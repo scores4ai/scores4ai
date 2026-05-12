@@ -1,0 +1,60 @@
+export const DATA_FRESHNESS_MINUTES = 60;
+
+export type DataSourceStatus = "demo" | "live" | "cached";
+
+export const dataSourceCopy: Record<
+  DataSourceStatus,
+  { label: string; helper: string }
+> = {
+  demo: {
+    label: "Demo seed data",
+    helper:
+      "Scores in the bundled catalog are example records for UI validation. Production rankings should come from OpenRouter metadata, Supabase-cached benchmarks, verified community ratings, and vetted programmer reviews.",
+  },
+  live: {
+    label: "Live data",
+    helper:
+      "Fresh OpenRouter metadata was fetched and merged with cached benchmark signals.",
+  },
+  cached: {
+    label: "Cached data",
+    helper:
+      "Live sources were unavailable, so the latest Supabase cache snapshot is being shown.",
+  },
+};
+
+export const scoringDimensions = [
+  {
+    key: "ai",
+    label: "AI Score",
+    weight: 0.5,
+    description:
+      "Transparent comprehensive benchmarks: capability, speed, reliability, hallucination resistance, privacy, and cost/value.",
+  },
+  {
+    key: "community",
+    label: "Community Score",
+    weight: 0.3,
+    description:
+      "Verified user ratings with anti-spam weighting, recency decay, and outlier detection.",
+  },
+  {
+    key: "programmer",
+    label: "Programmer Score",
+    weight: 0.2,
+    description:
+      "Vetted member reviews from builders who ship production code with the model, tool, or agent.",
+  },
+] as const;
+
+export function getTransparentScore(input: {
+  benchmark: number;
+  community: number;
+  programmer: number;
+}) {
+  return Math.round(
+    input.benchmark * scoringDimensions[0].weight +
+      input.community * scoringDimensions[1].weight +
+      input.programmer * scoringDimensions[2].weight,
+  );
+}

@@ -1,13 +1,26 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Search, Sparkles } from "lucide-react";
+import { Menu, Search, Sparkles } from "lucide-react";
+import { useState } from "react";
+
+const navItems = [
+  ["/", "Discover"],
+  ["/rankings", "Rankings"],
+  ["/agents", "Agents"],
+  ["/compare", "Compare"],
+  ["/community", "Community"],
+] as const;
 
 export function Nav() {
   const { pathname } = useLocation();
+  const [open, setOpen] = useState(false);
   const link = (to: string, label: string) => (
     <Link
       to={to}
-      className={`text-sm transition-colors ${
-        pathname === to ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+      onClick={() => setOpen(false)}
+      className={`rounded-lg px-2 py-1.5 text-sm transition-colors ${
+        pathname === to
+          ? "text-foreground"
+          : "text-muted-foreground hover:text-foreground"
       }`}
     >
       {label}
@@ -15,34 +28,64 @@ export function Nav() {
   );
 
   return (
-    <header className="sticky top-0 z-50 glass-strong">
-      <div className="mx-auto flex max-w-7xl items-center gap-8 px-6 py-4">
-        <Link to="/" className="flex items-center gap-2">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6">
+        <Link
+          to="/"
+          className="flex items-center gap-2"
+          aria-label="Scores4AI home"
+        >
           <div className="grid h-8 w-8 place-items-center rounded-lg bg-accent text-accent-foreground">
-            <Sparkles className="h-4 w-4" />
+            <Sparkles className="h-4 w-4" aria-hidden="true" />
           </div>
           <span className="font-display text-lg font-semibold tracking-tight">
             scores<span className="text-accent">4</span>ai
           </span>
         </Link>
-        <nav className="hidden items-center gap-6 md:flex">
-          {link("/", "Discover")}
-          {link("/rankings", "Rankings")}
-          {link("/agents", "Agents")}
-          {link("/compare", "Compare")}
-          {link("/community", "Community")}
+        <nav
+          className="hidden items-center gap-2 md:flex"
+          aria-label="Primary navigation"
+        >
+          {navItems.map(([to, label]) => link(to, label))}
         </nav>
-        <div className="ml-auto flex items-center gap-3">
-          <div className="hidden items-center gap-2 rounded-full border border-border bg-card/40 px-3 py-1.5 text-sm text-muted-foreground sm:flex">
-            <Search className="h-4 w-4" />
-            <span>Search 1,200+ AI tools</span>
-            <kbd className="ml-2 rounded border border-border px-1.5 py-0.5 text-[10px]">⌘K</kbd>
-          </div>
-          <button className="rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90">
-            Sign in
+        <div className="ml-auto flex items-center gap-2">
+          <label className="hidden items-center gap-2 rounded-full border border-border bg-card/40 px-3 py-1.5 text-sm text-muted-foreground sm:flex">
+            <Search className="h-4 w-4" aria-hidden="true" />
+            <span className="sr-only">Search tools</span>
+            <input
+              className="w-36 bg-transparent outline-none placeholder:text-muted-foreground lg:w-52"
+              placeholder="Search AI tools"
+            />
+          </label>
+          <Link
+            to="/rankings"
+            className="hidden rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90 sm:inline-flex"
+          >
+            View rankings
+          </Link>
+          <button
+            type="button"
+            onClick={() => setOpen((value) => !value)}
+            className="grid h-10 w-10 place-items-center rounded-full border border-border md:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+          >
+            <Menu className="h-4 w-4" aria-hidden="true" />
+            <span className="sr-only">Toggle menu</span>
           </button>
         </div>
       </div>
+      {open && (
+        <nav
+          id="mobile-nav"
+          className="border-t border-border px-4 py-3 md:hidden"
+          aria-label="Mobile navigation"
+        >
+          <div className="grid gap-1">
+            {navItems.map(([to, label]) => link(to, label))}
+          </div>
+        </nav>
+      )}
     </header>
   );
 }

@@ -10,7 +10,9 @@ export function ScoreMeter({
   return (
     <div>
       <div className="flex items-baseline justify-between">
-        <span className="text-xs uppercase tracking-wider text-muted-foreground">{label}</span>
+        <span className="text-xs uppercase tracking-wider text-muted-foreground">
+          {label}
+        </span>
         <span className="font-display text-sm font-semibold">{value}</span>
       </div>
       <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-secondary">
@@ -26,14 +28,27 @@ export function ScoreMeter({
   );
 }
 
-export function ScoreGauge({ value, label }: { value: number; label?: string }) {
+export function ScoreGauge({
+  value,
+  label,
+}: {
+  value: number;
+  label?: string;
+}) {
   const r = 52;
   const c = 2 * Math.PI * r;
   const off = c - (value / 100) * c;
   return (
     <div className="relative grid h-32 w-32 place-items-center">
       <svg className="absolute inset-0 -rotate-90" viewBox="0 0 120 120">
-        <circle cx="60" cy="60" r={r} stroke="var(--secondary)" strokeWidth="8" fill="none" />
+        <circle
+          cx="60"
+          cy="60"
+          r={r}
+          stroke="var(--secondary)"
+          strokeWidth="8"
+          fill="none"
+        />
         <circle
           cx="60"
           cy="60"
@@ -48,7 +63,11 @@ export function ScoreGauge({ value, label }: { value: number; label?: string }) 
       </svg>
       <div className="text-center">
         <div className="font-display text-3xl font-semibold">{value}</div>
-        {label && <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{label}</div>}
+        {label && (
+          <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+            {label}
+          </div>
+        )}
       </div>
     </div>
   );

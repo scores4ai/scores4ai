@@ -3,7 +3,9 @@ import { motion } from "framer-motion";
 import { ArrowRight, Search, Sparkles, Zap } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { DataNotice, LiveArchitectureCard } from "@/components/site/DataNotice";
 import { Rail } from "@/components/site/Rail";
+import { ScoreExplainer } from "@/components/site/ScoreExplainer";
 import { ToolCard } from "@/components/site/ToolCard";
 import { rails, tools, getTool } from "@/lib/data";
 
@@ -14,10 +16,14 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Discover the best AI models, tools, and agents. Community + expert reviews, benchmarks, and vibe-based rankings.",
+          "Discover the best AI models, tools, and agents. OpenRouter metadata, transparent benchmark scoring, community ratings, and vetted programmer reviews.",
       },
       { property: "og:title", content: "scores4ai — Discover the best AI" },
-      { property: "og:description", content: "Stop wasting time testing bad AI tools. See what actually works." },
+      {
+        property: "og:description",
+        content:
+          "Stop wasting time testing bad AI tools. See what actually works.",
+      },
     ],
   }),
   component: Home,
@@ -50,8 +56,9 @@ function Home() {
               <span className="text-gradient">AI models, tools & agents</span>
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
-              Stop wasting time testing bad AI tools. Community reviews, expert scores, and real
-              benchmarks — all in one place.
+              Stop wasting time testing bad AI tools. Transparent benchmark
+              scores, community ratings, vetted programmer reviews, and live
+              OpenRouter metadata — all in one place.
             </p>
 
             <div className="mx-auto mt-10 flex max-w-xl items-center gap-2 rounded-full glass-strong p-2 pl-5">
@@ -66,8 +73,18 @@ function Home() {
             </div>
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground">
-              {["coding", "writing", "agents", "open source", "image gen", "research"].map((t) => (
-                <span key={t} className="rounded-full border border-border px-2.5 py-1 hover:bg-secondary">
+              {[
+                "coding",
+                "writing",
+                "agents",
+                "open source",
+                "image gen",
+                "research",
+              ].map((t) => (
+                <span
+                  key={t}
+                  className="rounded-full border border-border px-2.5 py-1 hover:bg-secondary"
+                >
                   {t}
                 </span>
               ))}
@@ -75,32 +92,47 @@ function Home() {
           </motion.div>
 
           {/* Stats */}
-          <div className="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-2xl glass md:grid-cols-4">
+          <div className="mt-10">
+            <DataNotice />
+          </div>
+
+          <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl glass md:grid-cols-4">
             {[
-              ["1,200+", "AI tools tracked"],
-              ["48K", "Verified reviews"],
-              ["320", "Live benchmarks"],
-              ["24/7", "Trend updates"],
+              ["20", "Demo tools labeled"],
+              ["3", "Score types"],
+              ["60m", "Cache target"],
+              ["0", "Hidden fake claims"],
             ].map(([n, l]) => (
               <div key={l} className="bg-background/30 px-6 py-6 text-center">
                 <div className="font-display text-3xl font-semibold">{n}</div>
-                <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">{l}</div>
+                <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
+                  {l}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      <section className="mx-auto max-w-7xl px-6 pt-12">
+        <ScoreExplainer />
+      </section>
+
       {/* FEATURED GRID */}
       <section className="mx-auto max-w-7xl px-6 pt-12">
         <div className="flex items-end justify-between">
           <div>
-            <div className="text-xs uppercase tracking-wider text-accent">Editor's picks</div>
+            <div className="text-xs uppercase tracking-wider text-accent">
+              Demo leaderboard
+            </div>
             <h2 className="mt-1 font-display text-3xl font-semibold tracking-tight md:text-4xl">
-              The frontier this month
+              Seed records awaiting live verification
             </h2>
           </div>
-          <Link to="/rankings" className="hidden items-center gap-1 text-sm text-muted-foreground hover:text-foreground md:flex">
+          <Link
+            to="/rankings"
+            className="hidden items-center gap-1 text-sm text-muted-foreground hover:text-foreground md:flex"
+          >
             See full rankings <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -113,8 +145,16 @@ function Home() {
 
       {/* RAILS */}
       {rails.map((r) => (
-        <Rail key={r.title} title={r.title} tools={r.ids.map(getTool).filter(Boolean) as typeof tools} />
+        <Rail
+          key={r.title}
+          title={r.title}
+          tools={r.ids.map(getTool).filter(Boolean) as typeof tools}
+        />
       ))}
+
+      <section className="mx-auto mt-16 max-w-7xl px-6">
+        <LiveArchitectureCard />
+      </section>
 
       {/* COMPARE CTA */}
       <section className="mx-auto mt-24 max-w-7xl px-6">
@@ -123,14 +163,19 @@ function Home() {
           <div className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
           <div className="relative grid items-center gap-10 md:grid-cols-2">
             <div>
-              <div className="text-xs uppercase tracking-wider text-accent">Side by side</div>
+              <div className="text-xs uppercase tracking-wider text-accent">
+                Side by side
+              </div>
               <h3 className="mt-2 font-display text-3xl font-semibold md:text-4xl">
-                ChatGPT vs Claude vs Gemini.<br />
-                <span className="text-muted-foreground">Settle it with data.</span>
+                ChatGPT vs Claude vs Gemini.
+                <br />
+                <span className="text-muted-foreground">
+                  Settle it with data.
+                </span>
               </h3>
               <p className="mt-4 max-w-md text-muted-foreground">
-                Reasoning, coding, writing, speed, context, hallucinations, pricing — visualized
-                with radar charts and live benchmarks.
+                Reasoning, coding, writing, speed, context, hallucinations,
+                pricing — visualized with radar charts and live benchmarks.
               </p>
               <Link
                 to="/compare"
@@ -146,7 +191,9 @@ function Home() {
                     {t.name.slice(0, 1)}
                   </div>
                   <div className="mt-2 text-sm font-medium">{t.name}</div>
-                  <div className="mt-2 font-display text-2xl font-semibold">{t.scores.overall}</div>
+                  <div className="mt-2 font-display text-2xl font-semibold">
+                    {t.scores.ai}
+                  </div>
                 </div>
               ))}
             </div>
@@ -161,7 +208,8 @@ function Home() {
           See what actually works.
         </h3>
         <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-          Built by people who actually use AI. Independent. Opinionated. Receipts included.
+          Built by people who actually use AI. Independent. Opinionated.
+          Receipts included.
         </p>
       </section>
 
