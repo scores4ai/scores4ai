@@ -1,0 +1,95 @@
+name: Netlify live deploy
+
+on:
+  pull_request:
+    branches:
+      - main
+      - work
+  push:
+    branches:
+      - main
+      - work
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  build-and-deploy:
+    name: Build and publish live URL
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "scores4ai (1)"
+    env:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: "scores4ai (1)/package.json"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build app
+        run: npm run build
+
+      - name: Skip deploy notice
+        if: env.NETLIFY_AUTH_TOKEN == '' || env.NETLIFY_SITE_ID == ''
+        run: |
+          echo "### Netlify deploy skipped" >> "$GITHUB_STEP_SUMMARY"
+          echo "Add NETLIFY_AUTH_TOKEN and NETLIFY_SITE_ID repository secrets to publish live URLs from GitHub Actions." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Deploy pull request preview to Netlify
+        id: deploy-preview
+        if: github.event_name == 'pull_request' && env.NETLIFY_AUTH_TOKEN != '' && env.NETLIFY_SITE_ID != ''
+        run: |
+          set -euo pipefail
+          npx netlify-cli deploy \
+            --dir dist/client \
+            --functions netlify/functions \
+            --site "$NETLIFY_SITE_ID" \
+            --auth "$NETLIFY_AUTH_TOKEN" \
+            --json > netlify-preview.json
+          DEPLOY_URL=$(node -e "const fs=require('fs'); const data=JSON.parse(fs.readFileSync('netlify-preview.json','utf8')); console.log(data.deploy_url || data.ssl_url || data.url || '');")
+          echo "url=$DEPLOY_URL" >> "$GITHUB_OUTPUT"
+          echo "### Netlify preview" >> "$GITHUB_STEP_SUMMARY"
+          echo "$DEPLOY_URL" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Deploy production to Netlify
+        id: deploy-production
+        if: github.event_name != 'pull_request' && env.NETLIFY_AUTH_TOKEN != '' && env.NETLIFY_SITE_ID != ''
+        run: |
+          set -euo pipefail
+          npx netlify-cli deploy \
+            --prod \
+            --dir dist/client \
+            --functions netlify/functions \
+            --site "$NETLIFY_SITE_ID" \
+            --auth "$NETLIFY_AUTH_TOKEN" \
+            --json > netlify-production.json
+          DEPLOY_URL=$(node -e "const fs=require('fs'); const data=JSON.parse(fs.readFileSync('netlify-production.json','utf8')); console.log(data.ssl_url || data.url || data.deploy_url || '');")
+          echo "url=$DEPLOY_URL" >> "$GITHUB_OUTPUT"
+          echo "### Netlify production" >> "$GITHUB_STEP_SUMMARY"
+          echo "$DEPLOY_URL" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Comment preview URL on pull request
+        if: github.event_name == 'pull_request' && steps.deploy-preview.outputs.url != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = '${{ steps.deploy-preview.outputs.url }}';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `🚀 Scores4AI Netlify preview is live: ${url}`,
+            });

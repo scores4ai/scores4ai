@@ -1,0 +1,131 @@
+{
+  "name": "Scores4AI - OpenRouter model sync",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-sync-trigger",
+      "name": "Run manually",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 220]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "id": "scheduled-sync-trigger",
+      "name": "Every 6 hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 420]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.SCORES4AI_SITE_URL + '/api/openrouter/sync'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-sync-secret",
+              "value": "={{$env.OPENROUTER_SYNC_CRON_SECRET}}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 120000
+        }
+      },
+      "id": "post-openrouter-sync",
+      "name": "POST Scores4AI sync endpoint",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [560, 320]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "synced-count",
+              "name": "message",
+              "type": "string",
+              "value": "={{'OpenRouter sync completed from ' + $json.source + '. Cached models: ' + $json.count}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "summarize-sync",
+      "name": "Summarize result",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [860, 320]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Run manually": {
+      "main": [
+        [
+          {
+            "node": "POST Scores4AI sync endpoint",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Every 6 hours": {
+      "main": [
+        [
+          {
+            "node": "POST Scores4AI sync endpoint",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "POST Scores4AI sync endpoint": {
+      "main": [
+        [
+          {
+            "node": "Summarize result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true
+  },
+  "versionId": "scores4ai-openrouter-sync-v1",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": [
+    {
+      "name": "scores4ai"
+    },
+    {
+      "name": "openrouter"
+    }
+  ]
+}

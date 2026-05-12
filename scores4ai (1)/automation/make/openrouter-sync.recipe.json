@@ -1,0 +1,41 @@
+{
+  "name": "Scores4AI - OpenRouter model sync",
+  "platform": "Make.com",
+  "purpose": "Schedule a POST request to the Scores4AI Netlify sync endpoint so OpenRouter model metadata stays cached in Supabase.",
+  "requiredVariables": {
+    "SCORES4AI_SITE_URL": "https://YOUR_NETLIFY_SITE.netlify.app",
+    "OPENROUTER_SYNC_CRON_SECRET": "copy the same value configured in Netlify"
+  },
+  "scenario": [
+    {
+      "module": "Tools > Scheduler",
+      "settings": {
+        "runScenario": "Every 6 hours"
+      }
+    },
+    {
+      "module": "HTTP > Make a request",
+      "settings": {
+        "method": "POST",
+        "url": "{{SCORES4AI_SITE_URL}}/api/openrouter/sync",
+        "headers": [
+          {
+            "name": "x-sync-secret",
+            "value": "{{OPENROUTER_SYNC_CRON_SECRET}}"
+          }
+        ],
+        "parseResponse": true,
+        "timeoutSeconds": 120
+      }
+    }
+  ],
+  "expectedResponseShape": {
+    "source": "openrouter or cache",
+    "count": "number of cached model records",
+    "models": "array of cached model records"
+  },
+  "notes": [
+    "This file is a Make.com recipe with exact module settings. If your Make workspace supports blueprint import, map these values into the imported HTTP and scheduler modules; otherwise create the two modules manually.",
+    "Do not put OPENROUTER_API_KEY or SUPABASE_SERVICE_ROLE_KEY in Make. Make only needs the sync secret because Netlify already holds the real server-side secrets."
+  ]
+}
