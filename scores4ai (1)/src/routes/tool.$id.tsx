@@ -9,6 +9,7 @@ import {
   PolarRadiusAxis,
   ResponsiveContainer,
 } from "recharts";
+import { DataNotice } from "@/components/site/DataNotice";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { ScoreGauge, ScoreMeter } from "@/components/site/Score";
@@ -26,7 +27,10 @@ export const Route = createFileRoute("/tool/$id")({
       ? [
           { title: `${loaderData.tool.name} — Reviews & Score | scores4ai` },
           { name: "description", content: loaderData.tool.tagline },
-          { property: "og:title", content: `${loaderData.tool.name} on scores4ai` },
+          {
+            property: "og:title",
+            content: `${loaderData.tool.name} on scores4ai`,
+          },
           { property: "og:description", content: loaderData.tool.tagline },
         ]
       : [],
@@ -37,7 +41,9 @@ export const Route = createFileRoute("/tool/$id")({
       <Nav />
       <div className="mx-auto max-w-3xl px-6 py-32 text-center">
         <h1 className="font-display text-4xl">Tool not found</h1>
-        <Link to="/" className="mt-6 inline-block text-accent">← Back home</Link>
+        <Link to="/" className="mt-6 inline-block text-accent">
+          ← Back home
+        </Link>
       </div>
     </div>
   ),
@@ -76,7 +82,9 @@ function ToolPage() {
     { k: "Creativity", v: tool.scores.creativity },
   ];
 
-  const alternatives = tools.filter((t) => t.id !== tool.id && t.category === tool.category).slice(0, 4);
+  const alternatives = tools
+    .filter((t) => t.id !== tool.id && t.category === tool.category)
+    .slice(0, 4);
 
   return (
     <div className="min-h-screen">
@@ -86,7 +94,10 @@ function ToolPage() {
       <section className="relative overflow-hidden border-b border-border">
         <div className="absolute inset-0 grid-bg opacity-60" />
         <div className="relative mx-auto max-w-7xl px-6 py-16">
-          <Link to="/" className="text-sm text-muted-foreground hover:text-foreground">
+          <Link
+            to="/"
+            className="text-sm text-muted-foreground hover:text-foreground"
+          >
             ← Discover
           </Link>
           <div className="mt-6 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
@@ -105,14 +116,21 @@ function ToolPage() {
                 <h1 className="mt-2 font-display text-5xl font-semibold tracking-tight">
                   {tool.name}
                 </h1>
-                <p className="mt-2 max-w-xl text-muted-foreground">{tool.tagline}</p>
+                <p className="mt-2 max-w-xl text-muted-foreground">
+                  {tool.tagline}
+                </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {tool.tags.map((t) => (
-                    <span key={t} className="rounded-md bg-secondary px-2 py-0.5 text-xs text-muted-foreground">
+                    <span
+                      key={t}
+                      className="rounded-md bg-secondary px-2 py-0.5 text-xs text-muted-foreground"
+                    >
                       {t}
                     </span>
                   ))}
-                  <span className="rounded-md border border-border px-2 py-0.5 text-xs">{tool.pricing}</span>
+                  <span className="rounded-md border border-border px-2 py-0.5 text-xs">
+                    {tool.pricing}
+                  </span>
                 </div>
               </div>
             </div>
@@ -127,7 +145,7 @@ function ToolPage() {
               >
                 {tool.verdict}
               </div>
-              <ScoreGauge value={tool.scores.overall} label="Overall" />
+              <ScoreGauge value={tool.scores.ai} label="AI score" />
               <a
                 href={tool.website}
                 target="_blank"
@@ -161,6 +179,9 @@ function ToolPage() {
       </div>
 
       {/* Body */}
+      <div className="mx-auto mt-6 max-w-7xl px-6">
+        <DataNotice compact />
+      </div>
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 lg:grid-cols-[1fr_360px]">
         <main>
           <motion.div
@@ -173,41 +194,99 @@ function ToolPage() {
           </motion.div>
 
           <div className="mt-6 rounded-2xl glass p-6">
-            <h2 className="font-display text-xl font-semibold">Score breakdown</h2>
+            <h2 className="font-display text-xl font-semibold">
+              Score breakdown
+            </h2>
             <div className="mt-6 grid gap-x-10 gap-y-5 md:grid-cols-2">
-              <ScoreMeter label="Community" value={tool.scores.community} color="var(--reliable)" />
-              <ScoreMeter label="Expert" value={tool.scores.expert} color="var(--accent)" />
+              <ScoreMeter
+                label="AI score"
+                value={tool.scores.ai}
+                color="var(--accent)"
+              />
+              <ScoreMeter
+                label="Community"
+                value={tool.scores.community}
+                color="var(--reliable)"
+              />
+              <ScoreMeter
+                label="Programmer"
+                value={tool.scores.programmer}
+                color="var(--experimental)"
+              />
               <ScoreMeter label="Speed" value={tool.scores.speed} />
-              <ScoreMeter label="Intelligence" value={tool.scores.intelligence} />
+              <ScoreMeter
+                label="Intelligence"
+                value={tool.scores.intelligence}
+              />
               <ScoreMeter label="Ease of Use" value={tool.scores.ease} />
               <ScoreMeter label="Value" value={tool.scores.value} />
-              <ScoreMeter label="Anti-Hallucination" value={tool.scores.hallucination} color="var(--elite)" />
-              <ScoreMeter label="Privacy" value={tool.scores.privacy} color="var(--reliable)" />
-              <ScoreMeter label="Creativity" value={tool.scores.creativity} color="var(--experimental)" />
+              <ScoreMeter
+                label="Anti-Hallucination"
+                value={tool.scores.hallucination}
+                color="var(--elite)"
+              />
+              <ScoreMeter
+                label="Privacy"
+                value={tool.scores.privacy}
+                color="var(--reliable)"
+              />
+              <ScoreMeter
+                label="Creativity"
+                value={tool.scores.creativity}
+                color="var(--experimental)"
+              />
             </div>
           </div>
 
           <div className="mt-6 rounded-2xl glass p-6">
-            <h2 className="font-display text-xl font-semibold">Capability profile</h2>
+            <h2 className="font-display text-xl font-semibold">
+              Capability profile
+            </h2>
             <div className="mt-2 h-72">
               <ResponsiveContainer>
                 <RadarChart data={radar}>
                   <PolarGrid stroke="oklch(1 0 0 / 0.1)" />
-                  <PolarAngleAxis dataKey="k" tick={{ fill: "oklch(0.7 0.01 270)", fontSize: 12 }} />
-                  <PolarRadiusAxis tick={false} axisLine={false} domain={[0, 100]} />
-                  <Radar dataKey="v" stroke="var(--accent)" fill="var(--accent)" fillOpacity={0.3} />
+                  <PolarAngleAxis
+                    dataKey="k"
+                    tick={{ fill: "oklch(0.7 0.01 270)", fontSize: 12 }}
+                  />
+                  <PolarRadiusAxis
+                    tick={false}
+                    axisLine={false}
+                    domain={[0, 100]}
+                  />
+                  <Radar
+                    dataKey="v"
+                    stroke="var(--accent)"
+                    fill="var(--accent)"
+                    fillOpacity={0.3}
+                  />
                 </RadarChart>
               </ResponsiveContainer>
             </div>
           </div>
 
           <div className="mt-6 rounded-2xl glass p-6">
-            <h2 className="font-display text-xl font-semibold">Top community reviews</h2>
+            <h2 className="font-display text-xl font-semibold">
+              Top community reviews
+            </h2>
             <div className="mt-4 space-y-4">
               {[
-                { u: "alex.dev", r: 9.2, t: "Replaced three tools in my workflow. Worth every cent." },
-                { u: "research_ana", r: 8.7, t: "Best-in-class for long context. Citations are clean." },
-                { u: "vibe_coder", r: 7.9, t: "Hallucinates less than peers but still needs supervision on edge cases." },
+                {
+                  u: "alex.dev",
+                  r: 9.2,
+                  t: "Replaced three tools in my workflow. Worth every cent.",
+                },
+                {
+                  u: "research_ana",
+                  r: 8.7,
+                  t: "Best-in-class for long context. Citations are clean.",
+                },
+                {
+                  u: "vibe_coder",
+                  r: 7.9,
+                  t: "Hallucinates less than peers but still needs supervision on edge cases.",
+                },
               ].map((r) => (
                 <div key={r.u} className="rounded-xl bg-secondary/40 p-4">
                   <div className="flex items-center justify-between">
@@ -228,17 +307,42 @@ function ToolPage() {
 
         <aside className="space-y-4">
           <div className="rounded-2xl glass p-5">
-            <div className="text-xs uppercase tracking-wider text-muted-foreground">Quick facts</div>
+            <div className="text-xs uppercase tracking-wider text-muted-foreground">
+              Quick facts
+            </div>
             <dl className="mt-3 space-y-2 text-sm">
-              <div className="flex justify-between"><dt className="text-muted-foreground">Pricing</dt><dd>{tool.pricing}</dd></div>
-              <div className="flex justify-between"><dt className="text-muted-foreground">Released</dt><dd>{tool.released}</dd></div>
+              <div className="flex justify-between">
+                <dt className="text-muted-foreground">Pricing</dt>
+                <dd>{tool.pricing}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="text-muted-foreground">Released</dt>
+                <dd>{tool.released}</dd>
+              </div>
               {tool.contextWindow && (
-                <div className="flex justify-between"><dt className="text-muted-foreground">Context</dt><dd>{tool.contextWindow}</dd></div>
+                <div className="flex justify-between">
+                  <dt className="text-muted-foreground">Context</dt>
+                  <dd>{tool.contextWindow}</dd>
+                </div>
               )}
               {tool.modality && (
-                <div className="flex justify-between"><dt className="text-muted-foreground">Modality</dt><dd>{tool.modality.join(", ")}</dd></div>
+                <div className="flex justify-between">
+                  <dt className="text-muted-foreground">Modality</dt>
+                  <dd>{tool.modality.join(", ")}</dd>
+                </div>
               )}
-              <div className="flex justify-between"><dt className="text-muted-foreground">Open source</dt><dd>{tool.openSource ? "Yes" : "No"}</dd></div>
+              <div className="flex justify-between">
+                <dt className="text-muted-foreground">Open source</dt>
+                <dd>{tool.openSource ? "Yes" : "No"}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="text-muted-foreground">Data status</dt>
+                <dd>{tool.sourceStatus}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="text-muted-foreground">Evidence</dt>
+                <dd>{tool.evidenceCount || "Demo"}</dd>
+              </div>
             </dl>
           </div>
 
@@ -247,14 +351,19 @@ function ToolPage() {
               <Sparkles className="h-4 w-4 text-accent" /> AI Summary
             </div>
             <p className="mt-2 text-sm text-muted-foreground">
-              Reviewers consistently praise {tool.name}'s {tool.tags[0] ?? "core capability"}. Watch
-              for {tool.scores.hallucination < 80 ? "occasional hallucinations" : "edge-case latency"} on
-              complex tasks.
+              Reviewers consistently praise {tool.name}'s{" "}
+              {tool.tags[0] ?? "core capability"}. Watch for{" "}
+              {tool.scores.hallucination < 80
+                ? "occasional hallucinations"
+                : "edge-case latency"}{" "}
+              on complex tasks.
             </p>
           </div>
 
           <div className="rounded-2xl glass p-5">
-            <div className="text-xs uppercase tracking-wider text-muted-foreground">Alternatives</div>
+            <div className="text-xs uppercase tracking-wider text-muted-foreground">
+              Alternatives
+            </div>
             <div className="mt-3 space-y-3">
               {alternatives.map((a) => (
                 <Link
@@ -269,7 +378,7 @@ function ToolPage() {
                     </div>
                     <div className="text-sm">{a.name}</div>
                   </div>
-                  <span className="font-display text-sm">{a.scores.overall}</span>
+                  <span className="font-display text-sm">{a.scores.ai}</span>
                 </Link>
               ))}
             </div>
@@ -278,9 +387,13 @@ function ToolPage() {
       </div>
 
       <section className="mx-auto max-w-7xl px-6 pb-16">
-        <h2 className="font-display text-2xl font-semibold">More like {tool.name}</h2>
+        <h2 className="font-display text-2xl font-semibold">
+          More like {tool.name}
+        </h2>
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {alternatives.map((a, i) => <ToolCard key={a.id} tool={a} index={i} />)}
+          {alternatives.map((a, i) => (
+            <ToolCard key={a.id} tool={a} index={i} />
+          ))}
         </div>
       </section>
 

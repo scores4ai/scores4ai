@@ -3,7 +3,15 @@ import { useRef } from "react";
 import type { Tool } from "@/lib/data";
 import { ToolCard } from "./ToolCard";
 
-export function Rail({ title, subtitle, tools }: { title: string; subtitle?: string; tools: Tool[] }) {
+export function Rail({
+  title,
+  subtitle,
+  tools,
+}: {
+  title: string;
+  subtitle?: string;
+  tools: Tool[];
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const scroll = (dir: 1 | -1) =>
     ref.current?.scrollBy({ left: dir * 600, behavior: "smooth" });
@@ -13,8 +21,12 @@ export function Rail({ title, subtitle, tools }: { title: string; subtitle?: str
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex items-end justify-between">
           <div>
-            <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">{title}</h2>
-            {subtitle && <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>}
+            <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+              {title}
+            </h2>
+            {subtitle && (
+              <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
+            )}
           </div>
           <div className="hidden gap-2 md:flex">
             <button
@@ -36,7 +48,10 @@ export function Rail({ title, subtitle, tools }: { title: string; subtitle?: str
         ref={ref}
         className="scrollbar-hide mt-6 flex gap-4 overflow-x-auto px-6 pb-4 [scroll-padding-left:1.5rem] [scroll-snap-type:x_mandatory]"
       >
-        <div className="shrink-0" style={{ width: "max(0px, calc((100vw - 1280px) / 2))" }} />
+        <div
+          className="shrink-0"
+          style={{ width: "max(0px, calc((100vw - 1280px) / 2))" }}
+        />
         {tools.map((t, i) => (
           <div
             key={t.id}
