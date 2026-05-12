@@ -1,0 +1,124 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-elite: var(--elite);
+  --color-reliable: var(--reliable);
+  --color-experimental: var(--experimental);
+  --color-overhyped: var(--overhyped);
+  --color-broken: var(--broken);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Dark-first. Light is a fallback. */
+  --background: oklch(0.18 0.005 270);
+  --foreground: oklch(0.97 0.005 270);
+  --card: oklch(0.22 0.008 270);
+  --card-foreground: oklch(0.97 0.005 270);
+  --popover: oklch(0.2 0.008 270);
+  --popover-foreground: oklch(0.97 0.005 270);
+  --primary: oklch(0.97 0.005 270);
+  --primary-foreground: oklch(0.15 0.005 270);
+  --secondary: oklch(0.27 0.01 270);
+  --secondary-foreground: oklch(0.97 0.005 270);
+  --muted: oklch(0.25 0.008 270);
+  --muted-foreground: oklch(0.65 0.015 270);
+  --accent: oklch(0.78 0.18 70);
+  --accent-foreground: oklch(0.15 0.005 270);
+  --destructive: oklch(0.62 0.22 27);
+  --destructive-foreground: oklch(0.97 0 0);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.78 0.18 70);
+
+  --elite: oklch(0.82 0.17 145);
+  --reliable: oklch(0.78 0.16 200);
+  --experimental: oklch(0.82 0.17 75);
+  --overhyped: oklch(0.7 0.18 35);
+  --broken: oklch(0.62 0.22 27);
+}
+
+/* Dark-first: same as :root */
+.dark {
+  --background: oklch(0.14 0.005 270);
+  --foreground: oklch(0.97 0.005 270);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body { background-color: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); }
+  body {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.78 0.18 70 / 0.08), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 10%, oklch(0.65 0.2 280 / 0.06), transparent 60%);
+    min-height: 100vh;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+}
+
+@layer utilities {
+  .glass {
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.04), oklch(1 0 0 / 0.02));
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid oklch(1 0 0 / 0.06);
+  }
+  .glass-strong {
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.07), oklch(1 0 0 / 0.03));
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid oklch(1 0 0 / 0.08);
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, oklch(0.97 0.005 270), oklch(0.78 0.18 70));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(oklch(1 0 0 / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(1 0 0 / 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, black, transparent 75%);
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { scrollbar-width: none; }
+  .glow-accent { box-shadow: 0 0 0 1px oklch(0.78 0.18 70 / 0.2), 0 10px 40px -10px oklch(0.78 0.18 70 / 0.35); }
+}

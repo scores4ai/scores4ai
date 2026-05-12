@@ -1,0 +1,150 @@
+export type Verdict = "Elite" | "Reliable" | "Experimental" | "Overhyped" | "Broken";
+
+export type Tool = {
+  id: string;
+  name: string;
+  developer: string;
+  category: string;
+  tags: string[];
+  pricing: "Free" | "Freemium" | "Paid" | "Open Source";
+  released: string;
+  tagline: string;
+  description: string;
+  website: string;
+  trend: number; // -100..100
+  verdict: Verdict;
+  scores: {
+    overall: number;
+    community: number;
+    expert: number;
+    speed: number;
+    intelligence: number;
+    ease: number;
+    value: number;
+    hallucination: number; // higher = better (less hallucinations)
+    privacy: number;
+    creativity: number;
+  };
+  contextWindow?: string;
+  modality?: string[];
+  openSource?: boolean;
+  isAgent?: boolean;
+};
+
+const mk = (
+  id: string,
+  name: string,
+  developer: string,
+  category: string,
+  tagline: string,
+  pricing: Tool["pricing"],
+  trend: number,
+  verdict: Verdict,
+  s: Tool["scores"],
+  extra: Partial<Tool> = {}
+): Tool => ({
+  id,
+  name,
+  developer,
+  category,
+  tags: extra.tags ?? [],
+  pricing,
+  released: extra.released ?? "2024",
+  tagline,
+  description:
+    extra.description ??
+    `${name} by ${developer} is a leading ${category.toLowerCase()} known for ${tagline.toLowerCase()}.`,
+  website: extra.website ?? "https://example.com",
+  trend,
+  verdict,
+  scores: s,
+  contextWindow: extra.contextWindow,
+  modality: extra.modality,
+  openSource: extra.openSource,
+  isAgent: extra.isAgent,
+});
+
+export const tools: Tool[] = [
+  mk("gpt-5", "GPT-5", "OpenAI", "LLM", "The new frontier of reasoning", "Paid", 82, "Elite",
+    { overall: 96, community: 94, expert: 97, speed: 88, intelligence: 98, ease: 95, value: 78, hallucination: 89, privacy: 62, creativity: 92 },
+    { tags: ["reasoning", "coding", "writing", "vision"], contextWindow: "1M tokens", modality: ["text", "vision", "audio"], released: "2025" }),
+  mk("claude-4", "Claude 4 Opus", "Anthropic", "LLM", "Calm, careful, world-class writer", "Paid", 71, "Elite",
+    { overall: 95, community: 96, expert: 95, speed: 84, intelligence: 96, ease: 94, value: 80, hallucination: 93, privacy: 78, creativity: 95 },
+    { tags: ["writing", "reasoning", "long-context"], contextWindow: "500K tokens", modality: ["text", "vision"] }),
+  mk("gemini-3", "Gemini 3 Pro", "Google", "LLM", "Multimodal with cinematic context", "Freemium", 64, "Elite",
+    { overall: 92, community: 88, expert: 93, speed: 91, intelligence: 94, ease: 90, value: 86, hallucination: 84, privacy: 60, creativity: 89 },
+    { tags: ["multimodal", "search", "long-context"], contextWindow: "2M tokens", modality: ["text", "vision", "audio", "video"] }),
+  mk("llama-4", "Llama 4 405B", "Meta", "LLM", "Open weights at frontier scale", "Open Source", 58, "Reliable",
+    { overall: 89, community: 92, expert: 87, speed: 75, intelligence: 90, ease: 76, value: 96, hallucination: 80, privacy: 95, creativity: 84 },
+    { tags: ["open-source", "self-host"], openSource: true, modality: ["text"] }),
+  mk("mistral-large", "Mistral Large 2", "Mistral", "LLM", "European, efficient, multilingual", "Freemium", 24, "Reliable",
+    { overall: 86, community: 84, expert: 85, speed: 92, intelligence: 86, ease: 88, value: 90, hallucination: 78, privacy: 88, creativity: 80 },
+    { tags: ["multilingual", "efficient"], modality: ["text"] }),
+  mk("deepseek-v3", "DeepSeek V3", "DeepSeek", "LLM", "Open weights, brutal at math & code", "Open Source", 91, "Elite",
+    { overall: 91, community: 95, expert: 89, speed: 86, intelligence: 93, ease: 78, value: 99, hallucination: 82, privacy: 92, creativity: 81 },
+    { tags: ["coding", "math", "open-source"], openSource: true }),
+  mk("cursor", "Cursor", "Anysphere", "Coding Tool", "The IDE that codes with you", "Freemium", 88, "Elite",
+    { overall: 94, community: 96, expert: 93, speed: 90, intelligence: 92, ease: 95, value: 87, hallucination: 86, privacy: 70, creativity: 88 },
+    { tags: ["coding", "ide", "agent"] }),
+  mk("v0", "v0", "Vercel", "Coding Tool", "From prompt to production UI", "Freemium", 62, "Reliable",
+    { overall: 87, community: 86, expert: 85, speed: 89, intelligence: 84, ease: 96, value: 82, hallucination: 80, privacy: 72, creativity: 90 },
+    { tags: ["ui", "frontend", "react"] }),
+  mk("perplexity", "Perplexity", "Perplexity", "Research", "Answers with receipts", "Freemium", 47, "Reliable",
+    { overall: 88, community: 90, expert: 86, speed: 93, intelligence: 87, ease: 96, value: 85, hallucination: 90, privacy: 70, creativity: 75 },
+    { tags: ["search", "research", "citations"] }),
+  mk("midjourney-v7", "Midjourney v7", "Midjourney", "Image", "The taste-maker of generative art", "Paid", 41, "Elite",
+    { overall: 93, community: 95, expert: 92, speed: 80, intelligence: 88, ease: 88, value: 78, hallucination: 70, privacy: 65, creativity: 99 },
+    { tags: ["image", "art"], modality: ["image"] }),
+  mk("sora-2", "Sora 2", "OpenAI", "Video", "Cinematic AI video that finally holds up", "Paid", 95, "Elite",
+    { overall: 94, community: 92, expert: 95, speed: 60, intelligence: 90, ease: 85, value: 70, hallucination: 78, privacy: 60, creativity: 98 },
+    { tags: ["video", "generation"], modality: ["video"] }),
+  mk("eleven-v3", "ElevenLabs v3", "ElevenLabs", "Audio", "Voices indistinguishable from humans", "Freemium", 38, "Reliable",
+    { overall: 90, community: 91, expert: 89, speed: 92, intelligence: 82, ease: 94, value: 84, hallucination: 88, privacy: 70, creativity: 92 },
+    { tags: ["voice", "tts"], modality: ["audio"] }),
+  mk("devin", "Devin", "Cognition", "AI Agent", "Autonomous software engineer", "Paid", 12, "Experimental",
+    { overall: 74, community: 68, expert: 78, speed: 60, intelligence: 84, ease: 70, value: 55, hallucination: 60, privacy: 65, creativity: 72 },
+    { tags: ["agent", "coding", "autonomous"], isAgent: true }),
+  mk("browser-use", "Browser Use", "Browser Use", "AI Agent", "Open-source agent that browses for you", "Open Source", 76, "Reliable",
+    { overall: 82, community: 88, expert: 80, speed: 78, intelligence: 82, ease: 72, value: 96, hallucination: 70, privacy: 90, creativity: 78 },
+    { tags: ["agent", "browser", "automation"], isAgent: true, openSource: true }),
+  mk("manus", "Manus", "Butterfly Effect", "AI Agent", "General agent that ships work", "Freemium", 84, "Experimental",
+    { overall: 78, community: 82, expert: 76, speed: 70, intelligence: 86, ease: 80, value: 72, hallucination: 65, privacy: 60, creativity: 82 },
+    { tags: ["agent", "research", "autonomous"], isAgent: true }),
+  mk("notion-ai", "Notion AI", "Notion", "Productivity", "The thinking layer inside your docs", "Paid", 18, "Reliable",
+    { overall: 80, community: 78, expert: 80, speed: 88, intelligence: 78, ease: 95, value: 75, hallucination: 82, privacy: 72, creativity: 80 },
+    { tags: ["docs", "productivity"] }),
+  mk("grok-3", "Grok 3", "xAI", "LLM", "Real-time, irreverent, unfiltered", "Freemium", 33, "Experimental",
+    { overall: 79, community: 70, expert: 76, speed: 85, intelligence: 82, ease: 84, value: 76, hallucination: 65, privacy: 50, creativity: 86 },
+    { tags: ["realtime", "x-integration"] }),
+  mk("character-ai", "Character.AI", "Character", "Companion", "Roleplay at scale", "Freemium", -22, "Overhyped",
+    { overall: 62, community: 60, expert: 58, speed: 80, intelligence: 65, ease: 90, value: 70, hallucination: 55, privacy: 45, creativity: 88 },
+    { tags: ["roleplay", "chat"] }),
+  mk("autogpt", "AutoGPT", "Significant Gravitas", "AI Agent", "The OG autonomous agent", "Open Source", -41, "Broken",
+    { overall: 48, community: 52, expert: 42, speed: 50, intelligence: 60, ease: 40, value: 80, hallucination: 35, privacy: 88, creativity: 70 },
+    { tags: ["agent", "autonomous", "open-source"], isAgent: true, openSource: true }),
+  mk("ollama", "Ollama", "Ollama", "Infrastructure", "Run any open model locally", "Open Source", 70, "Elite",
+    { overall: 92, community: 96, expert: 90, speed: 85, intelligence: 80, ease: 92, value: 99, hallucination: 80, privacy: 99, creativity: 78 },
+    { tags: ["local", "infra", "open-source"], openSource: true }),
+];
+
+export const verdictColor: Record<Verdict, string> = {
+  Elite: "var(--elite)",
+  Reliable: "var(--reliable)",
+  Experimental: "var(--experimental)",
+  Overhyped: "var(--overhyped)",
+  Broken: "var(--broken)",
+};
+
+export const rails: { title: string; subtitle?: string; ids: string[] }[] = [
+  { title: "Most Loved This Week", ids: ["claude-4", "cursor", "ollama", "deepseek-v3", "perplexity", "gpt-5"] },
+  { title: "Best for Coding", ids: ["cursor", "deepseek-v3", "gpt-5", "v0", "claude-4", "devin"] },
+  { title: "Best Open Source", ids: ["llama-4", "deepseek-v3", "ollama", "browser-use", "autogpt"] },
+  { title: "Fastest Growing", ids: ["sora-2", "manus", "deepseek-v3", "cursor", "gpt-5", "browser-use"] },
+  { title: "Most Controversial", ids: ["grok-3", "devin", "character-ai", "autogpt", "manus"] },
+  { title: "Underground Gems", ids: ["browser-use", "ollama", "mistral-large", "eleven-v3"] },
+  { title: "Most Overrated", ids: ["character-ai", "autogpt", "devin"] },
+];
+
+export function getTool(id: string) {
+  return tools.find((t) => t.id === id);
+}
