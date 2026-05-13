@@ -7,7 +7,7 @@
 - Included tables for profiles, models, tools, agents, reviews, comparisons, prompt lab results, submitted tools, model sources, bookmarks, comments, and saved comparisons.
 - Enabled Row Level Security on all public tables.
 - Added policies for public reads, authenticated user-owned writes, admin management, and community submissions.
-- Added triggers for `updated_at`, profile creation on signup, and automatic RLS for future public tables.
+- Added triggers for `updated_at`, profile creation on signup, and automatic RLS for future public tables; if Supabase blocks event-trigger creation for your role, the script emits a notice and still enables RLS on all Scores4AI tables.
 - Added indexes for model lookup, sync freshness, reviews, comparisons, prompt lab history, and community features.
 
 ## You must do this manually
@@ -26,7 +26,8 @@
 
 - [ ] Project created.
 - [ ] SQL setup completed successfully.
-- [ ] RLS enabled on all public tables.
+- [ ] RLS enabled on all Scores4AI tables.
+- [ ] If the future-table RLS event-trigger notice appears, manually enable RLS on any new custom public tables you add later.
 - [ ] Auth signup creates a row in `profiles`.
 - [ ] Service role key stored only in Netlify/server environment variables.
 - [ ] First OpenRouter model sync completed.

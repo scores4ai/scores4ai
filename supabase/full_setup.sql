@@ -21,10 +21,17 @@ begin
 end;
 $$;
 
-drop event trigger if exists trg_enable_rls_for_new_public_tables;
-create event trigger trg_enable_rls_for_new_public_tables
-  on ddl_command_end when tag in ('CREATE TABLE')
-  execute function public.enable_rls_for_new_public_tables();
+do $$
+begin
+  drop event trigger if exists trg_enable_rls_for_new_public_tables;
+  create event trigger trg_enable_rls_for_new_public_tables
+    on ddl_command_end when tag in ('CREATE TABLE')
+    execute function public.enable_rls_for_new_public_tables();
+exception
+  when insufficient_privilege then
+    raise notice 'Skipping automatic future-table RLS event trigger because this database role cannot create event triggers. Existing Scores4AI tables still have RLS enabled below.';
+end;
+$$;
 
 create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,

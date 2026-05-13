@@ -3,10 +3,10 @@
 ## Codex already handled this
 
 - Added root `netlify.toml` with `base = "scores4ai (1)"`.
-- Configured `npm run build` and `dist/client` publish directory.
+- Configured `npm run build` and `dist/client` publish directory; the build now emits `dist/client/index.html` for Netlify fallback routing.
 - Set Node 22.
 - Added immutable asset caching and baseline security headers.
-- Added an SPA fallback redirect.
+- Added an SPA fallback redirect to `/index.html` and explicit Netlify Functions bundling from `netlify/functions`.
 - Added a scheduled Netlify function for a 12-hour OpenRouter sync cadence.
 
 ## You must do this manually
@@ -24,5 +24,7 @@
 - [ ] Build command is `npm run build`.
 - [ ] Publish directory is `dist/client`.
 - [ ] Environment variables configured.
+- [ ] `npm run build` emits `dist/client/index.html`.
+- [ ] `npm run verify:production-build` passes before deploy.
 - [ ] First deploy completed.
 - [ ] Scheduled sync strategy confirmed.

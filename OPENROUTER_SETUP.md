@@ -2,9 +2,9 @@
 
 ## Codex already handled this
 
-- Added OpenRouter model fetching and normalization.
+- Added OpenRouter model fetching and normalization in server-only source paths and Netlify/script entry points.
 - Captures model name, provider, pricing, context window, modality support, supported parameters, description, and timestamps when present.
-- Added a standalone sync script at `scores4ai (1)/scripts/sync-openrouter-models.mjs`.
+- Added a standalone sync script at `scores4ai (1)/scripts/sync-openrouter-models.mjs`; browser components only import formatting/pricing helpers and never call OpenRouter directly.
 - Added cache freshness constants: models every 12 hours and pricing every 24 hours.
 - Added UI labels for Live, Cached, Estimated, and Demo data states.
 
@@ -28,6 +28,7 @@ npm run sync:openrouter
 - [ ] OpenRouter key created.
 - [ ] Supabase tables exist.
 - [ ] Server-only keys configured.
+- [ ] Confirm no OpenRouter request code or service-role key markers are present in `dist/client` by running `npm run verify:production-build`.
 - [ ] First sync completed.
 - [ ] Model rows show `source_status = live`.
 - [ ] `model_sources` has a verified API source row.

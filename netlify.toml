@@ -6,6 +6,10 @@
 [build.environment]
   NODE_VERSION = "22"
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 [[scheduled.functions]]
   name = "sync-openrouter-models"
   cron = "0 */12 * * *"

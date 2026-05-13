@@ -19,7 +19,8 @@ export const Route = createFileRoute("/rankings")({
       { title: "AI Rankings — scores4ai" },
       {
         name: "description",
-        content: "Live rankings of AI tools, models, and agents.",
+        content:
+          "Transparent demo rankings of AI tools, models, and agents, with live-data labels when verified sources are connected.",
       },
     ],
   }),
@@ -79,7 +80,7 @@ function Rankings() {
       <Nav />
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="text-xs uppercase tracking-wider text-accent">
-          Live rankings
+          Demo rankings · live-data ready
         </div>
         <h1 className="mt-2 font-display text-5xl font-semibold tracking-tight">
           The complete AI leaderboard

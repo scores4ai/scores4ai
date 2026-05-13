@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { tools } from "@/lib/data";
-import { formatUsd } from "@/lib/openrouter";
+import { formatUsd } from "@/lib/currency";
 import { estimateTokensFromText } from "@/lib/pricing";
 
 const modelDefaults = tools.slice(0, 6).map((tool) => ({

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { tools } from "@/lib/data";
-import { formatUsd } from "@/lib/openrouter";
+import { formatUsd } from "@/lib/currency";
 import {
   bestValueModel,
   cheapestEquivalent,
