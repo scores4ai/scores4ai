@@ -6,6 +6,12 @@ import { DataNotice } from "@/components/site/DataNotice";
 import { ScoreExplainer } from "@/components/site/ScoreExplainer";
 import { ToolCard } from "@/components/site/ToolCard";
 import { tools } from "@/lib/data";
+import {
+  intentOptions,
+  transparentScore,
+  weightsForIntent,
+  type RankingIntent,
+} from "@/lib/scoring";
 
 export const Route = createFileRoute("/rankings")({
   head: () => ({
@@ -46,15 +52,18 @@ function Rankings() {
   const [filter, setFilter] = useState("All");
   const [sort, setSort] = useState<(typeof sorts)[number]>("AI score");
   const [openOnly, setOpenOnly] = useState(false);
+  const [intent, setIntent] = useState<RankingIntent>("coding");
 
   const list = useMemo(() => {
     let l = tools.filter((t) =>
       filter === "All" ? true : t.category === filter,
     );
     if (openOnly) l = l.filter((t) => t.openSource);
+    const intentWeights = weightsForIntent(intent);
     const key = (
       {
-        "AI score": (t: (typeof tools)[number]) => t.scores.ai,
+        "AI score": (t: (typeof tools)[number]) =>
+          transparentScore(t, intentWeights).score,
         Trending: (t: (typeof tools)[number]) => t.trend,
         Community: (t: (typeof tools)[number]) => t.scores.community,
         Programmer: (t: (typeof tools)[number]) => t.scores.programmer,
@@ -63,7 +72,7 @@ function Rankings() {
       } as const
     )[sort];
     return [...l].sort((a, b) => key(b) - key(a));
-  }, [filter, sort, openOnly]);
+  }, [filter, sort, openOnly, intent]);
 
   return (
     <div className="min-h-screen">
@@ -86,6 +95,36 @@ function Rankings() {
         </div>
         <div className="mt-8">
           <ScoreExplainer />
+        </div>
+
+        <div className="mt-8 rounded-2xl glass p-5">
+          <div className="text-xs uppercase tracking-wider text-accent">
+            Personalized rankings
+          </div>
+          <h2 className="mt-1 font-display text-2xl font-semibold">
+            What are you using AI for?
+          </h2>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {intentOptions.map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() => setIntent(option)}
+                className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
+                  intent === option
+                    ? "border-accent bg-accent text-accent-foreground"
+                    : "border-border text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Rankings dynamically recalculate with transparent weights for{" "}
+            {intent}. Change the sliders in Transparent Scoring to audit the
+            formula.
+          </p>
         </div>
 
         <div className="mt-10 flex flex-wrap items-center gap-2">

@@ -12,6 +12,8 @@ import {
 import { DataNotice } from "@/components/site/DataNotice";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { PricingCalculator } from "@/components/site/PricingCalculator";
+import { PromptLab } from "@/components/site/PromptLab";
 import { ScoreGauge, ScoreMeter } from "@/components/site/Score";
 import { ToolCard } from "@/components/site/ToolCard";
 import { getTool, tools, verdictColor, type Tool } from "@/lib/data";
@@ -63,7 +65,8 @@ const tabs = [
   "Benchmarks",
   "Comparisons",
   "Use Cases",
-  "Prompts",
+  "Prompt Lab",
+  "Sources",
   "Discussions",
   "Alternatives",
   "Pricing",
@@ -263,6 +266,62 @@ function ToolPage() {
                   />
                 </RadarChart>
               </ResponsiveContainer>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <PromptLab />
+          </div>
+
+          <div className="mt-6">
+            <PricingCalculator />
+          </div>
+
+          <div className="mt-6 rounded-2xl glass p-6">
+            <div className="text-xs uppercase tracking-wider text-accent">
+              Sources tab
+            </div>
+            <h2 className="mt-1 font-display text-xl font-semibold">
+              Verification sources
+            </h2>
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              {[
+                [
+                  "Official pricing source",
+                  "OpenRouter Models API",
+                  "Verified",
+                ],
+                [
+                  "Benchmark source",
+                  "Scores4AI benchmark snapshots",
+                  "Estimated",
+                ],
+                [
+                  "API source",
+                  tool.openRouterId
+                    ? tool.openRouterId
+                    : "Awaiting OpenRouter match",
+                  tool.openRouterId ? "Verified" : "Needs Review",
+                ],
+                [
+                  "Last checked",
+                  tool.lastVerified ?? "Needs live verification",
+                  tool.sourceStatus === "demo" ? "Needs Review" : "Verified",
+                ],
+              ].map(([label, value, status]) => (
+                <div
+                  key={label}
+                  className="rounded-xl bg-secondary/40 p-4 text-sm"
+                >
+                  <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                    {label}
+                  </div>
+                  <div className="mt-1 font-medium">{value}</div>
+                  <div className="mt-2 inline-flex rounded-full border border-border px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
+                    {status}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
