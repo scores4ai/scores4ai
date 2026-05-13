@@ -67,6 +67,17 @@ export function ToolCard({
         ? "Supabase Cache"
         : dataSourceCopy[tool.sourceStatus].label.replace(" seed data", "");
 
+};
+
+export function ToolCard({
+  tool,
+  index = 0,
+  displayScore = tool.scores.ai,
+  displayScoreLabel = "AI score",
+}: ToolCardProps) {
+  const trendUp = tool.trend >= 0;
+  const compactScoreLabel =
+    displayScoreLabel === "AI score" ? "AI" : "Weighted";
   return (
     <motion.article
       initial={{ opacity: 0, y: 12 }}
@@ -103,6 +114,23 @@ export function ToolCard({
               to="/tool/$id"
               params={{ id: tool.id }}
               className="font-display text-lg font-semibold hover:text-accent"
+        <div className="mt-5 flex items-end justify-between">
+          <div>
+            <div className="font-display text-3xl font-semibold tracking-tight">
+              {displayScore}
+            </div>
+            <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+              {displayScoreLabel}
+            </div>
+          </div>
+          <div className="flex flex-col items-end gap-1.5">
+            <span className="rounded-full border border-border px-2 py-0.5 text-[10px] text-muted-foreground">
+              {tool.pricing}
+            </span>
+            <span
+              className={`flex items-center gap-1 text-xs ${
+                trendUp ? "text-elite" : "text-broken"
+              }`}
             >
               {tool.name}
             </Link>
@@ -129,6 +157,12 @@ export function ToolCard({
         <div>
           <div className="font-display text-3xl font-semibold tracking-tight">
             {score}
+        <div className="mt-4 grid grid-cols-3 gap-2 rounded-xl bg-secondary/30 p-2 text-center text-[10px] text-muted-foreground">
+          <div>
+            <span className="block font-display text-sm text-foreground">
+              {displayScore}
+            </span>
+            {compactScoreLabel}
           </div>
           <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
             {displayScoreLabel}

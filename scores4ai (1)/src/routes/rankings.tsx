@@ -71,6 +71,10 @@ function Rankings() {
         scoreDetails,
       };
     });
+    const scoredTools = filteredTools.map((tool) => ({
+      tool,
+      displayScore: transparentScore(tool, intentWeights).score,
+    }));
     const key = (
       {
         "AI score": (item: (typeof scoredTools)[number]) => item.displayScore,
@@ -180,6 +184,7 @@ function Rankings() {
 
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {list.map(({ tool, displayScore, scoreDetails }, i) => (
+          {list.map(({ tool, displayScore }, i) => (
             <ToolCard
               key={tool.id}
               tool={tool}

@@ -2,6 +2,7 @@ import { DatabaseZap, Info } from "lucide-react";
 import {
   MODEL_FRESHNESS_HOURS,
   PRICING_FRESHNESS_HOURS,
+  dataSourceCopy,
 } from "@/lib/data-sources";
 
 export function DataNotice({ compact = false }: { compact?: boolean }) {
