@@ -56,23 +56,30 @@ function Rankings() {
   const [intent, setIntent] = useState<RankingIntent>("coding");
 
   const list = useMemo(() => {
-    let l = tools.filter((t) =>
-      filter === "All" ? true : t.category === filter,
+    let filteredTools = tools.filter((tool) =>
+      filter === "All" ? true : tool.category === filter,
     );
-    if (openOnly) l = l.filter((t) => t.openSource);
+    if (openOnly)
+      filteredTools = filteredTools.filter((tool) => tool.openSource);
+
     const intentWeights = weightsForIntent(intent);
+    const scoredTools = filteredTools.map((tool) => ({
+      tool,
+      displayScore: transparentScore(tool, intentWeights).score,
+    }));
     const key = (
       {
-        "AI score": (t: (typeof tools)[number]) =>
-          transparentScore(t, intentWeights).score,
-        Trending: (t: (typeof tools)[number]) => t.trend,
-        Community: (t: (typeof tools)[number]) => t.scores.community,
-        Programmer: (t: (typeof tools)[number]) => t.scores.programmer,
-        Speed: (t: (typeof tools)[number]) => t.scores.speed,
-        Value: (t: (typeof tools)[number]) => t.scores.value,
+        "AI score": (item: (typeof scoredTools)[number]) => item.displayScore,
+        Trending: (item: (typeof scoredTools)[number]) => item.tool.trend,
+        Community: (item: (typeof scoredTools)[number]) =>
+          item.tool.scores.community,
+        Programmer: (item: (typeof scoredTools)[number]) =>
+          item.tool.scores.programmer,
+        Speed: (item: (typeof scoredTools)[number]) => item.tool.scores.speed,
+        Value: (item: (typeof scoredTools)[number]) => item.tool.scores.value,
       } as const
     )[sort];
-    return [...l].sort((a, b) => key(b) - key(a));
+    return scoredTools.sort((a, b) => key(b) - key(a));
   }, [filter, sort, openOnly, intent]);
 
   return (
@@ -168,8 +175,14 @@ function Rankings() {
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {list.map((t, i) => (
-            <ToolCard key={t.id} tool={t} index={i} />
+          {list.map(({ tool, displayScore }, i) => (
+            <ToolCard
+              key={tool.id}
+              tool={tool}
+              index={i}
+              displayScore={displayScore}
+              displayScoreLabel="Transparent score"
+            />
           ))}
         </div>
       </div>
