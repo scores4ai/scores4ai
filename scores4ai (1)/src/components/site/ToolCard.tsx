@@ -5,8 +5,22 @@ import { verdictColor } from "@/lib/data";
 import { dataSourceCopy } from "@/lib/data-sources";
 import { motion } from "framer-motion";
 
-export function ToolCard({ tool, index = 0 }: { tool: Tool; index?: number }) {
+type ToolCardProps = {
+  tool: Tool;
+  index?: number;
+  displayScore?: number;
+  displayScoreLabel?: string;
+};
+
+export function ToolCard({
+  tool,
+  index = 0,
+  displayScore = tool.scores.ai,
+  displayScoreLabel = "AI score",
+}: ToolCardProps) {
   const trendUp = tool.trend >= 0;
+  const compactScoreLabel =
+    displayScoreLabel === "AI score" ? "AI" : "Weighted";
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -53,10 +67,10 @@ export function ToolCard({ tool, index = 0 }: { tool: Tool; index?: number }) {
         <div className="mt-5 flex items-end justify-between">
           <div>
             <div className="font-display text-3xl font-semibold tracking-tight">
-              {tool.scores.ai}
+              {displayScore}
             </div>
             <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
-              AI score
+              {displayScoreLabel}
             </div>
           </div>
           <div className="flex flex-col items-end gap-1.5">
@@ -80,9 +94,9 @@ export function ToolCard({ tool, index = 0 }: { tool: Tool; index?: number }) {
         <div className="mt-4 grid grid-cols-3 gap-2 rounded-xl bg-secondary/30 p-2 text-center text-[10px] text-muted-foreground">
           <div>
             <span className="block font-display text-sm text-foreground">
-              {tool.scores.ai}
+              {displayScore}
             </span>
-            AI
+            {compactScoreLabel}
           </div>
           <div>
             <span className="block font-display text-sm text-foreground">

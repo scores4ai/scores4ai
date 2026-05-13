@@ -1,5 +1,9 @@
 import { DatabaseZap, Info } from "lucide-react";
-import { DATA_FRESHNESS_MINUTES, dataSourceCopy } from "@/lib/data-sources";
+import {
+  MODEL_FRESHNESS_HOURS,
+  PRICING_FRESHNESS_HOURS,
+  dataSourceCopy,
+} from "@/lib/data-sources";
 
 export function DataNotice({ compact = false }: { compact?: boolean }) {
   const copy = dataSourceCopy.demo;
@@ -23,7 +27,10 @@ export function DataNotice({ compact = false }: { compact?: boolean }) {
           </p>
           <div className="mt-3 flex flex-wrap gap-2 text-[11px] uppercase tracking-wider text-muted-foreground">
             <span className="rounded-full border border-border px-2 py-1">
-              OpenRouter refresh target: {DATA_FRESHNESS_MINUTES}m
+              Model refresh: {MODEL_FRESHNESS_HOURS}h
+            </span>
+            <span className="rounded-full border border-border px-2 py-1">
+              Pricing refresh: {PRICING_FRESHNESS_HOURS}h
             </span>
             <span className="rounded-full border border-border px-2 py-1">
               Supabase cache ready

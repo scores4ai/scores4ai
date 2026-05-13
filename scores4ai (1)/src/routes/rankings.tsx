@@ -6,6 +6,12 @@ import { DataNotice } from "@/components/site/DataNotice";
 import { ScoreExplainer } from "@/components/site/ScoreExplainer";
 import { ToolCard } from "@/components/site/ToolCard";
 import { tools } from "@/lib/data";
+import {
+  intentOptions,
+  transparentScore,
+  weightsForIntent,
+  type RankingIntent,
+} from "@/lib/scoring";
 
 export const Route = createFileRoute("/rankings")({
   head: () => ({
@@ -13,7 +19,8 @@ export const Route = createFileRoute("/rankings")({
       { title: "AI Rankings — scores4ai" },
       {
         name: "description",
-        content: "Live rankings of AI tools, models, and agents.",
+        content:
+          "Transparent demo rankings of AI tools, models, and agents, with live-data labels when verified sources are connected.",
       },
     ],
   }),
@@ -46,31 +53,41 @@ function Rankings() {
   const [filter, setFilter] = useState("All");
   const [sort, setSort] = useState<(typeof sorts)[number]>("AI score");
   const [openOnly, setOpenOnly] = useState(false);
+  const [intent, setIntent] = useState<RankingIntent>("coding");
 
   const list = useMemo(() => {
-    let l = tools.filter((t) =>
-      filter === "All" ? true : t.category === filter,
+    let filteredTools = tools.filter((tool) =>
+      filter === "All" ? true : tool.category === filter,
     );
-    if (openOnly) l = l.filter((t) => t.openSource);
+    if (openOnly)
+      filteredTools = filteredTools.filter((tool) => tool.openSource);
+
+    const intentWeights = weightsForIntent(intent);
+    const scoredTools = filteredTools.map((tool) => ({
+      tool,
+      displayScore: transparentScore(tool, intentWeights).score,
+    }));
     const key = (
       {
-        "AI score": (t: (typeof tools)[number]) => t.scores.ai,
-        Trending: (t: (typeof tools)[number]) => t.trend,
-        Community: (t: (typeof tools)[number]) => t.scores.community,
-        Programmer: (t: (typeof tools)[number]) => t.scores.programmer,
-        Speed: (t: (typeof tools)[number]) => t.scores.speed,
-        Value: (t: (typeof tools)[number]) => t.scores.value,
+        "AI score": (item: (typeof scoredTools)[number]) => item.displayScore,
+        Trending: (item: (typeof scoredTools)[number]) => item.tool.trend,
+        Community: (item: (typeof scoredTools)[number]) =>
+          item.tool.scores.community,
+        Programmer: (item: (typeof scoredTools)[number]) =>
+          item.tool.scores.programmer,
+        Speed: (item: (typeof scoredTools)[number]) => item.tool.scores.speed,
+        Value: (item: (typeof scoredTools)[number]) => item.tool.scores.value,
       } as const
     )[sort];
-    return [...l].sort((a, b) => key(b) - key(a));
-  }, [filter, sort, openOnly]);
+    return scoredTools.sort((a, b) => key(b) - key(a));
+  }, [filter, sort, openOnly, intent]);
 
   return (
     <div className="min-h-screen">
       <Nav />
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="text-xs uppercase tracking-wider text-accent">
-          Live rankings
+          Demo rankings · live-data ready
         </div>
         <h1 className="mt-2 font-display text-5xl font-semibold tracking-tight">
           The complete AI leaderboard
@@ -86,6 +103,36 @@ function Rankings() {
         </div>
         <div className="mt-8">
           <ScoreExplainer />
+        </div>
+
+        <div className="mt-8 rounded-2xl glass p-5">
+          <div className="text-xs uppercase tracking-wider text-accent">
+            Personalized rankings
+          </div>
+          <h2 className="mt-1 font-display text-2xl font-semibold">
+            What are you using AI for?
+          </h2>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {intentOptions.map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() => setIntent(option)}
+                className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
+                  intent === option
+                    ? "border-accent bg-accent text-accent-foreground"
+                    : "border-border text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Rankings dynamically recalculate with transparent weights for{" "}
+            {intent}. Change the sliders in Transparent Scoring to audit the
+            formula.
+          </p>
         </div>
 
         <div className="mt-10 flex flex-wrap items-center gap-2">
@@ -128,8 +175,14 @@ function Rankings() {
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {list.map((t, i) => (
-            <ToolCard key={t.id} tool={t} index={i} />
+          {list.map(({ tool, displayScore }, i) => (
+            <ToolCard
+              key={tool.id}
+              tool={tool}
+              index={i}
+              displayScore={displayScore}
+              displayScoreLabel="Transparent score"
+            />
           ))}
         </div>
       </div>
