@@ -161,7 +161,12 @@ export function LiveModelData({
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {toolsToRender.map((tool, index) => (
-          <ToolCard key={tool.id} tool={tool} index={index} />
+          <ToolCard
+            key={tool.id}
+            tool={tool}
+            index={index}
+            linkToRecord={!usingLiveOrCache}
+          />
         ))}
       </div>
     </div>

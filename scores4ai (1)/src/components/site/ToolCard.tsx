@@ -1,5 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, TrendingDown, TrendingUp } from "lucide-react";
+import {
+  ArrowRight,
+  ExternalLink,
+  TrendingDown,
+  TrendingUp,
+} from "lucide-react";
 import type { Tool } from "@/lib/data";
 import { verdictColor } from "@/lib/data";
 import { dataSourceCopy } from "@/lib/data-sources";
@@ -15,6 +20,7 @@ type ToolCardProps = {
   displayScore?: number;
   displayScoreLabel?: string;
   scoreDetails?: ScoreDetails;
+  linkToRecord?: boolean;
 };
 
 function estimatedTokenPrices(tool: Tool) {
@@ -46,6 +52,7 @@ export function ToolCard({
   displayScore,
   displayScoreLabel = "AI score",
   scoreDetails,
+  linkToRecord = true,
 }: ToolCardProps) {
   const details = scoreDetails ?? transparentScore(tool);
   const score = displayScore ?? details.score;
@@ -91,13 +98,24 @@ export function ToolCard({
 
       <div className="mt-4">
         <div className="flex flex-wrap items-center gap-2">
-          <Link
-            to="/tool/$id"
-            params={{ id: tool.id }}
-            className="font-display text-lg font-semibold hover:text-accent"
-          >
-            {tool.name}
-          </Link>
+          {linkToRecord ? (
+            <Link
+              to="/tool/$id"
+              params={{ id: tool.id }}
+              className="font-display text-lg font-semibold hover:text-accent"
+            >
+              {tool.name}
+            </Link>
+          ) : (
+            <a
+              href={tool.website}
+              target="_blank"
+              rel="noreferrer"
+              className="font-display text-lg font-semibold hover:text-accent"
+            >
+              {tool.name}
+            </a>
+          )}
           <span className="text-xs text-muted-foreground">
             · {tool.developer}
           </span>
@@ -211,13 +229,24 @@ export function ToolCard({
             </span>
           ))}
         </div>
-        <Link
-          to="/tool/$id"
-          params={{ id: tool.id }}
-          className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
-        >
-          View record <ArrowRight className="h-3 w-3" />
-        </Link>
+        {linkToRecord ? (
+          <Link
+            to="/tool/$id"
+            params={{ id: tool.id }}
+            className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+          >
+            View record <ArrowRight className="h-3 w-3" />
+          </Link>
+        ) : (
+          <a
+            href={tool.website}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+          >
+            Open source <ExternalLink className="h-3 w-3" />
+          </a>
+        )}
       </div>
     </motion.article>
   );
