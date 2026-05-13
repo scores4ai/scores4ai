@@ -9,16 +9,40 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as RankingsRouteImport } from './routes/rankings'
+import { Route as PromptLabRouteImport } from './routes/prompt-lab'
+import { Route as PricingCalculatorRouteImport } from './routes/pricing-calculator'
+import { Route as ModelsRouteImport } from './routes/models'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ToolIdRouteImport } from './routes/tool.$id'
 
+const ToolsRoute = ToolsRouteImport.update({
+  id: '/tools',
+  path: '/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RankingsRoute = RankingsRouteImport.update({
   id: '/rankings',
   path: '/rankings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PromptLabRoute = PromptLabRouteImport.update({
+  id: '/prompt-lab',
+  path: '/prompt-lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingCalculatorRoute = PricingCalculatorRouteImport.update({
+  id: '/pricing-calculator',
+  path: '/pricing-calculator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ModelsRoute = ModelsRouteImport.update({
+  id: '/models',
+  path: '/models',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompareRoute = CompareRouteImport.update({
@@ -52,7 +76,11 @@ export interface FileRoutesByFullPath {
   '/agents': typeof AgentsRoute
   '/community': typeof CommunityRoute
   '/compare': typeof CompareRoute
+  '/models': typeof ModelsRoute
+  '/pricing-calculator': typeof PricingCalculatorRoute
+  '/prompt-lab': typeof PromptLabRoute
   '/rankings': typeof RankingsRoute
+  '/tools': typeof ToolsRoute
   '/tool/$id': typeof ToolIdRoute
 }
 export interface FileRoutesByTo {
@@ -60,7 +88,11 @@ export interface FileRoutesByTo {
   '/agents': typeof AgentsRoute
   '/community': typeof CommunityRoute
   '/compare': typeof CompareRoute
+  '/models': typeof ModelsRoute
+  '/pricing-calculator': typeof PricingCalculatorRoute
+  '/prompt-lab': typeof PromptLabRoute
   '/rankings': typeof RankingsRoute
+  '/tools': typeof ToolsRoute
   '/tool/$id': typeof ToolIdRoute
 }
 export interface FileRoutesById {
@@ -69,7 +101,11 @@ export interface FileRoutesById {
   '/agents': typeof AgentsRoute
   '/community': typeof CommunityRoute
   '/compare': typeof CompareRoute
+  '/models': typeof ModelsRoute
+  '/pricing-calculator': typeof PricingCalculatorRoute
+  '/prompt-lab': typeof PromptLabRoute
   '/rankings': typeof RankingsRoute
+  '/tools': typeof ToolsRoute
   '/tool/$id': typeof ToolIdRoute
 }
 export interface FileRouteTypes {
@@ -79,17 +115,35 @@ export interface FileRouteTypes {
     | '/agents'
     | '/community'
     | '/compare'
+    | '/models'
+    | '/pricing-calculator'
+    | '/prompt-lab'
     | '/rankings'
+    | '/tools'
     | '/tool/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/agents' | '/community' | '/compare' | '/rankings' | '/tool/$id'
+  to:
+    | '/'
+    | '/agents'
+    | '/community'
+    | '/compare'
+    | '/models'
+    | '/pricing-calculator'
+    | '/prompt-lab'
+    | '/rankings'
+    | '/tools'
+    | '/tool/$id'
   id:
     | '__root__'
     | '/'
     | '/agents'
     | '/community'
     | '/compare'
+    | '/models'
+    | '/pricing-calculator'
+    | '/prompt-lab'
     | '/rankings'
+    | '/tools'
     | '/tool/$id'
   fileRoutesById: FileRoutesById
 }
@@ -98,17 +152,49 @@ export interface RootRouteChildren {
   AgentsRoute: typeof AgentsRoute
   CommunityRoute: typeof CommunityRoute
   CompareRoute: typeof CompareRoute
+  ModelsRoute: typeof ModelsRoute
+  PricingCalculatorRoute: typeof PricingCalculatorRoute
+  PromptLabRoute: typeof PromptLabRoute
   RankingsRoute: typeof RankingsRoute
+  ToolsRoute: typeof ToolsRoute
   ToolIdRoute: typeof ToolIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tools': {
+      id: '/tools'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rankings': {
       id: '/rankings'
       path: '/rankings'
       fullPath: '/rankings'
       preLoaderRoute: typeof RankingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prompt-lab': {
+      id: '/prompt-lab'
+      path: '/prompt-lab'
+      fullPath: '/prompt-lab'
+      preLoaderRoute: typeof PromptLabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing-calculator': {
+      id: '/pricing-calculator'
+      path: '/pricing-calculator'
+      fullPath: '/pricing-calculator'
+      preLoaderRoute: typeof PricingCalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/models': {
+      id: '/models'
+      path: '/models'
+      fullPath: '/models'
+      preLoaderRoute: typeof ModelsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/compare': {
@@ -154,7 +240,11 @@ const rootRouteChildren: RootRouteChildren = {
   AgentsRoute: AgentsRoute,
   CommunityRoute: CommunityRoute,
   CompareRoute: CompareRoute,
+  ModelsRoute: ModelsRoute,
+  PricingCalculatorRoute: PricingCalculatorRoute,
+  PromptLabRoute: PromptLabRoute,
   RankingsRoute: RankingsRoute,
+  ToolsRoute: ToolsRoute,
   ToolIdRoute: ToolIdRoute,
 }
 export const routeTree = rootRouteImport

@@ -1,6 +1,8 @@
-export const DATA_FRESHNESS_MINUTES = 60;
+export const MODEL_FRESHNESS_HOURS = 12;
+export const PRICING_FRESHNESS_HOURS = 24;
+export const DATA_FRESHNESS_MINUTES = MODEL_FRESHNESS_HOURS * 60;
 
-export type DataSourceStatus = "demo" | "live" | "cached";
+export type DataSourceStatus = "demo" | "live" | "cached" | "estimated";
 
 export const dataSourceCopy: Record<
   DataSourceStatus,
@@ -20,6 +22,11 @@ export const dataSourceCopy: Record<
     label: "Cached data",
     helper:
       "Live sources were unavailable, so the latest Supabase cache snapshot is being shown.",
+  },
+  estimated: {
+    label: "Estimated",
+    helper:
+      "This value is calculated from public metadata and transparent assumptions until a verified live measurement is available.",
   },
 };
 

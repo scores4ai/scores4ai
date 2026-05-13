@@ -40,6 +40,9 @@ export type Tool = {
   openSource?: boolean;
   isAgent?: boolean;
   openRouterId?: string;
+  inputPricePerMillion?: number;
+  outputPricePerMillion?: number;
+  priceSourceLabel?: string;
   lastVerified?: string;
 };
 
@@ -75,6 +78,9 @@ const mk = (
   openSource: extra.openSource,
   isAgent: extra.isAgent,
   openRouterId: extra.openRouterId,
+  inputPricePerMillion: extra.inputPricePerMillion,
+  outputPricePerMillion: extra.outputPricePerMillion,
+  priceSourceLabel: extra.priceSourceLabel,
   lastVerified: extra.lastVerified ?? "Needs live verification",
   sourceStatus: extra.sourceStatus ?? "demo",
   evidenceCount: extra.evidenceCount ?? 0,

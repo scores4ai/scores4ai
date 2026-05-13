@@ -9,7 +9,9 @@
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "sync:openrouter": "node scripts/sync-openrouter-models.mjs",
+    "verify:production-build": "node scripts/verify-production-build.mjs"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.25.5",
