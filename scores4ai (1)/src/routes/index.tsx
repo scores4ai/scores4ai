@@ -147,9 +147,11 @@ function Home() {
           </motion.div>
 
           {/* Stats */}
-          <div className="mt-10">
-            <DataNotice status={sourceStatus} />
-          </div>
+          {sourceStatus === "demo" && (
+            <div className="mt-10">
+              <DataNotice status={sourceStatus} />
+            </div>
+          )}
 
           <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl glass md:grid-cols-4">
             {[
