@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Radar,
   RadarChart,
@@ -34,6 +34,7 @@ export const Route = createFileRoute("/compare")({
 const COLORS = ["var(--accent)", "var(--reliable)", "var(--elite)"];
 
 function Compare() {
+  const [chartReady, setChartReady] = useState(false);
   const [picks, setPicks] = useState<string[]>([
     "gpt-5",
     "claude-4",
@@ -61,6 +62,10 @@ function Compare() {
 
   const setSlot = (i: number, id: string) =>
     setPicks((p) => p.map((x, idx) => (idx === i ? id : x)));
+
+  useEffect(() => {
+    setChartReady(true);
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -141,35 +146,41 @@ function Compare() {
             Capability radar
           </h2>
           <div className="mt-4 h-96">
-            <ResponsiveContainer>
-              <RadarChart data={data}>
-                <PolarGrid stroke="oklch(1 0 0 / 0.1)" />
-                <PolarAngleAxis
-                  dataKey="k"
-                  tick={{ fill: "oklch(0.7 0.01 270)", fontSize: 12 }}
-                />
-                <PolarRadiusAxis
-                  tick={false}
-                  axisLine={false}
-                  domain={[0, 100]}
-                />
-                {selected.map((t, i) => (
-                  <Radar
-                    key={t.id}
-                    dataKey={t.name}
-                    stroke={COLORS[i]}
-                    fill={COLORS[i]}
-                    fillOpacity={0.18}
+            {chartReady ? (
+              <ResponsiveContainer>
+                <RadarChart data={data}>
+                  <PolarGrid stroke="oklch(1 0 0 / 0.1)" />
+                  <PolarAngleAxis
+                    dataKey="k"
+                    tick={{ fill: "oklch(0.7 0.01 270)", fontSize: 12 }}
                   />
-                ))}
-                <Legend
-                  wrapperStyle={{
-                    color: "var(--muted-foreground)",
-                    fontSize: 12,
-                  }}
-                />
-              </RadarChart>
-            </ResponsiveContainer>
+                  <PolarRadiusAxis
+                    tick={false}
+                    axisLine={false}
+                    domain={[0, 100]}
+                  />
+                  {selected.map((t, i) => (
+                    <Radar
+                      key={t.id}
+                      dataKey={t.name}
+                      stroke={COLORS[i]}
+                      fill={COLORS[i]}
+                      fillOpacity={0.18}
+                    />
+                  ))}
+                  <Legend
+                    wrapperStyle={{
+                      color: "var(--muted-foreground)",
+                      fontSize: 12,
+                    }}
+                  />
+                </RadarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="grid h-full place-items-center rounded-2xl border border-border bg-card/40 text-sm text-muted-foreground">
+                Capability chart loads in the browser with your selected tools.
+              </div>
+            )}
           </div>
         </div>
 

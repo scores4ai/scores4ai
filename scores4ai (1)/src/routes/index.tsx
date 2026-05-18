@@ -1,6 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Search, Sparkles, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  Calculator,
+  FlaskConical,
+  Search,
+  Sparkles,
+  Zap,
+} from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { DataNotice, LiveArchitectureCard } from "@/components/site/DataNotice";
@@ -45,71 +52,116 @@ function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mx-auto max-w-3xl text-center"
+            className="mx-auto max-w-4xl text-center"
           >
             <div className="mx-auto inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-xs text-muted-foreground">
               <Sparkles className="h-3 w-3 text-accent" />
-              The trust layer for AI products
+              Compare AI by task, price, context, and evidence
             </div>
             <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
-              Discover the best <br />
-              <span className="text-gradient">AI models, tools & agents</span>
+              Pick the right AI model <br />
+              <span className="text-gradient">before you spend tokens</span>
             </h1>
-            <p className="mx-auto mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
-              Stop wasting time testing bad AI tools. Transparent benchmark
-              scores, community ratings, vetted programmer reviews, and live
-              OpenRouter metadata — all in one place.
+            <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">
+              Scores4AI turns messy model choice into a decision workflow:
+              search models, compare one prompt across providers, estimate API
+              cost, and see exactly which data is live, cached, or estimated.
             </p>
 
-            <div className="mx-auto mt-10 flex max-w-xl items-center gap-2 rounded-full glass-strong p-2 pl-5">
-              <Search className="h-4 w-4 text-muted-foreground" />
-              <input
-                placeholder="Try 'Claude', 'best for coding', 'open source agents'..."
-                className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-              />
-              <button className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-foreground glow-accent">
-                Search
-              </button>
+            <div className="mx-auto mt-8 flex max-w-2xl flex-col justify-center gap-3 sm:flex-row">
+              <Link
+                to="/compare"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-medium text-accent-foreground glow-accent"
+              >
+                <FlaskConical className="h-4 w-4" /> Run Prompt Lab
+              </Link>
+              <Link
+                to="/rankings"
+                search={{ q: "coding" }}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground hover:bg-secondary"
+              >
+                <Calculator className="h-4 w-4" /> Compare token costs
+              </Link>
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground">
+            <form
+              action="/rankings"
+              method="get"
+              className="mx-auto mt-8 flex max-w-xl items-center gap-2 rounded-full glass-strong p-2 pl-5"
+              role="search"
+            >
+              <Search className="h-4 w-4 text-muted-foreground" />
+              <label className="sr-only" htmlFor="hero-search">
+                Search AI models, tools, and agents
+              </label>
+              <input
+                id="hero-search"
+                name="q"
+                placeholder="Search coding, research, agents, open source..."
+                className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+              />
+              <button
+                type="submit"
+                className="rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background"
+              >
+                Search
+              </button>
+            </form>
+
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground">
               {[
                 "coding",
-                "writing",
+                "research",
                 "agents",
                 "open source",
-                "image gen",
-                "research",
+                "low cost",
+                "privacy",
               ].map((t) => (
-                <span
+                <a
                   key={t}
+                  href={`/rankings?q=${encodeURIComponent(t)}`}
                   className="rounded-full border border-border px-2.5 py-1 hover:bg-secondary"
                 >
                   {t}
-                </span>
+                </a>
               ))}
             </div>
           </motion.div>
 
-          {/* Stats */}
-          <div className="mt-10">
-            <DataNotice />
-          </div>
-
-          <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl glass md:grid-cols-4">
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
             {[
-              ["20", "Demo tools labeled"],
-              ["3", "Score types"],
-              ["60m", "Cache target"],
-              ["0", "Hidden fake claims"],
-            ].map(([n, l]) => (
-              <div key={l} className="bg-background/30 px-6 py-6 text-center">
-                <div className="font-display text-3xl font-semibold">{n}</div>
-                <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
-                  {l}
+              [
+                "1",
+                "Search by job",
+                "Find models and tools for coding, research, agents, privacy, or low-cost workloads.",
+              ],
+              [
+                "2",
+                "Compare a prompt",
+                "Prompt Lab estimates tokens, context fit, price, speed, and hallucination risk before any API call.",
+              ],
+              [
+                "3",
+                "Trust the label",
+                "Every score declares whether it is live, cached, estimated, or demo seed data.",
+              ],
+            ].map(([n, title, body]) => (
+              <div key={title} className="rounded-2xl glass p-5 text-left">
+                <div className="grid h-8 w-8 place-items-center rounded-full bg-accent text-sm font-semibold text-accent-foreground">
+                  {n}
                 </div>
+                <div className="mt-4 font-display text-xl font-semibold">
+                  {title}
+                </div>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  {body}
+                </p>
               </div>
             ))}
+          </div>
+
+          <div className="mt-6">
+            <DataNotice />
           </div>
         </div>
       </section>
@@ -123,10 +175,10 @@ function Home() {
         <div className="flex items-end justify-between">
           <div>
             <div className="text-xs uppercase tracking-wider text-accent">
-              Demo leaderboard
+              Decision starters
             </div>
             <h2 className="mt-1 font-display text-3xl font-semibold tracking-tight md:text-4xl">
-              Seed records awaiting live verification
+              Start with transparent comparison cards
             </h2>
           </div>
           <Link
@@ -174,8 +226,8 @@ function Home() {
                 </span>
               </h3>
               <p className="mt-4 max-w-md text-muted-foreground">
-                Reasoning, coding, writing, speed, context, hallucinations,
-                pricing — visualized with radar charts and live benchmarks.
+                Reasoning, coding, writing, speed, context, hallucinations, and
+                pricing — visualized with labeled sources and estimates.
               </p>
               <Link
                 to="/compare"

@@ -3,6 +3,9 @@ import type { Tool } from "./data";
 export type PricingModel = Pick<Tool, "id" | "name" | "scores"> & {
   inputPricePerMillion?: number;
   outputPricePerMillion?: number;
+  modelId?: string;
+  contextTokens?: number;
+  pricingSource?: "openrouter-snapshot" | "local-estimate";
 };
 
 export type PricingInputs = {

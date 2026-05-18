@@ -9,9 +9,9 @@ export const dataSourceCopy: Record<
   { label: string; helper: string }
 > = {
   demo: {
-    label: "Demo seed data",
+    label: "Seed data — clearly labeled",
     helper:
-      "Scores in the bundled catalog are example records for UI validation. Production rankings should come from OpenRouter metadata, Supabase-cached benchmarks, verified community ratings, and vetted programmer reviews.",
+      "This workspace is usable for comparison flows today, but bundled scores are seed records. Trust the label on each card: live and cached rows come from OpenRouter + Supabase; estimated rows disclose their assumptions.",
   },
   live: {
     label: "Live data",
