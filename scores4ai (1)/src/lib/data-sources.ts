@@ -30,6 +30,47 @@ export const dataSourceCopy: Record<
   },
 };
 
+type DataSourceEnv = Record<string, string | boolean | undefined>;
+
+const statusValues = new Set<DataSourceStatus>([
+  "demo",
+  "live",
+  "cached",
+  "estimated",
+]);
+
+function normalizeStatus(value: string | boolean | undefined) {
+  if (typeof value !== "string") return undefined;
+  const normalized = value.trim().toLowerCase();
+  return statusValues.has(normalized as DataSourceStatus)
+    ? (normalized as DataSourceStatus)
+    : undefined;
+}
+
+function isEnabled(value: string | boolean | undefined) {
+  if (typeof value === "boolean") return value;
+  if (typeof value !== "string") return false;
+  return ["1", "true", "yes", "on", "live", "enabled"].includes(
+    value.trim().toLowerCase(),
+  );
+}
+
+export function resolveConfiguredDataSourceStatus(
+  env: DataSourceEnv = import.meta.env,
+): DataSourceStatus {
+  const explicitStatus =
+    normalizeStatus(env.VITE_DATA_SOURCE_STATUS) ??
+    normalizeStatus(env.VITE_PUBLIC_DATA_SOURCE_STATUS);
+  if (explicitStatus) return explicitStatus;
+
+  if (isEnabled(env.VITE_OPENROUTER_LIVE_DATA)) return "live";
+
+  const hasPublicSupabaseConfig = Boolean(env.VITE_SUPABASE_URL);
+  if (hasPublicSupabaseConfig) return "cached";
+
+  return "demo";
+}
+
 export const scoringDimensions = [
   {
     key: "ai",
