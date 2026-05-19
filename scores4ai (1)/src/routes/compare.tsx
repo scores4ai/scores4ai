@@ -15,7 +15,7 @@ import { DataNotice } from "@/components/site/DataNotice";
 import { PricingCalculator } from "@/components/site/PricingCalculator";
 import { PromptLab } from "@/components/site/PromptLab";
 import { ScoreMeter } from "@/components/site/Score";
-import { tools, getTool } from "@/lib/data";
+import { catalogTools as tools, getCatalogTool as getTool, catalogState } from "@/lib/catalog";
 
 export const Route = createFileRoute("/compare")({
   head: () => ({

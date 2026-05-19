@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { tools } from "@/lib/data";
+import { catalogTools as tools } from "@/lib/catalog";
 import { formatUsd } from "@/lib/currency";
 import {
   bestValueModel,
@@ -28,10 +28,19 @@ export function PricingCalculator() {
   const [promptsPerDay, setPromptsPerDay] = useState(100);
   const [avgInputTokens, setAvgInputTokens] = useState(600);
   const [avgOutputTokens, setAvgOutputTokens] = useState(200);
-  const [selectedModelId, setSelectedModelId] = useState(models[0].id);
+  const [selectedModelId, setSelectedModelId] = useState(models[0]?.id ?? "");
 
   const selectedModel =
     models.find((model) => model.id === selectedModelId) ?? models[0];
+
+  if (!selectedModel) {
+    return (
+      <section className="rounded-2xl glass p-5">
+        <h2 className="font-display text-2xl font-semibold">Pricing calculator</h2>
+        <p className="mt-2 text-sm text-muted-foreground">No live models available yet.</p>
+      </section>
+    );
+  }
   const estimate = useMemo(
     () =>
       estimateModelCost(

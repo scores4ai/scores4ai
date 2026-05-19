@@ -5,7 +5,7 @@ import { Footer } from "@/components/site/Footer";
 import { DataNotice } from "@/components/site/DataNotice";
 import { ScoreExplainer } from "@/components/site/ScoreExplainer";
 import { ToolCard } from "@/components/site/ToolCard";
-import { tools } from "@/lib/data";
+import { catalogTools as tools, catalogState } from "@/lib/catalog";
 import {
   intentOptions,
   transparentScore,

@@ -7,7 +7,7 @@ import { DataNotice, LiveArchitectureCard } from "@/components/site/DataNotice";
 import { Rail } from "@/components/site/Rail";
 import { ScoreExplainer } from "@/components/site/ScoreExplainer";
 import { ToolCard } from "@/components/site/ToolCard";
-import { rails, tools, getTool } from "@/lib/data";
+import { catalogRails as rails, catalogTools as tools, getCatalogTool as getTool, catalogState } from "@/lib/catalog";
 
 export const Route = createFileRoute("/")({
   head: () => ({
