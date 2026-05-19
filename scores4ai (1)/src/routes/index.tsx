@@ -7,7 +7,7 @@ import { DataNotice, LiveArchitectureCard } from "@/components/site/DataNotice";
 import { Rail } from "@/components/site/Rail";
 import { ScoreExplainer } from "@/components/site/ScoreExplainer";
 import { ToolCard } from "@/components/site/ToolCard";
-import { catalogRails as rails, catalogTools as tools, getCatalogTool as getTool, catalogState } from "@/lib/catalog";
+import { catalogRails as rails, catalogTools as tools, getCatalogTool as getTool } from "@/lib/catalog";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -33,19 +33,12 @@ function Home() {
   const featured = tools.slice(0, 6);
   const trending = (rails[0]?.ids ?? []).map(getTool).filter(Boolean) as typeof tools;
 
-  const homepageStats = catalogState.isDemo
-    ? [
-        [String(tools.length), "Catalog rows"],
-        ["3", "Score dimensions"],
-        [`${60}m`, "Cache target"],
-        ["0", "Hidden claims"],
-      ]
-    : [
-        [String(tools.length), "Verified tools loaded"],
-        ["3", "Score dimensions"],
-        ["12h", "Model freshness target"],
-        ["24h", "Pricing freshness target"],
-      ];
+  const homepageStats = [
+    [String(tools.length), "Verified tools loaded"],
+    ["3", "Score dimensions"],
+    ["12h", "Model freshness target"],
+    ["24h", "Pricing freshness target"],
+  ];
 
   return (
     <div className="min-h-screen">

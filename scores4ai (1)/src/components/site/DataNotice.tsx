@@ -5,6 +5,7 @@ import {
   dataSourceCopy,
 } from "@/lib/data-sources";
 import type { DataSourceStatus } from "@/lib/data-sources";
+import { env } from "@/lib/env";
 
 export function DataNotice({
   compact = false,
@@ -13,7 +14,8 @@ export function DataNotice({
   compact?: boolean;
   status?: DataSourceStatus;
 }) {
-  const copy = dataSourceCopy[status];
+  const resolvedStatus = env.useDemoData ? status : status === "demo" ? "live" : status;
+  const copy = dataSourceCopy[resolvedStatus];
 
   return (
     <aside
