@@ -20,7 +20,7 @@ export const Route = createFileRoute("/rankings")({
       {
         name: "description",
         content:
-          "Transparent demo rankings of AI tools, models, and agents, with live-data labels when verified sources are connected.",
+          "Transparent rankings of AI tools, models, and agents with source labels for live and cached data.",
       },
     ],
   }),

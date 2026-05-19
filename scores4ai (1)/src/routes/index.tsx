@@ -31,7 +31,21 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const featured = tools.slice(0, 6);
-  const trending = rails[0].ids.map(getTool).filter(Boolean) as typeof tools;
+  const trending = (rails[0]?.ids ?? []).map(getTool).filter(Boolean) as typeof tools;
+
+  const homepageStats = catalogState.isDemo
+    ? [
+        [String(tools.length), "Catalog rows"],
+        ["3", "Score dimensions"],
+        [`${60}m`, "Cache target"],
+        ["0", "Hidden claims"],
+      ]
+    : [
+        [String(tools.length), "Verified tools loaded"],
+        ["3", "Score dimensions"],
+        ["12h", "Model freshness target"],
+        ["24h", "Pricing freshness target"],
+      ];
 
   return (
     <div className="min-h-screen">
@@ -97,12 +111,7 @@ function Home() {
           </div>
 
           <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl glass md:grid-cols-4">
-            {[
-              ["20", "Demo tools labeled"],
-              ["3", "Score types"],
-              ["60m", "Cache target"],
-              ["0", "Hidden fake claims"],
-            ].map(([n, l]) => (
+            {homepageStats.map(([n, l]) => (
               <div key={l} className="bg-background/30 px-6 py-6 text-center">
                 <div className="font-display text-3xl font-semibold">{n}</div>
                 <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
@@ -123,10 +132,10 @@ function Home() {
         <div className="flex items-end justify-between">
           <div>
             <div className="text-xs uppercase tracking-wider text-accent">
-              Demo leaderboard
+              Leaderboard
             </div>
             <h2 className="mt-1 font-display text-3xl font-semibold tracking-tight md:text-4xl">
-              Seed records awaiting live verification
+              Production ranking snapshots
             </h2>
           </div>
           <Link

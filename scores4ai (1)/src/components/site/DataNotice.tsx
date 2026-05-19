@@ -30,13 +30,13 @@ export function DataNotice({
           <p className="mt-1 text-sm leading-6 text-muted-foreground">{copy.helper}</p>
           <div className="mt-3 flex flex-wrap gap-2 text-[11px] uppercase tracking-wider text-muted-foreground">
             <span className="rounded-full border border-border px-2 py-1">
-              Model refresh: {MODEL_FRESHNESS_HOURS}h
+              Model data SLA: {MODEL_FRESHNESS_HOURS}h
             </span>
             <span className="rounded-full border border-border px-2 py-1">
-              Pricing refresh: {PRICING_FRESHNESS_HOURS}h
+              Pricing data SLA: {PRICING_FRESHNESS_HOURS}h
             </span>
             <span className="rounded-full border border-border px-2 py-1">
-              Supabase cache ready
+              Cache status: active
             </span>
           </div>
         </div>

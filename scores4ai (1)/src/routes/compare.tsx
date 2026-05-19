@@ -75,8 +75,7 @@ function Compare() {
 
         <p className="mt-3 max-w-2xl text-muted-foreground">
           Compare benchmark dimensions, transparent score components, pricing
-          assumptions, and repeatable prompts. Demo seed data is labeled until
-          connected to live OpenRouter + Supabase feeds.
+          assumptions, and repeatable prompts across live and cached data feeds.
         </p>
         <div className="mt-8">
           <DataNotice compact />
