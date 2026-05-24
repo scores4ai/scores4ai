@@ -8,9 +8,13 @@ import { env } from "@/lib/env";
 type FeaturedTool = {
   id: string;
   name: string;
-  provider: string;
+  category: string;
   description: string;
-  sourceStatus: string;
+  logo: string;
+  benchmarkScore: number;
+  communityScore: number;
+  programmerScore: number;
+  pricing: string;
 };
 
 export const Route = createFileRoute("/")({
@@ -51,7 +55,7 @@ function Home() {
         setIsLoading(true);
         setError(null);
 
-        const url = `${env.supabaseUrl}/rest/v1/models?select=id,name,provider,description,source_status&order=updated_at.desc&limit=6`;
+        const url = `${env.supabaseUrl}/rest/v1/tools?select=id,name,category,description,pricing_type,metadata&order=updated_at.desc&limit=12`;
         const response = await fetch(url, {
           headers: {
             apikey: env.supabaseAnonKey,
@@ -60,15 +64,21 @@ function Home() {
         });
 
         if (!response.ok) {
-          throw new Error(`Failed to load models (${response.status})`);
+          throw new Error(`Failed to load tools (${response.status})`);
         }
 
         const rows = (await response.json()) as Array<{
           id: string;
           name: string;
-          provider: string;
+          category: string;
           description: string | null;
-          source_status: string;
+          pricing_type: string | null;
+          metadata?: {
+            logo?: string;
+            benchmark_score?: number;
+            community_score?: number;
+            programmer_score?: number;
+          };
         }>;
 
         if (isCancelled) return;
@@ -77,9 +87,13 @@ function Home() {
           rows.map((row) => ({
             id: row.id,
             name: row.name,
-            provider: row.provider,
+            category: row.category,
             description: row.description ?? "No description available.",
-            sourceStatus: row.source_status,
+            logo: row.metadata?.logo ?? "🧠",
+            benchmarkScore: row.metadata?.benchmark_score ?? 0,
+            communityScore: row.metadata?.community_score ?? 0,
+            programmerScore: row.metadata?.programmer_score ?? 0,
+            pricing: row.pricing_type ?? "Unknown",
           })),
         );
       } catch (loadError) {
@@ -110,7 +124,7 @@ function Home() {
     return tools.filter(
       (tool) =>
         tool.name.toLowerCase().includes(normalized) ||
-        tool.provider.toLowerCase().includes(normalized),
+        tool.category.toLowerCase().includes(normalized),
     );
   }, [query, tools]);
 
@@ -126,15 +140,15 @@ function Home() {
               Scores4AI Rankings
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
-              Discover production-ready AI models with transparent source status
-              and continuously updated ranking signals.
+              Discover production-ready AI tools with transparent scoring and
+              pricing metadata.
             </p>
             <div className="mx-auto mt-10 flex max-w-xl items-center gap-2 rounded-full glass-strong p-2 pl-5">
               <Search className="h-4 w-4 text-muted-foreground" />
               <input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search models and providers"
+                placeholder="Search tools and categories"
                 className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
               />
             </div>
@@ -143,15 +157,11 @@ function Home() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 pb-20">
-        <div className="mb-6 flex items-end justify-between">
-          <div>
-            <div className="text-xs uppercase tracking-wider text-accent">
-              Featured tools
-            </div>
-            <h2 className="mt-1 font-display text-3xl font-semibold tracking-tight md:text-4xl">
-              Latest ranking entries
-            </h2>
-          </div>
+        <div className="mb-6">
+          <div className="text-xs uppercase tracking-wider text-accent">Featured tools</div>
+          <h2 className="mt-1 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+            Latest ranking entries
+          </h2>
         </div>
 
         {isLoading ? (
@@ -173,23 +183,25 @@ function Home() {
           <div className="rounded-2xl glass p-6">
             <h3 className="font-display text-2xl font-semibold">No rankings available yet</h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              Rankings will appear after model data is ingested into Supabase.
+              Rankings will appear after tool data is ingested into Supabase.
             </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filteredTools.map((tool) => (
               <article key={tool.id} className="rounded-2xl glass p-5">
-                <div className="text-[11px] uppercase tracking-wider text-muted-foreground">
-                  {tool.provider}
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl" aria-hidden="true">{tool.logo}</span>
+                  <span className="text-[11px] uppercase tracking-wider text-muted-foreground">{tool.category}</span>
                 </div>
-                <h3 className="mt-2 font-display text-2xl font-semibold">{tool.name}</h3>
-                <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                  {tool.description}
-                </p>
-                <div className="mt-4 text-xs uppercase tracking-wider text-accent">
-                  Source: {tool.sourceStatus}
+                <h3 className="mt-3 font-display text-2xl font-semibold">{tool.name}</h3>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">{tool.description}</p>
+                <div className="mt-4 grid grid-cols-3 gap-2 text-xs">
+                  <div className="rounded-lg bg-secondary/40 p-2">B: {tool.benchmarkScore}</div>
+                  <div className="rounded-lg bg-secondary/40 p-2">C: {tool.communityScore}</div>
+                  <div className="rounded-lg bg-secondary/40 p-2">P: {tool.programmerScore}</div>
                 </div>
+                <div className="mt-3 text-xs uppercase tracking-wider text-accent">Pricing: {tool.pricing}</div>
               </article>
             ))}
           </div>
