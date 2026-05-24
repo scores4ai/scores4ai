@@ -17,7 +17,8 @@ function Rankings() {
       setLoading(true);
       const result = await getTopTools();
       if (cancelled) return;
-      setTools(result.data);
+      const sorted = [...result.data].sort((a, b) => b.overallScore - a.overallScore);
+      setTools(sorted);
       setError(result.error);
       setLoading(false);
     }

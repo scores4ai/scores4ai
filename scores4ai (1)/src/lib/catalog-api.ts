@@ -32,6 +32,7 @@ export async function getTopTools(): Promise<TopToolsResult> {
     );
 
     if (!response.ok) {
+      console.error("[getTopTools] Supabase request failed", { status: response.status });
       return { data: [], error: `Supabase request failed (${response.status})` };
     }
 
@@ -58,6 +59,7 @@ export async function getTopTools(): Promise<TopToolsResult> {
       error: null,
     };
   } catch (error) {
+    console.error("[getTopTools] Unexpected error", error);
     return {
       data: [],
       error: error instanceof Error ? error.message : "Unknown error",
