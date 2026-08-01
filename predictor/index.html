@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Offline Number Predictor</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f4f5f7;color:#111}
+main{max-width:900px;margin:auto;padding:14px}
+section{background:#fff;border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 2px 10px #0001}
+h1,h2{margin-top:0}.muted{color:#666}.hero{text-align:center}
+#primary{font-size:76px;font-weight:900;line-height:1}
+.picks{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.pick{background:#eee;border-radius:999px;padding:9px 12px;font-weight:700}.pick:first-child{background:#111;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.grid button{padding:14px 0;border:0;border-radius:12px;background:#111;color:#fff;font-size:18px;font-weight:700}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#f1f2f4;border-radius:12px;padding:10px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid #eee;padding:7px;text-align:left}
+.ok{color:#137333}.bad{color:#b3261e}.seq{display:grid;grid-template-columns:repeat(auto-fill,minmax(60px,1fr));gap:6px}
+.cell{background:#f2f3f5;border-radius:9px;padding:7px;text-align:center}.cell small{display:block;color:#777}
+@media(max-width:520px){.stats{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<section>
+<h1>Offline Number Predictor</h1>
+<div class="muted">All 186 known numbers and the reconstructed prediction audit are embedded directly in this file.</div>
+</section>
+
+<section class="hero">
+<div class="muted">NEXT PREDICTION</div>
+<div id="primary">—</div>
+<div id="picks" class="picks"></div>
+</section>
+
+<section>
+<h2>Enter newest result</h2>
+<div id="buttons" class="grid"></div>
+<p id="message" class="muted"></p>
+</section>
+
+<section>
+<h2>Live statistics on this device</h2>
+<div class="stats">
+<div class="stat">Top-5 success<strong id="top5" style="display:block">—</strong></div>
+<div class="stat">Live tests<strong id="tests" style="display:block">0</strong></div>
+<div class="stat">Total numbers<strong id="total" style="display:block">186</strong></div>
+</div>
+</section>
+
+<section>
+<h2>Reconstructed audit from this chat</h2>
+<table><thead><tr><th>Draw</th><th>Prediction</th><th>Actual</th><th>Result</th></tr></thead><tbody id="audit"></tbody></table>
+</section>
+
+<section>
+<h2>New live history</h2>
+<table><thead><tr><th>#</th><th>Five predictions</th><th>Actual</th><th>Result</th></tr></thead><tbody id="live"></tbody></table>
+</section>
+
+<section>
+<details open><summary><strong>Show all imported numbers</strong></summary>
+<div id="sequence" class="seq" style="margin-top:12px"></div>
+</details>
+</section>
+
+<script>
+const ORIGINAL = [15, 12, 3, 10, 8, 13, 13, 5, 7, 11, 4, 15, 12, 10, 15, 11, 5, 14, 14, 14, 12, 9, 11, 9, 8, 3, 1, 14, 2, 8, 7, 7, 9, 13, 14, 8, 6, 5, 13, 11, 10, 5, 8, 5, 10, 12, 14, 11, 7, 9, 5, 14, 4, 4, 1, 14, 4, 9, 6, 8, 11, 12, 6, 14, 15, 9, 8, 9, 4, 4, 12, 3, 15, 5, 7, 2, 5, 12, 14, 10, 6, 5, 12, 15, 12, 6, 9, 14, 10, 1, 9, 7, 4, 14, 2, 4, 10, 5, 15, 7, 2, 6, 13, 4, 15, 3, 5, 5, 8, 7, 9, 6, 2, 15, 10, 8, 10, 3, 5, 5, 6, 2, 12, 9, 9, 6, 2, 15, 3, 11, 11, 4, 1, 14, 4, 9, 6, 8, 11, 12, 6, 14, 15, 9, 8, 9, 4, 4, 12, 3, 15, 5, 7, 2, 5, 12, 14, 10, 6, 5, 12, 15, 12, 6, 9, 14, 10, 1, 9, 7, 4, 14, 2, 4, 12, 6, 10, 15, 5, 3, 13, 14, 14, 10, 14, 13];
+const CHAT_AUDIT = [{"draw": 175, "prediction": "10", "actual": 12, "result": "MISS"}, {"draw": 176, "prediction": "3", "actual": 6, "result": "MISS"}, {"draw": 177, "prediction": "14", "actual": 10, "result": "MISS"}, {"draw": 178, "prediction": "8", "actual": 15, "result": "MISS"}, {"draw": 179, "prediction": "11", "actual": 5, "result": "MISS"}, {"draw": 180, "prediction": "8", "actual": 3, "result": "MISS"}, {"draw": 181, "prediction": "13", "actual": 13, "result": "CORRECT"}, {"draw": 182, "prediction": "11", "actual": 14, "result": "MISS"}, {"draw": 183, "prediction": "8", "actual": 14, "result": "MISS"}, {"draw": 184, "prediction": "14", "actual": 10, "result": "MISS"}, {"draw": 185, "prediction": "6", "actual": 14, "result": "MISS"}, {"draw": 186, "prediction": "Unknown", "actual": 13, "result": "UNVERIFIED"}];
+const KEY = "offlinePredictorWorkingV1";
+let state;
+try {
+  state = JSON.parse(localStorage.getItem(KEY)) || {seq:[...ORIGINAL], ledger:[]};
+} catch(e) {
+  state = {seq:[...ORIGINAL], ledger:[]};
+}
+
+function prediction(seq) {
+  const overall = Array(15).fill(1);
+  const recent = Array(15).fill(.5);
+  const slot = Array(15).fill(.7);
+  const transition = Array(15).fill(.4);
+  seq.forEach(n => overall[n-1]++);
+  let w=1;
+  for(let i=seq.length-1;i>=0;i--){recent[seq[i]-1]+=w;w*=.965}
+  const target=seq.length%8;
+  for(let i=0;i<seq.length;i++) if(i%8===target) slot[seq[i]-1]++;
+  const last=seq[seq.length-1];
+  for(let i=1;i<seq.length;i++) if(seq[i-1]===last) transition[seq[i]-1]++;
+  const raw=overall.map((v,i)=>v+recent[i]+slot[i]+transition[i]);
+  const sum=raw.reduce((a,b)=>a+b,0);
+  return raw.map((p,i)=>({n:i+1,p:p/sum})).sort((a,b)=>b.p-a.p);
+}
+
+function addNumber(n) {
+  const top=prediction(state.seq).slice(0,5).map(x=>x.n);
+  state.seq.push(n);
+  state.ledger.push({top5:top, actual:n, hit:top.includes(n)});
+  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {}
+  render();
+  document.getElementById("message").innerHTML =
+    `<b class="${top.includes(n)?"ok":"bad"}">${top.includes(n)?"SUCCESS":"MISS"}</b> — predicted ${top.join(", ")}, actual ${n}`;
+}
+
+function render() {
+  const top=prediction(state.seq).slice(0,5);
+  document.getElementById("primary").textContent=top[0].n;
+  document.getElementById("picks").innerHTML=top.map((x,i)=>`<span class="pick">#${i+1} ${x.n}</span>`).join("");
+  document.getElementById("total").textContent=state.seq.length;
+  document.getElementById("tests").textContent=state.ledger.length;
+  const hits=state.ledger.filter(x=>x.hit).length;
+  document.getElementById("top5").textContent=state.ledger.length?`${(100*hits/state.ledger.length).toFixed(1)}% (${hits}/${state.ledger.length})`:"No live tests";
+  document.getElementById("sequence").innerHTML=state.seq.map((n,i)=>`<div class="cell"><small>#${i+1}</small><b>${n}</b></div>`).join("");
+  document.getElementById("audit").innerHTML=CHAT_AUDIT.map(r=>`<tr><td>${r.draw}</td><td>${r.prediction}</td><td><b>${r.actual}</b></td><td class="${r.result==="CORRECT"?"ok":r.result==="MISS"?"bad":""}">${r.result}</td></tr>`).join("");
+  document.getElementById("live").innerHTML=state.ledger.map((r,i)=>`<tr><td>${i+1}</td><td>${r.top5.join(", ")}</td><td><b>${r.actual}</b></td><td class="${r.hit?"ok":"bad"}">${r.hit?"SUCCESS":"MISS"}</td></tr>`).join("");
+}
+
+document.getElementById("buttons").innerHTML=Array.from({length:15},(_,i)=>`<button onclick="addNumber(${i+1})">${i+1}</button>`).join("");
+render();
+</script>
+</main></body></html>
