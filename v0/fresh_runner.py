@@ -3,12 +3,19 @@ import html
 import json
 import re
 import time
+from datetime import datetime
+from pathlib import Path
 from urllib.request import Request, urlopen
 
 from playwright.sync_api import sync_playwright
 import github_updater as engine
 
 BASE = "https://cash-pop.com/michigan/winning-numbers"
+FALLBACKS = [
+    "https://michiganlotterynumbers.com/cash-pop/numbers",
+    "https://michiganlotterylive.com/cash-pop/results",
+]
+STATE = Path(__file__).with_name("cloud_state.json")
 
 
 def html_to_text(document: str) -> str:
@@ -49,6 +56,87 @@ def normalize_json(value, out):
             normalize_json(item, out)
 
 
+def parse_dt(date_text, time_text):
+    raw = f"{date_text} {time_text}".replace("  ", " ").strip()
+    raw = re.sub(r"\s+(ET|EST|EDT)$", "", raw, flags=re.I)
+    for fmt in (
+        "%A, %B %d, %Y %I:%M %p",
+        "%A, %B %d, %Y %I:%M%p",
+        "%A %B %d %Y %I:%M %p",
+        "%A %B %d %Y %I:%M%p",
+    ):
+        try:
+            return datetime.strptime(raw, fmt)
+        except ValueError:
+            pass
+    return None
+
+
+def load_old_draws():
+    try:
+        return json.loads(STATE.read_text()).get("draws", [])
+    except Exception:
+        return []
+
+
+def parse_fallback_text(text, source):
+    lines = [re.sub(r"\s+", " ", x).strip() for x in text.replace("\r", "").split("\n")]
+    lines = [x for x in lines if x]
+    date_time_rx = re.compile(
+        r"^(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday),?\s+"
+        r"([A-Za-z]+\s+\d{1,2},?\s+\d{4})\s*(?:-|–|—)\s*"
+        r"(\d{1,2}:\d{2}\s*(?:AM|PM))$",
+        re.I,
+    )
+    number_rx = re.compile(r"^(1[0-5]|[1-9])$")
+    seen = {}
+    for i, line in enumerate(lines):
+        m = date_time_rx.match(line)
+        if not m:
+            continue
+        date_text = f"{m.group(1)}, {m.group(2).replace(',', '')}"
+        time_text = re.sub(r"\s+", " ", m.group(3).upper()).replace("AM", " AM").replace("PM", " PM")
+        time_text = re.sub(r"\s+", " ", time_text).strip()
+        number = None
+        for j in range(i + 1, min(len(lines), i + 7)):
+            if number_rx.match(lines[j]):
+                number = int(lines[j])
+                break
+        dt = parse_dt(date_text, time_text)
+        if dt and number is not None:
+            seen[dt] = {"number": number, "date": date_text, "time": time_text, "source": source}
+
+    old = load_old_draws()
+    old_by_dt = {}
+    for row in old:
+        dt = parse_dt(row.get("date", ""), row.get("time", ""))
+        if dt:
+            old_by_dt[(dt, int(row["number"]))] = int(row["draw"])
+
+    ordered = sorted(seen.items())
+    anchors = []
+    for idx, (dt, row) in enumerate(ordered):
+        draw = old_by_dt.get((dt, row["number"]))
+        if draw is not None:
+            anchors.append((idx, draw))
+    if not anchors:
+        print("fallback had rows but no verified timestamp anchor", source, len(ordered))
+        return []
+
+    anchor_idx, anchor_draw = max(anchors, key=lambda x: x[1])
+    mapped = []
+    for idx in range(anchor_idx, len(ordered)):
+        dt, row = ordered[idx]
+        mapped.append({
+            "draw": anchor_draw + (idx - anchor_idx),
+            "number": row["number"],
+            "date": row["date"],
+            "time": row["time"],
+            "source": source + " timestamp-matched",
+        })
+    return mapped
+
+
 def browser_candidates():
     candidates = []
     bodies = []
@@ -69,17 +157,30 @@ def browser_candidates():
             if any(x in ctype for x in ("json", "javascript", "text", "html")):
                 try:
                     body = response.body().decode("utf-8", "ignore")
-                    if "886" in body or "draw" in body.lower() or "winning" in body.lower():
+                    if "draw" in body.lower() or "winning" in body.lower():
                         bodies.append((response.url, body))
                 except Exception:
                     pass
 
         page.on("response", capture)
-        page.goto(BASE + "?live=" + stamp, wait_until="networkidle", timeout=120000)
-        page.wait_for_timeout(10000)
-        page.reload(wait_until="networkidle", timeout=120000)
-        page.wait_for_timeout(5000)
-        bodies.append(("page-visible", page.locator("body").inner_text(timeout=30000)))
+        try:
+            page.goto(BASE + "?live=" + stamp, wait_until="domcontentloaded", timeout=90000)
+            page.wait_for_timeout(12000)
+            bodies.append(("page-visible", page.locator("body").inner_text(timeout=30000)))
+        except Exception as exc:
+            print("primary browser failed", repr(exc))
+
+        for fallback in FALLBACKS:
+            try:
+                page.goto(fallback + "?live=" + str(time.time_ns()), wait_until="domcontentloaded", timeout=90000)
+                page.wait_for_timeout(7000)
+                visible = page.locator("body").inner_text(timeout=30000)
+                rows = parse_fallback_text(visible, fallback)
+                if rows:
+                    candidates.append((max(r["draw"] for r in rows), rows, fallback + " [fallback]"))
+                    print("fallback candidate", max(r["draw"] for r in rows), fallback)
+            except Exception as exc:
+                print("fallback browser failed", fallback, repr(exc))
         browser.close()
 
     for url, body in bodies:
@@ -100,8 +201,9 @@ def browser_candidates():
 
 def direct_candidates():
     candidates = []
-    for suffix in ("?nocache=", "/?nocache=", "?v="):
-        url = BASE + suffix + str(time.time_ns())
+    urls = [BASE] + FALLBACKS
+    for base in urls:
+        url = base + ("&" if "?" in base else "?") + "nocache=" + str(time.time_ns())
         try:
             req = Request(url, headers={
                 "User-Agent": "Mozilla/5.0",
@@ -111,10 +213,16 @@ def direct_candidates():
             })
             with urlopen(req, timeout=60) as response:
                 body = response.read().decode("utf-8", "ignore")
-            for text in (body, html_to_text(body)):
-                rows = engine.parse(text)
+            text = html_to_text(body)
+            if base == BASE:
+                for candidate_text in (body, text):
+                    rows = engine.parse(candidate_text)
+                    if rows:
+                        candidates.append((max(r["draw"] for r in rows), rows, url))
+            else:
+                rows = parse_fallback_text(text, base)
                 if rows:
-                    candidates.append((max(r["draw"] for r in rows), rows, url))
+                    candidates.append((max(r["draw"] for r in rows), rows, url + " [fallback-direct]"))
         except Exception as exc:
             print("direct failed", url, repr(exc))
     return candidates
@@ -122,7 +230,12 @@ def direct_candidates():
 
 def rows_to_engine_text(rows):
     lines = []
+    current_date = None
     for row in sorted(rows, key=lambda x: x["draw"], reverse=True):
+        date = row.get("date", "")
+        if date and date != current_date:
+            lines.append(date)
+            current_date = date
         lines.extend([str(row["number"]), f"#{row['draw']}", row.get("time", "")])
     return "\n".join(lines)
 
