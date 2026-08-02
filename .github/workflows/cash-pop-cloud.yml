@@ -1,42 +1,61 @@
-name: Update Michigan Cash Pop predictor
+name: Update and deploy Michigan Cash Pop predictor
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - "v0/cloud_engine.py"
-      - "v0/run_rendered_update.py"
-      - "v0/seed_state.py"
-      - "v0/seed_draws.json"
+      - "v0/github_updater.py"
+      - "v0/final.html"
       - ".github/workflows/cash-pop-cloud.yml"
   schedule:
-    - cron: "*/5 * * * *"
-
-concurrency:
-  group: cash-pop-live-update
-  cancel-in-progress: false
+    - cron: "2-57/5 * * * *"
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: cash-pop-predictor
+  cancel-in-progress: false
 
 jobs:
-  update:
+  update-and-deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install rendered-browser scraper
+
+      - name: Install rendered browser scraper
         run: |
           python -m pip install --upgrade pip
           pip install playwright
           playwright install --with-deps chromium
-      - name: Seed model if state is blank
-        run: python v0/seed_state.py
-      - name: Fetch rendered live page and update tournament
-        run: python v0/run_rendered_update.py
+
+      - name: Fetch live results and update model
+        run: python v0/github_updater.py
+
+      - name: Verify state
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          s = json.loads(Path('v0/cloud_state.json').read_text())
+          assert s.get('draws'), 'No draws stored'
+          assert s.get('pending'), 'No prediction generated'
+          assert s['pending']['draw'] == s['latestDraw'] + 1
+          print('Latest:', s['latestDraw'], 'Next:', s['pending']['draw'], 'Draws:', len(s['draws']))
+          PY
+
       - name: Commit updated state
         run: |
           git config user.name "cash-pop-bot"
@@ -45,3 +64,22 @@ jobs:
           git diff --cached --quiet || git commit -m "Update Cash Pop predictor state"
           git pull --rebase
           git push
+
+      - name: Prepare Pages site
+        run: |
+          mkdir -p _site
+          cp v0/final.html _site/index.html
+          cp v0/cloud_state.json _site/cloud_state.json
+          touch _site/.nojekyll
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
