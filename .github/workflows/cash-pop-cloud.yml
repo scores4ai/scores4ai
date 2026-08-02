@@ -1,0 +1,27 @@
+name: Update Michigan Cash Pop predictor
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch results and update predictor
+        run: python v0/cloud_engine.py
+      - name: Commit updated state
+        run: |
+          git config user.name "cash-pop-bot"
+          git config user.email "cash-pop-bot@users.noreply.github.com"
+          git add v0/cloud_state.json
+          git diff --cached --quiet || git commit -m "Update Cash Pop predictor state"
+          git push
