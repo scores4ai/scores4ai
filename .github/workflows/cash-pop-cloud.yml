@@ -5,6 +5,8 @@ on:
   push:
     paths:
       - "v0/cloud_engine.py"
+      - "v0/seed_state.py"
+      - "v0/seed_draws.json"
       - ".github/workflows/cash-pop-cloud.yml"
   schedule:
     - cron: "*/5 * * * *"
@@ -20,6 +22,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Seed model if state is blank
+        run: python v0/seed_state.py
       - name: Fetch results and update predictor
         run: python v0/cloud_engine.py
       - name: Commit updated state
