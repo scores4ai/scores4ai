@@ -17,6 +17,8 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    env:
+      N8N_FEED_URL: ${{ secrets.N8N_FEED_URL }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -24,7 +26,7 @@ jobs:
           python-version: "3.12"
       - name: Seed model if state is blank
         run: python v0/seed_state.py
-      - name: Fetch results and update predictor
+      - name: Fetch latest results and update 600-draw tournament
         run: python v0/cloud_engine.py
       - name: Commit updated state
         run: |
