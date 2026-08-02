@@ -5,11 +5,16 @@ on:
   push:
     paths:
       - "v0/cloud_engine.py"
+      - "v0/live_updater.py"
       - "v0/seed_state.py"
       - "v0/seed_draws.json"
       - ".github/workflows/cash-pop-cloud.yml"
   schedule:
     - cron: "*/5 * * * *"
+
+concurrency:
+  group: cash-pop-live-update
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -17,6 +22,7 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 4
     env:
       N8N_FEED_URL: ${{ secrets.N8N_FEED_URL }}
     steps:
@@ -26,12 +32,13 @@ jobs:
           python-version: "3.12"
       - name: Seed model if state is blank
         run: python v0/seed_state.py
-      - name: Fetch latest results and update 600-draw tournament
-        run: python v0/cloud_engine.py
+      - name: Fetch fresh results and update tournament
+        run: python v0/live_updater.py
       - name: Commit updated state
         run: |
           git config user.name "cash-pop-bot"
           git config user.email "cash-pop-bot@users.noreply.github.com"
           git add v0/cloud_state.json
           git diff --cached --quiet || git commit -m "Update Cash Pop predictor state"
+          git pull --rebase
           git push
