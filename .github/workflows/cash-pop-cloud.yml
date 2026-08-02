@@ -1,33 +1,21 @@
-name: Update and deploy Michigan Cash Pop predictor
+name: Update Michigan Cash Pop predictor data
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "index.html"
-      - "v0/github_updater.py"
-      - "v0/final.html"
-      - "v0/cloud_state.json"
-      - ".github/workflows/cash-pop-cloud.yml"
   schedule:
     - cron: "2-57/5 * * * *"
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
-  group: cash-pop-predictor
+  group: cash-pop-data-update
   cancel-in-progress: false
 
 jobs:
-  update-and-deploy:
+  update-data:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -66,22 +54,3 @@ jobs:
           git diff --cached --quiet || git commit -m "Update Cash Pop predictor state"
           git pull --rebase
           git push
-
-      - name: Prepare Pages site
-        run: |
-          mkdir -p _site
-          cp v0/final.html _site/index.html
-          cp v0/cloud_state.json _site/cloud_state.json
-          touch _site/.nojekyll
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-
-      - name: Deploy GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
