@@ -8,19 +8,19 @@ on:
       - "v0/github_updater.py"
       - "v0/fresh_runner.py"
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "1-56/5 * * * *"
 
 permissions:
   contents: write
 
 concurrency:
   group: cash-pop-live-update
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   update-data:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 10
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -38,12 +38,18 @@ jobs:
           pip install playwright
           playwright install --with-deps chromium
 
-      - name: Fetch freshest result, score, and predict
-        run: python v0/fresh_runner.py
-
-      - name: Verify and publish state
+      - name: Poll twice, score, predict, and publish
+        shell: bash
         run: |
-          python - <<'PY'
+          set -e
+          git config user.name "cash-pop-bot"
+          git config user.email "cash-pop-bot@users.noreply.github.com"
+
+          for pass in 1 2; do
+            echo "===== live pass $pass at $(date -u) ====="
+            git pull --rebase origin main
+            python v0/fresh_runner.py
+            python - <<'PY'
           import json
           from pathlib import Path
           s=json.loads(Path('v0/cloud_state.json').read_text())
@@ -52,11 +58,11 @@ jobs:
           assert s['pending']['draw']==s['latestDraw']+1
           print('Latest',s['latestDraw'],'Next',s['pending']['draw'],'Updated',s.get('updatedAt'))
           PY
-          git config user.name "cash-pop-bot"
-          git config user.email "cash-pop-bot@users.noreply.github.com"
-          git add v0/cloud_state.json
-          if ! git diff --cached --quiet; then
-            git commit -m "Update live Cash Pop state"
-            git pull --rebase origin main
-            git push origin main
-          fi
+            git add v0/cloud_state.json
+            if ! git diff --cached --quiet; then
+              git commit -m "Update live Cash Pop state"
+              git pull --rebase origin main
+              git push origin main
+            fi
+            if [ "$pass" = "1" ]; then sleep 120; fi
+          done
