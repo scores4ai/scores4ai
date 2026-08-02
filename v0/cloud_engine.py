@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# production-trigger: 2026-08-02T03:15:00-04:00
 import json, math, os, re
 from datetime import datetime, timezone
 from pathlib import Path
