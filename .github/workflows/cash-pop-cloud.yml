@@ -4,8 +4,10 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - "index.html"
       - "v0/github_updater.py"
       - "v0/final.html"
+      - "v0/cloud_state.json"
       - ".github/workflows/cash-pop-cloud.yml"
   schedule:
     - cron: "2-57/5 * * * *"
