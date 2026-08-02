@@ -1,24 +1,30 @@
-name: Update Michigan Cash Pop predictor data
+name: Continuous Michigan Cash Pop data updater
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/cash-pop-cloud.yml"
+      - "v0/github_updater.py"
   schedule:
-    - cron: "2-57/5 * * * *"
+    - cron: "3 * * * *"
 
 permissions:
   contents: write
 
 concurrency:
-  group: cash-pop-data-update
-  cancel-in-progress: false
+  group: cash-pop-continuous-data
+  cancel-in-progress: true
 
 jobs:
   update-data:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 65
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -31,26 +37,42 @@ jobs:
           pip install playwright
           playwright install --with-deps chromium
 
-      - name: Fetch live results and update model
-        run: python v0/github_updater.py
-
-      - name: Verify state
+      - name: Poll, predict, score, and save for 58 minutes
+        shell: bash
         run: |
-          python - <<'PY'
+          set +e
+          git config user.name "cash-pop-bot"
+          git config user.email "cash-pop-bot@users.noreply.github.com"
+
+          for attempt in $(seq 1 50); do
+            echo "===== Live poll $attempt at $(date -u) ====="
+
+            git pull --rebase origin main || true
+            python v0/github_updater.py
+            updater_status=$?
+
+            if [ $updater_status -eq 0 ]; then
+              python - <<'PY'
           import json
           from pathlib import Path
           s = json.loads(Path('v0/cloud_state.json').read_text())
           assert s.get('draws'), 'No draws stored'
           assert s.get('pending'), 'No prediction generated'
           assert s['pending']['draw'] == s['latestDraw'] + 1
-          print('Latest:', s['latestDraw'], 'Next:', s['pending']['draw'], 'Draws:', len(s['draws']))
+          print('Latest:', s['latestDraw'], 'Next:', s['pending']['draw'], 'Draws:', len(s['draws']), 'Updated:', s.get('updatedAt'))
           PY
 
-      - name: Commit updated state
-        run: |
-          git config user.name "cash-pop-bot"
-          git config user.email "cash-pop-bot@users.noreply.github.com"
-          git add v0/cloud_state.json
-          git diff --cached --quiet || git commit -m "Update Cash Pop predictor state"
-          git pull --rebase
-          git push
+              git add v0/cloud_state.json
+              if ! git diff --cached --quiet; then
+                git commit -m "Live Cash Pop update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+                git pull --rebase origin main || true
+                git push origin main || true
+              else
+                echo "No new completed draw yet."
+              fi
+            else
+              echo "Updater failed on this poll; retrying next minute."
+            fi
+
+            sleep 60
+          done
