@@ -1,1 +1,464 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Adaptive Predictor V0</title><style>:root{--b:#0b0f19;--c:#121827;--l:#293653;--t:#eef3ff;--m:#9baccc;--p:#7c5cff;--g:#28c76f;--r:#ff5b6e}*{box-sizing:border-box}body{margin:0;background:var(--b);color:var(--t);font:15px Arial}.w{max-width:860px;margin:auto;padding:12px 12px 60px}.c{background:var(--c);border:1px solid var(--l);border-radius:18px;padding:15px;margin:10px 0}.m{color:var(--m);font-size:13px}h2,h3{margin:0 0 9px}.hero{text-align:center}.primary{font-size:68px;font-weight:900}.five,.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.stats{grid-template-columns:repeat(3,1fr)}.pick,.stat{background:#192238;border:1px solid var(--l);border-radius:13px;padding:10px;text-align:center}.pick:first-child{background:var(--p)}.pick b{font-size:25px}.stat b{display:block;font-size:18px;margin-top:4px}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.grid button,.a button{border:0;border-radius:12px;padding:13px;background:#1a2338;color:#fff;font-weight:bold}.a{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.a button{background:var(--p)}textarea{width:100%;min-height:170px;background:#0e1524;color:#fff;border:1px solid #425374;border-radius:13px;padding:11px}table{width:100%;border-collapse:collapse}td,th{padding:7px;border-bottom:1px solid var(--l);text-align:left;font-size:12px}.ok{color:var(--g)}.bad{color:var(--r)}.model{display:grid;grid-template-columns:1.3fr .6fr .6fr;gap:7px;padding:8px 0;border-bottom:1px solid var(--l)}.bar{height:7px;background:#26324b;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--p)}@media(max-width:550px){.five{gap:4px}.pick{padding:9px 2px}.stats{grid-template-columns:1fr}.model{grid-template-columns:1.2fr .7fr .7fr}}</style></head><body><div class="w"><div class="c"><h2>Adaptive Predictor V0</h2><div class="m">Competing algorithms, strict walk-forward testing, and separate live future testing.</div></div><div class="c"><b id="saved">Loading…</b><div class="a"><button onclick="backup()">Download backup</button><button onclick="file.click()">Restore backup</button><input id="file" type="file" hidden accept=".json" onchange="restore(event)"></div></div><div class="c hero"><div class="m" id="next">NEXT DRAW</div><div class="m">PRIMARY PICK</div><div class="primary" id="one">—</div><div class="m"><b>ALL FIVE PREDICTIONS</b> — any match counts as Top-5 success</div><div class="five" id="five"></div></div><div class="c"><h3>Enter a live result</h3><div id="grid" class="grid"></div><div id="msg" class="m"></div></div><div class="c"><h3>Paste a large dataset</h3><div class="m">After import, every draw is replayed in order. Each prediction uses only earlier draws. Bulk data never counts as a live prediction.</div><textarea id="bulk" placeholder="Sunday, August 02, 2026&#10;7&#10;#88517&#10;1:13 AM"></textarea><div class="a"><button onclick="bulkImport()">Import and walk-forward test</button></div><div id="bulkmsg" class="m"></div></div><div class="c"><h3>Historical walk-forward accuracy</h3><div class="stats"><div class="stat"><span class="m">Evaluated</span><b id="be">—</b></div><div class="stat"><span class="m">Successes</span><b id="bs">—</b></div><div class="stat"><span class="m">Misses</span><b id="bm">—</b></div></div><div class="stats" style="margin-top:7px"><div class="stat"><span class="m">Accuracy</span><b id="ba">—</b></div><div class="stat"><span class="m">Avg success run</span><b id="bas">—</b></div><div class="stat"><span class="m">Avg miss run</span><b id="bam">—</b></div></div><div class="stats" style="margin-top:7px"><div class="stat"><span class="m">Longest success</span><b id="bls">—</b></div><div class="stat"><span class="m">Longest miss</span><b id="blm">—</b></div><div class="stat"><span class="m">Current run</span><b id="bc">—</b></div></div><div id="btstatus" class="m" style="margin-top:9px"></div><div style="overflow:auto;max-height:440px"><table><thead><tr><th>Draw</th><th>Five predicted</th><th>Actual</th><th>Result</th><th>Run</th><th>Total</th></tr></thead><tbody id="btrows"></tbody></table></div></div><div class="c"><h3>Historical algorithm tournament</h3><div class="m">Weights are earned during the chronological replay and show which algorithm types contributed most.</div><div id="btmodels"></div></div><div class="c"><h3>Live future-test record</h3><div class="stats"><div class="stat"><span class="m">Live tests</span><b id="le">0</b></div><div class="stat"><span class="m">Successes</span><b id="ls">0</b></div><div class="stat"><span class="m">Misses</span><b id="lm">0</b></div></div><div class="stats" style="margin-top:7px"><div class="stat"><span class="m">Accuracy</span><b id="la">—</b></div><div class="stat"><span class="m">Avg success run</span><b id="las">—</b></div><div class="stat"><span class="m">Avg miss run</span><b id="lam">—</b></div></div><div style="overflow:auto;max-height:320px"><table><thead><tr><th>Draw</th><th>Five predicted</th><th>Actual</th><th>Result</th><th>Run</th></tr></thead><tbody id="lrows"></tbody></table></div></div><div class="c"><h3>Current live algorithm weights</h3><div id="lmodels"></div></div><div class="c"><h3 id="count"></h3><div style="overflow:auto;max-height:430px"><table><thead><tr><th>Draw</th><th>Time</th><th>Number</th></tr></thead><tbody id="rows"></tbody></table></div></div></div><script>const E=[[88415,'2026-08-01 13:19',1],[88416,'2026-08-01 13:26',1],[88417,'2026-08-01 13:33',15],[88418,'2026-08-01 13:40',8],[88419,'2026-08-01 13:47',15],[88420,'2026-08-01 13:54',9],[88421,'2026-08-01 14:01',8],[88422,'2026-08-01 14:08',13],[88423,'2026-08-01 14:15',10],[88424,'2026-08-01 14:22',1],[88425,'2026-08-01 14:29',14],[88426,'2026-08-01 14:36',4],[88427,'2026-08-01 14:43',3],[88428,'2026-08-01 14:50',6],[88429,'2026-08-01 14:57',12],[88430,'2026-08-01 15:04',4],[88431,'2026-08-01 15:11',9],[88432,'2026-08-01 15:18',13],[88433,'2026-08-01 15:25',4],[88434,'2026-08-01 15:32',8],[88435,'2026-08-01 15:39',8],[88436,'2026-08-01 15:46',4],[88437,'2026-08-01 15:53',1],[88438,'2026-08-01 16:00',11],[88439,'2026-08-01 16:07',5],[88440,'2026-08-01 16:14',6],[88441,'2026-08-01 16:21',5],[88442,'2026-08-01 16:28',7],[88443,'2026-08-01 16:35',10],[88444,'2026-08-01 16:42',15],[88445,'2026-08-01 16:49',14],[88446,'2026-08-01 16:56',3],[88447,'2026-08-01 17:03',2],[88448,'2026-08-01 17:10',9],[88449,'2026-08-01 17:17',12],[88450,'2026-08-01 17:24',4],[88451,'2026-08-01 17:31',7],[88452,'2026-08-01 17:38',2],[88453,'2026-08-01 17:45',9],[88454,'2026-08-01 17:52',12],[88455,'2026-08-01 17:59',14],[88456,'2026-08-01 18:06',2],[88457,'2026-08-01 18:13',2],[88458,'2026-08-01 18:20',2],[88459,'2026-08-01 18:27',5],[88460,'2026-08-01 18:34',11],[88461,'2026-08-01 18:41',15],[88462,'2026-08-01 18:48',12],[88463,'2026-08-01 18:55',13],[88464,'2026-08-01 19:02',5],[88465,'2026-08-01 19:09',8],[88466,'2026-08-01 19:16',12],[88467,'2026-08-01 19:23',13],[88468,'2026-08-01 19:30',3],[88469,'2026-08-01 19:37',13],[88470,'2026-08-01 19:44',6],[88471,'2026-08-01 19:51',9],[88472,'2026-08-01 19:58',7],[88473,'2026-08-01 20:05',14],[88474,'2026-08-01 20:12',8],[88475,'2026-08-01 20:19',6],[88476,'2026-08-01 20:26',4],[88477,'2026-08-01 20:33',9],[88478,'2026-08-01 20:40',8],[88479,'2026-08-01 20:47',1],[88480,'2026-08-01 20:54',4],[88481,'2026-08-01 21:01',4],[88482,'2026-08-01 21:08',7],[88483,'2026-08-01 21:15',9],[88484,'2026-08-01 21:22',8],[88485,'2026-08-01 21:29',1],[88486,'2026-08-01 21:36',2],[88487,'2026-08-01 21:43',8],[88488,'2026-08-01 21:50',12],[88489,'2026-08-01 21:57',11],[88490,'2026-08-01 22:04',8],[88491,'2026-08-01 22:11',12],[88492,'2026-08-01 22:18',4],[88493,'2026-08-01 22:25',13],[88494,'2026-08-01 22:32',8],[88495,'2026-08-01 22:39',3],[88496,'2026-08-01 22:46',13],[88497,'2026-08-01 22:53',10],[88498,'2026-08-01 23:00',6],[88499,'2026-08-01 23:07',9],[88500,'2026-08-01 23:14',11],[88501,'2026-08-01 23:21',2]],K='v0Hosted';let S;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}if(!S||!Array.isArray(S.d))S={d:E.map(x=>({draw:x[0],time:x[1],number:x[2]})),l:[],w:null};S.l=Array.isArray(S.l)?S.l:[];const fw=()=>({overall:1,recent:1,transition:1,lag7:1,cycle8:1,similarity:1});S.w=S.w||fw();const norm=a=>{let s=a.reduce((x,y)=>x+y,0)||1;return a.map(x=>x/s)},cnt=(q,s)=>{let a=Array(15).fill(.5);for(let i=s;i<q.length;i++)a[q[i]-1]++;return norm(a)},trans=q=>{let a=Array(15).fill(.4),z=q.at(-1);for(let i=1;i<q.length;i++)if(q[i-1]===z)a[q[i]-1]++;return norm(a)},lag=(q,n)=>{let a=Array(15).fill(.5);if(q.length>n)a[q[q.length-n]-1]+=4;return norm(a)},cyc=(q,n)=>{let a=Array(15).fill(.5),s=q.length%n;for(let i=0;i<q.length;i++)if(i%n===s)a[q[i]-1]++;return norm(a)},sim=q=>{let a=Array(15).fill(.5),n=4,t=q.slice(-n),m=[];for(let e=n;e<q.length;e++){let d=0;for(let j=0;j<n;j++)if(q[e-n+j]!==t[j])d++;m.push({d,n:q[e]})}m.sort((x,y)=>x.d-y.d).slice(0,12).forEach((x,i)=>a[x.n-1]+=1/(1+x.d+i*.1));return norm(a)},models=q=>[{id:'overall',name:'Overall frequency',s:cnt(q,0)},{id:'recent',name:'Recent frequency',s:cnt(q,Math.max(0,q.length-24))},{id:'transition',name:'Transition / Markov',s:trans(q)},{id:'lag7',name:'Lag 7',s:lag(q,7)},{id:'cycle8',name:'Cycle 8',s:cyc(q,8)},{id:'similarity',name:'Sequence similarity',s:sim(q)}],top=m=>m.s.map((s,i)=>({n:i+1,s})).sort((a,b)=>b.s-a.s||a.n-b.n).slice(0,5).map(x=>x.n);function predict(q,w){let ms=models(q),c=Array(15).fill(0);ms.forEach(m=>{m.top=top(m);m.s.forEach((v,i)=>c[i]+=v*(w[m.id]||1))});return{ms,p:c.map((s,i)=>({n:i+1,s})).sort((a,b)=>b.s-a.s||a.n-b.n).slice(0,5).map(x=>x.n)}}function learn(w,ms,a){ms.forEach(m=>w[m.id]=Math.max(.1,Math.min(10,(w[m.id]||1)*(m.top.includes(a)?1.1:.95))));let ks=Object.keys(w),av=ks.reduce((s,k)=>s+w[k],0)/ks.length;ks.forEach(k=>w[k]/=av)}function runs(r){let rs=[],c=null,s=0,m=0,l={};r.forEach(x=>{x.hit5?s++:m++;x.total=s+'-'+m;let t=x.hit5?'SUCCESS':'MISS';if(!c||c.t!==t){c={t,n:1,a:[x]};rs.push(c)}else{c.n++;c.a.push(x)}});rs.forEach(z=>z.a.forEach((x,i)=>l[x.draw]=z.t+' '+(i+1)+' of '+z.n));let sr=rs.filter(x=>x.t==='SUCCESS'),mr=rs.filter(x=>x.t==='MISS'),av=x=>x.length?x.reduce((s,z)=>s+z.n,0)/x.length:0;return{s,m,l,a:r.length?s/r.length:0,as:av(sr),am:av(mr),ls:sr.length?Math.max(...sr.map(x=>x.n)):0,lm:mr.length?Math.max(...mr.map(x=>x.n)):0,c:rs.at(-1)}}function rebuild(){let d=S.d.slice().sort((a,b)=>a.draw-b.draw),q=[],w=fw(),r=[],warm=Math.min(40,Math.max(20,Math.floor(d.length*.08)));d.forEach(x=>{if(q.length>=warm){let z=predict(q,w),mh={};z.ms.forEach(m=>mh[m.id]=m.top.includes(x.number));r.push({draw:x.draw,top5:z.p,actual:x.number,hit5:z.p.includes(x.number),mh});learn(w,z.ms,x.number)}q.push(x.number)});S.bt=r;S.btw=w;S.warm=warm;return runs(r)}function seq(){return S.d.slice().sort((a,b)=>a.draw-b.draw).map(x=>x.number)}function nextDraw(){return Math.max(...S.d.map(x=>x.draw))+1}function save(){S.saved=new Date().toISOString();localStorage.setItem(K,JSON.stringify(S));render()}function add(n){let z=predict(seq(),S.w),d=nextDraw(),mh={};z.ms.forEach(m=>mh[m.id]=m.top.includes(n));S.d.push({draw:d,time:new Date().toLocaleString(),number:n});S.l.push({draw:d,top5:z.p,actual:n,hit5:z.p.includes(n),mh});learn(S.w,z.ms,n);rebuild();save();msg.innerHTML='<b class="'+(z.p.includes(n)?'ok':'bad')+'">'+(z.p.includes(n)?'SUCCESS':'MISS')+'</b> — '+z.p.join(', ')}function names(id){return{overall:'Overall frequency',recent:'Recent frequency',transition:'Transition / Markov',lag7:'Lag 7',cycle8:'Cycle 8',similarity:'Sequence similarity'}[id]}function modelHTML(w,r){let total=Object.values(w).reduce((a,b)=>a+b,0)||1;return Object.keys(w).sort((a,b)=>w[b]-w[a]).map(id=>{let t=r.filter(x=>x.mh&&x.mh[id]!==undefined),h=t.filter(x=>x.mh[id]).length,sh=100*w[id]/total;return'<div class="model"><div><b>'+names(id)+'</b><div class="bar"><i style="width:'+sh.toFixed(1)+'%"></i></div></div><div><span class="m">Weight</span><br><b>'+sh.toFixed(1)+'%</b></div><div><span class="m">Top-5</span><br><b>'+(t.length?(100*h/t.length).toFixed(1)+'%':'—')+'</b></div></div>'}).join('')}function render(){let z=predict(seq(),S.w),d=S.d.slice().sort((a,b)=>b.draw-a.draw),b=rebuild(),l=runs(S.l.slice().sort((a,b)=>a.draw-b.draw));one.textContent=z.p[0];five.innerHTML=z.p.map((n,i)=>'<div class="pick"><small>#'+(i+1)+'</small><br><b>'+n+'</b></div>').join('');next.textContent='NEXT DRAW #'+nextDraw();saved.textContent='Saved: '+(S.saved?new Date(S.saved).toLocaleString():'embedded data')+' · '+d.length+' draws';count.textContent=d.length+' draws loaded';rows.innerHTML=d.map(x=>'<tr><td>#'+x.draw+'</td><td>'+(x.time||'—')+'</td><td><b>'+x.number+'</b></td></tr>').join('');be.textContent=S.bt.length;bs.textContent=b.s;bm.textContent=b.m;ba.textContent=(100*b.a).toFixed(1)+'%';bas.textContent=b.as?b.as.toFixed(2):'—';bam.textContent=b.am?b.am.toFixed(2):'—';bls.textContent=b.ls||'—';blm.textContent=b.lm||'—';bc.textContent=b.c?b.c.t+' × '+b.c.n:'—';btstatus.textContent='Warm-up: '+S.warm+' draws. Each test used only earlier draw numbers. Random Top-5 baseline: 33.3%.';btrows.innerHTML=S.bt.slice().reverse().map(x=>'<tr><td>#'+x.draw+'</td><td>'+x.top5.join(', ')+'</td><td><b>'+x.actual+'</b></td><td class="'+(x.hit5?'ok':'bad')+'">'+(x.hit5?'SUCCESS':'MISS')+'</td><td>'+b.l[x.draw]+'</td><td>'+x.total+'</td></tr>').join('');btmodels.innerHTML=modelHTML(S.btw,S.bt);le.textContent=S.l.length;ls.textContent=l.s;lm.textContent=l.m;la.textContent=S.l.length?(100*l.a).toFixed(1)+'%':'—';las.textContent=l.as?l.as.toFixed(2):'—';lam.textContent=l.am?l.am.toFixed(2):'—';lrows.innerHTML=S.l.slice().reverse().map(x=>'<tr><td>#'+x.draw+'</td><td>'+x.top5.join(', ')+'</td><td><b>'+x.actual+'</b></td><td class="'+(x.hit5?'ok':'bad')+'">'+(x.hit5?'SUCCESS':'MISS')+'</td><td>'+(l.l[x.draw]||'—')+'</td></tr>').join('');lmodels.innerHTML=modelHTML(S.w,S.l)}function mon(x){return{january:1,february:2,march:3,april:4,may:5,june:6,july:7,august:8,september:9,october:10,november:11,december:12}[x.toLowerCase()]||1}function date(x){let m=x.match(/^(?:Sun|Mon|Tues|Wednes|Thurs|Fri|Satur)day,\s*([A-Za-z]+)\s+(\d+),\s*(\d{4})$/i);return m?m[3]+'-'+String(mon(m[1])).padStart(2,'0')+'-'+String(+m[2]).padStart(2,'0'):null}function time(x){let m=x.match(/^(\d+):(\d{2})\s*(AM|PM)$/i);if(!m)return x;let h=+m[1];if(m[3].toUpperCase()==='PM'&&h<12)h+=12;if(m[3].toUpperCase()==='AM'&&h===12)h=0;return String(h).padStart(2,'0')+':'+m[2]}function parse(text){let a=text.split(/\r?\n/).map(x=>x.trim()).filter(Boolean),o=[],e=[],dt='',i=0;while(i<a.length){let z=date(a[i]);if(z){dt=z;i++;continue}let m=a[i].match(/Draw\s*#(\d+).*[-–—]\s*(1[0-5]|[1-9])$/i);if(m){o.push({draw:+m[1],time:'',number:+m[2]});i++;continue}m=a[i].match(/^(\d+)\s*,\s*([^,]+)\s*,\s*(1[0-5]|[1-9])$/);if(m){o.push({draw:+m[1],time:m[2],number:+m[3]});i++;continue}if(/^(1[0-5]|[1-9])$/.test(a[i])&&/^#\d+$/.test(a[i+1]||'')&&/^\d+:\d{2}\s*(AM|PM)$/i.test(a[i+2]||'')){o.push({number:+a[i],draw:+a[i+1].slice(1),time:(dt?dt+' ':'')+time(a[i+2])});i+=3;continue}e.push(a[i++])}return{o,e}}function bulkImport(){let x=parse(bulk.value),map={};if(!x.o.length){bulkmsg.textContent='No readable draws found; text kept for correction.';return}S.d.forEach(v=>map[v.draw]=v);x.o.forEach(v=>map[v.draw]=v);S.d=Object.values(map).sort((a,b)=>a.draw-b.draw);let b=rebuild();bulk.value='';bulk.blur();save();bulkmsg.textContent='Imported '+x.o.length+' draws and replayed '+S.bt.length+' predictions: '+b.s+' successes, '+b.m+' misses.'+(x.e.length?' '+x.e.length+' line(s) unread.':'')}function backup(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({version:'V0 Walk Forward Backup',state:S},null,2)],{type:'application/json'}));a.download='adaptive_predictor_v0_backup.json';a.click()}function restore(e){let r=new FileReader();r.onload=()=>{let x=JSON.parse(r.result);S=x.state||x;S.l=Array.isArray(S.l)?S.l:[];S.w=S.w||fw();rebuild();save()};r.readAsText(e.target.files[0])}grid.innerHTML=Array.from({length:15},(_,i)=>'<button onclick="add('+(i+1)+')">'+(i+1)+'</button>').join('');rebuild();save();</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0f19">
+<title>Adaptive Predictor V0</title>
+<style>
+:root{--bg:#0b0f19;--card:#121827;--line:#26314b;--text:#eef3ff;--muted:#9baccc;--accent:#7c5cff;--good:#28c76f;--bad:#ff5b6e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+.w{max-width:800px;margin:auto;padding:12px 12px 50px}.c{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin:10px 0}
+.m{color:var(--muted);font-size:13px}h2,h3{margin-top:0}
+.hero{text-align:center}.primary{font-size:64px;font-weight:900;line-height:1;margin:8px 0}
+.five{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
+.pick{background:#222c45;border:1px solid #354362;border-radius:15px;padding:12px 5px;text-align:center}
+.pick:first-child{background:var(--accent);border-color:var(--accent)}.pick small{display:block;color:#c7d2ee;font-size:11px}.pick b{font-size:27px}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.grid button,.actions button{border:0;border-radius:12px;padding:13px;background:#171f31;color:#fff;font-weight:bold}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.actions button{background:var(--accent)}
+textarea{width:100%;min-height:150px;background:#0f1522;color:#fff;border:1px solid #405071;border-radius:12px;padding:10px}
+table{width:100%;border-collapse:collapse}td,th{padding:7px;border-bottom:1px solid var(--line);text-align:left;font-size:12px}.ok{color:var(--good)}.bad{color:var(--bad)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#171f31;border:1px solid #26314b;border-radius:13px;padding:10px}.stat b{display:block;font-size:18px;margin-top:4px}.bar{height:8px;background:#26314b;border-radius:99px;overflow:hidden;margin-top:5px}.bar span{display:block;height:100%;background:#7c5cff}.modelrow{display:grid;grid-template-columns:1.35fr .65fr .65fr;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #26314b}
+@media(max-width:520px){.five{grid-template-columns:repeat(5,1fr);gap:5px}.pick{padding:10px 2px}.pick b{font-size:22px}.stats{grid-template-columns:1fr}.modelrow{grid-template-columns:1.2fr .7fr .7fr}}
+</style>
+</head>
+<body><div class="w">
+<div class="c"><h2>Adaptive Predictor V0</h2><div class="m">Five-number ensemble prediction. Draw number is the source of truth.</div></div>
+<div class="c"><b id="saveStatus">Loading…</b><div class="actions"><button onclick="backup()">Download backup</button><button onclick="document.getElementById('file').click()">Restore backup</button><input id="file" type="file" accept=".json" hidden onchange="restore(event)"></div></div>
+<div class="c hero">
+<div class="m" id="nextLabel">NEXT DRAW</div>
+<div class="m" style="margin-top:8px">PRIMARY PICK</div>
+<div class="primary" id="primary">—</div>
+<div class="m"><b>ALL FIVE PREDICTIONS</b> — a match with any of these counts as Top-5 success</div>
+<div class="five" id="five"></div>
+</div>
+<div class="c"><h3>Enter newest result</h3><div id="grid" class="grid"></div><div id="message" class="m" style="margin-top:9px"></div></div>
+<div class="c">
+<h3>Learning scoreboard</h3>
+<div class="stats">
+  <div class="stat"><span class="m">Top-5 successes</span><b id="successes">0</b></div>
+  <div class="stat"><span class="m">Misses</span><b id="misses">0</b></div>
+  <div class="stat"><span class="m">Future-test accuracy</span><b id="accuracy">No tests</b></div></div><div class="stats" style="margin-top:8px"><div class="stat"><span class="m">Current streak</span><b id="currentStreak">—</b></div><div class="stat"><span class="m">Avg success streak</span><b id="avgSuccessStreak">—</b></div><div class="stat"><span class="m">Avg miss streak</span><b id="avgMissStreak">—</b></div>
+</div>
+<div class="stats" style="margin-top:8px">
+  <div class="stat"><span class="m">Current streak</span><b id="currentStreak">—</b></div>
+  <div class="stat"><span class="m">Average success streak</span><b id="avgSuccessStreak">—</b></div>
+  <div class="stat"><span class="m">Average miss streak</span><b id="avgMissStreak">—</b></div>
+</div>
+<div class="m" style="margin-top:10px">Random Top-5 baseline: 33.3%. Models gain or lose ensemble weight after each future result.</div>
+</div>
+
+<div class="c">
+<h3>Competing algorithm weights</h3>
+<div id="modelWeights"></div>
+</div>
+
+<div class="c">
+<h3>Future prediction history</h3>
+<div style="overflow:auto;max-height:300px">
+<table>
+<thead><tr><th>Draw</th><th>Predicted five</th><th>Actual</th><th>Result</th><th>Streak</th></tr></thead>
+<tbody id="predictionRows"></tbody>
+</table>
+</div>
+</div>
+<div class="c"><h3>Bulk update / fill gaps</h3><div class="m">Paste full Draw # lines, CSV, “draw number,” or the official block format with date, result, #draw, and time.</div><textarea id="bulk"></textarea><div class="actions"><button id="importButton" onclick="bulkImport()">Import and walk-forward test</button></div><div id="importProgress" class="m" style="margin-top:8px"></div><div id="bulkMessage" class="m"></div></div>
+<div class="c">
+<h3>Historical walk-forward test</h3>
+<div class="m">
+When a large dataset is pasted, the app replays it in draw-number order. For each draw, it predicts using only earlier draws, freezes that prediction, reveals the actual result, scores every algorithm, updates the weights, and then advances to the next draw. No future draw is visible to the models.
+</div>
+<div class="stats" style="margin-top:10px">
+  <div class="stat"><span class="m">Evaluated draws</span><b id="btEvaluated">—</b></div>
+  <div class="stat"><span class="m">Successes</span><b id="btSuccesses">—</b></div>
+  <div class="stat"><span class="m">Misses</span><b id="btMisses">—</b></div>
+</div>
+<div class="stats" style="margin-top:8px">
+  <div class="stat"><span class="m">Top-5 accuracy</span><b id="btAccuracy">—</b></div>
+  <div class="stat"><span class="m">Average success run</span><b id="btAvgSuccess">—</b></div>
+  <div class="stat"><span class="m">Average miss run</span><b id="btAvgMiss">—</b></div>
+</div>
+<div class="stats" style="margin-top:8px">
+  <div class="stat"><span class="m">Longest success run</span><b id="btLongestSuccess">—</b></div>
+  <div class="stat"><span class="m">Longest miss run</span><b id="btLongestMiss">—</b></div>
+  <div class="stat"><span class="m">Current replay streak</span><b id="btCurrentStreak">—</b></div>
+</div>
+<div class="m" id="btStatus" style="margin-top:10px"></div>
+<div style="overflow:auto;max-height:440px;margin-top:10px">
+<table>
+<thead><tr><th>Draw</th><th>Predicted five</th><th>Actual</th><th>Result</th><th>Run</th><th>Cumulative</th></tr></thead>
+<tbody id="btRows"></tbody>
+</table>
+</div>
+</div>
+
+<div class="c">
+<h3>Historical algorithm tournament</h3>
+<div class="m">These percentages are the final weights earned during the complete walk-forward replay. They are separate from the live future-test weights.</div>
+<div id="btModelWeights" style="margin-top:10px"></div>
+</div>
+
+<div class="c">
+<h3>Live future-test record</h3>
+<div class="m">Only results entered after a prediction was already visible on screen count here. Bulk-pasted data never counts as a live prediction.</div>
+<div class="stats" style="margin-top:10px">
+  <div class="stat"><span class="m">Live tests</span><b id="liveEvaluated">0</b></div>
+  <div class="stat"><span class="m">Live successes</span><b id="liveSuccesses">0</b></div>
+  <div class="stat"><span class="m">Live misses</span><b id="liveMisses">0</b></div>
+</div>
+<div class="stats" style="margin-top:8px">
+  <div class="stat"><span class="m">Live accuracy</span><b id="liveAccuracy">—</b></div>
+  <div class="stat"><span class="m">Average success run</span><b id="liveAvgSuccess">—</b></div>
+  <div class="stat"><span class="m">Average miss run</span><b id="liveAvgMiss">—</b></div>
+</div>
+<div style="overflow:auto;max-height:340px;margin-top:10px">
+<table>
+<thead><tr><th>Draw</th><th>Predicted five</th><th>Actual</th><th>Result</th><th>Run</th></tr></thead>
+<tbody id="liveRows"></tbody>
+</table>
+</div>
+</div>
+<div class="c"><b id="count"></b><div style="overflow:auto;max-height:430px"><table><thead><tr><th>Draw</th><th>Time</th><th>Number</th></tr></thead><tbody id="rows"></tbody></table></div></div>
+</div>
+<script>
+const EMBEDDED=[[88415, "2026-08-01 13:19", 1], [88416, "2026-08-01 13:26", 1], [88417, "2026-08-01 13:33", 15], [88418, "2026-08-01 13:40", 8], [88419, "2026-08-01 13:47", 15], [88420, "2026-08-01 13:54", 9], [88421, "2026-08-01 14:01", 8], [88422, "2026-08-01 14:08", 13], [88423, "2026-08-01 14:15", 10], [88424, "2026-08-01 14:22", 1], [88425, "2026-08-01 14:29", 14], [88426, "2026-08-01 14:36", 4], [88427, "2026-08-01 14:43", 3], [88428, "2026-08-01 14:50", 6], [88429, "2026-08-01 14:57", 12], [88430, "2026-08-01 15:04", 4], [88431, "2026-08-01 15:11", 9], [88432, "2026-08-01 15:18", 13], [88433, "2026-08-01 15:25", 4], [88434, "2026-08-01 15:32", 8], [88435, "2026-08-01 15:39", 8], [88436, "2026-08-01 15:46", 4], [88437, "2026-08-01 15:53", 1], [88438, "2026-08-01 16:00", 11], [88439, "2026-08-01 16:07", 5], [88440, "2026-08-01 16:14", 6], [88441, "2026-08-01 16:21", 5], [88442, "2026-08-01 16:28", 7], [88443, "2026-08-01 16:35", 10], [88444, "2026-08-01 16:42", 15], [88445, "2026-08-01 16:49", 14], [88446, "2026-08-01 16:56", 3], [88447, "2026-08-01 17:03", 2], [88448, "2026-08-01 17:10", 9], [88449, "2026-08-01 17:17", 12], [88450, "2026-08-01 17:24", 4], [88451, "2026-08-01 17:31", 7], [88452, "2026-08-01 17:38", 2], [88453, "2026-08-01 17:45", 9], [88454, "2026-08-01 17:52", 12], [88455, "2026-08-01 17:59", 14], [88456, "2026-08-01 18:06", 2], [88457, "2026-08-01 18:13", 2], [88458, "2026-08-01 18:20", 2], [88459, "2026-08-01 18:27", 5], [88460, "2026-08-01 18:34", 11], [88461, "2026-08-01 18:41", 15], [88462, "2026-08-01 18:48", 12], [88463, "2026-08-01 18:55", 13], [88464, "2026-08-01 19:02", 5], [88465, "2026-08-01 19:09", 8], [88466, "2026-08-01 19:16", 12], [88467, "2026-08-01 19:23", 13], [88468, "2026-08-01 19:30", 3], [88469, "2026-08-01 19:37", 13], [88470, "2026-08-01 19:44", 6], [88471, "2026-08-01 19:51", 9], [88472, "2026-08-01 19:58", 7], [88473, "2026-08-01 20:05", 14], [88474, "2026-08-01 20:12", 8], [88475, "2026-08-01 20:19", 6], [88476, "2026-08-01 20:26", 4], [88477, "2026-08-01 20:33", 9], [88478, "2026-08-01 20:40", 8], [88479, "2026-08-01 20:47", 1], [88480, "2026-08-01 20:54", 4], [88481, "2026-08-01 21:01", 4], [88482, "2026-08-01 21:08", 7], [88483, "2026-08-01 21:15", 9], [88484, "2026-08-01 21:22", 8], [88485, "2026-08-01 21:29", 1], [88486, "2026-08-01 21:36", 2], [88487, "2026-08-01 21:43", 8], [88488, "2026-08-01 21:50", 12], [88489, "2026-08-01 21:57", 11], [88490, "2026-08-01 22:04", 8], [88491, "2026-08-01 22:11", 12], [88492, "2026-08-01 22:18", 4], [88493, "2026-08-01 22:25", 13], [88494, "2026-08-01 22:32", 8], [88495, "2026-08-01 22:39", 3], [88496, "2026-08-01 22:46", 13], [88497, "2026-08-01 22:53", 10], [88498, "2026-08-01 23:00", 6], [88499, "2026-08-01 23:07", 9], [88500, "2026-08-01 23:14", 11], [88501, "2026-08-01 23:21", 2]];
+const KEY='v0Hosted';
+let state;
+try{state=JSON.parse(localStorage.getItem(KEY))}catch(e){state=null}
+if(!state||!Array.isArray(state.d))state={d:EMBEDDED.map(x=>({draw:x[0],time:x[1],number:x[2]})),l:[],saved:null};
+if(!Array.isArray(state.l))state.l=[];if(!state.w)state.w={overall:1,recent:1,transition:1,lag7:1,cycle8:1,similarity:1};if(!Array.isArray(state.bt))state.bt=[];if(!state.btw)state.btw={overall:1,recent:1,transition:1,lag7:1,cycle8:1,similarity:1};
+
+function saveState(){state.saved=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(state));render()}
+function sequence(){return state.d.slice().sort((a,b)=>a.draw-b.draw).map(x=>x.number)}
+function normalizeScores(a){
+ const sum=a.reduce((s,x)=>s+x,0)||1;
+ return a.map(x=>x/sum);
+}
+function countModel(q,start){
+ const a=Array(15).fill(.5);
+ for(let i=start;i<q.length;i++)a[q[i]-1]++;
+ return normalizeScores(a);
+}
+function transitionModel(q){
+ const a=Array(15).fill(.4),last=q[q.length-1];
+ for(let i=1;i<q.length;i++)if(q[i-1]===last)a[q[i]-1]++;
+ return normalizeScores(a);
+}
+function lagModel(q,lag){
+ const a=Array(15).fill(.5);
+ if(q.length>lag)a[q[q.length-lag]-1]+=4;
+ return normalizeScores(a);
+}
+function cycleModel(q,cycle){
+ const a=Array(15).fill(.5),slot=q.length%cycle;
+ for(let i=0;i<q.length;i++)if(i%cycle===slot)a[q[i]-1]++;
+ return normalizeScores(a);
+}
+function similarityModel(q){
+ const a=Array(15).fill(.5),len=4,target=q.slice(-len),matches=[];
+ for(let end=len;end<q.length;end++){
+   let distance=0;
+   for(let j=0;j<len;j++)if(q[end-len+j]!==target[j])distance++;
+   matches.push({distance:distance,next:q[end]});
+ }
+ matches.sort((x,y)=>x.distance-y.distance);
+ matches.slice(0,12).forEach((x,i)=>a[x.next-1]+=1/(1+x.distance+i*.1));
+ return normalizeScores(a);
+}
+function getModels(q){
+ return [
+  {id:'overall',name:'Overall frequency',scores:countModel(q,0)},
+  {id:'recent',name:'Recent frequency',scores:countModel(q,Math.max(0,q.length-24))},
+  {id:'transition',name:'Transition / Markov',scores:transitionModel(q)},
+  {id:'lag7',name:'Lag 7',scores:lagModel(q,7)},
+  {id:'cycle8',name:'Cycle 8',scores:cycleModel(q,8)},
+  {id:'similarity',name:'Sequence similarity',scores:similarityModel(q)}
+ ];
+}
+function modelTop5(model){
+ return model.scores.map((score,i)=>({n:i+1,score:score})).sort((a,b)=>b.score-a.score||a.n-b.n).slice(0,5).map(x=>x.n);
+}
+function predictions(){
+ const q=sequence(),models=getModels(q),combined=Array(15).fill(0);
+ models.forEach(model=>{
+   model.top5=modelTop5(model);
+   model.weight=Math.max(.1,state.w[model.id]||1);
+   model.scores.forEach((score,i)=>combined[i]+=score*model.weight);
+ });
+ const picks=combined.map((score,i)=>({n:i+1,score:score})).sort((a,b)=>b.score-a.score||a.n-b.n).slice(0,5);
+ return {picks:picks,models:models};
+}
+
+function nextDraw(){return Math.max(...state.d.map(x=>x.draw))+1}
+function addResult(n){
+ const result=predictions(),p=result.picks.map(x=>x.n),draw=nextDraw(),hit=p.includes(n);
+ const modelResults={};
+ result.models.forEach(model=>modelResults[model.id]=model.top5.includes(n));
+ state.d.push({draw:draw,time:new Date().toLocaleString(),number:n});
+ state.l.push({draw:draw,top5:p,actual:n,hit5:hit,modelResults:modelResults,weightsBefore:Object.assign({},state.w)});
+ updateWeightsObject(state.w,result.models,n);
+ saveState();
+ document.getElementById('message').innerHTML='<b class="'+(hit?'ok':'bad')+'">'+(hit?'TOP-5 SUCCESS':'MISS')+'</b> — predicted '+p.join(', ')+'; actual '+n+'.';
+}
+
+function freshWeights(){
+ return {overall:1,recent:1,transition:1,lag7:1,cycle8:1,similarity:1};
+}
+function predictFromHistory(history,weights){
+ const models=getModels(history),combined=Array(15).fill(0);
+ models.forEach(model=>{
+   model.top5=modelTop5(model);
+   model.weight=Math.max(.1,weights[model.id]||1);
+   model.scores.forEach((score,i)=>combined[i]+=score*model.weight);
+ });
+ const picks=combined.map((score,i)=>({n:i+1,score:score}))
+   .sort((a,b)=>b.score-a.score||a.n-b.n).slice(0,5).map(x=>x.n);
+ return {picks:picks,models:models};
+}
+function updateWeightsObject(weights,models,actual){
+ models.forEach(model=>{
+   const hit=model.top5.includes(actual);
+   const current=weights[model.id]||1;
+   weights[model.id]=Math.max(.1,Math.min(10,current*(hit?1.10:.95)));
+ });
+ const keys=Object.keys(weights);
+ const average=keys.reduce((sum,key)=>sum+weights[key],0)/keys.length;
+ keys.forEach(key=>weights[key]=weights[key]/average);
+}
+function annotateRuns(records){
+ const runs=[],labels={};
+ let current=null,success=0,miss=0;
+ records.forEach(record=>{
+   if(record.hit5)success++; else miss++;
+   record.cumulative=success+'-'+miss;
+   const type=record.hit5?'SUCCESS':'MISS';
+   if(!current||current.type!==type){
+     current={type:type,length:1,records:[record]};
+     runs.push(current);
+   }else{
+     current.length++;
+     current.records.push(record);
+   }
+ });
+ runs.forEach(run=>run.records.forEach((record,index)=>{
+   labels[record.draw]=run.type+' '+(index+1)+' of '+run.length;
+ }));
+ const successes=runs.filter(run=>run.type==='SUCCESS');
+ const misses=runs.filter(run=>run.type==='MISS');
+ const average=list=>list.length?list.reduce((sum,run)=>sum+run.length,0)/list.length:0;
+ return {
+   labels:labels,
+   success:success,
+   miss:miss,
+   accuracy:records.length?success/records.length:0,
+   avgSuccess:average(successes),
+   avgMiss:average(misses),
+   longestSuccess:successes.length?Math.max(...successes.map(run=>run.length)):0,
+   longestMiss:misses.length?Math.max(...misses.map(run=>run.length)):0,
+   current:runs.length?runs[runs.length-1]:null
+ };
+}
+
+async function rebuildWalkForwardAsync(){
+ const ordered=state.d.slice().sort((a,b)=>a.draw-b.draw);
+ const history=[],records=[],weights=freshWeights();
+ const warmup=Math.min(40,Math.max(20,Math.floor(ordered.length*.08)));
+ const progress=document.getElementById('importProgress');
+ const button=document.getElementById('importButton');
+ if(button){button.disabled=true;button.textContent='Testing algorithms…';}
+ for(let i=0;i<ordered.length;i++){
+   const row=ordered[i];
+   if(history.length>=warmup){
+     const prediction=predictFromHistory(history,weights);
+     const modelResults={};
+     prediction.models.forEach(model=>modelResults[model.id]=model.top5.includes(row.number));
+     records.push({
+       draw:row.draw,time:row.time,top5:prediction.picks,actual:row.number,
+       hit5:prediction.picks.includes(row.number),modelResults:modelResults,
+       weightsBefore:Object.assign({},weights)
+     });
+     updateWeightsObject(weights,prediction.models,row.number);
+   }
+   history.push(row.number);
+   if(i%20===0){
+     if(progress)progress.textContent='Testing draw '+(i+1)+' of '+ordered.length+'…';
+     await new Promise(resolve=>setTimeout(resolve,0));
+   }
+ }
+ state.bt=records;
+ state.btw=weights;
+ state.btWarmup=warmup;
+ state.btSourceCount=state.d.length;
+ if(progress)progress.textContent='Walk-forward test complete.';
+ if(button){button.disabled=false;button.textContent='Import and walk-forward test';}
+ return annotateRuns(records);
+}
+function rebuildWalkForwardFast(){
+ const ordered=state.d.slice().sort((a,b)=>a.draw-b.draw);
+ const history=[],records=[],weights=freshWeights();
+ const warmup=Math.min(40,Math.max(20,Math.floor(ordered.length*.08)));
+ for(let i=0;i<ordered.length;i++){
+   const row=ordered[i];
+   if(history.length>=warmup){
+     const prediction=predictFromHistory(history,weights);
+     const modelResults={};
+     prediction.models.forEach(model=>modelResults[model.id]=model.top5.includes(row.number));
+     records.push({
+       draw:row.draw,time:row.time,top5:prediction.picks,actual:row.number,
+       hit5:prediction.picks.includes(row.number),modelResults:modelResults,
+       weightsBefore:Object.assign({},weights)
+     });
+     updateWeightsObject(weights,prediction.models,row.number);
+   }
+   history.push(row.number);
+ }
+ state.bt=records;
+ state.btw=weights;
+ state.btWarmup=warmup;
+ state.btSourceCount=state.d.length;
+ return annotateRuns(records);
+}
+function ensureWalkForward(){
+ if(!Array.isArray(state.bt))state.bt=[];
+ if(state.btSourceCount!==state.d.length)return null;
+ return annotateRuns(state.bt);
+}
+
+function streakSummary(){
+ const rows=state.l.slice().sort((a,b)=>a.draw-b.draw);
+ const runs=[];
+ let current=null;
+ rows.forEach(row=>{
+   const type=row.hit5?'SUCCESS':'MISS';
+   if(!current||current.type!==type){
+     current={type:type,length:1,start:row.draw,end:row.draw};
+     runs.push(current);
+   }else{
+     current.length++;
+     current.end=row.draw;
+   }
+ });
+ const successRuns=runs.filter(x=>x.type==='SUCCESS');
+ const missRuns=runs.filter(x=>x.type==='MISS');
+ const avg=a=>a.length?(a.reduce((s,x)=>s+x.length,0)/a.length):0;
+ const labels={};
+ runs.forEach(run=>{
+   for(let d=run.start;d<=run.end;d++)labels[d]=run.type+' '+(d-run.start+1)+' of '+run.length;
+ });
+ return {
+   runs:runs,
+   current:runs.length?runs[runs.length-1]:null,
+   avgSuccess:avg(successRuns),
+   avgMiss:avg(missRuns),
+   longestSuccess:successRuns.length?Math.max(...successRuns.map(x=>x.length)):0,
+   longestMiss:missRuns.length?Math.max(...missRuns.map(x=>x.length)):0,
+   labels:labels
+ };
+}
+function render(){
+ const result=predictions(),p=result.picks;
+ document.getElementById('primary').textContent=p[0].n;
+ document.getElementById('five').innerHTML=p.map((x,i)=>'<div class="pick"><small>#'+(i+1)+'</small><b>'+x.n+'</b></div>').join('');
+ document.getElementById('nextLabel').textContent='NEXT DRAW #'+nextDraw();
+
+ const allDraws=state.d.slice().sort((x,y)=>y.draw-x.draw);
+ document.getElementById('rows').innerHTML=allDraws.slice(0,200).map(x=>'<tr><td>#'+x.draw+'</td><td>'+(x.time||'—')+'</td><td><b>'+x.number+'</b></td></tr>').join('');
+ document.getElementById('count').textContent=allDraws.length+' draws loaded';
+ document.getElementById('saveStatus').textContent='Saved: '+(state.saved?new Date(state.saved).toLocaleString():'embedded data')+' · '+allDraws.length+' draws';
+
+ // Live future-test scoreboard.
+ const liveStats=annotateRuns(state.l.slice().sort((a,b)=>a.draw-b.draw));
+ document.getElementById('successes').textContent=liveStats.success;
+ document.getElementById('misses').textContent=liveStats.miss;
+ document.getElementById('accuracy').textContent=state.l.length?(100*liveStats.accuracy).toFixed(1)+'% ('+liveStats.success+'/'+state.l.length+')':'No live tests';
+ document.getElementById('currentStreak').textContent=liveStats.current?(liveStats.current.type+' × '+liveStats.current.length):'—';
+ document.getElementById('avgSuccessStreak').textContent=liveStats.avgSuccess?(liveStats.avgSuccess.toFixed(2)+' · max '+liveStats.longestSuccess):'—';
+ document.getElementById('avgMissStreak').textContent=liveStats.avgMiss?(liveStats.avgMiss.toFixed(2)+' · max '+liveStats.longestMiss):'—';
+
+ document.getElementById('liveEvaluated').textContent=state.l.length;
+ document.getElementById('liveSuccesses').textContent=liveStats.success;
+ document.getElementById('liveMisses').textContent=liveStats.miss;
+ document.getElementById('liveAccuracy').textContent=state.l.length?(100*liveStats.accuracy).toFixed(1)+'%':'—';
+ document.getElementById('liveAvgSuccess').textContent=liveStats.avgSuccess?liveStats.avgSuccess.toFixed(2):'—';
+ document.getElementById('liveAvgMiss').textContent=liveStats.avgMiss?liveStats.avgMiss.toFixed(2):'—';
+ document.getElementById('liveRows').innerHTML=state.l.slice().sort((a,b)=>b.draw-a.draw).map(x=>
+   '<tr><td>#'+x.draw+'</td><td>'+x.top5.join(', ')+'</td><td><b>'+x.actual+'</b></td><td class="'+(x.hit5?'ok':'bad')+'">'+(x.hit5?'SUCCESS':'MISS')+'</td><td>'+((liveStats.labels&&liveStats.labels[x.draw])||'—')+'</td></tr>'
+ ).join('');
+
+ // Current live model weights.
+ const liveWeightTotal=Object.values(state.w).reduce((s,x)=>s+x,0)||1;
+ document.getElementById('modelWeights').innerHTML=result.models
+   .sort((a,b)=>(state.w[b.id]||1)-(state.w[a.id]||1))
+   .map(model=>{
+      const share=100*(state.w[model.id]||1)/liveWeightTotal;
+      const tests=state.l.filter(x=>x.modelResults&&x.modelResults[model.id]!==undefined);
+      const hits=tests.filter(x=>x.modelResults[model.id]).length;
+      const rate=tests.length?(100*hits/tests.length).toFixed(1)+'%':'No live tests';
+      return '<div class="modelrow"><div><b>'+model.name+'</b><div class="bar"><span style="width:'+share.toFixed(1)+'%"></span></div></div><div><span class="m">Weight</span><br><b>'+share.toFixed(1)+'%</b></div><div><span class="m">Top-5</span><br><b>'+rate+'</b></div></div>';
+   }).join('');
+
+ // Historical walk-forward scoreboard.
+ let btStats=ensureWalkForward();
+ if(!btStats){document.getElementById('btStatus').textContent='Historical test needs to be rebuilt. Import data again to run it.';btStats=annotateRuns([]);}
+ document.getElementById('btEvaluated').textContent=state.bt.length;
+ document.getElementById('btSuccesses').textContent=btStats.success;
+ document.getElementById('btMisses').textContent=btStats.miss;
+ document.getElementById('btAccuracy').textContent=state.bt.length?(100*btStats.accuracy).toFixed(1)+'%':'—';
+ document.getElementById('btAvgSuccess').textContent=btStats.avgSuccess?btStats.avgSuccess.toFixed(2):'—';
+ document.getElementById('btAvgMiss').textContent=btStats.avgMiss?btStats.avgMiss.toFixed(2):'—';
+ document.getElementById('btLongestSuccess').textContent=btStats.longestSuccess||'—';
+ document.getElementById('btLongestMiss').textContent=btStats.longestMiss||'—';
+ document.getElementById('btCurrentStreak').textContent=btStats.current?(btStats.current.type+' × '+btStats.current.length):'—';
+ document.getElementById('btStatus').textContent='Warm-up: '+(state.btWarmup||0)+' draws · Evaluated in strict chronological order · Random Top-5 baseline: 33.3%.';
+ document.getElementById('btRows').innerHTML=state.bt.slice().sort((a,b)=>b.draw-a.draw).slice(0,200).map(x=>
+   '<tr><td>#'+x.draw+'</td><td>'+x.top5.join(', ')+'</td><td><b>'+x.actual+'</b></td><td class="'+(x.hit5?'ok':'bad')+'">'+(x.hit5?'SUCCESS':'MISS')+'</td><td>'+((btStats.labels&&btStats.labels[x.draw])||'—')+'</td><td>'+x.cumulative+'</td></tr>'
+ ).join('');
+
+ const btWeightTotal=Object.values(state.btw).reduce((s,x)=>s+x,0)||1;
+ const btModelStats={};
+ Object.keys(state.btw).forEach(id=>{
+   const tests=state.bt.filter(x=>x.modelResults&&x.modelResults[id]!==undefined);
+   const hits=tests.filter(x=>x.modelResults[id]).length;
+   btModelStats[id]={tests:tests.length,hits:hits,rate:tests.length?hits/tests.length:0};
+ });
+ const nameMap={overall:'Overall frequency',recent:'Recent frequency',transition:'Transition / Markov',lag7:'Lag 7',cycle8:'Cycle 8',similarity:'Sequence similarity'};
+ document.getElementById('btModelWeights').innerHTML=Object.keys(state.btw)
+   .sort((a,b)=>state.btw[b]-state.btw[a])
+   .map(id=>{
+      const share=100*state.btw[id]/btWeightTotal,stats=btModelStats[id];
+      return '<div class="modelrow"><div><b>'+nameMap[id]+'</b><div class="bar"><span style="width:'+share.toFixed(1)+'%"></span></div></div><div><span class="m">Weight</span><br><b>'+share.toFixed(1)+'%</b></div><div><span class="m">Top-5</span><br><b>'+(stats.tests?(100*stats.rate).toFixed(1)+'%':'—')+'</b></div></div>';
+   }).join('');
+
+ document.getElementById('predictionRows').innerHTML=state.l.slice().reverse().map(x=>'<tr><td>#'+x.draw+'</td><td>'+x.top5.join(', ')+'</td><td><b>'+x.actual+'</b></td><td class="'+(x.hit5?'ok':'bad')+'">'+(x.hit5?'SUCCESS':'MISS')+'</td><td>'+((liveStats.labels&&liveStats.labels[x.draw])||'—')+'</td></tr>').join('');
+}
+function monthNum(name){const m={january:1,february:2,march:3,april:4,may:5,june:6,july:7,august:8,september:9,october:10,november:11,december:12};return m[String(name||'').toLowerCase()]||1}
+function normalizeDateHeading(line){const m=line.match(/^(?:Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday),\s*([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/i);if(!m)return null;const mm=monthNum(m[1]),dd=+m[2],yy=+m[3];return yy+'-'+String(mm).padStart(2,'0')+'-'+String(dd).padStart(2,'0')}
+function normalizeTime(t){const m=String(t||'').trim().match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);if(!m)return String(t||'').trim();let h=+m[1],min=m[2],ap=m[3].toUpperCase();if(ap==='PM'&&h<12)h+=12;if(ap==='AM'&&h===12)h=0;return String(h).padStart(2,'0')+':'+min}
+function parseLine(line){let m=line.trim().match(/Draw\s*#\s*(\d+).*?[-–—]\s*(1[0-5]|[1-9])\s*$/i);if(m)return{draw:+m[1],time:line.replace(/^.*?[-–—]\s*/,'').replace(/\s*[-–—]\s*(1[0-5]|[1-9])\s*$/,'').trim(),number:+m[2]};m=line.match(/^\s*(\d+)\s*,\s*([^,]+)\s*,\s*(1[0-5]|[1-9])\s*$/);if(m)return{draw:+m[1],time:m[2],number:+m[3]};m=line.match(/^\s*(\d+)\s+(1[0-5]|[1-9])\s*$/);return m?{draw:+m[1],time:'',number:+m[2]}:null}
+function parseBulkText(text){const lines=String(text||'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean),items=[],errors=[];let currentDate='',i=0;while(i<lines.length){const date=normalizeDateHeading(lines[i]);if(date){currentDate=date;i++;continue}const single=parseLine(lines[i]);if(single){items.push(single);i++;continue}if(/^(1[0-5]|[1-9])$/.test(lines[i])&&/^#\d+$/.test(lines[i+1]||'')&&/^\d{1,2}:\d{2}\s*(AM|PM)$/i.test(lines[i+2]||'')){const number=+lines[i],draw=+lines[i+1].replace('#',''),clock=normalizeTime(lines[i+2]);items.push({draw,time:(currentDate?currentDate+' ':'')+clock,number});i+=3;continue}errors.push(lines[i]);i++}return{items,errors}}
+async function bulkImport(){
+ const box=document.getElementById('bulk');
+ const parsed=parseBulkText(box.value),items=parsed.items,map={};
+ if(!items.length){
+   document.getElementById('bulkMessage').textContent='No readable draws were found. The pasted text was kept so you can correct it.';
+   return;
+ }
+ state.d.forEach(x=>map[x.draw]=x);
+ items.forEach(x=>map[x.draw]=x);
+ state.d=Object.values(map).sort((a,b)=>a.draw-b.draw);
+ document.getElementById('bulkMessage').textContent='Imported '+items.length+' draws. Running walk-forward test…';
+ const summary=await rebuildWalkForwardAsync();
+ state.saved=new Date().toISOString();
+ localStorage.setItem(KEY,JSON.stringify(state));
+ box.value='';
+ box.blur();
+ render();
+ document.getElementById('bulkMessage').textContent=
+   'Imported '+items.length+' draws. Tested '+state.bt.length+
+   ' historical predictions: '+summary.success+' successes, '+summary.miss+' misses'+
+   (parsed.errors.length?' · '+parsed.errors.length+' unreadable line(s).':'.');
+}
+function backup(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({version:'V0 Hosted Backup',state},null,2)],{type:'application/json'}));a.download='adaptive_predictor_v0_backup.json';a.click()}
+function restore(e){const r=new FileReader();r.onload=()=>{const x=JSON.parse(r.result);state=x.state||x;saveState()};r.readAsText(e.target.files[0])}
+document.getElementById('grid').innerHTML=Array.from({length:15},(_,i)=>'<button onclick="addResult('+(i+1)+')">'+(i+1)+'</button>').join('');
+render();
+</script></body></html>
