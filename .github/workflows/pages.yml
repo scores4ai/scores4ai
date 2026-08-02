@@ -6,6 +6,7 @@ on:
     paths:
       - "index.html"
       - "v0/final.html"
+      - "v0/live2.html"
       - "v0/cloud_state.json"
       - ".github/workflows/pages.yml"
 
@@ -40,9 +41,6 @@ jobs:
             -d '{"build_type":"workflow"}')
           echo "Pages enable response: $code"
           cat /tmp/pages.json || true
-          if [ "$code" != "201" ] && [ "$code" != "409" ]; then
-            echo "Pages could not be enabled automatically. Continuing in case it is already enabled."
-          fi
 
       - name: Build static site
         run: |
@@ -50,12 +48,13 @@ jobs:
           mkdir -p _site/v0
           cp index.html _site/index.html
           cp v0/final.html _site/v0/final.html
+          cp v0/live2.html _site/v0/live2.html
           cp v0/cloud_state.json _site/v0/cloud_state.json
           cp v0/cloud_state.json _site/cloud_state.json
           touch _site/.nojekyll
           test -s _site/index.html
-          test -s _site/v0/final.html
-          test -s _site/cloud_state.json
+          test -s _site/v0/live2.html
+          test -s _site/v0/cloud_state.json
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
