@@ -1,35 +1,28 @@
-<!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Adaptive Predictor Cloud</title>
-<style>
-body{margin:0;background:#0b0f19;color:#eef3ff;font-family:Arial}.w{max-width:820px;margin:auto;padding:14px}.c{background:#121827;border:1px solid #26314b;border-radius:18px;padding:16px;margin:12px 0}.m{color:#9baccc;font-size:13px}.hero{text-align:center}.five{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}.pick{background:#222c45;border:1px solid #354362;border-radius:15px;padding:12px 4px;text-align:center}.pick:first-child{background:#7c5cff}.pick b{font-size:28px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{background:#171f31;border:1px solid #26314b;border-radius:13px;padding:10px}.stat b{display:block;font-size:18px;margin-top:4px}.ok{color:#28c76f}.bad{color:#ff5b6e}table{width:100%;border-collapse:collapse}th,td{padding:7px;border-bottom:1px solid #26314b;text-align:left;font-size:12px}.bar{height:8px;background:#26314b;border-radius:9px;overflow:hidden}.bar span{display:block;height:100%;background:#7c5cff}@media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.five{gap:5px}.pick b{font-size:22px}}
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Adaptive Predictor Cloud</title><style>
+body{margin:0;background:#0b0f19;color:#eef3ff;font-family:Arial}.w{max-width:900px;margin:auto;padding:14px}.c{background:#121827;border:1px solid #26314b;border-radius:18px;padding:16px;margin:12px 0}.m{color:#9baccc;font-size:13px}.hero{text-align:center}.five{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}.pick{background:#222c45;border:1px solid #354362;border-radius:15px;padding:12px 4px;text-align:center}.pick:first-child{background:#7c5cff}.pick b{font-size:28px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{background:#171f31;border:1px solid #26314b;border-radius:13px;padding:10px}.stat b{display:block;font-size:18px;margin-top:4px}.ok{color:#28c76f}.bad{color:#ff5b6e}table{width:100%;border-collapse:collapse}th,td{padding:7px;border-bottom:1px solid #26314b;text-align:left;font-size:12px}.bar{height:8px;background:#26314b;border-radius:9px;overflow:hidden}.bar span{display:block;height:100%;background:#7c5cff}.model{display:grid;grid-template-columns:1.5fr .5fr;gap:8px;margin:10px 0}@media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.five{gap:5px}.pick b{font-size:22px}}
 </style></head><body><div class="w">
-<div class="c"><h2 style="margin:0">Adaptive Predictor Cloud</h2><div class="m">Runs automatically in GitHub every five minutes, even when your phone is off.</div></div>
-<div class="c hero"><div class="m" id="status">Loading cloud model…</div><h3 id="next">NEXT DRAW</h3><div class="five" id="five"></div></div>
+<div class="c"><h2 style="margin:0">Adaptive Predictor Cloud</h2><div class="m">The next target is controlled by the n8n/cloud results feed. Fifteen algorithms compete and are reweighted after strict walk-forward testing.</div></div>
+<div class="c hero"><div class="m" id="status">Loading cloud model…</div><h3 id="next">NEXT DRAW</h3><div class="five" id="five"></div><div class="m" id="feed" style="margin-top:10px"></div></div>
 <div class="c"><div class="stats">
-<div class="stat"><span class="m">Evaluated</span><b id="evaluated">—</b></div>
-<div class="stat"><span class="m">Successes</span><b id="successes">—</b></div>
-<div class="stat"><span class="m">Misses</span><b id="misses">—</b></div>
-<div class="stat"><span class="m">Top-5 accuracy</span><b id="accuracy">—</b></div>
-</div><div class="m" style="margin-top:8px">Random Top-5 baseline: 33.3%. A result above this is not proof of decoding unless it persists across many true future tests.</div></div>
-<div class="c"><h3>Algorithm weights</h3><div id="weights"></div></div>
-<div class="c"><h3>Recent success/miss record</h3><div style="overflow:auto;max-height:500px"><table><thead><tr><th>Draw</th><th>Predicted five</th><th>Actual</th><th>Result</th><th>Test type</th></tr></thead><tbody id="rows"></tbody></table></div></div>
-</div>
-<script>
+<div class="stat"><span class="m">Seed draws</span><b id="seed">—</b></div><div class="stat"><span class="m">Evaluated</span><b id="evaluated">—</b></div>
+<div class="stat"><span class="m">Successes</span><b id="successes">—</b></div><div class="stat"><span class="m">Misses</span><b id="misses">—</b></div>
+</div><div class="stats" style="margin-top:8px">
+<div class="stat"><span class="m">Walk-forward accuracy</span><b id="accuracy">—</b></div><div class="stat"><span class="m">True live tests</span><b id="liveTests">—</b></div>
+<div class="stat"><span class="m">Live successes</span><b id="liveSuccesses">—</b></div><div class="stat"><span class="m">Live accuracy</span><b id="liveAccuracy">—</b></div>
+</div><div class="m" style="margin-top:8px">Random Top-5 baseline: 33.3%. Outperformance must persist in true future tests before it suggests a useful pattern.</div></div>
+<div class="c"><h3>Competing algorithm weights</h3><div id="weights"></div></div>
+<div class="c"><h3>Success and miss history</h3><div style="overflow:auto;max-height:600px"><table><thead><tr><th>Draw</th><th>Predicted five</th><th>Actual</th><th>Result</th><th>Test type</th></tr></thead><tbody id="rows"></tbody></table></div></div>
+</div><script>
 const STATE='https://raw.githubusercontent.com/scores4ai/scores4ai/main/v0/cloud_state.json';
-const names={overall:'Overall frequency',recent:'Recent frequency',transition:'Transition / Markov',lag7:'Lag 7',cycle8:'Cycle 8',similarity:'Sequence similarity'};
-async function load(){
- try{
-  const r=await fetch(STATE+'?t='+Date.now(),{cache:'no-store'}); if(!r.ok)throw new Error('HTTP '+r.status);
-  const s=await r.json(),p=s.pending;
-  document.getElementById('status').textContent='Last cloud update: '+(s.updatedAt?new Date(s.updatedAt).toLocaleString():'waiting for first run');
-  document.getElementById('next').textContent=p?'NEXT DRAW #'+p.draw:'Waiting for first prediction';
-  document.getElementById('five').innerHTML=p?p.top5.map((n,i)=>'<div class="pick"><span class="m">#'+(i+1)+'</span><br><b>'+n+'</b></div>').join(''):'';
-  const st=s.stats||{}; evaluated.textContent=st.evaluated||0;successes.textContent=st.successes||0;misses.textContent=st.misses||0;accuracy.textContent=st.evaluated?(100*st.accuracy).toFixed(1)+'%':'—';
-  const w=s.weights||{},tot=Object.values(w).reduce((a,b)=>a+b,0)||1;
-  weights.innerHTML=Object.keys(w).sort((a,b)=>w[b]-w[a]).map(k=>{const pct=100*w[k]/tot;return '<div style="margin:9px 0"><b>'+names[k]+'</b> '+pct.toFixed(1)+'%<div class="bar"><span style="width:'+pct+'%"></span></div></div>'}).join('');
-  rows.innerHTML=(s.history||[]).slice(-200).reverse().map(x=>'<tr><td>#'+x.draw+'</td><td>'+x.top5.join(', ')+'</td><td><b>'+x.actual+'</b></td><td class="'+(x.hit5?'ok':'bad')+'">'+(x.hit5?'SUCCESS':'MISS')+'</td><td>'+x.type.replaceAll('_',' ')+'</td></tr>').join('');
- }catch(e){document.getElementById('status').textContent='Cloud state not ready: '+e.message}
-}
-load();setInterval(load,60000);
+async function load(){try{const r=await fetch(STATE+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);const s=await r.json(),p=s.pending,st=s.stats||{};
+status.textContent='Last cloud update: '+(s.updatedAt?new Date(s.updatedAt).toLocaleString():'waiting');
+next.textContent=p?'NEXT DRAW #'+p.draw:'Waiting for feed';five.innerHTML=p?p.top5.map((n,i)=>'<div class="pick"><span class="m">#'+(i+1)+'</span><br><b>'+n+'</b></div>').join(''):'';
+feed.textContent='Feed: '+(s.feed||'not connected')+' · Latest completed draw #'+(s.latestDraw||'—');
+seed.textContent=s.seedCount||0;evaluated.textContent=st.evaluated||0;successes.textContent=st.successes||0;misses.textContent=st.misses||0;
+accuracy.textContent=st.evaluated?(100*st.accuracy).toFixed(1)+'%':'—';liveTests.textContent=st.liveEvaluated||0;liveSuccesses.textContent=st.liveSuccesses||0;liveAccuracy.textContent=st.liveEvaluated?(100*st.liveAccuracy).toFixed(1)+'%':'—';
+const w=s.weights||{},names=s.modelNames||{},tot=Object.values(w).reduce((a,b)=>a+b,0)||1;
+weights.innerHTML=Object.keys(w).sort((a,b)=>w[b]-w[a]).map(k=>{const pct=100*w[k]/tot;return '<div class="model"><div><b>'+(names[k]||k)+'</b><div class="bar"><span style="width:'+pct+'%"></span></div></div><b>'+pct.toFixed(1)+'%</b></div>'}).join('');
+rows.innerHTML=(s.history||[]).slice(-300).reverse().map(x=>'<tr><td>#'+x.draw+'</td><td>'+x.top5.join(', ')+'</td><td><b>'+x.actual+'</b></td><td class="'+(x.hit5?'ok':'bad')+'">'+(x.hit5?'SUCCESS':'MISS')+'</td><td>'+String(x.type).replaceAll('_',' ')+'</td></tr>').join('');
+}catch(e){status.textContent='Cloud model unavailable: '+e.message}}load();setInterval(load,30000);
 </script></body></html>
