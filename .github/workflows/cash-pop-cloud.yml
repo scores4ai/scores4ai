@@ -1,4 +1,4 @@
-name: Michigan Cash Pop live updater
+name: Michigan Cash Pop continuous updater
 
 on:
   workflow_dispatch:
@@ -8,19 +8,19 @@ on:
       - "v0/github_updater.py"
       - "v0/fresh_runner.py"
   schedule:
-    - cron: "1-56/5 * * * *"
+    - cron: "2 * * * *"
 
 permissions:
   contents: write
 
 concurrency:
-  group: cash-pop-live-update
-  cancel-in-progress: false
+  group: cash-pop-continuous
+  cancel-in-progress: true
 
 jobs:
   update-data:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 65
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -38,18 +38,21 @@ jobs:
           pip install playwright
           playwright install --with-deps chromium
 
-      - name: Poll twice, score, predict, and publish
+      - name: Poll every minute and publish immediately
         shell: bash
         run: |
-          set -e
+          set +e
           git config user.name "cash-pop-bot"
           git config user.email "cash-pop-bot@users.noreply.github.com"
 
-          for pass in 1 2; do
+          for pass in $(seq 1 57); do
             echo "===== live pass $pass at $(date -u) ====="
-            git pull --rebase origin main
+            git pull --rebase origin main || true
             python v0/fresh_runner.py
-            python - <<'PY'
+            status=$?
+
+            if [ $status -eq 0 ]; then
+              python - <<'PY'
           import json
           from pathlib import Path
           s=json.loads(Path('v0/cloud_state.json').read_text())
@@ -58,11 +61,15 @@ jobs:
           assert s['pending']['draw']==s['latestDraw']+1
           print('Latest',s['latestDraw'],'Next',s['pending']['draw'],'Updated',s.get('updatedAt'))
           PY
-            git add v0/cloud_state.json
-            if ! git diff --cached --quiet; then
-              git commit -m "Update live Cash Pop state"
-              git pull --rebase origin main
-              git push origin main
+              git add v0/cloud_state.json
+              if ! git diff --cached --quiet; then
+                git commit -m "Live Cash Pop update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+                git pull --rebase origin main || true
+                git push origin main || true
+              fi
+            else
+              echo "Fetch failed; retrying in one minute"
             fi
-            if [ "$pass" = "1" ]; then sleep 120; fi
+
+            sleep 60
           done
