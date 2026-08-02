@@ -1,1 +1,97 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Adaptive Predictor V0</title><style>body{margin:0;background:#0b0f19;color:#eef3ff;font-family:Arial}.w{max-width:760px;margin:auto;padding:12px}.c{background:#121827;border:1px solid #26314b;border-radius:18px;padding:15px;margin:10px 0}.m{color:#9baccc;font-size:13px}.p{text-align:center;font-size:72px;font-weight:900}.top{display:flex;gap:7px;justify-content:center;flex-wrap:wrap}.b{background:#222c45;padding:8px 11px;border-radius:99px;font-weight:bold}.b:first-child{background:#7c5cff}.g{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.g button,.a button{border:0;border-radius:12px;padding:13px;background:#171f31;color:#fff;font-weight:bold}.a{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.a button{background:#7c5cff}textarea{width:100%;min-height:150px;background:#0f1522;color:#fff;border:1px solid #405071;border-radius:12px;padding:10px;box-sizing:border-box}table{width:100%;border-collapse:collapse}td,th{padding:7px;border-bottom:1px solid #26314b;text-align:left;font-size:12px}.ok{color:#28c76f}.bad{color:#ff5b6e}</style></head><body><div class="w"><div class="c"><h2 style="margin:0">Adaptive Predictor V0</h2><div class="m">Draw-number-first research lab. Data saves after every change.</div></div><div class="c"><b id="save">Loading…</b><div class="a"><button onclick="backup()">Download backup</button><button onclick="document.getElementById('f').click()">Restore backup</button><input id="f" type="file" accept=".json" hidden onchange="restore(event)"></div></div><div class="c"><div class="m" id="next">NEXT DRAW</div><div class="p" id="pred">—</div><div class="top" id="top"></div></div><div class="c"><b>Enter newest result</b><div id="grid" class="g" style="margin-top:9px"></div><div id="msg" class="m" style="margin-top:8px"></div></div><div class="c"><b>Bulk update / fill gaps</b><div class="m">Paste full Draw # lines, CSV, or “draw number”. Existing draw numbers update; missing ones are added.</div><textarea id="bulk" placeholder="Draw #88513 — 12:45 AM (Aug 2, 2026) — 15&#10;88514, 2026-08-02 00:52, 7&#10;88515 4"></textarea><div class="a"><button onclick="bulkImport()">Import / fill gaps</button></div><div id="bulkmsg" class="m"></div></div><div class="c"><b id="count"></b><div style="overflow:auto;max-height:430px"><table><thead><tr><th>Draw</th><th>Time</th><th>Number</th></tr></thead><tbody id="rows"></tbody></table></div></div></div><script>const E=[[88415,'2026-08-01 13:19',1],[88416,'2026-08-01 13:26',1],[88417,'2026-08-01 13:33',15],[88418,'2026-08-01 13:40',8],[88419,'2026-08-01 13:47',15],[88420,'2026-08-01 13:54',9],[88421,'2026-08-01 14:01',8],[88422,'2026-08-01 14:08',13],[88423,'2026-08-01 14:15',10],[88424,'2026-08-01 14:22',1],[88425,'2026-08-01 14:29',14],[88426,'2026-08-01 14:36',4],[88427,'2026-08-01 14:43',3],[88428,'2026-08-01 14:50',6],[88429,'2026-08-01 14:57',12],[88430,'2026-08-01 15:04',4],[88431,'2026-08-01 15:11',9],[88432,'2026-08-01 15:18',13],[88433,'2026-08-01 15:25',4],[88434,'2026-08-01 15:32',8],[88435,'2026-08-01 15:39',8],[88436,'2026-08-01 15:46',4],[88437,'2026-08-01 15:53',1],[88438,'2026-08-01 16:00',11],[88439,'2026-08-01 16:07',5],[88440,'2026-08-01 16:14',6],[88441,'2026-08-01 16:21',5],[88442,'2026-08-01 16:28',7],[88443,'2026-08-01 16:35',10],[88444,'2026-08-01 16:42',15],[88445,'2026-08-01 16:49',14],[88446,'2026-08-01 16:56',3],[88447,'2026-08-01 17:03',2],[88448,'2026-08-01 17:10',9],[88449,'2026-08-01 17:17',12],[88450,'2026-08-01 17:24',4],[88451,'2026-08-01 17:31',7],[88452,'2026-08-01 17:38',2],[88453,'2026-08-01 17:45',9],[88454,'2026-08-01 17:52',12],[88455,'2026-08-01 17:59',14],[88456,'2026-08-01 18:06',2],[88457,'2026-08-01 18:13',2],[88458,'2026-08-01 18:20',2],[88459,'2026-08-01 18:27',5],[88460,'2026-08-01 18:34',11],[88461,'2026-08-01 18:41',15],[88462,'2026-08-01 18:48',12],[88463,'2026-08-01 18:55',13],[88464,'2026-08-01 19:02',5],[88465,'2026-08-01 19:09',8],[88466,'2026-08-01 19:16',12],[88467,'2026-08-01 19:23',13],[88468,'2026-08-01 19:30',3],[88469,'2026-08-01 19:37',13],[88470,'2026-08-01 19:44',6],[88471,'2026-08-01 19:51',9],[88472,'2026-08-01 19:58',7],[88473,'2026-08-01 20:05',14],[88474,'2026-08-01 20:12',8],[88475,'2026-08-01 20:19',6],[88476,'2026-08-01 20:26',4],[88477,'2026-08-01 20:33',9],[88478,'2026-08-01 20:40',8],[88479,'2026-08-01 20:47',1],[88480,'2026-08-01 20:54',4],[88481,'2026-08-01 21:01',4],[88482,'2026-08-01 21:08',7],[88483,'2026-08-01 21:15',9],[88484,'2026-08-01 21:22',8],[88485,'2026-08-01 21:29',1],[88486,'2026-08-01 21:36',2],[88487,'2026-08-01 21:43',8],[88488,'2026-08-01 21:50',12],[88489,'2026-08-01 21:57',11],[88490,'2026-08-01 22:04',8],[88491,'2026-08-01 22:11',12],[88492,'2026-08-01 22:18',4],[88493,'2026-08-01 22:25',13],[88494,'2026-08-01 22:32',8],[88495,'2026-08-01 22:39',3],[88496,'2026-08-01 22:46',13],[88497,'2026-08-01 22:53',10],[88498,'2026-08-01 23:00',6],[88499,'2026-08-01 23:07',9],[88500,'2026-08-01 23:14',11],[88501,'2026-08-01 23:21',2],[88513,'',15]],K='v0Hosted';let S=JSON.parse(localStorage.getItem(K)||'null')||{d:E.map(x=>({draw:x[0],time:x[1],number:x[2]})),l:[],saved:null};function save(){S.saved=new Date().toISOString();localStorage.setItem(K,JSON.stringify(S));render()}function seq(){return S.d.slice().sort((a,b)=>a.draw-b.draw).map(x=>x.number)}function picks(){let q=seq(),a=[];for(let n=1;n<=15;n++){let all=q.filter(x=>x==n).length,re=q.slice(-24).filter(x=>x==n).length;a.push({n,s:all+1.5*re})}return a.sort((x,y)=>y.s-x.s||x.n-y.n).slice(0,5)}function next(){return Math.max(...S.d.map(x=>x.draw))+1}function add(n){let p=picks().map(x=>x.n),d=next();S.d.push({draw:d,time:new Date().toLocaleString(),number:n});S.l.push({draw:d,top5:p,actual:n,hit:p.includes(n)});save();msg.innerHTML='<b class="'+(p.includes(n)?'ok':'bad')+'">'+(p.includes(n)?'TOP-5 SUCCESS':'MISS')+'</b> — Draw #'+d}function render(){let p=picks();pred.textContent=p[0].n;top.innerHTML=p.map((x,i)=>'<span class="b">#'+(i+1)+' '+x.n+'</span>').join('');next.textContent='NEXT DRAW #'+next();let a=S.d.slice().sort((x,y)=>y.draw-x.draw);rows.innerHTML=a.map(x=>'<tr><td>#'+x.draw+'</td><td>'+(x.time||'—')+'</td><td><b>'+x.number+'</b></td></tr>').join('');count.textContent=a.length+' draws loaded';save.textContent='Saved: '+(S.saved?new Date(S.saved).toLocaleString():'embedded data')+' · '+a.length+' draws'}function parse(line){let m=line.trim().match(/Draw\s*#\s*(\d+).*?[-–—]\s*(1[0-5]|[1-9])\s*$/i);if(m)return{draw:+m[1],time:line.replace(/^.*?[-–—]\s*/,'').replace(/\s*[-–—]\s*(1[0-5]|[1-9])\s*$/,'').trim(),number:+m[2]};m=line.match(/^\s*(\d+)\s*,\s*([^,]+)\s*,\s*(1[0-5]|[1-9])\s*$/);if(m)return{draw:+m[1],time:m[2],number:+m[3]};m=line.match(/^\s*(\d+)\s+(1[0-5]|[1-9])\s*$/);return m?{draw:+m[1],time:'',number:+m[2]}:null}function bulkImport(){let a=bulk.value.split(/\n/).map(parse).filter(Boolean),map={};S.d.forEach(x=>map[x.draw]=x);a.forEach(x=>map[x.draw]=x);S.d=Object.values(map);save();bulkmsg.textContent='Imported '+a.length+' readable lines.'}function backup(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({version:'V0 Hosted Backup',state:S},null,2)],{type:'application/json'}));a.download='adaptive_predictor_v0_backup.json';a.click()}function restore(e){let r=new FileReader();r.onload=()=>{let x=JSON.parse(r.result);S=x.state||x;save()};r.readAsText(e.target.files[0])}grid.innerHTML=Array.from({length:15},(_,i)=>'<button onclick="add('+(i+1)+')">'+(i+1)+'</button>').join('');render();</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0f19">
+<title>Adaptive Predictor V0</title>
+<style>
+:root{--bg:#0b0f19;--card:#121827;--line:#26314b;--text:#eef3ff;--muted:#9baccc;--accent:#7c5cff;--good:#28c76f;--bad:#ff5b6e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+.w{max-width:800px;margin:auto;padding:12px 12px 50px}.c{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin:10px 0}
+.m{color:var(--muted);font-size:13px}h2,h3{margin-top:0}
+.hero{text-align:center}.primary{font-size:64px;font-weight:900;line-height:1;margin:8px 0}
+.five{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
+.pick{background:#222c45;border:1px solid #354362;border-radius:15px;padding:12px 5px;text-align:center}
+.pick:first-child{background:var(--accent);border-color:var(--accent)}.pick small{display:block;color:#c7d2ee;font-size:11px}.pick b{font-size:27px}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.grid button,.actions button{border:0;border-radius:12px;padding:13px;background:#171f31;color:#fff;font-weight:bold}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.actions button{background:var(--accent)}
+textarea{width:100%;min-height:150px;background:#0f1522;color:#fff;border:1px solid #405071;border-radius:12px;padding:10px}
+table{width:100%;border-collapse:collapse}td,th{padding:7px;border-bottom:1px solid var(--line);text-align:left;font-size:12px}.ok{color:var(--good)}.bad{color:var(--bad)}
+@media(max-width:520px){.five{grid-template-columns:repeat(5,1fr);gap:5px}.pick{padding:10px 2px}.pick b{font-size:22px}}
+</style>
+</head>
+<body><div class="w">
+<div class="c"><h2>Adaptive Predictor V0</h2><div class="m">Five-number ensemble prediction. Draw number is the source of truth.</div></div>
+<div class="c"><b id="saveStatus">Loading…</b><div class="actions"><button onclick="backup()">Download backup</button><button onclick="document.getElementById('file').click()">Restore backup</button><input id="file" type="file" accept=".json" hidden onchange="restore(event)"></div></div>
+<div class="c hero">
+<div class="m" id="nextLabel">NEXT DRAW</div>
+<div class="m" style="margin-top:8px">PRIMARY PICK</div>
+<div class="primary" id="primary">—</div>
+<div class="m"><b>ALL FIVE PREDICTIONS</b> — a match with any of these counts as Top-5 success</div>
+<div class="five" id="five"></div>
+</div>
+<div class="c"><h3>Enter newest result</h3><div id="grid" class="grid"></div><div id="message" class="m" style="margin-top:9px"></div></div>
+<div class="c"><h3>Bulk update / fill gaps</h3><div class="m">Paste full Draw # lines, CSV, or “draw number”. Existing draw numbers update and missing ones are added.</div><textarea id="bulk"></textarea><div class="actions"><button onclick="bulkImport()">Import / fill gaps</button></div><div id="bulkMessage" class="m"></div></div>
+<div class="c"><b id="count"></b><div style="overflow:auto;max-height:430px"><table><thead><tr><th>Draw</th><th>Time</th><th>Number</th></tr></thead><tbody id="rows"></tbody></table></div></div>
+</div>
+<script>
+const EMBEDDED=[[88415, "2026-08-01 13:19", 1], [88416, "2026-08-01 13:26", 1], [88417, "2026-08-01 13:33", 15], [88418, "2026-08-01 13:40", 8], [88419, "2026-08-01 13:47", 15], [88420, "2026-08-01 13:54", 9], [88421, "2026-08-01 14:01", 8], [88422, "2026-08-01 14:08", 13], [88423, "2026-08-01 14:15", 10], [88424, "2026-08-01 14:22", 1], [88425, "2026-08-01 14:29", 14], [88426, "2026-08-01 14:36", 4], [88427, "2026-08-01 14:43", 3], [88428, "2026-08-01 14:50", 6], [88429, "2026-08-01 14:57", 12], [88430, "2026-08-01 15:04", 4], [88431, "2026-08-01 15:11", 9], [88432, "2026-08-01 15:18", 13], [88433, "2026-08-01 15:25", 4], [88434, "2026-08-01 15:32", 8], [88435, "2026-08-01 15:39", 8], [88436, "2026-08-01 15:46", 4], [88437, "2026-08-01 15:53", 1], [88438, "2026-08-01 16:00", 11], [88439, "2026-08-01 16:07", 5], [88440, "2026-08-01 16:14", 6], [88441, "2026-08-01 16:21", 5], [88442, "2026-08-01 16:28", 7], [88443, "2026-08-01 16:35", 10], [88444, "2026-08-01 16:42", 15], [88445, "2026-08-01 16:49", 14], [88446, "2026-08-01 16:56", 3], [88447, "2026-08-01 17:03", 2], [88448, "2026-08-01 17:10", 9], [88449, "2026-08-01 17:17", 12], [88450, "2026-08-01 17:24", 4], [88451, "2026-08-01 17:31", 7], [88452, "2026-08-01 17:38", 2], [88453, "2026-08-01 17:45", 9], [88454, "2026-08-01 17:52", 12], [88455, "2026-08-01 17:59", 14], [88456, "2026-08-01 18:06", 2], [88457, "2026-08-01 18:13", 2], [88458, "2026-08-01 18:20", 2], [88459, "2026-08-01 18:27", 5], [88460, "2026-08-01 18:34", 11], [88461, "2026-08-01 18:41", 15], [88462, "2026-08-01 18:48", 12], [88463, "2026-08-01 18:55", 13], [88464, "2026-08-01 19:02", 5], [88465, "2026-08-01 19:09", 8], [88466, "2026-08-01 19:16", 12], [88467, "2026-08-01 19:23", 13], [88468, "2026-08-01 19:30", 3], [88469, "2026-08-01 19:37", 13], [88470, "2026-08-01 19:44", 6], [88471, "2026-08-01 19:51", 9], [88472, "2026-08-01 19:58", 7], [88473, "2026-08-01 20:05", 14], [88474, "2026-08-01 20:12", 8], [88475, "2026-08-01 20:19", 6], [88476, "2026-08-01 20:26", 4], [88477, "2026-08-01 20:33", 9], [88478, "2026-08-01 20:40", 8], [88479, "2026-08-01 20:47", 1], [88480, "2026-08-01 20:54", 4], [88481, "2026-08-01 21:01", 4], [88482, "2026-08-01 21:08", 7], [88483, "2026-08-01 21:15", 9], [88484, "2026-08-01 21:22", 8], [88485, "2026-08-01 21:29", 1], [88486, "2026-08-01 21:36", 2], [88487, "2026-08-01 21:43", 8], [88488, "2026-08-01 21:50", 12], [88489, "2026-08-01 21:57", 11], [88490, "2026-08-01 22:04", 8], [88491, "2026-08-01 22:11", 12], [88492, "2026-08-01 22:18", 4], [88493, "2026-08-01 22:25", 13], [88494, "2026-08-01 22:32", 8], [88495, "2026-08-01 22:39", 3], [88496, "2026-08-01 22:46", 13], [88497, "2026-08-01 22:53", 10], [88498, "2026-08-01 23:00", 6], [88499, "2026-08-01 23:07", 9], [88500, "2026-08-01 23:14", 11], [88501, "2026-08-01 23:21", 2]];
+const KEY='v0Hosted';
+let state;
+try{state=JSON.parse(localStorage.getItem(KEY))}catch(e){state=null}
+if(!state||!Array.isArray(state.d))state={d:EMBEDDED.map(x=>({draw:x[0],time:x[1],number:x[2]})),l:[],saved:null};
+if(!Array.isArray(state.l))state.l=[];
+
+function saveState(){state.saved=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(state));render()}
+function sequence(){return state.d.slice().sort((a,b)=>a.draw-b.draw).map(x=>x.number)}
+function predictions(){
+ const q=sequence(), scores=[];
+ for(let n=1;n<=15;n++){
+   let overall=0,recent=0,transition=0;
+   for(let i=0;i<q.length;i++)if(q[i]===n)overall++;
+   for(let i=Math.max(0,q.length-24);i<q.length;i++)if(q[i]===n)recent++;
+   const last=q[q.length-1];
+   for(let i=1;i<q.length;i++)if(q[i-1]===last&&q[i]===n)transition++;
+   scores.push({n:n,score:overall+1.5*recent+1.25*transition});
+ }
+ return scores.sort((a,b)=>b.score-a.score||a.n-b.n).slice(0,5);
+}
+function nextDraw(){return Math.max(...state.d.map(x=>x.draw))+1}
+function addResult(n){
+ const p=predictions().map(x=>x.n),draw=nextDraw(),hit=p.includes(n);
+ state.d.push({draw,time:new Date().toLocaleString(),number:n});
+ state.l.push({draw,top5:p,actual:n,hit5:hit});
+ saveState();
+ document.getElementById('message').innerHTML='<b class="'+(hit?'ok':'bad')+'">'+(hit?'TOP-5 SUCCESS':'MISS')+'</b> — predicted '+p.join(', ')+'; actual '+n+'.';
+}
+function render(){
+ const p=predictions();
+ document.getElementById('primary').textContent=p[0].n;
+ document.getElementById('five').innerHTML=p.map((x,i)=>'<div class="pick"><small>#'+(i+1)+'</small><b>'+x.n+'</b></div>').join('');
+ document.getElementById('nextLabel').textContent='NEXT DRAW #'+nextDraw();
+ const a=state.d.slice().sort((x,y)=>y.draw-x.draw);
+ document.getElementById('rows').innerHTML=a.map(x=>'<tr><td>#'+x.draw+'</td><td>'+(x.time||'—')+'</td><td><b>'+x.number+'</b></td></tr>').join('');
+ document.getElementById('count').textContent=a.length+' draws loaded';
+ document.getElementById('saveStatus').textContent='Saved: '+(state.saved?new Date(state.saved).toLocaleString():'embedded data')+' · '+a.length+' draws';
+}
+function parseLine(line){
+ let m=line.trim().match(/Draw\s*#\s*(\d+).*?[-–—]\s*(1[0-5]|[1-9])\s*$/i);
+ if(m)return{draw:+m[1],time:line.replace(/^.*?[-–—]\s*/,'').replace(/\s*[-–—]\s*(1[0-5]|[1-9])\s*$/,'').trim(),number:+m[2]};
+ m=line.match(/^\s*(\d+)\s*,\s*([^,]+)\s*,\s*(1[0-5]|[1-9])\s*$/);
+ if(m)return{draw:+m[1],time:m[2],number:+m[3]};
+ m=line.match(/^\s*(\d+)\s+(1[0-5]|[1-9])\s*$/);
+ return m?{draw:+m[1],time:'',number:+m[2]}:null;
+}
+function bulkImport(){
+ const items=document.getElementById('bulk').value.split(/\r?\n/).map(parseLine).filter(Boolean),map={};
+ state.d.forEach(x=>map[x.draw]=x);items.forEach(x=>map[x.draw]=x);state.d=Object.values(map);saveState();
+ document.getElementById('bulkMessage').textContent='Imported '+items.length+' readable lines.';
+}
+function backup(){
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({version:'V0 Hosted Backup',state},null,2)],{type:'application/json'}));a.download='adaptive_predictor_v0_backup.json';a.click();
+}
+function restore(e){const r=new FileReader();r.onload=()=>{const x=JSON.parse(r.result);state=x.state||x;saveState()};r.readAsText(e.target.files[0])}
+document.getElementById('grid').innerHTML=Array.from({length:15},(_,i)=>'<button onclick="addResult('+(i+1)+')">'+(i+1)+'</button>').join('');
+render();
+</script></body></html>
