@@ -5,7 +5,7 @@ on:
   push:
     paths:
       - "v0/cloud_engine.py"
-      - "v0/live_updater.py"
+      - "v0/run_rendered_update.py"
       - "v0/seed_state.py"
       - "v0/seed_draws.json"
       - ".github/workflows/cash-pop-cloud.yml"
@@ -22,18 +22,21 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
-    env:
-      N8N_FEED_URL: ${{ secrets.N8N_FEED_URL }}
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install rendered-browser scraper
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright
+          playwright install --with-deps chromium
       - name: Seed model if state is blank
         run: python v0/seed_state.py
-      - name: Fetch fresh results and update tournament
-        run: python v0/live_updater.py
+      - name: Fetch rendered live page and update tournament
+        run: python v0/run_rendered_update.py
       - name: Commit updated state
         run: |
           git config user.name "cash-pop-bot"
