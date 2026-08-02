@@ -8,6 +8,8 @@ on:
       - "v0/final.html"
       - "v0/live2.html"
       - "v0/cloud_state.json"
+      - "v1/index.html"
+      - "v1/cloud_state.json"
       - ".github/workflows/pages.yml"
 
 permissions:
@@ -45,16 +47,20 @@ jobs:
       - name: Build static site
         run: |
           rm -rf _site
-          mkdir -p _site/v0
+          mkdir -p _site/v0 _site/v1
           cp index.html _site/index.html
           cp v0/final.html _site/v0/final.html
           cp v0/live2.html _site/v0/live2.html
           cp v0/cloud_state.json _site/v0/cloud_state.json
           cp v0/cloud_state.json _site/cloud_state.json
+          cp v1/index.html _site/v1/index.html
+          cp v1/cloud_state.json _site/v1/cloud_state.json
           touch _site/.nojekyll
           test -s _site/index.html
           test -s _site/v0/live2.html
           test -s _site/v0/cloud_state.json
+          test -s _site/v1/index.html
+          test -s _site/v1/cloud_state.json
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
