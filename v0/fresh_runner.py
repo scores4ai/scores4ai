@@ -1,85 +1,141 @@
 #!/usr/bin/env python3
 import html
+import json
 import re
 import time
 from urllib.request import Request, urlopen
 
+from playwright.sync_api import sync_playwright
 import github_updater as engine
 
 BASE = "https://cash-pop.com/michigan/winning-numbers"
-ORIGINAL_BROWSER_FETCH = engine.fetch_visible_text
 
 
-def html_to_visible_text(document: str) -> str:
-    """Convert fetched HTML into the line-oriented text expected by engine.parse."""
+def html_to_text(document: str) -> str:
     document = re.sub(r"(?is)<script[^>]*>.*?</script>", "\n", document)
     document = re.sub(r"(?is)<style[^>]*>.*?</style>", "\n", document)
     document = re.sub(r"(?i)<br\s*/?>", "\n", document)
     document = re.sub(r"(?i)</(?:div|p|li|section|article|h[1-6]|tr|td|span|a)>", "\n", document)
     document = re.sub(r"(?s)<[^>]+>", " ", document)
-    document = html.unescape(document).replace("\xa0", " ")
-    return "\n".join(line.strip() for line in document.splitlines() if line.strip())
+    return "\n".join(x.strip() for x in html.unescape(document).replace("\xa0", " ").splitlines() if x.strip())
 
 
-def fetch_direct(url: str) -> str:
-    req = Request(
-        url,
-        headers={
-            "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Version/18 Mobile Safari/604.1",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "Accept-Language": "en-US,en;q=0.9",
-            "Cache-Control": "no-cache, no-store, max-age=0",
-            "Pragma": "no-cache",
-            "Expires": "0",
-        },
-    )
-    with urlopen(req, timeout=60) as response:
-        return response.read().decode("utf-8", "ignore")
+def normalize_json(value, out):
+    if isinstance(value, dict):
+        draw = None
+        number = None
+        for key, val in value.items():
+            k = re.sub(r"[^a-z0-9]", "", str(key).lower())
+            if k in {"draw", "drawnumber", "drawid", "drawingnumber"}:
+                try:
+                    n = int(val)
+                    if 80000 <= n <= 999999:
+                        draw = n
+                except Exception:
+                    pass
+            if k in {"number", "winningnumber", "result", "ball", "value"}:
+                try:
+                    n = int(val)
+                    if 1 <= n <= 15:
+                        number = n
+                except Exception:
+                    pass
+        if draw and number:
+            out[draw] = {"draw": draw, "number": number, "date": "", "time": "", "source": "live network JSON"}
+        for val in value.values():
+            normalize_json(val, out)
+    elif isinstance(value, list):
+        for item in value:
+            normalize_json(item, out)
 
 
-def direct_fetch() -> str:
+def browser_candidates():
     candidates = []
+    bodies = []
     stamp = str(time.time_ns())
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Version/18 Mobile Safari/604.1",
+            extra_http_headers={"Cache-Control": "no-cache, no-store, max-age=0", "Pragma": "no-cache"},
+        )
+        page = context.new_page()
+        session = context.new_cdp_session(page)
+        session.send("Network.enable")
+        session.send("Network.setCacheDisabled", {"cacheDisabled": True})
 
-    for suffix in (
-        "?nocache=" + stamp,
-        "/?nocache=" + stamp,
-        "?v=" + stamp + "&source=github",
-    ):
-        url = BASE + suffix
-        try:
-            raw_html = fetch_direct(url)
-            visible = html_to_visible_text(raw_html)
-            rows = engine.parse(visible)
-            if rows:
-                latest = max(row["draw"] for row in rows)
-                candidates.append((latest, visible, "direct"))
-                print("Direct candidate:", latest, url)
-            else:
-                print("Direct source parsed zero rows:", url)
-        except Exception as exc:
-            print("Direct fetch failed:", url, repr(exc))
+        def capture(response):
+            ctype = (response.headers.get("content-type") or "").lower()
+            if any(x in ctype for x in ("json", "javascript", "text", "html")):
+                try:
+                    body = response.body().decode("utf-8", "ignore")
+                    if "886" in body or "draw" in body.lower() or "winning" in body.lower():
+                        bodies.append((response.url, body))
+                except Exception:
+                    pass
 
-    try:
-        visible = ORIGINAL_BROWSER_FETCH()
-        rows = engine.parse(visible)
+        page.on("response", capture)
+        page.goto(BASE + "?live=" + stamp, wait_until="networkidle", timeout=120000)
+        page.wait_for_timeout(10000)
+        page.reload(wait_until="networkidle", timeout=120000)
+        page.wait_for_timeout(5000)
+        bodies.append(("page-visible", page.locator("body").inner_text(timeout=30000)))
+        browser.close()
+
+    for url, body in bodies:
+        rows = engine.parse(body)
         if rows:
-            latest = max(row["draw"] for row in rows)
-            candidates.append((latest, visible, "browser"))
-            print("Browser candidate:", latest)
-        else:
-            print("Browser source parsed zero rows")
-    except Exception as exc:
-        print("Browser fetch failed:", repr(exc))
+            candidates.append((max(r["draw"] for r in rows), rows, url))
+        try:
+            payload = json.loads(body)
+            found = {}
+            normalize_json(payload, found)
+            if found:
+                rows2 = [found[k] for k in sorted(found)]
+                candidates.append((max(found), rows2, url + " [json]"))
+        except Exception:
+            pass
+    return candidates
 
+
+def direct_candidates():
+    candidates = []
+    for suffix in ("?nocache=", "/?nocache=", "?v="):
+        url = BASE + suffix + str(time.time_ns())
+        try:
+            req = Request(url, headers={
+                "User-Agent": "Mozilla/5.0",
+                "Accept": "text/html,application/json,*/*",
+                "Cache-Control": "no-cache, no-store, max-age=0",
+                "Pragma": "no-cache",
+            })
+            with urlopen(req, timeout=60) as response:
+                body = response.read().decode("utf-8", "ignore")
+            for text in (body, html_to_text(body)):
+                rows = engine.parse(text)
+                if rows:
+                    candidates.append((max(r["draw"] for r in rows), rows, url))
+        except Exception as exc:
+            print("direct failed", url, repr(exc))
+    return candidates
+
+
+def rows_to_engine_text(rows):
+    lines = []
+    for row in sorted(rows, key=lambda x: x["draw"], reverse=True):
+        lines.extend([str(row["number"]), f"#{row['draw']}", row.get("time", "")])
+    return "\n".join(lines)
+
+
+def freshest_text():
+    candidates = direct_candidates() + browser_candidates()
     if not candidates:
-        raise RuntimeError("All live-result fetch methods failed or returned unparseable data")
+        raise RuntimeError("No live result candidate found")
+    candidates.sort(key=lambda x: x[0], reverse=True)
+    latest, rows, source = candidates[0]
+    print("selected", latest, source)
+    return rows_to_engine_text(rows)
 
-    candidates.sort(key=lambda item: item[0], reverse=True)
-    latest, text, source = candidates[0]
-    print("Selected source:", source, "latest draw:", latest)
-    return text
 
-
-engine.fetch_visible_text = direct_fetch
+engine.fetch_visible_text = freshest_text
 engine.main()
