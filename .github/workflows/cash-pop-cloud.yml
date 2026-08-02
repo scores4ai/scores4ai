@@ -2,6 +2,10 @@ name: Update Michigan Cash Pop predictor
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "v0/cloud_engine.py"
+      - ".github/workflows/cash-pop-cloud.yml"
   schedule:
     - cron: "*/5 * * * *"
 
