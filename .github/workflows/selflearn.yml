@@ -1,0 +1,45 @@
+name: Update Self-Learning Experiment
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+  push:
+    paths:
+      - "v1/github_updater.py"
+      - ".github/workflows/selflearn.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: self-learning-experiment
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate isolated prediction state
+        run: python v1/github_updater.py
+
+      - name: Commit experiment state
+        run: |
+          git config user.name "self-learning-bot"
+          git config user.email "self-learning-bot@users.noreply.github.com"
+          git add v1/cloud_state.json
+          if git diff --cached --quiet; then
+            echo "No experiment state change"
+          else
+            git commit -m "Update self-learning experiment state"
+            git pull --rebase origin main
+            git push origin main
+          fi
