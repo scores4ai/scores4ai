@@ -1,4 +1,4 @@
-name: Continuous Michigan Cash Pop data updater
+name: Michigan Cash Pop live updater
 
 on:
   workflow_dispatch:
@@ -6,20 +6,21 @@ on:
     paths:
       - ".github/workflows/cash-pop-cloud.yml"
       - "v0/github_updater.py"
+      - "v0/fresh_runner.py"
   schedule:
-    - cron: "3 * * * *"
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: write
 
 concurrency:
-  group: cash-pop-continuous-data
+  group: cash-pop-live-update
   cancel-in-progress: true
 
 jobs:
   update-data:
     runs-on: ubuntu-latest
-    timeout-minutes: 65
+    timeout-minutes: 12
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -31,48 +32,31 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install rendered browser scraper
+      - name: Install browser fallback
         run: |
           python -m pip install --upgrade pip
           pip install playwright
           playwright install --with-deps chromium
 
-      - name: Poll, predict, score, and save for 58 minutes
-        shell: bash
+      - name: Fetch freshest result, score, and predict
+        run: python v0/fresh_runner.py
+
+      - name: Verify and publish state
         run: |
-          set +e
-          git config user.name "cash-pop-bot"
-          git config user.email "cash-pop-bot@users.noreply.github.com"
-
-          for attempt in $(seq 1 50); do
-            echo "===== Live poll $attempt at $(date -u) ====="
-
-            git pull --rebase origin main || true
-            python v0/github_updater.py
-            updater_status=$?
-
-            if [ $updater_status -eq 0 ]; then
-              python - <<'PY'
+          python - <<'PY'
           import json
           from pathlib import Path
-          s = json.loads(Path('v0/cloud_state.json').read_text())
-          assert s.get('draws'), 'No draws stored'
-          assert s.get('pending'), 'No prediction generated'
-          assert s['pending']['draw'] == s['latestDraw'] + 1
-          print('Latest:', s['latestDraw'], 'Next:', s['pending']['draw'], 'Draws:', len(s['draws']), 'Updated:', s.get('updatedAt'))
+          s=json.loads(Path('v0/cloud_state.json').read_text())
+          assert s.get('draws')
+          assert s.get('pending')
+          assert s['pending']['draw']==s['latestDraw']+1
+          print('Latest',s['latestDraw'],'Next',s['pending']['draw'],'Updated',s.get('updatedAt'))
           PY
-
-              git add v0/cloud_state.json
-              if ! git diff --cached --quiet; then
-                git commit -m "Live Cash Pop update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-                git pull --rebase origin main || true
-                git push origin main || true
-              else
-                echo "No new completed draw yet."
-              fi
-            else
-              echo "Updater failed on this poll; retrying next minute."
-            fi
-
-            sleep 60
-          done
+          git config user.name "cash-pop-bot"
+          git config user.email "cash-pop-bot@users.noreply.github.com"
+          git add v0/cloud_state.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update live Cash Pop state"
+            git pull --rebase origin main
+            git push origin main
+          fi
