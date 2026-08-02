@@ -1,0 +1,50 @@
+name: Build APX prediction laboratory
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "apx/**"
+      - "v0/cloud_state.json"
+      - ".github/workflows/apx-lab.yml"
+  schedule:
+    - cron: "4-59/5 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apx-lab
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build tournament state
+        run: python apx/engine.py
+      - name: Validate without touching working predictor
+        run: |
+          python - <<'PY'
+          import json
+          s=json.load(open('apx/state.json'))
+          assert s['nextDraw']==s['latestDraw']+1
+          assert len(s['top5'])==5 and len(set(s['top5']))==5
+          assert s['modelCount']>=40
+          assert s['leaderboard']
+          print('APX validated:',s['latestDraw'],s['nextDraw'],s['modelCount'],s['top5'])
+          PY
+      - name: Commit APX state
+        run: |
+          git config user.name "apx-research-bot"
+          git config user.email "apx-research-bot@users.noreply.github.com"
+          git add apx/state.json
+          git diff --cached --quiet || git commit -m "Update APX tournament state"
+          git pull --rebase origin main || true
+          git push origin main || true
