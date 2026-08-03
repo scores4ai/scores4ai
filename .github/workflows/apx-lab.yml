@@ -2,6 +2,11 @@ name: Build APX prediction laboratory
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "apx/engine.py"
+      - "apx/index.html"
+      - ".github/workflows/apx-lab.yml"
   schedule:
     - cron: "4-59/5 * * * *"
 
