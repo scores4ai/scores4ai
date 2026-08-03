@@ -1,1 +1,50 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0; url=./v0/live2.html"><title>Adaptive Predictor</title><script>location.replace('./v0/live2.html?ts='+Date.now())</script></head><body style="background:#0b0f19;color:#eef3ff;font-family:Arial;padding:24px">Opening Adaptive Predictor… <a style="color:#9a84ff" href="./v0/live2.html">Tap here if it does not open automatically.</a></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>APX Verified Live</title>
+<style>
+body{margin:0;background:#090d17;color:#eef3ff;font-family:Arial,sans-serif}.w{max-width:820px;margin:auto;padding:16px}.c{background:#121827;border:1px solid #2d3956;border-radius:20px;padding:18px;margin:14px 0}.m{color:#a8b4d1}.ok{color:#2bd47d}.warn{color:#ffb020}.bad{color:#ff6475}.five,.grid{display:grid;gap:10px}.five{grid-template-columns:repeat(5,1fr)}.grid{grid-template-columns:1fr 1fr}.pick,.box{background:#1a2338;border:1px solid #354362;border-radius:15px;padding:14px;text-align:center}.pick:first-child{background:#7357f6}.pick b{font-size:30px}.box b{display:block;font-size:22px;margin-top:6px;overflow-wrap:anywhere}button{background:#7357f6;color:white;border:0;border-radius:12px;padding:12px 16px;font-weight:bold;font-size:16px}@media(max-width:600px){.pick b{font-size:23px}.five{gap:6px}.grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body><div class="w">
+<div class="c"><h1 style="margin:0 0 8px">APX Adaptive Prediction Laboratory</h1><div class="m">Verified source status. The page never labels stale data as live.</div></div>
+<div class="c" style="text-align:center"><div id="status" class="m">Checking repository state…</div><h2 id="next">NEXT DRAW</h2><div id="five" class="five"></div><div style="margin-top:14px"><button onclick="load()">Refresh now</button></div></div>
+<div class="c"><h2>Live verification</h2><div class="grid">
+<div class="box"><span class="m">APX stored draw</span><b id="stored">—</b></div>
+<div class="box"><span class="m">Source latest draw</span><b id="source">—</b></div>
+<div class="box"><span class="m">Draw gap</span><b id="gap">—</b></div>
+<div class="box"><span class="m">Last successful source read</span><b id="success">—</b></div>
+<div class="box"><span class="m">Last source attempt</span><b id="attempt">—</b></div>
+<div class="box"><span class="m">Source result</span><b id="result">—</b></div>
+</div><div id="reason" class="m" style="margin-top:14px"></div></div>
+</div>
+<script>
+const repo='https://api.github.com/repos/scores4ai/scores4ai/contents/';
+const $=id=>document.getElementById(id);
+function decode(v){const b=atob(String(v||'').replace(/\n/g,''));return new TextDecoder().decode(Uint8Array.from(b,c=>c.charCodeAt(0)))}
+async function file(path){const r=await fetch(repo+path+'?ref=main&cb='+Date.now(),{cache:'no-store',headers:{Accept:'application/vnd.github+json'}});if(!r.ok)throw Error(path+' HTTP '+r.status);const x=await r.json();return JSON.parse(decode(x.content))}
+function ageMin(x){return x?(Date.now()-new Date(x).getTime())/60000:99999}
+async function load(){
+ $('status').textContent='Checking repository state…';
+ try{
+  const [s,h]=await Promise.all([file('apx/state.json'),file('apx/heartbeat.json')]);
+  const stored=Number(s.latestDraw||0),source=Number(h.sourceLatestDraw||0),gap=Math.max(0,source-stored);
+  const recent=ageMin(h.lastAttemptAt)<3;
+  const sourceOk=h.sourceSuccess===true;
+  const matched=source>0&&stored===source;
+  const live=recent&&sourceOk&&matched;
+  $('status').innerHTML=live?'<span class="ok">● VERIFIED LIVE</span> · source and APX agree':'<span class="warn">● NOT VERIFIED LIVE</span>';
+  $('next').textContent='NEXT DRAW #'+(s.nextDraw||stored+1);
+  $('five').innerHTML=(s.top5||[]).map((n,i)=>'<div class="pick"><span class="m">#'+(i+1)+'</span><br><b>'+n+'</b></div>').join('');
+  $('stored').textContent='#'+stored;$('source').textContent=source?'#'+source:'Unknown';$('gap').textContent=gap+' draw'+(gap===1?'':'s');
+  $('success').textContent=h.lastSuccessAt?new Date(h.lastSuccessAt).toLocaleString():'None';
+  $('attempt').textContent=h.lastAttemptAt?new Date(h.lastAttemptAt).toLocaleString():'None';
+  $('result').textContent=sourceOk?'Source read succeeded':'Source read failed';$('result').className=sourceOk?'ok':'bad';
+  let reason='';if(!recent)reason='Watcher has not attempted a source read within three minutes.';else if(!sourceOk)reason=h.lastError||'Source fetch failed.';else if(!matched)reason='Source and stored draw numbers do not match.';else reason=h.drawAdvanced?'A newer draw was parsed and committed.':'Source checked successfully; no newer draw was available at that check.';
+  $('reason').textContent=reason;
+ }catch(e){$('status').innerHTML='<span class="bad">● DATA UNAVAILABLE</span>';$('reason').textContent=e.message}
+}
+load();setInterval(load,30000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)load()});
+</script></body></html>
