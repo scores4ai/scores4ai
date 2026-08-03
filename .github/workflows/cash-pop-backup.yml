@@ -15,7 +15,7 @@ concurrency:
 jobs:
   backup-update:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,6 +24,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: pip
 
       - name: Check whether primary is stale
         id: stale
@@ -43,12 +44,12 @@ jobs:
           print('run=' + ('true' if stale else 'false'))
           PY
 
-      - name: Install browser
+      - name: Install browser fallback
         if: steps.stale.outputs.run == 'true'
         run: |
           python -m pip install --upgrade pip
           pip install playwright
-          playwright install --with-deps chromium
+          playwright install chromium
 
       - name: Run backup checks
         if: steps.stale.outputs.run == 'true'
@@ -61,22 +62,23 @@ jobs:
           for pass in 1 2; do
             git fetch origin main
             git reset --hard origin/main
+
             python v0/robust_runner.py
             source_status=$?
             apx_status=1
-            retirement_status=1
             evolution_status=1
+            retirement_status=1
+
             if [ $source_status -eq 0 ]; then
               python apx/engine.py
               apx_status=$?
-              if [ $apx_status -eq 0 ]; then
-                python apx/retirement.py
-                retirement_status=$?
-              fi
-              if [ $retirement_status -eq 0 ]; then
-                python apx/evolution.py
-                evolution_status=$?
-              fi
+            fi
+
+            if [ $apx_status -eq 0 ]; then
+              python apx/evolution.py
+              evolution_status=$?
+              python apx/retirement.py
+              retirement_status=$?
             fi
 
             SOURCE_STATUS=$source_status APX_STATUS=$apx_status RETIREMENT_STATUS=$retirement_status EVOLUTION_STATUS=$evolution_status PASS_NUMBER=$pass python - <<'PY'
@@ -90,7 +92,7 @@ jobs:
           apx_ok=os.environ['APX_STATUS']=='0'
           retirement_ok=os.environ['RETIREMENT_STATUS']=='0'
           evolution_ok=os.environ['EVOLUTION_STATUS']=='0'
-          ok=source_ok and apx_ok and retirement_ok and evolution_ok
+          core_ok=source_ok and apx_ok
           latest=0
           try: latest=json.loads(Path('apx/state.json').read_text()).get('latestDraw',0)
           except Exception: pass
@@ -99,20 +101,22 @@ jobs:
             'updater':'backup',
             'pass':int(os.environ['PASS_NUMBER']),
             'lastAttemptAt':now,
-            'lastSuccessAt':now if ok else old.get('lastSuccessAt'),
-            'success':ok,
+            'lastSuccessAt':now if core_ok else old.get('lastSuccessAt'),
+            'success':core_ok,
             'sourceSuccess':source_ok,
             'apxSuccess':apx_ok,
             'retirementSuccess':retirement_ok,
             'evolutionSuccess':evolution_ok,
+            'researchHealthy':retirement_ok and evolution_ok,
             'latestDraw':latest,
-            'consecutiveFailures':0 if ok else int(old.get('consecutiveFailures',0))+1,
+            'consecutiveFailures':0 if core_ok else int(old.get('consecutiveFailures',0))+1,
             'pollIntervalSeconds':65,
-            'architecture':'primary-fast-plus-staggered-backup'
+            'architecture':'core-live-independent-of-research-modules'
           },indent=2))
           PY
 
-            git add v0/cloud_state.json apx/state.json apx/heartbeat.json apx/evolution_state.json
+            git add v0/cloud_state.json
+            git add -A apx
             if ! git diff --cached --quiet; then
               git commit -m "Backup Cash Pop poll $(date -u +%Y-%m-%dT%H:%M:%SZ)"
               for attempt in 1 2 3; do
