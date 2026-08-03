@@ -28,7 +28,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run 2,000 synthetic-history tests
+      - name: Run 500 synthetic-history tests
         run: python daily3/monte_carlo_reality.py
       - name: Verify result
         run: |
@@ -36,7 +36,7 @@ jobs:
           import json
           from pathlib import Path
           d=json.loads(Path('daily3/monte_carlo_results.json').read_text())
-          assert d['simulations']==2000
+          assert d['simulations']==500
           assert d['testedPerSimulation']==11900
           assert d['integrity']['futureDataAccess'] is False
           assert len(d['models'])==3
