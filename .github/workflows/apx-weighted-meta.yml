@@ -1,0 +1,62 @@
+name: APX weighted meta-ensemble test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "apx/weighted_meta_ensemble.py"
+      - ".github/workflows/apx-weighted-meta.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apx-weighted-meta
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run weighted meta-ensemble
+        run: python apx/weighted_meta_ensemble.py
+      - name: Verify untouched-test integrity
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('apx/weighted_meta_results.json').read_text())
+          assert d['newUntouchedTestDraws']==3000
+          assert d['integrity']['futureDataAccess'] is False
+          assert d['integrity']['policyLockedBeforeTest'] is True
+          assert d['integrity']['testUpdates'] is False
+          assert d['integrity']['priorSelectorHoldoutExcluded'] is True
+          assert d['integrity']['featuresComputedBeforeReveal'] is True
+          assert d['integrity']['predictionFingerprints'] is True
+          assert len(d['fingerprintChainSha256'])==64
+          assert len(d['resultSha256'])==64
+          for row in d['leaderboard']:
+              assert row['tested']==3000
+              assert row['hits']+row['misses']==3000
+          print({'ensemble':d['ensembleResult'],'bestBase':d['bestBaseModel'],'beatBestBase':d['beatBestBase']})
+          PY
+      - name: Commit result
+        run: |
+          git config user.name "apx-meta-bot"
+          git config user.email "apx-meta-bot@users.noreply.github.com"
+          git add apx/weighted_meta_results.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Update weighted meta-ensemble untouched test"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push origin main && exit 0
+            sleep 4
+          done
+          exit 1
