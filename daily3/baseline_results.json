@@ -1,0 +1,807 @@
+{
+  "version": "Daily 3 Baseline Replay Phase 1",
+  "archiveSha256": "49a97dd6d3dd780b6911175047023ef8e67d769abe4a4ceea4623703a11a0859",
+  "archiveDrawCount": 12100,
+  "warmupDraws": 200,
+  "testedDraws": 11900,
+  "integrity": {
+    "futureDataAccess": false,
+    "predictionsFrozenBeforeReveal": true,
+    "uniformRandomDeterministic": true
+  },
+  "randomBaselines": {
+    "exactStraight": 0.001,
+    "eachPosition": 0.1,
+    "atLeastOneCorrectPosition": 0.271
+  },
+  "results": [
+    {
+      "model": "last_draw",
+      "tested": 11900,
+      "exactHits": 11,
+      "exactAccuracy": 0.0009243697478991597,
+      "boxHits": 64,
+      "boxAccuracy": 0.005378151260504202,
+      "atLeastOnePositionHits": 3235,
+      "atLeastOnePositionAccuracy": 0.2718487394957983,
+      "positionHits": [
+        1209,
+        1211,
+        1186
+      ],
+      "positionAccuracy": [
+        0.10159663865546219,
+        0.10176470588235294,
+        0.09966386554621849
+      ]
+    },
+    {
+      "model": "uniform_random",
+      "tested": 11900,
+      "exactHits": 8,
+      "exactAccuracy": 0.0006722689075630252,
+      "boxHits": 59,
+      "boxAccuracy": 0.004957983193277311,
+      "atLeastOnePositionHits": 3190,
+      "atLeastOnePositionAccuracy": 0.2680672268907563,
+      "positionHits": [
+        1195,
+        1182,
+        1161
+      ],
+      "positionAccuracy": [
+        0.1004201680672269,
+        0.09932773109243698,
+        0.09756302521008403
+      ]
+    },
+    {
+      "model": "frequency_position",
+      "tested": 11900,
+      "exactHits": 6,
+      "exactAccuracy": 0.0005042016806722689,
+      "boxHits": 60,
+      "boxAccuracy": 0.005042016806722689,
+      "atLeastOnePositionHits": 3272,
+      "atLeastOnePositionAccuracy": 0.2749579831932773,
+      "positionHits": [
+        1220,
+        1170,
+        1204
+      ],
+      "positionAccuracy": [
+        0.10252100840336134,
+        0.09831932773109243,
+        0.1011764705882353
+      ]
+    }
+  ],
+  "sampleRecords": [
+    {
+      "sequence": 201,
+      "date": "2010-04-11",
+      "drawType": "midday",
+      "knownThrough": 200,
+      "predictions": {
+        "uniform_random": [
+          7,
+          2,
+          5
+        ],
+        "frequency_position": [
+          7,
+          4,
+          4
+        ],
+        "last_draw": [
+          6,
+          1,
+          5
+        ]
+      },
+      "actual": [
+        7,
+        9,
+        9
+      ],
+      "fingerprint": "0a01c9afb703b6de1d77da83675ecf63433f3408093ca80e0d89ff25ef71856c"
+    },
+    {
+      "sequence": 202,
+      "date": "2010-04-11",
+      "drawType": "evening",
+      "knownThrough": 201,
+      "predictions": {
+        "uniform_random": [
+          2,
+          5,
+          8
+        ],
+        "frequency_position": [
+          7,
+          4,
+          4
+        ],
+        "last_draw": [
+          7,
+          9,
+          9
+        ]
+      },
+      "actual": [
+        4,
+        1,
+        6
+      ],
+      "fingerprint": "71fbd5aa67dc6cf77b855e57ce22354738482276c924a287a11d1e8eda1251a6"
+    },
+    {
+      "sequence": 203,
+      "date": "2010-04-12",
+      "drawType": "midday",
+      "knownThrough": 202,
+      "predictions": {
+        "uniform_random": [
+          3,
+          5,
+          9
+        ],
+        "frequency_position": [
+          7,
+          4,
+          4
+        ],
+        "last_draw": [
+          4,
+          1,
+          6
+        ]
+      },
+      "actual": [
+        0,
+        1,
+        5
+      ],
+      "fingerprint": "e21b8706c21dd0ed86db4c591352e7d45e4d361438850f92bebd0a0bafb77b4f"
+    },
+    {
+      "sequence": 204,
+      "date": "2010-04-12",
+      "drawType": "evening",
+      "knownThrough": 203,
+      "predictions": {
+        "uniform_random": [
+          0,
+          4,
+          1
+        ],
+        "frequency_position": [
+          7,
+          4,
+          4
+        ],
+        "last_draw": [
+          0,
+          1,
+          5
+        ]
+      },
+      "actual": [
+        4,
+        3,
+        8
+      ],
+      "fingerprint": "c8193e59d53025d57478567aec40050383515707e2b16f2217f0dc6714ab6c20"
+    },
+    {
+      "sequence": 205,
+      "date": "2010-04-13",
+      "drawType": "midday",
+      "knownThrough": 204,
+      "predictions": {
+        "uniform_random": [
+          1,
+          8,
+          3
+        ],
+        "frequency_position": [
+          7,
+          4,
+          4
+        ],
+        "last_draw": [
+          4,
+          3,
+          8
+        ]
+      },
+      "actual": [
+        2,
+        4,
+        5
+      ],
+      "fingerprint": "b24cc43a0902941f7a9707aa8336f8e32d17cafb71effafd1ca773d176bd872b"
+    },
+    {
+      "sequence": 206,
+      "date": "2010-04-13",
+      "drawType": "evening",
+      "knownThrough": 205,
+      "predictions": {
+        "uniform_random": [
+          0,
+          0,
+          2
+        ],
+        "frequency_position": [
+          7,
+          4,
+          4
+        ],
+        "last_draw": [
+          2,
+          4,
+          5
+        ]
+      },
+      "actual": [
+        2,
+        6,
+        5
+      ],
+      "fingerprint": "e10f0da40ea630a6e9dafc50615e7bd4c69a72763c06929897eee15e41908edf"
+    },
+    {
+      "sequence": 207,
+      "date": "2010-04-14",
+      "drawType": "midday",
+      "knownThrough": 206,
+      "predictions": {
+        "uniform_random": [
+          2,
+          5,
+          5
+        ],
+        "frequency_position": [
+          7,
+          4,
+          4
+        ],
+        "last_draw": [
+          2,
+          6,
+          5
+        ]
+      },
+      "actual": [
+        9,
+        3,
+        4
+      ],
+      "fingerprint": "c85298843a817e9432f799523126f3b93e896871a5667f869fbffb6ace7148da"
+    },
+    {
+      "sequence": 208,
+      "date": "2010-04-14",
+      "drawType": "evening",
+      "knownThrough": 207,
+      "predictions": {
+        "uniform_random": [
+          0,
+          4,
+          6
+        ],
+        "frequency_position": [
+          7,
+          4,
+          4
+        ],
+        "last_draw": [
+          9,
+          3,
+          4
+        ]
+      },
+      "actual": [
+        1,
+        6,
+        1
+      ],
+      "fingerprint": "31caa5ca08269e94fa03e03cf2560a57c4a06835ad9b69e066805fcde4ad63f0"
+    },
+    {
+      "sequence": 209,
+      "date": "2010-04-15",
+      "drawType": "midday",
+      "knownThrough": 208,
+      "predictions": {
+        "uniform_random": [
+          4,
+          7,
+          5
+        ],
+        "frequency_position": [
+          7,
+          6,
+          4
+        ],
+        "last_draw": [
+          1,
+          6,
+          1
+        ]
+      },
+      "actual": [
+        9,
+        5,
+        9
+      ],
+      "fingerprint": "85d4f14093358b6fe35760f569ae5a3d46ee2fee2bb5e30f32cee8d7eebbe658"
+    },
+    {
+      "sequence": 210,
+      "date": "2010-04-15",
+      "drawType": "evening",
+      "knownThrough": 209,
+      "predictions": {
+        "uniform_random": [
+          6,
+          2,
+          1
+        ],
+        "frequency_position": [
+          7,
+          6,
+          4
+        ],
+        "last_draw": [
+          9,
+          5,
+          9
+        ]
+      },
+      "actual": [
+        3,
+        8,
+        9
+      ],
+      "fingerprint": "048587449dd6bc79eec0902e1c17a8638014d2d37e59a11348c13c0ae3d0cdf6"
+    },
+    {
+      "sequence": 211,
+      "date": "2010-04-16",
+      "drawType": "midday",
+      "knownThrough": 210,
+      "predictions": {
+        "uniform_random": [
+          0,
+          4,
+          2
+        ],
+        "frequency_position": [
+          7,
+          6,
+          4
+        ],
+        "last_draw": [
+          3,
+          8,
+          9
+        ]
+      },
+      "actual": [
+        6,
+        7,
+        7
+      ],
+      "fingerprint": "9c57724c023ecd3e4c50abf24ecb26c021cdd98dc510a7768f8e87e315584e98"
+    },
+    {
+      "sequence": 212,
+      "date": "2010-04-16",
+      "drawType": "evening",
+      "knownThrough": 211,
+      "predictions": {
+        "uniform_random": [
+          8,
+          9,
+          1
+        ],
+        "frequency_position": [
+          7,
+          6,
+          4
+        ],
+        "last_draw": [
+          6,
+          7,
+          7
+        ]
+      },
+      "actual": [
+        7,
+        3,
+        5
+      ],
+      "fingerprint": "7687b0addee80a3ba7671e0fab7e9b922b46160840f3750a52ce978b805303a7"
+    },
+    {
+      "sequence": 213,
+      "date": "2010-04-17",
+      "drawType": "midday",
+      "knownThrough": 212,
+      "predictions": {
+        "uniform_random": [
+          2,
+          8,
+          2
+        ],
+        "frequency_position": [
+          7,
+          6,
+          4
+        ],
+        "last_draw": [
+          7,
+          3,
+          5
+        ]
+      },
+      "actual": [
+        3,
+        1,
+        7
+      ],
+      "fingerprint": "b48de8e0b7a73755ba72fbe6619ce95fe88e34258fbcf7f8db1b0aad0d13466c"
+    },
+    {
+      "sequence": 214,
+      "date": "2010-04-17",
+      "drawType": "evening",
+      "knownThrough": 213,
+      "predictions": {
+        "uniform_random": [
+          3,
+          7,
+          9
+        ],
+        "frequency_position": [
+          7,
+          6,
+          4
+        ],
+        "last_draw": [
+          3,
+          1,
+          7
+        ]
+      },
+      "actual": [
+        2,
+        6,
+        0
+      ],
+      "fingerprint": "db7ca90c8fea7264c275d5f3275251aa13f8bc7fc196c439fc6ec3e67ea0cc9f"
+    },
+    {
+      "sequence": 215,
+      "date": "2010-04-18",
+      "drawType": "midday",
+      "knownThrough": 214,
+      "predictions": {
+        "uniform_random": [
+          3,
+          8,
+          8
+        ],
+        "frequency_position": [
+          7,
+          6,
+          4
+        ],
+        "last_draw": [
+          2,
+          6,
+          0
+        ]
+      },
+      "actual": [
+        6,
+        1,
+        9
+      ],
+      "fingerprint": "edada18b9393036f80b7d05583958655df4cbfd08ee610ef530a9337b32eadf3"
+    },
+    {
+      "sequence": 216,
+      "date": "2010-04-18",
+      "drawType": "evening",
+      "knownThrough": 215,
+      "predictions": {
+        "uniform_random": [
+          1,
+          7,
+          0
+        ],
+        "frequency_position": [
+          7,
+          6,
+          4
+        ],
+        "last_draw": [
+          6,
+          1,
+          9
+        ]
+      },
+      "actual": [
+        1,
+        0,
+        3
+      ],
+      "fingerprint": "077e1a2e83298a2d6381592a84db3504ae1b34d5de2ac119bf249e5bec713ac3"
+    },
+    {
+      "sequence": 217,
+      "date": "2010-04-19",
+      "drawType": "midday",
+      "knownThrough": 216,
+      "predictions": {
+        "uniform_random": [
+          0,
+          8,
+          2
+        ],
+        "frequency_position": [
+          7,
+          6,
+          4
+        ],
+        "last_draw": [
+          1,
+          0,
+          3
+        ]
+      },
+      "actual": [
+        3,
+        1,
+        0
+      ],
+      "fingerprint": "e87143eb1414c5507d9d0e674d39f491b52e21b60cfb1432d556a8a0d800b011"
+    },
+    {
+      "sequence": 218,
+      "date": "2010-04-19",
+      "drawType": "evening",
+      "knownThrough": 217,
+      "predictions": {
+        "uniform_random": [
+          4,
+          3,
+          7
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          3,
+          1,
+          0
+        ]
+      },
+      "actual": [
+        0,
+        5,
+        2
+      ],
+      "fingerprint": "7a5df3c7034d70d3f0a34fd3a6477851e586ec2ceac5619e66df5187cd9b2618"
+    },
+    {
+      "sequence": 219,
+      "date": "2010-04-20",
+      "drawType": "midday",
+      "knownThrough": 218,
+      "predictions": {
+        "uniform_random": [
+          3,
+          8,
+          5
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          0,
+          5,
+          2
+        ]
+      },
+      "actual": [
+        1,
+        5,
+        3
+      ],
+      "fingerprint": "0d9935952f8ddff23087a2796d26b9f21557654ed66d2e045ed395410bf6cb5b"
+    },
+    {
+      "sequence": 220,
+      "date": "2010-04-20",
+      "drawType": "evening",
+      "knownThrough": 219,
+      "predictions": {
+        "uniform_random": [
+          2,
+          1,
+          1
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          1,
+          5,
+          3
+        ]
+      },
+      "actual": [
+        7,
+        7,
+        5
+      ],
+      "fingerprint": "1e0e4b62251d2d45722277312f1ea2e0688d4eada8255b94beee3b00b948d2ee"
+    },
+    {
+      "sequence": 221,
+      "date": "2010-04-21",
+      "drawType": "midday",
+      "knownThrough": 220,
+      "predictions": {
+        "uniform_random": [
+          8,
+          5,
+          2
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          7,
+          7,
+          5
+        ]
+      },
+      "actual": [
+        7,
+        9,
+        2
+      ],
+      "fingerprint": "456de8c2f2351eafd3c4c68f41c27fba8ccbdbdc98812624e9be2c3880836bc3"
+    },
+    {
+      "sequence": 222,
+      "date": "2010-04-21",
+      "drawType": "evening",
+      "knownThrough": 221,
+      "predictions": {
+        "uniform_random": [
+          9,
+          7,
+          0
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          7,
+          9,
+          2
+        ]
+      },
+      "actual": [
+        0,
+        7,
+        2
+      ],
+      "fingerprint": "9dcbda8703276397b6be4836ca09a265f4b8dc5c7134e09d5a47f74070e8c87d"
+    },
+    {
+      "sequence": 223,
+      "date": "2010-04-22",
+      "drawType": "midday",
+      "knownThrough": 222,
+      "predictions": {
+        "uniform_random": [
+          4,
+          6,
+          5
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          0,
+          7,
+          2
+        ]
+      },
+      "actual": [
+        3,
+        6,
+        6
+      ],
+      "fingerprint": "355c2d5d6ca0092f9d33895a611deb6fd31e7292da1f495200c76c105275525e"
+    },
+    {
+      "sequence": 224,
+      "date": "2010-04-22",
+      "drawType": "evening",
+      "knownThrough": 223,
+      "predictions": {
+        "uniform_random": [
+          0,
+          2,
+          5
+        ],
+        "frequency_position": [
+          7,
+          6,
+          4
+        ],
+        "last_draw": [
+          3,
+          6,
+          6
+        ]
+      },
+      "actual": [
+        8,
+        6,
+        2
+      ],
+      "fingerprint": "833cbb3c76bbf55052909642aaa7d31eb92971a009b2f82dc5529adb260a6e24"
+    },
+    {
+      "sequence": 225,
+      "date": "2010-04-23",
+      "drawType": "midday",
+      "knownThrough": 224,
+      "predictions": {
+        "uniform_random": [
+          5,
+          3,
+          0
+        ],
+        "frequency_position": [
+          7,
+          6,
+          4
+        ],
+        "last_draw": [
+          8,
+          6,
+          2
+        ]
+      },
+      "actual": [
+        3,
+        1,
+        9
+      ],
+      "fingerprint": "7aacdabbff1107cb60ab9742df71b88a6dd2ffbc320fc33e49c291e851b82706"
+    }
+  ],
+  "resultSha256": "d7b83aded654a2fa56224c6c309e0394601cc7065792b63866e5bebcaf110246"
+}
