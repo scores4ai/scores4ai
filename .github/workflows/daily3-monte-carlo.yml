@@ -1,0 +1,56 @@
+name: Daily 3 Monte Carlo reality check
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "daily3/monte_carlo_reality.py"
+      - "daily3/archive.json"
+      - "daily3/baseline_results.json"
+      - ".github/workflows/daily3-monte-carlo.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily3-monte-carlo
+  cancel-in-progress: true
+
+jobs:
+  reality-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run 2,000 synthetic-history tests
+        run: python daily3/monte_carlo_reality.py
+      - name: Verify result
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('daily3/monte_carlo_results.json').read_text())
+          assert d['simulations']==2000
+          assert d['testedPerSimulation']==11900
+          assert d['integrity']['futureDataAccess'] is False
+          assert len(d['models'])==3
+          assert len(d['resultSha256'])==64
+          print(d['multipleModelRealityCheck'])
+          PY
+      - name: Commit result
+        run: |
+          git config user.name "daily3-research-bot"
+          git config user.email "daily3-research-bot@users.noreply.github.com"
+          git add daily3/monte_carlo_results.json
+          git commit -m "Update Daily 3 Monte Carlo reality results" || exit 0
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push origin main && exit 0
+            sleep 4
+          done
+          exit 1
