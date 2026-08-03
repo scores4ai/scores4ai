@@ -84,8 +84,7 @@ def wilson(h,n,z=1.959963984540054):
  p=h/n;d=1+z*z/n;c=(p+z*z/(2*n))/d;m=z*math.sqrt((p*(1-p)+z*z/(4*n))/n)/d;return [max(0,c-m),min(1,c+m)]
 def binomial_tail(h,n,p=BASELINE):
  if n<=0:return 1.0
- logs=[]
- for k in range(h,n+1):logs.append(math.lgamma(n+1)-math.lgamma(k+1)-math.lgamma(n-k+1)+k*math.log(p)+(n-k)*math.log1p(-p))
+ logs=[math.lgamma(n+1)-math.lgamma(k+1)-math.lgamma(n-k+1)+k*math.log(p)+(n-k)*math.log1p(-p) for k in range(h,n+1)]
  mx=max(logs);return min(1.0,math.exp(mx)*sum(math.exp(x-mx) for x in logs))
 def integrity(history):
  n=len(history);h=sum(1 for x in history if x.get('hit5'));obs=h/n if n else 0;lo,hi=wilson(h,n);pv=binomial_tail(h,n);recent=history[-100:];previous=history[-200:-100];ra=sum(x.get('hit5',False) for x in recent)/len(recent) if recent else 0;pa=sum(x.get('hit5',False) for x in previous)/len(previous) if previous else None;delta=ra-pa if pa is not None else 0
@@ -95,6 +94,7 @@ def main():
  src=json.loads(SOURCE.read_text());draws=src.get('draws',[])
  if len(draws)<120:raise SystemExit('Need at least 120 draws')
  history,board,top5,model_picks=train(draws);latest=max(x['draw'] for x in draws);hits=sum(x['hit5'] for x in history);live=[x for x in src.get('history',[]) if x.get('type')=='automated_future_test'];ri=integrity(history)
- out={'version':'APX Phase 1.1','updatedAt':datetime.now(timezone.utc).isoformat(),'latestDraw':latest,'nextDraw':latest+1,'top5':top5,'drawCount':len(draws),'modelCount':len(board),'leaderboard':board,'history':history[-300:],'liveHistory':live[-300:],'researchIntegrity':ri,'stats':{'evaluated':len(history),'hits':hits,'misses':len(history)-hits,'accuracy':hits/len(history) if history else 0,'randomTop5Baseline':BASELINE,'liveEvaluated':len(live),'liveHits':sum(1 for x in live if x.get('hit5'))},'modelTop5':model_picks}
- OUT.parent.mkdir(exist_ok=True);OUT.write_text(json.dumps(out,indent=2));print(json.dumps({'latest':latest,'next':latest+1,'models':len(board),'top5':top5,'observed':ri['observed'],'pValue':ri['pValueOneSided']}))
+ feed=src.get('feedDiagnostics') or {};feed['sourceLabel']=src.get('feed','unknown');feed['sourceUrl']=src.get('source','');feed['sourceUpdatedAt']=src.get('updatedAt');feed['apxLatestDraw']=latest;feed['sourceLatestDraw']=src.get('latestDraw',latest);feed['drawGap']=max(0,int(feed['sourceLatestDraw'])-int(latest))
+ out={'version':'APX Phase 1.2','updatedAt':datetime.now(timezone.utc).isoformat(),'latestDraw':latest,'nextDraw':latest+1,'top5':top5,'drawCount':len(draws),'modelCount':len(board),'leaderboard':board,'history':history[-300:],'liveHistory':live[-300:],'researchIntegrity':ri,'feedDiagnostics':feed,'stats':{'evaluated':len(history),'hits':hits,'misses':len(history)-hits,'accuracy':hits/len(history) if history else 0,'randomTop5Baseline':BASELINE,'liveEvaluated':len(live),'liveHits':sum(1 for x in live if x.get('hit5'))},'modelTop5':model_picks}
+ OUT.parent.mkdir(exist_ok=True);OUT.write_text(json.dumps(out,indent=2));print(json.dumps({'latest':latest,'next':latest+1,'models':len(board),'top5':top5,'feed':feed.get('selectedSource',feed.get('sourceLabel')),'gap':feed['drawGap']}))
 if __name__=='__main__':main()
