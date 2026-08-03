@@ -1,6 +1,6 @@
 {
-  "version": "APX Phase 1",
-  "updatedAt": "2026-08-03T01:22:27.754710+00:00",
+  "version": "APX Phase 1.1",
+  "updatedAt": "2026-08-03T01:32:08.583799+00:00",
   "latestDraw": 88665,
   "nextDraw": 88666,
   "top5": [
@@ -5254,6 +5254,24 @@
       "scoredAt": "2026-08-03T00:51:01.879306+00:00"
     }
   ],
+  "researchIntegrity": {
+    "baseline": 0.3333333333333333,
+    "observed": 0.358,
+    "excess": 0.02466666666666667,
+    "confidence95": {
+      "low": 0.317207603401289,
+      "high": 0.40095770928979185
+    },
+    "pValueOneSided": 0.13106924024251496,
+    "independentPredictions": 500,
+    "significantAt05": false,
+    "evidence": "insufficient",
+    "trend": "improving",
+    "recent100": 0.45,
+    "previous100": 0.36,
+    "trendDelta": 0.09000000000000002,
+    "note": "Exploratory walk-forward evidence; multiple-model selection is not yet corrected."
+  },
   "stats": {
     "evaluated": 500,
     "hits": 179,
