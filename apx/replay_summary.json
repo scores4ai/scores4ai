@@ -1,0 +1,127 @@
+{
+  "version": "Historical Replay Phase 1",
+  "createdAt": "2026-08-03T18:28:27.708143+00:00",
+  "archiveDrawCount": 83875,
+  "archiveSha256": "c16df9a10a560cb987c20709f43e7719cf2c470f5ce5344bd5af1531f8b544b4",
+  "warmupDraws": 100,
+  "replaySteps": 250,
+  "firstTestedDraw": 1109,
+  "lastTestedDraw": 1366,
+  "integrity": {
+    "futureDataAccess": false,
+    "oneDrawRevealedPerStep": true,
+    "predictionsFrozenBeforeReveal": true,
+    "recordSha256": "adfd88c2158ded1a78b3b14eec4328f120cafad7709edcec3b843d3324712e6b",
+    "rule": "At target index t, every model receives only archive rows with index < t. Predictions are fingerprinted before archive row t is scored."
+  },
+  "winner": {
+    "model": "markov_1",
+    "tested": 250,
+    "hits": 86,
+    "misses": 164,
+    "accuracy": 0.344,
+    "excessOverRandom": 0.010666666666666658,
+    "confidence95": [
+      0.2878747771696037,
+      0.40484681227297487
+    ]
+  },
+  "leaderboard": [
+    {
+      "model": "markov_1",
+      "tested": 250,
+      "hits": 86,
+      "misses": 164,
+      "accuracy": 0.344,
+      "excessOverRandom": 0.010666666666666658,
+      "confidence95": [
+        0.2878747771696037,
+        0.40484681227297487
+      ]
+    },
+    {
+      "model": "cycle_20",
+      "tested": 250,
+      "hits": 84,
+      "misses": 166,
+      "accuracy": 0.336,
+      "excessOverRandom": 0.002666666666666706,
+      "confidence95": [
+        0.2803229470521072,
+        0.39664077518239854
+      ]
+    },
+    {
+      "model": "frequency_60",
+      "tested": 250,
+      "hits": 84,
+      "misses": 166,
+      "accuracy": 0.336,
+      "excessOverRandom": 0.002666666666666706,
+      "confidence95": [
+        0.2803229470521072,
+        0.39664077518239854
+      ]
+    },
+    {
+      "model": "cycle_8",
+      "tested": 250,
+      "hits": 83,
+      "misses": 167,
+      "accuracy": 0.332,
+      "excessOverRandom": -0.0013333333333332975,
+      "confidence95": [
+        0.2765538920259372,
+        0.39253089660453205
+      ]
+    },
+    {
+      "model": "frequency_all",
+      "tested": 250,
+      "hits": 83,
+      "misses": 167,
+      "accuracy": 0.332,
+      "excessOverRandom": -0.0013333333333332975,
+      "confidence95": [
+        0.2765538920259372,
+        0.39253089660453205
+      ]
+    },
+    {
+      "model": "gap_longest",
+      "tested": 250,
+      "hits": 83,
+      "misses": 167,
+      "accuracy": 0.332,
+      "excessOverRandom": -0.0013333333333332975,
+      "confidence95": [
+        0.2765538920259372,
+        0.39253089660453205
+      ]
+    },
+    {
+      "model": "lag_vote",
+      "tested": 250,
+      "hits": 80,
+      "misses": 170,
+      "accuracy": 0.32,
+      "excessOverRandom": -0.013333333333333308,
+      "confidence95": [
+        0.26527465872568123,
+        0.38017332909267876
+      ]
+    },
+    {
+      "model": "frequency_24",
+      "tested": 250,
+      "hits": 75,
+      "misses": 175,
+      "accuracy": 0.3,
+      "excessOverRandom": -0.033333333333333326,
+      "confidence95": [
+        0.2465717791163956,
+        0.3594815406817822
+      ]
+    }
+  ]
+}
