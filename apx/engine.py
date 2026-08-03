@@ -16,12 +16,13 @@ def frequency(seq,window=None,decay=None):
  else:
   for x in data:s[x]+=1
  return norm(s)
-def gap_model(seq,overdue=True):
+def gap_model(seq,overdue=True,threshold=0):
  s={n:.1 for n in NUMBERS};rev=list(reversed(seq))
  for n in NUMBERS:
   try:g=rev.index(n)+1
   except ValueError:g=len(seq)+1
-  s[n]=g if overdue else 1/max(g,1)
+  if threshold:s[n]=1+(g>=threshold)*g
+  else:s[n]=g if overdue else 1/max(g,1)
  return norm(s)
 def markov(seq,order=1):
  s={n:.25 for n in NUMBERS}
@@ -46,6 +47,25 @@ def neighbor(seq,length=4):
  for i in range(length,len(seq)):
   d=sum(a!=b for a,b in zip(tail,seq[i-length:i]));s[seq[i]]+=1/(1+d)
  return norm(s)
+def parity_regime(seq,lookback=3):
+ s={n:1.0 for n in NUMBERS};tail=seq[-lookback:]
+ if len(tail)==lookback:
+  same=all(x%2==tail[0]%2 for x in tail)
+  if same:
+   target=1-tail[0]%2
+   for n in NUMBERS:s[n]+=2.5 if n%2==target else 0
+ return norm(s)
+def band_reversion(seq,lookback=5):
+ s={n:1.0 for n in NUMBERS};tail=seq[-lookback:]
+ if tail:
+  avg=sum(tail)/len(tail)
+  for n in NUMBERS:s[n]+=abs(n-avg)/8
+ return norm(s)
+def repeat_suppression(seq,window=4):
+ s={n:1.0 for n in NUMBERS}
+ recent=set(seq[-window:])
+ for n in NUMBERS:s[n]+=0 if n in recent else 2
+ return norm(s)
 def build_models(seq):
  m={}
  for w in (10,20,30,50,75,100,200,None):m[f'freq_{w or "all"}']=frequency(seq,w)
@@ -56,6 +76,15 @@ def build_models(seq):
  m['gap_overdue']=gap_model(seq,True);m['gap_recent']=gap_model(seq,False)
  for l in (3,4,5,6):m[f'neighbor_{l}']=neighbor(seq,l)
  return m
+def build_incubator(seq):
+ return {
+  'parity_flip_3':parity_regime(seq,3),
+  'parity_flip_4':parity_regime(seq,4),
+  'gap_threshold_18':gap_model(seq,threshold=18),
+  'gap_threshold_25':gap_model(seq,threshold=25),
+  'band_reversion_5':band_reversion(seq,5),
+  'repeat_suppression_4':repeat_suppression(seq,4)
+ }
 def picks(s):return [n for n,_ in sorted(s.items(),key=lambda x:(-x[1],x[0]))[:5]]
 def fresh_record():return {'tested':0,'hits':0,'recent':[],'weight':1.0}
 def train(draws,warmup=100):
@@ -66,10 +95,10 @@ def train(draws,warmup=100):
    for name,s in models.items():
     p=picks(s);model_picks[name]=p;r=records[name];recent=sum(r['recent'][-50:])/max(1,len(r['recent'][-50:]));r['weight']=max(.05,min(8.0,math.exp(3*(recent-BASELINE))))
     for n,v in s.items():votes[n]+=v*r['weight']
-   ensemble=picks(votes);actual=row['number'];hit=actual in ensemble;history.append({'draw':row['draw'],'top5':ensemble,'actual':actual,'hit5':hit,'type':'strict_walk_forward'})
+   ensemble=picks(votes);actual=int(row['number']);history.append({'draw':row['draw'],'top5':ensemble,'actual':actual,'hit5':actual in ensemble,'type':'strict_walk_forward'})
    for name,p in model_picks.items():
     h=1 if actual in p else 0;r=records[name];r['tested']+=1;r['hits']+=h;r['recent'].append(h);r['recent']=r['recent'][-200:]
-  seq.append(row['number'])
+  seq.append(int(row['number']))
  models=build_models(seq);votes={n:0.0 for n in NUMBERS};model_picks={}
  for name,s in models.items():
   p=picks(s);model_picks[name]=p;r=records[name];recent=sum(r['recent'][-50:])/max(1,len(r['recent'][-50:]));r['weight']=max(.05,min(8.0,math.exp(3*(recent-BASELINE))))
@@ -78,7 +107,7 @@ def train(draws,warmup=100):
  for name,r in records.items():
   acc=r['hits']/r['tested'] if r['tested'] else 0;r50=sum(r['recent'][-50:])/max(1,len(r['recent'][-50:]));board.append({'name':name,'tested':r['tested'],'hits':r['hits'],'accuracy':acc,'rolling50':r50,'weight':r['weight'],'top5':model_picks.get(name,[])})
  board.sort(key=lambda x:(-x['weight'],-x['rolling50'],-x['accuracy']))
- return history,board,picks(votes),model_picks
+ return history,board,picks(votes),model_picks,seq
 
 def wilson(h,n,z=1.959963984540054):
  if n<=0:return [0,1]
@@ -87,7 +116,7 @@ def binomial_tail(h,n,p=BASELINE):
  if n<=0:return 1.0
  logs=[math.lgamma(n+1)-math.lgamma(k+1)-math.lgamma(n-k+1)+k*math.log(p)+(n-k)*math.log1p(-p) for k in range(h,n+1)]
  mx=max(logs);return min(1.0,math.exp(mx)*sum(math.exp(x-mx) for x in logs))
-def integrity(history,note='Exploratory walk-forward evidence; multiple-model selection is not yet corrected.'):
+def integrity(history,note):
  n=len(history);h=sum(1 for x in history if x.get('hit5'));obs=h/n if n else 0;lo,hi=wilson(h,n);pv=binomial_tail(h,n);recent=history[-100:];previous=history[-200:-100];ra=sum(x.get('hit5',False) for x in recent)/len(recent) if recent else 0;pa=sum(x.get('hit5',False) for x in previous)/len(previous) if previous else None;delta=ra-pa if pa is not None else 0
  trend='flat' if pa is None or abs(delta)<.015 else ('improving' if delta>0 else 'declining');sig=pv<.05 and lo>BASELINE;evidence='strong' if sig and pv<.001 else ('moderate' if sig else 'insufficient')
  return {'baseline':BASELINE,'observed':obs,'excess':obs-BASELINE,'confidence95':{'low':lo,'high':hi},'pValueOneSided':pv,'independentPredictions':n,'significantAt05':sig,'evidence':evidence,'trend':trend,'recent100':ra,'previous100':pa,'trendDelta':delta,'note':note}
@@ -99,23 +128,36 @@ def score_apx_live(previous,draws):
  for row in previous.get('liveHistory',[]):
   try:did=int(row['draw'])
   except Exception:continue
-  if row.get('type')=='apx_live_forward' and did not in seen:
-   live.append(row);seen.add(did)
- pending=previous.get('pendingPrediction') or {}
- try:target=int(pending.get('draw',-1))
- except Exception:target=-1
- draw_map={int(x['draw']):x for x in draws}
+  if row.get('type')=='apx_live_forward' and did not in seen:live.append(row);seen.add(did)
+ pending=previous.get('pendingPrediction') or {};target=int(pending.get('draw',-1));draw_map={int(x['draw']):x for x in draws}
  if target in draw_map and target not in seen:
   actual=int(draw_map[target]['number']);top5=[int(x) for x in pending.get('top5',[])]
-  live.append({'draw':target,'top5':top5,'actual':actual,'hit5':actual in top5,'type':'apx_live_forward','predictedAt':pending.get('predictedAt'),'scoredAt':utcnow(),'predictionFingerprint':pending.get('fingerprint'),'modelCount':pending.get('modelCount')});seen.add(target)
+  live.append({'draw':target,'top5':top5,'actual':actual,'hit5':actual in top5,'type':'apx_live_forward','predictedAt':pending.get('predictedAt'),'scoredAt':utcnow(),'predictionFingerprint':pending.get('fingerprint'),'modelCount':pending.get('modelCount')})
  return live[-1000:]
+def score_incubator(previous,draws,seq):
+ old=(previous.get('incubator') or {});history=list(old.get('history') or []);seen={(x.get('candidate'),int(x.get('draw',-1))) for x in history};draw_map={int(x['draw']):x for x in draws}
+ for p in old.get('pending',[]):
+  target=int(p.get('draw',-1));name=p.get('candidate')
+  if target in draw_map and (name,target) not in seen:
+   actual=int(draw_map[target]['number']);top5=[int(x) for x in p.get('top5',[])]
+   history.append({'candidate':name,'draw':target,'top5':top5,'actual':actual,'hit5':actual in top5,'predictedAt':p.get('predictedAt'),'scoredAt':utcnow(),'type':'incubator_live_forward'});seen.add((name,target))
+ current=build_incubator(seq);now=utcnow();pending=[{'candidate':name,'draw':max(draw_map)+1,'top5':picks(scores),'predictedAt':now,'immutable':True} for name,scores in current.items()]
+ candidates=[]
+ for name in current:
+  rows=[x for x in history if x.get('candidate')==name];n=len(rows);h=sum(x.get('hit5',False) for x in rows);acc=h/n if n else 0;pv=binomial_tail(h,n);lo,hi=wilson(h,n)
+  status='testing'
+  if n>=100 and pv<.01 and lo>BASELINE:status='eligible_for_graduation'
+  elif n>=100 and acc<=BASELINE:status='retired'
+  candidates.append({'name':name,'status':status,'tested':n,'hits':h,'accuracy':acc,'excess':acc-BASELINE,'pValue':pv,'confidence95':{'low':lo,'high':hi},'currentTop5':picks(current[name]),'minimumTests':100})
+ candidates.sort(key=lambda x:(x['status']!='eligible_for_graduation',-x['accuracy'],-x['tested']))
+ return {'isolatedFromTournament':True,'activeCount':sum(x['status']=='testing' for x in candidates),'graduatedCount':sum(x['status']=='eligible_for_graduation' for x in candidates),'retiredCount':sum(x['status']=='retired' for x in candidates),'candidates':candidates,'pending':pending,'history':history[-2000:],'rule':'Candidates never affect live APX predictions. Graduation requires at least 100 independent live tests, p<0.01, and a 95% interval above the random baseline.'}
 def main():
  src=json.loads(SOURCE.read_text());draws=src.get('draws',[])
  if len(draws)<120:raise SystemExit('Need at least 120 draws')
- previous=load_previous();history,board,top5,model_picks=train(draws);latest=max(int(x['draw']) for x in draws);hits=sum(x['hit5'] for x in history);live=score_apx_live(previous,draws);ri=integrity(history);live_ri=integrity(live,'Only immutable APX predictions created before each live draw are counted here.')
+ previous=load_previous();history,board,top5,model_picks,seq=train(draws);latest=max(int(x['draw']) for x in draws);hits=sum(x['hit5'] for x in history);live=score_apx_live(previous,draws);incubator=score_incubator(previous,draws,seq)
+ ri=integrity(history,'Exploratory walk-forward evidence; multiple-model selection is not yet corrected.');live_ri=integrity(live,'Only immutable APX predictions created before each live draw are counted here.')
  feed=src.get('feedDiagnostics') or {};feed['sourceLabel']=src.get('feed','unknown');feed['sourceUrl']=src.get('source','');feed['sourceUpdatedAt']=src.get('updatedAt');feed['apxLatestDraw']=latest;feed['sourceLatestDraw']=src.get('latestDraw',latest);feed['drawGap']=max(0,int(feed['sourceLatestDraw'])-latest)
- predicted_at=utcnow();fingerprint=f"apx-{latest+1}-"+'-'.join(map(str,top5))
- pending={'draw':latest+1,'top5':top5,'modelTop5':model_picks,'predictedAt':predicted_at,'fingerprint':fingerprint,'modelCount':len(board),'immutable':True}
- out={'version':'APX Phase 1.3','updatedAt':predicted_at,'latestDraw':latest,'nextDraw':latest+1,'top5':top5,'pendingPrediction':pending,'drawCount':len(draws),'modelCount':len(board),'leaderboard':board,'history':history[-300:],'liveHistory':live,'researchIntegrity':ri,'liveResearchIntegrity':live_ri,'feedDiagnostics':feed,'stats':{'evaluated':len(history),'hits':hits,'misses':len(history)-hits,'accuracy':hits/len(history) if history else 0,'randomTop5Baseline':BASELINE,'liveEvaluated':len(live),'liveHits':sum(1 for x in live if x.get('hit5')),'liveMisses':sum(1 for x in live if not x.get('hit5')),'liveAccuracy':sum(1 for x in live if x.get('hit5'))/len(live) if live else 0},'modelTop5':model_picks}
- OUT.parent.mkdir(exist_ok=True);OUT.write_text(json.dumps(out,indent=2));print(json.dumps({'latest':latest,'next':latest+1,'models':len(board),'top5':top5,'apxLiveTests':len(live),'pendingFingerprint':fingerprint,'gap':feed['drawGap']}))
+ predicted_at=utcnow();fingerprint=f"apx-{latest+1}-"+'-'.join(map(str,top5));pending={'draw':latest+1,'top5':top5,'modelTop5':model_picks,'predictedAt':predicted_at,'fingerprint':fingerprint,'modelCount':len(board),'immutable':True}
+ out={'version':'APX Phase 1.4','updatedAt':predicted_at,'latestDraw':latest,'nextDraw':latest+1,'top5':top5,'pendingPrediction':pending,'drawCount':len(draws),'modelCount':len(board),'leaderboard':board,'history':history[-300:],'liveHistory':live,'researchIntegrity':ri,'liveResearchIntegrity':live_ri,'feedDiagnostics':feed,'incubator':incubator,'stats':{'evaluated':len(history),'hits':hits,'misses':len(history)-hits,'accuracy':hits/len(history) if history else 0,'randomTop5Baseline':BASELINE,'liveEvaluated':len(live),'liveHits':sum(1 for x in live if x.get('hit5')),'liveMisses':sum(1 for x in live if not x.get('hit5')),'liveAccuracy':sum(1 for x in live if x.get('hit5'))/len(live) if live else 0},'modelTop5':model_picks}
+ OUT.parent.mkdir(exist_ok=True);OUT.write_text(json.dumps(out,indent=2));print(json.dumps({'latest':latest,'next':latest+1,'models':len(board),'incubatorCandidates':len(incubator['candidates']),'incubatorIsolated':incubator['isolatedFromTournament'],'apxLiveTests':len(live),'gap':feed['drawGap']}))
 if __name__=='__main__':main()
