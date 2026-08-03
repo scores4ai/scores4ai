@@ -8,6 +8,7 @@ on:
       - "index.html"
       - "v0/final.html"
       - "v0/cloud_state.json"
+      - "apx/**"
       - ".github/workflows/deploy-pages.yml"
 
 permissions:
@@ -33,13 +34,21 @@ jobs:
         run: |
           test -f v0/final.html
           test -f v0/cloud_state.json
+          test -f apx/index.html
+          test -f apx/evolution.html
+          test -f apx/state.json
 
       - name: Build site folder
         run: |
           rm -rf _site
-          mkdir -p _site
+          mkdir -p _site/apx
           cp v0/final.html _site/index.html
           cp v0/cloud_state.json _site/cloud_state.json
+          cp apx/index.html _site/apx/index.html
+          cp apx/evolution.html _site/apx/evolution.html
+          cp apx/state.json _site/apx/state.json
+          if [ -f apx/evolution_state.json ]; then cp apx/evolution_state.json _site/apx/evolution_state.json; fi
+          if [ -f apx/heartbeat.json ]; then cp apx/heartbeat.json _site/apx/heartbeat.json; fi
           touch _site/.nojekyll
 
       - name: Configure Pages
