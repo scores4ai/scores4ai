@@ -1,0 +1,1013 @@
+{
+  "version": "Daily 3 Blind Holdout Phase 1",
+  "archiveSha256": "49a97dd6d3dd780b6911175047023ef8e67d769abe4a4ceea4623703a11a0859",
+  "split": {
+    "trainingDraws": 8470,
+    "validationDraws": 1815,
+    "blindHoldoutDraws": 1815,
+    "blindStartSequence": 10286,
+    "blindEndSequence": 12100
+  },
+  "integrity": {
+    "holdoutLockedBeforeScoring": true,
+    "holdoutUpdates": false,
+    "futureDataAccess": false,
+    "predictionsFrozenBeforeReveal": true
+  },
+  "randomBaselines": {
+    "exactStraight": 0.001,
+    "eachPosition": 0.1,
+    "atLeastOnePosition": 0.271
+  },
+  "leaderboard": [
+    {
+      "model": "last_draw",
+      "tested": 1815,
+      "exactHits": 3,
+      "exactAccuracy": 0.001652892561983471,
+      "boxHits": 14,
+      "boxAccuracy": 0.007713498622589532,
+      "atLeastOnePositionAccuracy": 0.2820936639118457,
+      "positionAccuracy": [
+        0.10358126721763085,
+        0.10909090909090909,
+        0.10523415977961433
+      ]
+    },
+    {
+      "model": "uniform_random",
+      "tested": 1815,
+      "exactHits": 2,
+      "exactAccuracy": 0.0011019283746556473,
+      "boxHits": 8,
+      "boxAccuracy": 0.004407713498622589,
+      "atLeastOnePositionAccuracy": 0.27548209366391185,
+      "positionAccuracy": [
+        0.09641873278236915,
+        0.10743801652892562,
+        0.09696969696969697
+      ]
+    },
+    {
+      "model": "position_transition_1",
+      "tested": 1815,
+      "exactHits": 1,
+      "exactAccuracy": 0.0005509641873278236,
+      "boxHits": 4,
+      "boxAccuracy": 0.0022038567493112946,
+      "atLeastOnePositionAccuracy": 0.2793388429752066,
+      "positionAccuracy": [
+        0.10137741046831956,
+        0.09807162534435261,
+        0.1046831955922865
+      ]
+    },
+    {
+      "model": "frequency_position",
+      "tested": 1815,
+      "exactHits": 0,
+      "exactAccuracy": 0.0,
+      "boxHits": 5,
+      "boxAccuracy": 0.0027548209366391185,
+      "atLeastOnePositionAccuracy": 0.2699724517906336,
+      "positionAccuracy": [
+        0.09752066115702479,
+        0.09531680440771349,
+        0.1024793388429752
+      ]
+    }
+  ],
+  "samples": [
+    {
+      "sequence": 10286,
+      "predictionFingerprint": "3f4ce75fa199bdfe6768439779baf585b1913ac13d64f591b492487265f18dec",
+      "predictions": {
+        "uniform_random": [
+          8,
+          7,
+          3
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          5,
+          0,
+          2
+        ],
+        "position_transition_1": [
+          6,
+          1,
+          4
+        ]
+      },
+      "actual": [
+        2,
+        7,
+        2
+      ]
+    },
+    {
+      "sequence": 10287,
+      "predictionFingerprint": "f33dee0945bc2fb838ae929132adaea2e1e42d90300b2ddf622b539ba694064c",
+      "predictions": {
+        "uniform_random": [
+          9,
+          8,
+          7
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          2,
+          7,
+          2
+        ],
+        "position_transition_1": [
+          6,
+          2,
+          4
+        ]
+      },
+      "actual": [
+        8,
+        5,
+        4
+      ]
+    },
+    {
+      "sequence": 10288,
+      "predictionFingerprint": "208852eb1b682a9de0e428e92b2936fefb480e4fc90519a055cee60f395499f8",
+      "predictions": {
+        "uniform_random": [
+          5,
+          5,
+          0
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          8,
+          5,
+          4
+        ],
+        "position_transition_1": [
+          0,
+          1,
+          4
+        ]
+      },
+      "actual": [
+        0,
+        9,
+        5
+      ]
+    },
+    {
+      "sequence": 10289,
+      "predictionFingerprint": "d3163fbcdd034578d2434359689e567363f130b0d3a4ebe4dfd6a9150eef03db",
+      "predictions": {
+        "uniform_random": [
+          9,
+          3,
+          7
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          0,
+          9,
+          5
+        ],
+        "position_transition_1": [
+          3,
+          3,
+          4
+        ]
+      },
+      "actual": [
+        1,
+        3,
+        5
+      ]
+    },
+    {
+      "sequence": 10290,
+      "predictionFingerprint": "cd3c4817e9cee85bfda1e7bfdc3f81f8f77ca3434d058a9f9bf6fbfd44504f0a",
+      "predictions": {
+        "uniform_random": [
+          8,
+          4,
+          3
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          1,
+          3,
+          5
+        ],
+        "position_transition_1": [
+          7,
+          6,
+          4
+        ]
+      },
+      "actual": [
+        4,
+        3,
+        1
+      ]
+    },
+    {
+      "sequence": 10291,
+      "predictionFingerprint": "184259b4cff4c1bcb51e3e4967340b53f74b11efda34b69137cbb3a27fcc3475",
+      "predictions": {
+        "uniform_random": [
+          5,
+          9,
+          8
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          4,
+          3,
+          1
+        ],
+        "position_transition_1": [
+          2,
+          6,
+          5
+        ]
+      },
+      "actual": [
+        2,
+        6,
+        0
+      ]
+    },
+    {
+      "sequence": 10292,
+      "predictionFingerprint": "f72be84064739084fabb25113f5a92b75d5d9e2aaaa27f50d925f987f7bd6a25",
+      "predictions": {
+        "uniform_random": [
+          9,
+          8,
+          9
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          2,
+          6,
+          0
+        ],
+        "position_transition_1": [
+          6,
+          1,
+          3
+        ]
+      },
+      "actual": [
+        1,
+        1,
+        6
+      ]
+    },
+    {
+      "sequence": 10293,
+      "predictionFingerprint": "914ca10f291a03d90dc4c3f63a328be95ab8bb95461df46f5f240155d7906239",
+      "predictions": {
+        "uniform_random": [
+          7,
+          5,
+          8
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          1,
+          1,
+          6
+        ],
+        "position_transition_1": [
+          7,
+          9,
+          7
+        ]
+      },
+      "actual": [
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "sequence": 10294,
+      "predictionFingerprint": "35b8d2d497de345907c62faf9ec50c8e7598a0003b944f0836b5875aa6cf9c6e",
+      "predictions": {
+        "uniform_random": [
+          3,
+          9,
+          8
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          6,
+          8,
+          9
+        ],
+        "position_transition_1": [
+          7,
+          2,
+          6
+        ]
+      },
+      "actual": [
+        4,
+        2,
+        9
+      ]
+    },
+    {
+      "sequence": 10295,
+      "predictionFingerprint": "1ac8405b616c7aa0b6e513884f3acfd6ecdb86aa1a6256673c63c8d116148e6e",
+      "predictions": {
+        "uniform_random": [
+          1,
+          3,
+          4
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          4,
+          2,
+          9
+        ],
+        "position_transition_1": [
+          2,
+          8,
+          6
+        ]
+      },
+      "actual": [
+        2,
+        8,
+        3
+      ]
+    },
+    {
+      "sequence": 10296,
+      "predictionFingerprint": "89197152198f6ea2d4b0579d93cc132d3320eb2e4d0847d4c9f4635e462cfef3",
+      "predictions": {
+        "uniform_random": [
+          1,
+          8,
+          1
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          2,
+          8,
+          3
+        ],
+        "position_transition_1": [
+          6,
+          2,
+          5
+        ]
+      },
+      "actual": [
+        9,
+        7,
+        5
+      ]
+    },
+    {
+      "sequence": 10297,
+      "predictionFingerprint": "9d818807b8a8444f82b2c04d9648928d30ffbf521c9d6e75073156b9bb629b3e",
+      "predictions": {
+        "uniform_random": [
+          8,
+          1,
+          3
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          9,
+          7,
+          5
+        ],
+        "position_transition_1": [
+          7,
+          2,
+          4
+        ]
+      },
+      "actual": [
+        2,
+        4,
+        3
+      ]
+    },
+    {
+      "sequence": 10298,
+      "predictionFingerprint": "92299c5664f8ec66898d50c233acbbaee3c797491f165fca0c045a9086d97138",
+      "predictions": {
+        "uniform_random": [
+          1,
+          2,
+          1
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          2,
+          4,
+          3
+        ],
+        "position_transition_1": [
+          6,
+          2,
+          5
+        ]
+      },
+      "actual": [
+        0,
+        6,
+        0
+      ]
+    },
+    {
+      "sequence": 10299,
+      "predictionFingerprint": "b3c134ef81d9786428cbc5134d4e5682d0a0efa633e29852d977389e4ba06989",
+      "predictions": {
+        "uniform_random": [
+          4,
+          5,
+          9
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          0,
+          6,
+          0
+        ],
+        "position_transition_1": [
+          3,
+          1,
+          3
+        ]
+      },
+      "actual": [
+        9,
+        5,
+        0
+      ]
+    },
+    {
+      "sequence": 10300,
+      "predictionFingerprint": "15f184cb11b493396c6b745a09d43e82352732aecf8bf1773acf261b466d8ef6",
+      "predictions": {
+        "uniform_random": [
+          9,
+          7,
+          3
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          9,
+          5,
+          0
+        ],
+        "position_transition_1": [
+          7,
+          1,
+          3
+        ]
+      },
+      "actual": [
+        3,
+        3,
+        4
+      ]
+    },
+    {
+      "sequence": 10301,
+      "predictionFingerprint": "33eecc6bd50718077a06095838bd0537e493121663d1fb7854fae857eb4250d1",
+      "predictions": {
+        "uniform_random": [
+          1,
+          8,
+          5
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          3,
+          3,
+          4
+        ],
+        "position_transition_1": [
+          0,
+          6,
+          4
+        ]
+      },
+      "actual": [
+        9,
+        6,
+        1
+      ]
+    },
+    {
+      "sequence": 10302,
+      "predictionFingerprint": "476bb8c026cdfb9869326e5917d43c1ef04e62147cc073dd50ba47298adf3142",
+      "predictions": {
+        "uniform_random": [
+          2,
+          8,
+          2
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          9,
+          6,
+          1
+        ],
+        "position_transition_1": [
+          7,
+          1,
+          5
+        ]
+      },
+      "actual": [
+        7,
+        0,
+        9
+      ]
+    },
+    {
+      "sequence": 10303,
+      "predictionFingerprint": "adbe8186747b7a536066337ca015583bb9376983bdb78f8831d2684cd38310b4",
+      "predictions": {
+        "uniform_random": [
+          8,
+          2,
+          1
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          7,
+          0,
+          9
+        ],
+        "position_transition_1": [
+          8,
+          1,
+          6
+        ]
+      },
+      "actual": [
+        9,
+        1,
+        5
+      ]
+    },
+    {
+      "sequence": 10304,
+      "predictionFingerprint": "5316c031edeb75d51934deddf0f2026947ef384eb1a2e571f98e5157a1e89226",
+      "predictions": {
+        "uniform_random": [
+          3,
+          6,
+          8
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          9,
+          1,
+          5
+        ],
+        "position_transition_1": [
+          7,
+          9,
+          4
+        ]
+      },
+      "actual": [
+        1,
+        9,
+        6
+      ]
+    },
+    {
+      "sequence": 10305,
+      "predictionFingerprint": "01764e0e6c2639893b0ed273c5e35e14be2630d90ffe2ec78ad66ee4a96579ac",
+      "predictions": {
+        "uniform_random": [
+          1,
+          4,
+          8
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          1,
+          9,
+          6
+        ],
+        "position_transition_1": [
+          7,
+          3,
+          7
+        ]
+      },
+      "actual": [
+        4,
+        3,
+        0
+      ]
+    },
+    {
+      "sequence": 10306,
+      "predictionFingerprint": "6979384cf2a6096c937bb463943fbc5aea88a64024fcb38d7298121599b25850",
+      "predictions": {
+        "uniform_random": [
+          3,
+          9,
+          6
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          4,
+          3,
+          0
+        ],
+        "position_transition_1": [
+          2,
+          6,
+          3
+        ]
+      },
+      "actual": [
+        2,
+        5,
+        7
+      ]
+    },
+    {
+      "sequence": 10307,
+      "predictionFingerprint": "388dd6faa0ca0f0ec0c1e0886d7431630b1628adb4cc41df49ff195ba160cce2",
+      "predictions": {
+        "uniform_random": [
+          6,
+          4,
+          1
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          2,
+          5,
+          7
+        ],
+        "position_transition_1": [
+          6,
+          1,
+          9
+        ]
+      },
+      "actual": [
+        7,
+        5,
+        1
+      ]
+    },
+    {
+      "sequence": 10308,
+      "predictionFingerprint": "f687270eacb1b549d9d2eb52976875a9d8ef7918610186bb0d48768919726107",
+      "predictions": {
+        "uniform_random": [
+          1,
+          0,
+          1
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          7,
+          5,
+          1
+        ],
+        "position_transition_1": [
+          8,
+          1,
+          5
+        ]
+      },
+      "actual": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "sequence": 10309,
+      "predictionFingerprint": "da320c0e4fa3f204f9c43d4dfa4c9f68309a05e94a0d6b80fef51ae61c0a407b",
+      "predictions": {
+        "uniform_random": [
+          9,
+          8,
+          9
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          1,
+          0,
+          0
+        ],
+        "position_transition_1": [
+          7,
+          1,
+          3
+        ]
+      },
+      "actual": [
+        8,
+        4,
+        9
+      ]
+    },
+    {
+      "sequence": 10310,
+      "predictionFingerprint": "64dadd821dc8cdc3da8c5072f23955b9010559f5454467a14f1a0b71c14e289f",
+      "predictions": {
+        "uniform_random": [
+          5,
+          6,
+          2
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          8,
+          4,
+          9
+        ],
+        "position_transition_1": [
+          0,
+          2,
+          6
+        ]
+      },
+      "actual": [
+        5,
+        3,
+        3
+      ]
+    },
+    {
+      "sequence": 10311,
+      "predictionFingerprint": "77f031fdf261e667e0032d6d7781a72c577599a1c95a6b73351ee5d64a9b35f5",
+      "predictions": {
+        "uniform_random": [
+          7,
+          9,
+          5
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          5,
+          3,
+          3
+        ],
+        "position_transition_1": [
+          6,
+          6,
+          5
+        ]
+      },
+      "actual": [
+        3,
+        8,
+        2
+      ]
+    },
+    {
+      "sequence": 10312,
+      "predictionFingerprint": "4ad3704f991feb77f0eafa462ffaad122ca2b997853dfc0cf514d964a7fd1231",
+      "predictions": {
+        "uniform_random": [
+          4,
+          9,
+          6
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          3,
+          8,
+          2
+        ],
+        "position_transition_1": [
+          0,
+          2,
+          4
+        ]
+      },
+      "actual": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "sequence": 10313,
+      "predictionFingerprint": "a52d5114a9738dde717144d17b818209253cf6b77dcd7f79d25f9e181a7c7e67",
+      "predictions": {
+        "uniform_random": [
+          5,
+          6,
+          8
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          2,
+          0,
+          0
+        ],
+        "position_transition_1": [
+          6,
+          1,
+          3
+        ]
+      },
+      "actual": [
+        0,
+        0,
+        5
+      ]
+    },
+    {
+      "sequence": 10314,
+      "predictionFingerprint": "e4a80532c49c7cf8a3f92a87d2b5b9cf7e7ef01b5409b0a48951ed5f67f5a0a2",
+      "predictions": {
+        "uniform_random": [
+          4,
+          1,
+          9
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          0,
+          0,
+          5
+        ],
+        "position_transition_1": [
+          3,
+          1,
+          4
+        ]
+      },
+      "actual": [
+        9,
+        5,
+        7
+      ]
+    },
+    {
+      "sequence": 10315,
+      "predictionFingerprint": "5160a874d944794a216ad3b1be56e6ebc00b51aa6a5be36a521f79e787f96347",
+      "predictions": {
+        "uniform_random": [
+          4,
+          2,
+          5
+        ],
+        "frequency_position": [
+          7,
+          1,
+          4
+        ],
+        "last_draw": [
+          9,
+          5,
+          7
+        ],
+        "position_transition_1": [
+          7,
+          1,
+          9
+        ]
+      },
+      "actual": [
+        3,
+        0,
+        5
+      ]
+    }
+  ],
+  "resultSha256": "f5a19bfda846be31e394716c211578e0d814a9a3f903a41668e6b8babec7819a"
+}
