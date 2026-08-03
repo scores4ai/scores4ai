@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>APX Verified Live</title>
+<style>
+body{margin:0;background:#090d17;color:#eef3ff;font-family:Arial,sans-serif}.w{max-width:900px;margin:auto;padding:14px}.c{background:#121827;border:1px solid #293552;border-radius:18px;padding:16px;margin:12px 0}.m{color:#9dabca}.five,.stats{display:grid;gap:8px}.five{grid-template-columns:repeat(5,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.pick,.stat{background:#1a2338;border:1px solid #34415e;border-radius:14px;padding:12px;text-align:center}.pick:first-child{background:#7357f6}.pick b{font-size:30px}.stat b{display:block;font-size:20px;margin-top:5px;overflow-wrap:anywhere}.ok{color:#2bd47d}.bad{color:#ff6475}.warn{color:#ffb020}button{background:#7357f6;color:#fff;border:0;border-radius:12px;padding:12px 18px;font-weight:bold}table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #293552;text-align:left;font-size:12px}.banner{font-size:20px;font-weight:bold}.detail{margin-top:8px;line-height:1.45}@media(max-width:650px){.five{gap:5px}.pick{padding:10px 3px}.pick b{font-size:23px}}
+</style></head><body><div class="w">
+<div class="c"><h2 style="margin:0">APX Adaptive Prediction Laboratory</h2><div class="m">Verified source status — a fresh timestamp alone cannot be labeled LIVE.</div></div>
+<div class="c" style="text-align:center"><div id="status" class="banner warn">Checking source and APX state…</div><div id="reason" class="m detail"></div><h2 id="next">NEXT DRAW</h2><div id="five" class="five"></div><div style="margin-top:14px"><button onclick="load()">Refresh verified state</button></div></div>
+<div class="c"><div class="stats">
+<div class="stat"><span class="m">Stored latest draw</span><b id="stored">—</b></div><div class="stat"><span class="m">Source latest draw</span><b id="source">—</b></div>
+<div class="stat"><span class="m">Last source attempt</span><b id="attempt">—</b></div><div class="stat"><span class="m">Last source success</span><b id="success">—</b></div>
+<div class="stat"><span class="m">Draw gap</span><b id="gap">—</b></div><div class="stat"><span class="m">Source result</span><b id="sourceResult">—</b></div>
+</div></div>
+<div class="c"><div class="stats"><div class="stat"><span class="m">Models</span><b id="models">—</b></div><div class="stat"><span class="m">APX live tests</span><b id="tests">—</b></div><div class="stat"><span class="m">Live accuracy</span><b id="accuracy">—</b></div><div class="stat"><span class="m">Random baseline</span><b>33.3%</b></div></div></div>
+<div class="c"><h3>Recent immutable tests</h3><div style="overflow:auto;max-height:460px"><table><thead><tr><th>Draw</th><th>Frozen prediction</th><th>Actual</th><th>Result</th></tr></thead><tbody id="rows"></tbody></table></div></div>
+</div><script>
+const STATE='https://api.github.com/repos/scores4ai/scores4ai/contents/apx/state.json?ref=main';
+const HEART='https://api.github.com/repos/scores4ai/scores4ai/contents/apx/heartbeat.json?ref=main';
+const $=id=>document.getElementById(id);let busy=false;
+function decode(v){const b=atob(String(v||'').replace(/\n/g,''));return new TextDecoder().decode(Uint8Array.from(b,c=>c.charCodeAt(0)))}
+async function jsonFile(url){const r=await fetch(url+'&cb='+Date.now(),{cache:'no-store',headers:{Accept:'application/vnd.github+json'}});if(!r.ok)throw Error('GitHub API '+r.status);const e=await r.json();return JSON.parse(decode(e.content))}
+function ageMin(v){return v?(Date.now()-new Date(v).getTime())/60000:99999}
+function fmt(v){return v?new Date(v).toLocaleString():'Never'}
+function pct(v){return (100*(Number(v)||0)).toFixed(1)+'%'}
+async function load(){if(busy)return;busy=true;try{
+ const [s,h]=await Promise.all([jsonFile(STATE),jsonFile(HEART)]);const fd=s.feedDiagnostics||{},st=s.stats||{},p=s.pendingPrediction||{},lh=s.liveHistory||[];
+ const stored=Number(s.latestDraw||0);const source=Number(h.sourceLatestDraw??fd.sourceLatestDraw??0);const attempt=h.lastAttemptAt;const lastSuccess=h.lastSuccessAt;
+ const recentAttempt=ageMin(attempt)<3;const recentSuccess=ageMin(lastSuccess)<10;const sourceOK=h.sourceSuccess===true;const matched=source>0&&source===stored;const advanced=source>=stored&&stored>0;const verified=recentAttempt&&recentSuccess&&sourceOK&&matched&&advanced;
+ $('status').className='banner '+(verified?'ok':sourceOK?'warn':'bad');$('status').textContent=verified?'● VERIFIED LIVE':sourceOK?'● CHECKED — NOT VERIFIED LIVE':'● SOURCE OFFLINE / STALE';
+ const reasons=[];if(!recentAttempt)reasons.push('No source attempt within 3 minutes');if(!recentSuccess)reasons.push('No successful source read within 10 minutes');if(!sourceOK)reasons.push(h.lastError||'Latest source request failed');if(source===0)reasons.push('Source draw number was not recorded');else if(source!==stored)reasons.push('Source draw #'+source+' does not match stored draw #'+stored);$('reason').textContent=verified?'The source succeeded recently and its latest draw exactly matches APX.':reasons.join(' · ');
+ $('stored').textContent=stored?'#'+stored:'—';$('source').textContent=source?'#'+source:'Unknown';$('attempt').textContent=fmt(attempt);$('success').textContent=fmt(lastSuccess);$('gap').textContent=source&&stored?Math.max(0,source-stored)+' draw(s)':'Unknown';$('sourceResult').textContent=sourceOK?'SUCCESS':'FAILED';$('sourceResult').className=sourceOK?'ok':'bad';
+ $('next').textContent='NEXT DRAW #'+(s.nextDraw||p.draw||stored+1);$('five').innerHTML=(s.top5||p.top5||[]).map((n,i)=>'<div class="pick"><span class="m">#'+(i+1)+'</span><br><b>'+n+'</b></div>').join('');$('models').textContent=s.modelCount||'—';$('tests').textContent=st.liveEvaluated||0;$('accuracy').textContent=pct(st.liveAccuracy);
+ $('rows').innerHTML=lh.slice(-40).reverse().map(x=>'<tr><td>#'+x.draw+'</td><td>'+((x.top5||[]).join(', '))+'</td><td><b>'+x.actual+'</b></td><td class="'+(x.hit5?'ok':'bad')+'">'+(x.hit5?'SUCCESS':'MISS')+'</td></tr>').join('')||'<tr><td colspan="4" class="m">No tests recorded.</td></tr>';
+ }catch(e){$('status').className='banner bad';$('status').textContent='● VERIFIED STATE UNAVAILABLE';$('reason').textContent=e.message}finally{busy=false}}
+load();setInterval(load,20000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)load()});
+</script></body></html>
