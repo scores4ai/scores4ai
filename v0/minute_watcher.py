@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import json
+import shutil
 import subprocess
+import tempfile
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -36,22 +38,60 @@ def load_heartbeat():
         return {}
 
 
-def run(cmd):
-    return subprocess.run(cmd, check=False).returncode
+def run(cmd, cwd=None):
+    return subprocess.run(cmd, cwd=cwd, check=False).returncode
+
+
+def sync_pages_branch():
+    """Copy the current live JSON into gh-pages during this same workflow run."""
+    temp_dir = Path(tempfile.mkdtemp(prefix='apx-gh-pages-'))
+    try:
+        run(['git', 'fetch', 'origin', 'gh-pages'])
+        if run(['git', 'worktree', 'add', '--force', str(temp_dir), 'gh-pages']) != 0:
+            return False
+
+        (temp_dir / 'apx').mkdir(parents=True, exist_ok=True)
+        for source, destinations in (
+            (Path('apx/state.json'), [temp_dir / 'state.json', temp_dir / 'apx/state.json']),
+            (Path('apx/heartbeat.json'), [temp_dir / 'heartbeat.json', temp_dir / 'apx/heartbeat.json']),
+        ):
+            if not source.exists():
+                continue
+            for destination in destinations:
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, destination)
+
+        run(['git', 'add', 'state.json', 'heartbeat.json', 'apx/state.json', 'apx/heartbeat.json'], cwd=temp_dir)
+        if subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=temp_dir).returncode == 0:
+            return True
+        if run(['git', 'commit', '-m', f'Publish APX live state {latest_draw()} {now()}'], cwd=temp_dir) != 0:
+            return False
+        for _ in range(3):
+            if run(['git', 'pull', '--rebase', 'origin', 'gh-pages'], cwd=temp_dir) == 0 and run(['git', 'push', 'origin', 'gh-pages'], cwd=temp_dir) == 0:
+                return True
+            time.sleep(3)
+        return False
+    finally:
+        run(['git', 'worktree', 'remove', '--force', str(temp_dir)])
+        shutil.rmtree(temp_dir, ignore_errors=True)
 
 
 def commit_and_push(message):
     run(['git', 'add', 'v0/cloud_state.json'])
     run(['git', 'add', '-A', 'apx'])
-    if subprocess.run(['git', 'diff', '--cached', '--quiet']).returncode == 0:
-        return True
-    if run(['git', 'commit', '-m', message]) != 0:
-        return False
-    for _ in range(3):
-        if run(['git', 'pull', '--rebase', 'origin', 'main']) == 0 and run(['git', 'push', 'origin', 'main']) == 0:
-            return True
-        time.sleep(4)
-    return False
+    changed = subprocess.run(['git', 'diff', '--cached', '--quiet']).returncode != 0
+    if changed:
+        if run(['git', 'commit', '-m', message]) != 0:
+            return False
+        pushed = False
+        for _ in range(3):
+            if run(['git', 'pull', '--rebase', 'origin', 'main']) == 0 and run(['git', 'push', 'origin', 'main']) == 0:
+                pushed = True
+                break
+            time.sleep(4)
+        if not pushed:
+            return False
+    return sync_pages_branch()
 
 
 def write_heartbeat(*, source_ok, source_url, source_latest, stored_draw, advanced, error=None):
@@ -72,7 +112,7 @@ def write_heartbeat(*, source_ok, source_url, source_latest, stored_draw, advanc
         'pollIntervalSeconds': INTERVAL,
         'lastError': error,
         'liveDefinition': 'A newer source draw was parsed and committed',
-        'architecture': 'two-source-minute-watcher-plus-five-minute-backup',
+        'architecture': 'same-run-main-and-gh-pages-publisher',
     }
     HEARTBEAT.write_text(json.dumps(hb, indent=2))
     commit_and_push(f"Cash Pop heartbeat {stored_draw} {now()}")
@@ -102,7 +142,7 @@ def publish(draw, source_url, source_latest):
         'pollIntervalSeconds': INTERVAL,
         'lastError': None,
         'liveDefinition': 'A newer source draw was parsed and committed',
-        'architecture': 'two-source-minute-watcher-plus-five-minute-backup',
+        'architecture': 'same-run-main-and-gh-pages-publisher',
     }
     HEARTBEAT.write_text(json.dumps(hb, indent=2))
     commit_and_push(f'Minute watcher draw {draw} {now()}')
