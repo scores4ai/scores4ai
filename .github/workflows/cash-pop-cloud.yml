@@ -7,6 +7,7 @@ on:
       - ".github/workflows/cash-pop-cloud.yml"
       - "v0/github_updater.py"
       - "v0/fresh_runner.py"
+      - "v0/robust_runner.py"
   schedule:
     - cron: "*/5 * * * *"
 
@@ -50,7 +51,7 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
 
-            python v0/fresh_runner.py
+            python v0/robust_runner.py
             status=$?
 
             if [ $status -eq 0 ]; then
