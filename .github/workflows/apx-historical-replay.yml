@@ -38,7 +38,8 @@ jobs:
           import json
           from pathlib import Path
           d=json.loads(Path('apx/replay_state.json').read_text())
-          assert d['replaySteps'] == len(d['records']) == 250
+          s=json.loads(Path('apx/replay_summary.json').read_text())
+          assert d['replaySteps'] == len(d['records']) == 250 == s['replaySteps']
           assert d['integrity']['futureDataAccess'] is False
           assert d['integrity']['oneDrawRevealedPerStep'] is True
           assert d['integrity']['predictionsFrozenBeforeReveal'] is True
@@ -50,20 +51,19 @@ jobs:
               assert row['knownThroughDraw'] < row['targetDraw']
               assert len(row['predictionFingerprint']) == 64
               assert len(row['predictions']) >= 8
-              if previous is not None:
-                  assert row['targetDraw'] > previous
+              if previous is not None: assert row['targetDraw'] > previous
               previous=row['targetDraw']
           for model in d['leaderboard']:
               assert model['tested'] == d['replaySteps']
               assert model['hits'] + model['misses'] == model['tested']
-          print({'steps':d['replaySteps'],'first':d['firstTestedDraw'],'last':d['lastTestedDraw'],'winner':d['leaderboard'][0]})
+          print(s)
           PY
 
       - name: Commit replay proof
         run: |
           git config user.name "apx-replay-bot"
           git config user.email "apx-replay-bot@users.noreply.github.com"
-          git add apx/replay_state.json
+          git add apx/replay_state.json apx/replay_summary.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "Update leakage-safe historical replay proof"
           for attempt in 1 2 3; do
