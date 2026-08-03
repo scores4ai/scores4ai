@@ -8,6 +8,7 @@ on:
       - "v0/github_updater.py"
       - "v0/fresh_runner.py"
       - "v0/robust_runner.py"
+      - "apx/engine.py"
   schedule:
     - cron: "*/5 * * * *"
 
@@ -39,7 +40,7 @@ jobs:
           pip install playwright
           playwright install --with-deps chromium
 
-      - name: Poll repeatedly and publish new draws
+      - name: Poll, rebuild APX, and publish atomically
         shell: bash
         run: |
           set +e
@@ -55,26 +56,35 @@ jobs:
             status=$?
 
             if [ $status -eq 0 ]; then
-              python - <<'PY'
+              python apx/engine.py
+              apx_status=$?
+
+              if [ $apx_status -eq 0 ]; then
+                python - <<'PY'
           import json
           from pathlib import Path
-          s=json.loads(Path('v0/cloud_state.json').read_text())
-          assert s.get('draws')
-          assert s.get('pending')
-          assert s['pending']['draw'] == s['latestDraw'] + 1
-          print('Latest', s['latestDraw'], 'Next', s['pending']['draw'], 'Updated', s.get('updatedAt'))
+          live=json.loads(Path('v0/cloud_state.json').read_text())
+          apx=json.loads(Path('apx/state.json').read_text())
+          assert live.get('draws') and live.get('pending')
+          assert live['pending']['draw'] == live['latestDraw'] + 1
+          assert apx['latestDraw'] == live['latestDraw']
+          assert apx['nextDraw'] == live['latestDraw'] + 1
+          print('Atomic update verified:', live['latestDraw'], apx['latestDraw'], apx['nextDraw'])
           PY
 
-              git add v0/cloud_state.json
-              if ! git diff --cached --quiet; then
-                git commit -m "Live Cash Pop update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-                for attempt in 1 2 3; do
-                  git pull --rebase origin main && git push origin main && break
-                  echo "Push retry $attempt"
-                  sleep 5
-                done
+                git add v0/cloud_state.json apx/state.json
+                if ! git diff --cached --quiet; then
+                  git commit -m "Live Cash Pop and APX update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+                  for attempt in 1 2 3; do
+                    git pull --rebase origin main && git push origin main && break
+                    echo "Push retry $attempt"
+                    sleep 5
+                  done
+                else
+                  echo "No new draw found on pass $pass"
+                fi
               else
-                echo "No new draw found on pass $pass"
+                echo "APX rebuild failed on pass $pass"
               fi
             else
               echo "Source fetch failed on pass $pass"
