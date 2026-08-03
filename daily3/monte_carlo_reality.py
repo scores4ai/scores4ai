@@ -7,7 +7,7 @@ ARCHIVE=Path('daily3/archive.json')
 REAL=Path('daily3/baseline_results.json')
 OUT=Path('daily3/monte_carlo_results.json')
 WARMUP=200
-SIMULATIONS=2000
+SIMULATIONS=500
 
 
 def pick(rng,weights):
@@ -25,7 +25,7 @@ def normalize(c):
 
 def evaluate(draws,seed):
     rng=random.Random(seed)
-    counts=[[Counter(row[p] for row in draws[:WARMUP]) for p in range(3)]][0]
+    counts=[Counter(row[p] for row in draws[:WARMUP]) for p in range(3)]
     models={n:{'exact':0,'positions':[0,0,0],'one':0} for n in ('uniform_random','frequency_position','last_draw')}
     prev=draws[WARMUP-1]
     for i in range(WARMUP,len(draws)):
@@ -53,7 +53,6 @@ def percentile(sorted_values,q):
 def main():
     archive=json.loads(ARCHIVE.read_text());real=json.loads(REAL.read_text())
     rows=archive['draws'];n=len(rows);tested=n-WARMUP
-    # Preserve midday/evening and position-specific marginal frequencies.
     dist={}
     for draw_type in ('midday','evening'):
         dist[draw_type]=[]
@@ -65,9 +64,7 @@ def main():
     for sim in range(SIMULATIONS):
         seed=int(hashlib.sha256(f"{archive['sha256']}:{sim}".encode()).hexdigest()[:16],16)
         rng=random.Random(seed)
-        synthetic=[]
-        for row in rows:
-            synthetic.append([pick(rng,dist[row['drawType']][p]) for p in range(3)])
+        synthetic=[[pick(rng,dist[row['drawType']][p]) for p in range(3)] for row in rows]
         result=evaluate(synthetic,seed^0xA5A5A5A5)
         best_exact.append(max(v['exact'] for v in result.values()))
         for name,v in result.items():
