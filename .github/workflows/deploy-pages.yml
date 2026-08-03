@@ -37,6 +37,7 @@ jobs:
           test -f apx/index.html
           test -f apx/evolution.html
           test -f apx/retirement.html
+          test -f apx/ledger.html
           test -f apx/state.json
 
       - name: Build site folder
@@ -48,6 +49,7 @@ jobs:
           cp apx/index.html _site/apx/index.html
           cp apx/evolution.html _site/apx/evolution.html
           cp apx/retirement.html _site/apx/retirement.html
+          cp apx/ledger.html _site/apx/ledger.html
           cp apx/state.json _site/apx/state.json
           if [ -f apx/evolution_state.json ]; then cp apx/evolution_state.json _site/apx/evolution_state.json; fi
           if [ -f apx/heartbeat.json ]; then cp apx/heartbeat.json _site/apx/heartbeat.json; fi
