@@ -1,0 +1,155 @@
+{
+  "version": "Daily 3 Monte Carlo Reality Check Phase 1",
+  "archiveSha256": "49a97dd6d3dd780b6911175047023ef8e67d769abe4a4ceea4623703a11a0859",
+  "simulations": 500,
+  "drawsPerSimulation": 12100,
+  "testedPerSimulation": 11900,
+  "syntheticRule": "Independent digits sampled from real midday/evening position-specific marginal frequencies; same replay and model-selection process applied.",
+  "integrity": {
+    "realResultsReadOnly": true,
+    "simulationSeedsDeterministic": true,
+    "futureDataAccess": false
+  },
+  "multipleModelRealityCheck": {
+    "realBestExactHits": 11,
+    "simulatedBestMedian": 15,
+    "simulatedBestP95": 20,
+    "simulatedBestP99": 22,
+    "empiricalP": 0.9780439121756487
+  },
+  "models": [
+    {
+      "model": "last_draw",
+      "real": {
+        "exactHits": 11,
+        "atLeastOnePositionHits": 3235,
+        "positionHits": [
+          1209,
+          1211,
+          1186
+        ]
+      },
+      "simulation": {
+        "exact": {
+          "median": 12,
+          "p95": 18,
+          "p99": 20,
+          "empiricalP": 0.6626746506986028
+        },
+        "one": {
+          "median": 3230,
+          "p95": 3308,
+          "p99": 3333,
+          "empiricalP": 0.45708582834331335
+        },
+        "p0": {
+          "median": 1192,
+          "p95": 1245,
+          "p99": 1273,
+          "empiricalP": 0.3093812375249501
+        },
+        "p1": {
+          "median": 1190,
+          "p95": 1241,
+          "p99": 1261,
+          "empiricalP": 0.27345309381237526
+        },
+        "p2": {
+          "median": 1190,
+          "p95": 1248,
+          "p99": 1266,
+          "empiricalP": 0.5688622754491018
+        }
+      }
+    },
+    {
+      "model": "uniform_random",
+      "real": {
+        "exactHits": 8,
+        "atLeastOnePositionHits": 3190,
+        "positionHits": [
+          1195,
+          1182,
+          1161
+        ]
+      },
+      "simulation": {
+        "exact": {
+          "median": 12,
+          "p95": 18,
+          "p99": 19,
+          "empiricalP": 0.9141716566866267
+        },
+        "one": {
+          "median": 3224,
+          "p95": 3300,
+          "p99": 3322,
+          "empiricalP": 0.7684630738522954
+        },
+        "p0": {
+          "median": 1190,
+          "p95": 1247,
+          "p99": 1269,
+          "empiricalP": 0.46107784431137727
+        },
+        "p1": {
+          "median": 1187,
+          "p95": 1247,
+          "p99": 1267,
+          "empiricalP": 0.5848303393213573
+        },
+        "p2": {
+          "median": 1189,
+          "p95": 1243,
+          "p99": 1263,
+          "empiricalP": 0.8083832335329342
+        }
+      }
+    },
+    {
+      "model": "frequency_position",
+      "real": {
+        "exactHits": 6,
+        "atLeastOnePositionHits": 3272,
+        "positionHits": [
+          1220,
+          1170,
+          1204
+        ]
+      },
+      "simulation": {
+        "exact": {
+          "median": 13,
+          "p95": 19,
+          "p99": 21,
+          "empiricalP": 0.9800399201596807
+        },
+        "one": {
+          "median": 3298,
+          "p95": 3386,
+          "p99": 3412,
+          "empiricalP": 0.6706586826347305
+        },
+        "p0": {
+          "median": 1227,
+          "p95": 1288,
+          "p99": 1305,
+          "empiricalP": 0.5748502994011976
+        },
+        "p1": {
+          "median": 1212,
+          "p95": 1271,
+          "p99": 1290,
+          "empiricalP": 0.8862275449101796
+        },
+        "p2": {
+          "median": 1216,
+          "p95": 1280,
+          "p99": 1312,
+          "empiricalP": 0.6467065868263473
+        }
+      }
+    }
+  ],
+  "resultSha256": "c7fdbb52d3902e850f81cf24505c05f47b2808b8cdc0fcced86e1aa1e5f6424d"
+}
