@@ -6,6 +6,7 @@ from pathlib import Path
 
 SOURCE=Path('v0/cloud_state.json');OUT=Path('apx/state.json');NUMBERS=range(1,16);BASELINE=5/15
 
+def utcnow(): return datetime.now(timezone.utc).isoformat()
 def norm(s):
  t=sum(s.values()) or 1;return {n:s.get(n,0)/t for n in NUMBERS}
 def frequency(seq,window=None,decay=None):
@@ -86,15 +87,35 @@ def binomial_tail(h,n,p=BASELINE):
  if n<=0:return 1.0
  logs=[math.lgamma(n+1)-math.lgamma(k+1)-math.lgamma(n-k+1)+k*math.log(p)+(n-k)*math.log1p(-p) for k in range(h,n+1)]
  mx=max(logs);return min(1.0,math.exp(mx)*sum(math.exp(x-mx) for x in logs))
-def integrity(history):
+def integrity(history,note='Exploratory walk-forward evidence; multiple-model selection is not yet corrected.'):
  n=len(history);h=sum(1 for x in history if x.get('hit5'));obs=h/n if n else 0;lo,hi=wilson(h,n);pv=binomial_tail(h,n);recent=history[-100:];previous=history[-200:-100];ra=sum(x.get('hit5',False) for x in recent)/len(recent) if recent else 0;pa=sum(x.get('hit5',False) for x in previous)/len(previous) if previous else None;delta=ra-pa if pa is not None else 0
  trend='flat' if pa is None or abs(delta)<.015 else ('improving' if delta>0 else 'declining');sig=pv<.05 and lo>BASELINE;evidence='strong' if sig and pv<.001 else ('moderate' if sig else 'insufficient')
- return {'baseline':BASELINE,'observed':obs,'excess':obs-BASELINE,'confidence95':{'low':lo,'high':hi},'pValueOneSided':pv,'independentPredictions':n,'significantAt05':sig,'evidence':evidence,'trend':trend,'recent100':ra,'previous100':pa,'trendDelta':delta,'note':'Exploratory walk-forward evidence; multiple-model selection is not yet corrected.'}
+ return {'baseline':BASELINE,'observed':obs,'excess':obs-BASELINE,'confidence95':{'low':lo,'high':hi},'pValueOneSided':pv,'independentPredictions':n,'significantAt05':sig,'evidence':evidence,'trend':trend,'recent100':ra,'previous100':pa,'trendDelta':delta,'note':note}
+def load_previous():
+ try:return json.loads(OUT.read_text())
+ except Exception:return {}
+def score_apx_live(previous,draws):
+ live=[];seen=set()
+ for row in previous.get('liveHistory',[]):
+  try:did=int(row['draw'])
+  except Exception:continue
+  if row.get('type')=='apx_live_forward' and did not in seen:
+   live.append(row);seen.add(did)
+ pending=previous.get('pendingPrediction') or {}
+ try:target=int(pending.get('draw',-1))
+ except Exception:target=-1
+ draw_map={int(x['draw']):x for x in draws}
+ if target in draw_map and target not in seen:
+  actual=int(draw_map[target]['number']);top5=[int(x) for x in pending.get('top5',[])]
+  live.append({'draw':target,'top5':top5,'actual':actual,'hit5':actual in top5,'type':'apx_live_forward','predictedAt':pending.get('predictedAt'),'scoredAt':utcnow(),'predictionFingerprint':pending.get('fingerprint'),'modelCount':pending.get('modelCount')});seen.add(target)
+ return live[-1000:]
 def main():
  src=json.loads(SOURCE.read_text());draws=src.get('draws',[])
  if len(draws)<120:raise SystemExit('Need at least 120 draws')
- history,board,top5,model_picks=train(draws);latest=max(x['draw'] for x in draws);hits=sum(x['hit5'] for x in history);live=[x for x in src.get('history',[]) if x.get('type')=='automated_future_test'];ri=integrity(history)
- feed=src.get('feedDiagnostics') or {};feed['sourceLabel']=src.get('feed','unknown');feed['sourceUrl']=src.get('source','');feed['sourceUpdatedAt']=src.get('updatedAt');feed['apxLatestDraw']=latest;feed['sourceLatestDraw']=src.get('latestDraw',latest);feed['drawGap']=max(0,int(feed['sourceLatestDraw'])-int(latest))
- out={'version':'APX Phase 1.2','updatedAt':datetime.now(timezone.utc).isoformat(),'latestDraw':latest,'nextDraw':latest+1,'top5':top5,'drawCount':len(draws),'modelCount':len(board),'leaderboard':board,'history':history[-300:],'liveHistory':live[-300:],'researchIntegrity':ri,'feedDiagnostics':feed,'stats':{'evaluated':len(history),'hits':hits,'misses':len(history)-hits,'accuracy':hits/len(history) if history else 0,'randomTop5Baseline':BASELINE,'liveEvaluated':len(live),'liveHits':sum(1 for x in live if x.get('hit5'))},'modelTop5':model_picks}
- OUT.parent.mkdir(exist_ok=True);OUT.write_text(json.dumps(out,indent=2));print(json.dumps({'latest':latest,'next':latest+1,'models':len(board),'top5':top5,'feed':feed.get('selectedSource',feed.get('sourceLabel')),'gap':feed['drawGap']}))
+ previous=load_previous();history,board,top5,model_picks=train(draws);latest=max(int(x['draw']) for x in draws);hits=sum(x['hit5'] for x in history);live=score_apx_live(previous,draws);ri=integrity(history);live_ri=integrity(live,'Only immutable APX predictions created before each live draw are counted here.')
+ feed=src.get('feedDiagnostics') or {};feed['sourceLabel']=src.get('feed','unknown');feed['sourceUrl']=src.get('source','');feed['sourceUpdatedAt']=src.get('updatedAt');feed['apxLatestDraw']=latest;feed['sourceLatestDraw']=src.get('latestDraw',latest);feed['drawGap']=max(0,int(feed['sourceLatestDraw'])-latest)
+ predicted_at=utcnow();fingerprint=f"apx-{latest+1}-"+'-'.join(map(str,top5))
+ pending={'draw':latest+1,'top5':top5,'modelTop5':model_picks,'predictedAt':predicted_at,'fingerprint':fingerprint,'modelCount':len(board),'immutable':True}
+ out={'version':'APX Phase 1.3','updatedAt':predicted_at,'latestDraw':latest,'nextDraw':latest+1,'top5':top5,'pendingPrediction':pending,'drawCount':len(draws),'modelCount':len(board),'leaderboard':board,'history':history[-300:],'liveHistory':live,'researchIntegrity':ri,'liveResearchIntegrity':live_ri,'feedDiagnostics':feed,'stats':{'evaluated':len(history),'hits':hits,'misses':len(history)-hits,'accuracy':hits/len(history) if history else 0,'randomTop5Baseline':BASELINE,'liveEvaluated':len(live),'liveHits':sum(1 for x in live if x.get('hit5')),'liveMisses':sum(1 for x in live if not x.get('hit5')),'liveAccuracy':sum(1 for x in live if x.get('hit5'))/len(live) if live else 0},'modelTop5':model_picks}
+ OUT.parent.mkdir(exist_ok=True);OUT.write_text(json.dumps(out,indent=2));print(json.dumps({'latest':latest,'next':latest+1,'models':len(board),'top5':top5,'apxLiveTests':len(live),'pendingFingerprint':fingerprint,'gap':feed['drawGap']}))
 if __name__=='__main__':main()
