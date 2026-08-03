@@ -1,6 +1,6 @@
 {
-  "version": "APX Phase 1.3",
-  "updatedAt": "2026-08-03T03:10:48.184943+00:00",
+  "version": "APX Phase 1.4",
+  "updatedAt": "2026-08-03T03:14:14.215119+00:00",
   "latestDraw": 88685,
   "nextDraw": 88686,
   "top5": [
@@ -301,7 +301,7 @@
         12
       ]
     },
-    "predictedAt": "2026-08-03T03:10:48.184943+00:00",
+    "predictedAt": "2026-08-03T03:14:14.215119+00:00",
     "fingerprint": "apx-88686-1-3-5-14-2",
     "modelCount": 40,
     "immutable": true
@@ -4995,6 +4995,222 @@
     "apxLatestDraw": 88685,
     "sourceLatestDraw": 88685,
     "drawGap": 0
+  },
+  "incubator": {
+    "isolatedFromTournament": true,
+    "activeCount": 6,
+    "graduatedCount": 0,
+    "retiredCount": 0,
+    "candidates": [
+      {
+        "name": "parity_flip_3",
+        "status": "testing",
+        "tested": 0,
+        "hits": 0,
+        "accuracy": 0,
+        "excess": -0.3333333333333333,
+        "pValue": 1.0,
+        "confidence95": {
+          "low": 0,
+          "high": 1
+        },
+        "currentTop5": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "minimumTests": 100
+      },
+      {
+        "name": "parity_flip_4",
+        "status": "testing",
+        "tested": 0,
+        "hits": 0,
+        "accuracy": 0,
+        "excess": -0.3333333333333333,
+        "pValue": 1.0,
+        "confidence95": {
+          "low": 0,
+          "high": 1
+        },
+        "currentTop5": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "minimumTests": 100
+      },
+      {
+        "name": "gap_threshold_18",
+        "status": "testing",
+        "tested": 0,
+        "hits": 0,
+        "accuracy": 0,
+        "excess": -0.3333333333333333,
+        "pValue": 1.0,
+        "confidence95": {
+          "low": 0,
+          "high": 1
+        },
+        "currentTop5": [
+          15,
+          4,
+          12,
+          13,
+          8
+        ],
+        "minimumTests": 100
+      },
+      {
+        "name": "gap_threshold_25",
+        "status": "testing",
+        "tested": 0,
+        "hits": 0,
+        "accuracy": 0,
+        "excess": -0.3333333333333333,
+        "pValue": 1.0,
+        "confidence95": {
+          "low": 0,
+          "high": 1
+        },
+        "currentTop5": [
+          15,
+          4,
+          12,
+          13,
+          1
+        ],
+        "minimumTests": 100
+      },
+      {
+        "name": "band_reversion_5",
+        "status": "testing",
+        "tested": 0,
+        "hits": 0,
+        "accuracy": 0,
+        "excess": -0.3333333333333333,
+        "pValue": 1.0,
+        "confidence95": {
+          "low": 0,
+          "high": 1
+        },
+        "currentTop5": [
+          15,
+          14,
+          13,
+          12,
+          1
+        ],
+        "minimumTests": 100
+      },
+      {
+        "name": "repeat_suppression_4",
+        "status": "testing",
+        "tested": 0,
+        "hits": 0,
+        "accuracy": 0,
+        "excess": -0.3333333333333333,
+        "pValue": 1.0,
+        "confidence95": {
+          "low": 0,
+          "high": 1
+        },
+        "currentTop5": [
+          1,
+          2,
+          4,
+          5,
+          6
+        ],
+        "minimumTests": 100
+      }
+    ],
+    "pending": [
+      {
+        "candidate": "parity_flip_3",
+        "draw": 88686,
+        "top5": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "predictedAt": "2026-08-03T03:14:14.214633+00:00",
+        "immutable": true
+      },
+      {
+        "candidate": "parity_flip_4",
+        "draw": 88686,
+        "top5": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "predictedAt": "2026-08-03T03:14:14.214633+00:00",
+        "immutable": true
+      },
+      {
+        "candidate": "gap_threshold_18",
+        "draw": 88686,
+        "top5": [
+          15,
+          4,
+          12,
+          13,
+          8
+        ],
+        "predictedAt": "2026-08-03T03:14:14.214633+00:00",
+        "immutable": true
+      },
+      {
+        "candidate": "gap_threshold_25",
+        "draw": 88686,
+        "top5": [
+          15,
+          4,
+          12,
+          13,
+          1
+        ],
+        "predictedAt": "2026-08-03T03:14:14.214633+00:00",
+        "immutable": true
+      },
+      {
+        "candidate": "band_reversion_5",
+        "draw": 88686,
+        "top5": [
+          15,
+          14,
+          13,
+          12,
+          1
+        ],
+        "predictedAt": "2026-08-03T03:14:14.214633+00:00",
+        "immutable": true
+      },
+      {
+        "candidate": "repeat_suppression_4",
+        "draw": 88686,
+        "top5": [
+          1,
+          2,
+          4,
+          5,
+          6
+        ],
+        "predictedAt": "2026-08-03T03:14:14.214633+00:00",
+        "immutable": true
+      }
+    ],
+    "history": [],
+    "rule": "Candidates never affect live APX predictions. Graduation requires at least 100 independent live tests, p<0.01, and a 95% interval above the random baseline."
   },
   "stats": {
     "evaluated": 500,
