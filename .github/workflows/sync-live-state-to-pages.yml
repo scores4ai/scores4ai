@@ -1,0 +1,57 @@
+name: Sync APX live state to Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "apx/state.json"
+      - "apx/heartbeat.json"
+      - ".github/workflows/sync-live-state-to-pages.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-apx-live-state
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Copy latest APX state into gh-pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp apx/state.json /tmp/apx-state.json
+          cp apx/heartbeat.json /tmp/apx-heartbeat.json
+
+          git fetch origin gh-pages
+          git worktree add /tmp/gh-pages origin/gh-pages
+          cd /tmp/gh-pages
+
+          mkdir -p apx
+          cp /tmp/apx-state.json apx/state.json
+          cp /tmp/apx-heartbeat.json apx/heartbeat.json
+          cp /tmp/apx-state.json state.json
+          cp /tmp/apx-heartbeat.json heartbeat.json
+          touch .nojekyll
+
+          git config user.name "cash-pop-pages-sync"
+          git config user.email "cash-pop-pages-sync@users.noreply.github.com"
+          git add apx/state.json apx/heartbeat.json state.json heartbeat.json .nojekyll
+
+          if git diff --cached --quiet; then
+            echo "Pages state already current"
+            exit 0
+          fi
+
+          git commit -m "Sync APX live state from main"
+          git push origin HEAD:gh-pages
