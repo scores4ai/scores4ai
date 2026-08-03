@@ -1,0 +1,1116 @@
+{
+  "version": "Meta Model Sandbox Phase 1",
+  "archiveSha256": "c16df9a10a560cb987c20709f43e7719cf2c470f5ce5344bd5af1531f8b544b4",
+  "warmup": 200,
+  "trainingDraws": 5000,
+  "untouchedHoldoutDraws": 3000,
+  "trainingStartDraw": 1213,
+  "trainingEndDraw": 6436,
+  "holdoutStartDraw": 6437,
+  "holdoutEndDraw": 9572,
+  "integrity": {
+    "futureDataAccess": false,
+    "policyLockedBeforeHoldout": true,
+    "holdoutUpdates": false,
+    "featuresComputedBeforeReveal": true,
+    "selectionRule": "Context-specific hit rates shrunk toward each model global training accuracy with 75 pseudo-observations."
+  },
+  "metaResult": {
+    "model": "meta_selector",
+    "tested": 3000,
+    "hits": 1023,
+    "misses": 1977,
+    "accuracy": 0.341,
+    "excessOverRandom": 0.0076666666666667105,
+    "confidence95": [
+      0.32424978414501804,
+      0.35815688974963567
+    ]
+  },
+  "bestBaseModel": {
+    "model": "markov_1",
+    "tested": 3000,
+    "hits": 1060,
+    "misses": 1940,
+    "accuracy": 0.35333333333333333,
+    "excessOverRandom": 0.020000000000000018,
+    "confidence95": [
+      0.3364259305787782,
+      0.3706158650473174
+    ]
+  },
+  "leaderboard": [
+    {
+      "model": "markov_1",
+      "tested": 3000,
+      "hits": 1060,
+      "misses": 1940,
+      "accuracy": 0.35333333333333333,
+      "excessOverRandom": 0.020000000000000018,
+      "confidence95": [
+        0.3364259305787782,
+        0.3706158650473174
+      ]
+    },
+    {
+      "model": "frequency_24",
+      "tested": 3000,
+      "hits": 1033,
+      "misses": 1967,
+      "accuracy": 0.3443333333333333,
+      "excessOverRandom": 0.01100000000000001,
+      "confidence95": [
+        0.3275393910204166,
+        0.3615254238827348
+      ]
+    },
+    {
+      "model": "frequency_all",
+      "tested": 3000,
+      "hits": 1026,
+      "misses": 1974,
+      "accuracy": 0.342,
+      "excessOverRandom": 0.008666666666666711,
+      "confidence95": [
+        0.3252365687385016,
+        0.3591675474587015
+      ]
+    },
+    {
+      "model": "cycle_8",
+      "tested": 3000,
+      "hits": 1025,
+      "misses": 1975,
+      "accuracy": 0.3416666666666667,
+      "excessOverRandom": 0.00833333333333336,
+      "confidence95": [
+        0.3249076312405698,
+        0.3588306708557834
+      ]
+    },
+    {
+      "model": "meta_selector",
+      "tested": 3000,
+      "hits": 1023,
+      "misses": 1977,
+      "accuracy": 0.341,
+      "excessOverRandom": 0.0076666666666667105,
+      "confidence95": [
+        0.32424978414501804,
+        0.35815688974963567
+      ]
+    },
+    {
+      "model": "cycle_20",
+      "tested": 3000,
+      "hits": 1020,
+      "misses": 1980,
+      "accuracy": 0.34,
+      "excessOverRandom": 0.00666666666666671,
+      "confidence95": [
+        0.32326308335098863,
+        0.3571461482411157
+      ]
+    },
+    {
+      "model": "frequency_60",
+      "tested": 3000,
+      "hits": 978,
+      "misses": 2022,
+      "accuracy": 0.326,
+      "excessOverRandom": -0.007333333333333303,
+      "confidence95": [
+        0.3094581744082383,
+        0.3429868649481751
+      ]
+    },
+    {
+      "model": "gap_longest",
+      "tested": 3000,
+      "hits": 977,
+      "misses": 2023,
+      "accuracy": 0.32566666666666666,
+      "excessOverRandom": -0.007666666666666655,
+      "confidence95": [
+        0.3091296909788403,
+        0.34264953427672334
+      ]
+    },
+    {
+      "model": "lag_vote",
+      "tested": 3000,
+      "hits": 966,
+      "misses": 2034,
+      "accuracy": 0.322,
+      "excessOverRandom": -0.011333333333333306,
+      "confidence95": [
+        0.3055170110259705,
+        0.33893825912024556
+      ]
+    }
+  ],
+  "choiceCounts": {
+    "frequency_24": 31,
+    "markov_1": 921,
+    "lag_vote": 444,
+    "cycle_8": 351,
+    "gap_longest": 707,
+    "cycle_20": 192,
+    "frequency_all": 195,
+    "frequency_60": 159
+  },
+  "learnedContexts": 56,
+  "sampleHoldoutRecords": [
+    {
+      "draw": 6437,
+      "context": [
+        "high",
+        "low",
+        "low-heavy",
+        "balanced"
+      ],
+      "chosenModel": "frequency_24",
+      "prediction": [
+        3,
+        7,
+        4,
+        6,
+        11
+      ],
+      "actual": 8,
+      "hit": false
+    },
+    {
+      "draw": 6438,
+      "context": [
+        "mid",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        7,
+        5,
+        9,
+        13,
+        8
+      ],
+      "actual": 1,
+      "hit": false
+    },
+    {
+      "draw": 6439,
+      "context": [
+        "mid",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        11,
+        8,
+        12,
+        13,
+        14
+      ],
+      "actual": 7,
+      "hit": false
+    },
+    {
+      "draw": 6440,
+      "context": [
+        "mid",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        1,
+        14,
+        15,
+        7,
+        9
+      ],
+      "actual": 8,
+      "hit": false
+    },
+    {
+      "draw": 6441,
+      "context": [
+        "mid",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        7,
+        5,
+        9,
+        13,
+        8
+      ],
+      "actual": 13,
+      "hit": true
+    },
+    {
+      "draw": 6442,
+      "context": [
+        "mid",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        10,
+        6,
+        15,
+        4,
+        7
+      ],
+      "actual": 12,
+      "hit": false
+    },
+    {
+      "draw": 6443,
+      "context": [
+        "mid",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        13,
+        11,
+        14,
+        6,
+        15
+      ],
+      "actual": 1,
+      "hit": false
+    },
+    {
+      "draw": 6444,
+      "context": [
+        "mid",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        11,
+        8,
+        12,
+        13,
+        14
+      ],
+      "actual": 10,
+      "hit": false
+    },
+    {
+      "draw": 6445,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        6,
+        8,
+        9,
+        2,
+        11
+      ],
+      "actual": 15,
+      "hit": false
+    },
+    {
+      "draw": 6446,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        15,
+        4,
+        10,
+        12,
+        3
+      ],
+      "actual": 9,
+      "hit": false
+    },
+    {
+      "draw": 6447,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        9,
+        11,
+        7,
+        2,
+        5
+      ],
+      "actual": 15,
+      "hit": false
+    },
+    {
+      "draw": 6448,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        15,
+        4,
+        10,
+        12,
+        3
+      ],
+      "actual": 2,
+      "hit": false
+    },
+    {
+      "draw": 6449,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        8,
+        15,
+        9,
+        5,
+        1
+      ],
+      "actual": 3,
+      "hit": false
+    },
+    {
+      "draw": 6450,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        2,
+        11,
+        14,
+        6,
+        3
+      ],
+      "actual": 6,
+      "hit": true
+    },
+    {
+      "draw": 6451,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        11,
+        3,
+        7,
+        10,
+        14
+      ],
+      "actual": 3,
+      "hit": true
+    },
+    {
+      "draw": 6452,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        2,
+        11,
+        6,
+        14,
+        3
+      ],
+      "actual": 6,
+      "hit": true
+    },
+    {
+      "draw": 6453,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        3,
+        11,
+        7,
+        10,
+        14
+      ],
+      "actual": 4,
+      "hit": false
+    },
+    {
+      "draw": 6454,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        6,
+        5,
+        2,
+        15,
+        10
+      ],
+      "actual": 11,
+      "hit": false
+    },
+    {
+      "draw": 6455,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        11,
+        10,
+        7,
+        8,
+        5
+      ],
+      "actual": 15,
+      "hit": false
+    },
+    {
+      "draw": 6456,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        15,
+        4,
+        10,
+        12,
+        3
+      ],
+      "actual": 14,
+      "hit": false
+    },
+    {
+      "draw": 6457,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        2,
+        14,
+        10,
+        3,
+        11
+      ],
+      "actual": 14,
+      "hit": true
+    },
+    {
+      "draw": 6458,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        15,
+        14,
+        4,
+        6,
+        1
+      ],
+      "actual": 2,
+      "hit": false
+    },
+    {
+      "draw": 6459,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        14,
+        11,
+        3,
+        9,
+        1
+      ],
+      "actual": 8,
+      "hit": false
+    },
+    {
+      "draw": 6460,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        2,
+        15,
+        14,
+        6,
+        1
+      ],
+      "actual": 14,
+      "hit": true
+    },
+    {
+      "draw": 6461,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        2,
+        8,
+        14,
+        4,
+        1
+      ],
+      "actual": 11,
+      "hit": false
+    },
+    {
+      "draw": 6462,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "markov_1",
+      "prediction": [
+        11,
+        10,
+        7,
+        8,
+        5
+      ],
+      "actual": 11,
+      "hit": true
+    },
+    {
+      "draw": 6463,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        11,
+        14,
+        2,
+        15,
+        6
+      ],
+      "actual": 4,
+      "hit": false
+    },
+    {
+      "draw": 6464,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        11,
+        8,
+        14,
+        3,
+        1
+      ],
+      "actual": 7,
+      "hit": false
+    },
+    {
+      "draw": 6465,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        14,
+        4,
+        11,
+        6,
+        1
+      ],
+      "actual": 4,
+      "hit": true
+    },
+    {
+      "draw": 6466,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        4,
+        7,
+        11,
+        2,
+        1
+      ],
+      "actual": 7,
+      "hit": true
+    },
+    {
+      "draw": 6467,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        4,
+        11,
+        7,
+        8,
+        1
+      ],
+      "actual": 1,
+      "hit": true
+    },
+    {
+      "draw": 6468,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        4,
+        7,
+        14,
+        15,
+        1
+      ],
+      "actual": 8,
+      "hit": false
+    },
+    {
+      "draw": 6469,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        7,
+        1,
+        11,
+        14,
+        2
+      ],
+      "actual": 1,
+      "hit": true
+    },
+    {
+      "draw": 6470,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        8,
+        1,
+        4,
+        11,
+        14
+      ],
+      "actual": 14,
+      "hit": true
+    },
+    {
+      "draw": 6471,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        1,
+        8,
+        7,
+        4,
+        2
+      ],
+      "actual": 9,
+      "hit": false
+    },
+    {
+      "draw": 6472,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        1,
+        14,
+        7,
+        8,
+        2
+      ],
+      "actual": 2,
+      "hit": true
+    },
+    {
+      "draw": 6473,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        14,
+        9,
+        8,
+        4,
+        1
+      ],
+      "actual": 8,
+      "hit": true
+    },
+    {
+      "draw": 6474,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        2,
+        9,
+        1,
+        7,
+        11
+      ],
+      "actual": 3,
+      "hit": false
+    },
+    {
+      "draw": 6475,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        8,
+        2,
+        14,
+        1,
+        11
+      ],
+      "actual": 15,
+      "hit": false
+    },
+    {
+      "draw": 6476,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        8,
+        3,
+        9,
+        4,
+        1
+      ],
+      "actual": 5,
+      "hit": false
+    },
+    {
+      "draw": 6477,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        15,
+        3,
+        2,
+        1,
+        7
+      ],
+      "actual": 4,
+      "hit": false
+    },
+    {
+      "draw": 6478,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        5,
+        15,
+        8,
+        14,
+        4
+      ],
+      "actual": 13,
+      "hit": false
+    },
+    {
+      "draw": 6479,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        4,
+        5,
+        3,
+        9,
+        7
+      ],
+      "actual": 8,
+      "hit": false
+    },
+    {
+      "draw": 6480,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        13,
+        4,
+        15,
+        2,
+        1
+      ],
+      "actual": 10,
+      "hit": false
+    },
+    {
+      "draw": 6481,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        8,
+        13,
+        5,
+        1,
+        2
+      ],
+      "actual": 14,
+      "hit": false
+    },
+    {
+      "draw": 6482,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        10,
+        8,
+        4,
+        3,
+        1
+      ],
+      "actual": 10,
+      "hit": true
+    },
+    {
+      "draw": 6483,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        14,
+        10,
+        13,
+        15,
+        1
+      ],
+      "actual": 6,
+      "hit": false
+    },
+    {
+      "draw": 6484,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        10,
+        14,
+        8,
+        5,
+        9
+      ],
+      "actual": 7,
+      "hit": false
+    },
+    {
+      "draw": 6485,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "lag_vote",
+      "prediction": [
+        10,
+        6,
+        4,
+        2,
+        1
+      ],
+      "actual": 7,
+      "hit": false
+    },
+    {
+      "draw": 6486,
+      "context": [
+        "high",
+        "high",
+        "balanced",
+        "balanced"
+      ],
+      "chosenModel": "cycle_8",
+      "prediction": [
+        14,
+        1,
+        4,
+        2,
+        5
+      ],
+      "actual": 8,
+      "hit": false
+    }
+  ],
+  "resultSha256": "314af0f479f046eccd5d738d33fd97aaceb455fad35323d7b1f235dfcf695553"
+}
