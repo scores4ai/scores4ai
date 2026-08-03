@@ -1,15 +1,17 @@
 {
-  "updater": "minute-watcher",
-  "lastAttemptAt": "2026-08-03T16:21:54.098617+00:00",
-  "lastSuccessAt": "2026-08-03T16:21:54.098630+00:00",
+  "updater": "backup",
+  "pass": 1,
+  "lastAttemptAt": "2026-08-03T17:48:34.430252+00:00",
+  "lastSuccessAt": "2026-08-03T17:48:34.430252+00:00",
   "success": true,
   "sourceSuccess": true,
   "apxSuccess": true,
-  "evolutionSuccess": true,
   "retirementSuccess": true,
+  "evolutionSuccess": true,
   "ledgerSuccess": true,
-  "latestDraw": 88778,
+  "researchHealthy": true,
+  "latestDraw": 88790,
   "consecutiveFailures": 0,
-  "pollIntervalSeconds": 60,
-  "architecture": "persistent-minute-watcher-plus-five-minute-backup"
+  "scheduledIntervalMinutes": 5,
+  "architecture": "backup-live-core-plus-permanent-draw-ledger"
 }
