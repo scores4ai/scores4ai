@@ -1,0 +1,2810 @@
+{
+  "version": "Weighted Meta Ensemble Phase 1",
+  "archiveSha256": "c16df9a10a560cb987c20709f43e7719cf2c470f5ce5344bd5af1531f8b544b4",
+  "warmup": 200,
+  "trainingDraws": 5000,
+  "skippedPriorHoldoutDraws": 3000,
+  "newUntouchedTestDraws": 3000,
+  "trainingStartDraw": 1213,
+  "trainingEndDraw": 6436,
+  "testStartDraw": 9573,
+  "testEndDraw": 12704,
+  "integrity": {
+    "futureDataAccess": false,
+    "policyLockedBeforeTest": true,
+    "testUpdates": false,
+    "priorSelectorHoldoutExcluded": true,
+    "featuresComputedBeforeReveal": true,
+    "predictionFingerprints": true,
+    "weightRule": "Context hit rates shrunk by 100 observations, softmax temperature 35.0, then rank-weighted number voting."
+  },
+  "ensembleResult": {
+    "model": "weighted_meta_ensemble",
+    "tested": 3000,
+    "hits": 1056,
+    "misses": 1944,
+    "accuracy": 0.352,
+    "excessOverRandom": 0.018666666666666665,
+    "confidence95": [
+      0.3351089856020663,
+      0.36926955362063013
+    ]
+  },
+  "bestBaseModel": {
+    "model": "cycle_20",
+    "tested": 3000,
+    "hits": 1062,
+    "misses": 1938,
+    "accuracy": 0.354,
+    "excessOverRandom": 0.020666666666666667,
+    "confidence95": [
+      0.3370844575817566,
+      0.3712889662460385
+    ]
+  },
+  "beatBestBase": false,
+  "leaderboard": [
+    {
+      "model": "cycle_20",
+      "tested": 3000,
+      "hits": 1062,
+      "misses": 1938,
+      "accuracy": 0.354,
+      "excessOverRandom": 0.020666666666666667,
+      "confidence95": [
+        0.3370844575817566,
+        0.3712889662460385
+      ]
+    },
+    {
+      "model": "weighted_meta_ensemble",
+      "tested": 3000,
+      "hits": 1056,
+      "misses": 1944,
+      "accuracy": 0.352,
+      "excessOverRandom": 0.018666666666666665,
+      "confidence95": [
+        0.3351089856020663,
+        0.36926955362063013
+      ]
+    },
+    {
+      "model": "cycle_8",
+      "tested": 3000,
+      "hits": 1023,
+      "misses": 1977,
+      "accuracy": 0.341,
+      "excessOverRandom": 0.0076666666666667105,
+      "confidence95": [
+        0.32424978414501804,
+        0.35815688974963567
+      ]
+    },
+    {
+      "model": "gap_longest",
+      "tested": 3000,
+      "hits": 1006,
+      "misses": 1994,
+      "accuracy": 0.3353333333333333,
+      "excessOverRandom": 0.0020000000000000018,
+      "confidence95": [
+        0.31865959295294644,
+        0.3524282412272609
+      ]
+    },
+    {
+      "model": "frequency_24",
+      "tested": 3000,
+      "hits": 1003,
+      "misses": 1997,
+      "accuracy": 0.3343333333333333,
+      "excessOverRandom": 0.0010000000000000009,
+      "confidence95": [
+        0.3176733704462714,
+        0.35141702143138653
+      ]
+    },
+    {
+      "model": "markov_1",
+      "tested": 3000,
+      "hits": 1002,
+      "misses": 1998,
+      "accuracy": 0.334,
+      "excessOverRandom": 0.0006666666666667043,
+      "confidence95": [
+        0.317344648495375,
+        0.3510799292814333
+      ]
+    },
+    {
+      "model": "frequency_all",
+      "tested": 3000,
+      "hits": 996,
+      "misses": 2004,
+      "accuracy": 0.332,
+      "excessOverRandom": -0.0013333333333332975,
+      "confidence95": [
+        0.315372515572502,
+        0.3490571775992075
+      ]
+    },
+    {
+      "model": "frequency_60",
+      "tested": 3000,
+      "hits": 992,
+      "misses": 2008,
+      "accuracy": 0.33066666666666666,
+      "excessOverRandom": -0.0026666666666666505,
+      "confidence95": [
+        0.31405795013023285,
+        0.3477084866380775
+      ]
+    },
+    {
+      "model": "lag_vote",
+      "tested": 3000,
+      "hits": 985,
+      "misses": 2015,
+      "accuracy": 0.3283333333333333,
+      "excessOverRandom": -0.0050000000000000044,
+      "confidence95": [
+        0.31175782762634124,
+        0.3453479104360206
+      ]
+    }
+  ],
+  "averageModelWeights": {
+    "cycle_8": 0.1481540534982399,
+    "markov_1": 0.15898953046637865,
+    "frequency_all": 0.1117436575706205,
+    "gap_longest": 0.16301610908061692,
+    "lag_vote": 0.12141052037266423,
+    "frequency_24": 0.09345019726389171,
+    "cycle_20": 0.12158567812189208,
+    "frequency_60": 0.08165025362568944
+  },
+  "sampleTestRecords": [
+    {
+      "draw": 9573,
+      "knownThrough": 9572,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "even-heavy"
+      ],
+      "weights": {
+        "cycle_8": 0.0870073736205384,
+        "markov_1": 0.04799023410792285,
+        "frequency_all": 0.20037204486359347,
+        "gap_longest": 0.0820790543264853,
+        "lag_vote": 0.07304406150552929,
+        "frequency_24": 0.1301340631052778,
+        "cycle_20": 0.2827146705809122,
+        "frequency_60": 0.09665849788974071
+      },
+      "predictions": {
+        "cycle_8": [
+          8,
+          1,
+          10,
+          6,
+          4
+        ],
+        "markov_1": [
+          6,
+          13,
+          11,
+          14,
+          12
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          3,
+          15,
+          2,
+          1
+        ],
+        "lag_vote": [
+          10,
+          4,
+          11,
+          12,
+          7
+        ],
+        "frequency_24": [
+          4,
+          12,
+          2,
+          8,
+          9
+        ],
+        "cycle_20": [
+          9,
+          2,
+          1,
+          4,
+          11
+        ],
+        "frequency_60": [
+          10,
+          3,
+          4,
+          12,
+          14
+        ]
+      },
+      "ensemble": [
+        4,
+        11,
+        2,
+        10,
+        1
+      ],
+      "actual": 3,
+      "hit": false,
+      "fingerprint": "487cc5c4f20a70a76c16acf73b5d474592de6d7bbc94f453a21e4c7ed37661c8"
+    },
+    {
+      "draw": 9574,
+      "knownThrough": 9573,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12062780092979118,
+        "markov_1": 0.24474562012291515,
+        "frequency_all": 0.05900925147573135,
+        "gap_longest": 0.1815503706315081,
+        "lag_vote": 0.10822986361272145,
+        "frequency_24": 0.0774546580291813,
+        "cycle_20": 0.044398360818013384,
+        "frequency_60": 0.16398407438013818
+      },
+      "predictions": {
+        "cycle_8": [
+          14,
+          2,
+          5,
+          8,
+          15
+        ],
+        "markov_1": [
+          3,
+          11,
+          2,
+          6,
+          9
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          15,
+          2,
+          1,
+          7
+        ],
+        "lag_vote": [
+          10,
+          12,
+          9,
+          4,
+          1
+        ],
+        "frequency_24": [
+          4,
+          12,
+          2,
+          8,
+          10
+        ],
+        "cycle_20": [
+          9,
+          5,
+          7,
+          10,
+          12
+        ],
+        "frequency_60": [
+          10,
+          3,
+          4,
+          12,
+          14
+        ]
+      },
+      "ensemble": [
+        2,
+        10,
+        3,
+        6,
+        12
+      ],
+      "actual": 9,
+      "hit": false,
+      "fingerprint": "1e9a92dbb7cd7225eac8065553633a6bb7aea52002edfb8f7a16c0e11f77e0df"
+    },
+    {
+      "draw": 9575,
+      "knownThrough": 9574,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12062780092979118,
+        "markov_1": 0.24474562012291515,
+        "frequency_all": 0.05900925147573135,
+        "gap_longest": 0.1815503706315081,
+        "lag_vote": 0.10822986361272145,
+        "frequency_24": 0.0774546580291813,
+        "cycle_20": 0.044398360818013384,
+        "frequency_60": 0.16398407438013818
+      },
+      "predictions": {
+        "cycle_8": [
+          10,
+          15,
+          4,
+          7,
+          3
+        ],
+        "markov_1": [
+          9,
+          11,
+          3,
+          2,
+          7
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          15,
+          2,
+          1,
+          7
+        ],
+        "lag_vote": [
+          3,
+          12,
+          4,
+          13,
+          14
+        ],
+        "frequency_24": [
+          4,
+          12,
+          2,
+          8,
+          9
+        ],
+        "cycle_20": [
+          5,
+          14,
+          7,
+          4,
+          1
+        ],
+        "frequency_60": [
+          3,
+          10,
+          4,
+          12,
+          14
+        ]
+      },
+      "ensemble": [
+        3,
+        7,
+        4,
+        2,
+        10
+      ],
+      "actual": 8,
+      "hit": false,
+      "fingerprint": "0aca7a7ac3f355265f51fbd568e1b071f36569a74eb5831fe4f1f6206d6e7724"
+    },
+    {
+      "draw": 9576,
+      "knownThrough": 9575,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12062780092979118,
+        "markov_1": 0.24474562012291515,
+        "frequency_all": 0.05900925147573135,
+        "gap_longest": 0.1815503706315081,
+        "lag_vote": 0.10822986361272145,
+        "frequency_24": 0.0774546580291813,
+        "cycle_20": 0.044398360818013384,
+        "frequency_60": 0.16398407438013818
+      },
+      "predictions": {
+        "cycle_8": [
+          3,
+          11,
+          12,
+          7,
+          15
+        ],
+        "markov_1": [
+          7,
+          14,
+          5,
+          10,
+          11
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          15,
+          2,
+          1,
+          7
+        ],
+        "lag_vote": [
+          9,
+          3,
+          10,
+          11,
+          8
+        ],
+        "frequency_24": [
+          4,
+          8,
+          2,
+          9,
+          10
+        ],
+        "cycle_20": [
+          7,
+          11,
+          10,
+          5,
+          12
+        ],
+        "frequency_60": [
+          3,
+          10,
+          4,
+          12,
+          14
+        ]
+      },
+      "ensemble": [
+        10,
+        7,
+        11,
+        14,
+        3
+      ],
+      "actual": 3,
+      "hit": true,
+      "fingerprint": "312c0b7650b248976d5539429ae33806fa7c4f02bf646aceaf4481081753282c"
+    },
+    {
+      "draw": 9577,
+      "knownThrough": 9576,
+      "context": [
+        "mid",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.11425303248628818,
+        "markov_1": 0.22065326940323518,
+        "frequency_all": 0.08149368810957695,
+        "gap_longest": 0.19592425859940735,
+        "lag_vote": 0.11054358817649398,
+        "frequency_24": 0.079370045646496,
+        "cycle_20": 0.16831851032344144,
+        "frequency_60": 0.029443607255060848
+      },
+      "predictions": {
+        "cycle_8": [
+          11,
+          15,
+          9,
+          7,
+          12
+        ],
+        "markov_1": [
+          3,
+          11,
+          2,
+          6,
+          9
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          15,
+          2,
+          1,
+          7
+        ],
+        "lag_vote": [
+          9,
+          8,
+          12,
+          5,
+          1
+        ],
+        "frequency_24": [
+          4,
+          8,
+          2,
+          3,
+          9
+        ],
+        "cycle_20": [
+          5,
+          8,
+          11,
+          14,
+          12
+        ],
+        "frequency_60": [
+          3,
+          10,
+          4,
+          12,
+          14
+        ]
+      },
+      "ensemble": [
+        11,
+        9,
+        2,
+        6,
+        15
+      ],
+      "actual": 2,
+      "hit": true,
+      "fingerprint": "22b771bb0b6b894c9ee8a0782a4cc45884ba74602595b79c61cc233e45c0e647"
+    },
+    {
+      "draw": 9578,
+      "knownThrough": 9577,
+      "context": [
+        "mid",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.11425303248628818,
+        "markov_1": 0.22065326940323518,
+        "frequency_all": 0.08149368810957695,
+        "gap_longest": 0.19592425859940735,
+        "lag_vote": 0.11054358817649398,
+        "frequency_24": 0.079370045646496,
+        "cycle_20": 0.16831851032344144,
+        "frequency_60": 0.029443607255060848
+      },
+      "predictions": {
+        "cycle_8": [
+          9,
+          14,
+          5,
+          6,
+          12
+        ],
+        "markov_1": [
+          5,
+          15,
+          8,
+          1,
+          3
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          15,
+          1,
+          7,
+          14
+        ],
+        "lag_vote": [
+          3,
+          8,
+          4,
+          12,
+          1
+        ],
+        "frequency_24": [
+          4,
+          8,
+          2,
+          3,
+          9
+        ],
+        "cycle_20": [
+          14,
+          5,
+          13,
+          8,
+          4
+        ],
+        "frequency_60": [
+          3,
+          10,
+          4,
+          12,
+          14
+        ]
+      },
+      "ensemble": [
+        14,
+        8,
+        5,
+        15,
+        1
+      ],
+      "actual": 7,
+      "hit": false,
+      "fingerprint": "0c3b72f9cd14465d7d5426a6267dfd74cf5634c2697e064557fd3a59140cce30"
+    },
+    {
+      "draw": 9579,
+      "knownThrough": 9578,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12062780092979118,
+        "markov_1": 0.24474562012291515,
+        "frequency_all": 0.05900925147573135,
+        "gap_longest": 0.1815503706315081,
+        "lag_vote": 0.10822986361272145,
+        "frequency_24": 0.0774546580291813,
+        "cycle_20": 0.044398360818013384,
+        "frequency_60": 0.16398407438013818
+      },
+      "predictions": {
+        "cycle_8": [
+          11,
+          15,
+          10,
+          6,
+          7
+        ],
+        "markov_1": [
+          1,
+          7,
+          14,
+          5,
+          15
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          15,
+          1,
+          14,
+          5
+        ],
+        "lag_vote": [
+          2,
+          3,
+          9,
+          10,
+          4
+        ],
+        "frequency_24": [
+          4,
+          8,
+          3,
+          7,
+          9
+        ],
+        "cycle_20": [
+          10,
+          4,
+          9,
+          15,
+          2
+        ],
+        "frequency_60": [
+          3,
+          10,
+          4,
+          12,
+          14
+        ]
+      },
+      "ensemble": [
+        15,
+        14,
+        10,
+        7,
+        1
+      ],
+      "actual": 1,
+      "hit": true,
+      "fingerprint": "a985a91b2bb1e3c26308c4a130021d401535e1b16e6c0edf3a99ad46c0b4c80b"
+    },
+    {
+      "draw": 9580,
+      "knownThrough": 9579,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12062780092979118,
+        "markov_1": 0.24474562012291515,
+        "frequency_all": 0.05900925147573135,
+        "gap_longest": 0.1815503706315081,
+        "lag_vote": 0.10822986361272145,
+        "frequency_24": 0.0774546580291813,
+        "cycle_20": 0.044398360818013384,
+        "frequency_60": 0.16398407438013818
+      },
+      "predictions": {
+        "cycle_8": [
+          10,
+          11,
+          6,
+          9,
+          14
+        ],
+        "markov_1": [
+          13,
+          12,
+          14,
+          8,
+          15
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          15,
+          14,
+          5,
+          13
+        ],
+        "lag_vote": [
+          7,
+          2,
+          8,
+          12,
+          13
+        ],
+        "frequency_24": [
+          4,
+          8,
+          3,
+          7,
+          9
+        ],
+        "cycle_20": [
+          8,
+          15,
+          7,
+          14,
+          3
+        ],
+        "frequency_60": [
+          10,
+          3,
+          4,
+          12,
+          14
+        ]
+      },
+      "ensemble": [
+        14,
+        13,
+        12,
+        15,
+        8
+      ],
+      "actual": 11,
+      "hit": false,
+      "fingerprint": "144a4e61d8bd11cc25c0d60b06768fb36e2ead44d43d6d9fdb34b6c888512167"
+    },
+    {
+      "draw": 9581,
+      "knownThrough": 9580,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12062780092979118,
+        "markov_1": 0.24474562012291515,
+        "frequency_all": 0.05900925147573135,
+        "gap_longest": 0.1815503706315081,
+        "lag_vote": 0.10822986361272145,
+        "frequency_24": 0.0774546580291813,
+        "cycle_20": 0.044398360818013384,
+        "frequency_60": 0.16398407438013818
+      },
+      "predictions": {
+        "cycle_8": [
+          8,
+          1,
+          10,
+          6,
+          4
+        ],
+        "markov_1": [
+          11,
+          10,
+          7,
+          8,
+          4
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          15,
+          14,
+          5,
+          13
+        ],
+        "lag_vote": [
+          3,
+          1,
+          7,
+          11,
+          2
+        ],
+        "frequency_24": [
+          8,
+          3,
+          4,
+          7,
+          9
+        ],
+        "cycle_20": [
+          6,
+          8,
+          3,
+          12,
+          10
+        ],
+        "frequency_60": [
+          3,
+          4,
+          10,
+          12,
+          14
+        ]
+      },
+      "ensemble": [
+        10,
+        4,
+        8,
+        7,
+        11
+      ],
+      "actual": 11,
+      "hit": true,
+      "fingerprint": "48478393e65c6b0ac627c604f016efc1be923a8ada0095a5ea10111efab68a23"
+    },
+    {
+      "draw": 9582,
+      "knownThrough": 9581,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.11612493372951661,
+        "markov_1": 0.08335334424387345,
+        "frequency_all": 0.1008748697618481,
+        "gap_longest": 0.10731028728480524,
+        "lag_vote": 0.3648255345286298,
+        "frequency_24": 0.07034186538510569,
+        "cycle_20": 0.09557918224519299,
+        "frequency_60": 0.06158998282102816
+      },
+      "predictions": {
+        "cycle_8": [
+          14,
+          2,
+          5,
+          8,
+          15
+        ],
+        "markov_1": [
+          11,
+          10,
+          7,
+          8,
+          4
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          15,
+          14,
+          5,
+          13
+        ],
+        "lag_vote": [
+          11,
+          1,
+          9,
+          2,
+          3
+        ],
+        "frequency_24": [
+          8,
+          11,
+          3,
+          4,
+          7
+        ],
+        "cycle_20": [
+          11,
+          14,
+          5,
+          3,
+          2
+        ],
+        "frequency_60": [
+          3,
+          4,
+          10,
+          12,
+          14
+        ]
+      },
+      "ensemble": [
+        11,
+        2,
+        3,
+        14,
+        1
+      ],
+      "actual": 7,
+      "hit": false,
+      "fingerprint": "3c4da0aafbb0017f091896f081d59109a3878f21d2de293d150f5cbce2f67d5f"
+    },
+    {
+      "draw": 9583,
+      "knownThrough": 9582,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.11612493372951661,
+        "markov_1": 0.08335334424387345,
+        "frequency_all": 0.1008748697618481,
+        "gap_longest": 0.10731028728480524,
+        "lag_vote": 0.3648255345286298,
+        "frequency_24": 0.07034186538510569,
+        "cycle_20": 0.09557918224519299,
+        "frequency_60": 0.06158998282102816
+      },
+      "predictions": {
+        "cycle_8": [
+          10,
+          15,
+          4,
+          7,
+          3
+        ],
+        "markov_1": [
+          1,
+          7,
+          14,
+          5,
+          15
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          15,
+          14,
+          5,
+          13
+        ],
+        "lag_vote": [
+          11,
+          7,
+          8,
+          4,
+          1
+        ],
+        "frequency_24": [
+          7,
+          11,
+          3,
+          4,
+          8
+        ],
+        "cycle_20": [
+          11,
+          15,
+          9,
+          7,
+          10
+        ],
+        "frequency_60": [
+          3,
+          4,
+          10,
+          12,
+          7
+        ]
+      },
+      "ensemble": [
+        7,
+        11,
+        4,
+        15,
+        8
+      ],
+      "actual": 11,
+      "hit": true,
+      "fingerprint": "ef038ec0dc45ae956b8ead59f4201b619314e5237a571a59b3e97675302474ad"
+    },
+    {
+      "draw": 9584,
+      "knownThrough": 9583,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12062780092979118,
+        "markov_1": 0.24474562012291515,
+        "frequency_all": 0.05900925147573135,
+        "gap_longest": 0.1815503706315081,
+        "lag_vote": 0.10822986361272145,
+        "frequency_24": 0.0774546580291813,
+        "cycle_20": 0.044398360818013384,
+        "frequency_60": 0.16398407438013818
+      },
+      "predictions": {
+        "cycle_8": [
+          3,
+          11,
+          12,
+          7,
+          15
+        ],
+        "markov_1": [
+          11,
+          10,
+          7,
+          8,
+          4
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          15,
+          14,
+          5,
+          13
+        ],
+        "lag_vote": [
+          7,
+          11,
+          1,
+          3,
+          10
+        ],
+        "frequency_24": [
+          11,
+          7,
+          3,
+          4,
+          8
+        ],
+        "cycle_20": [
+          4,
+          11,
+          9,
+          10,
+          3
+        ],
+        "frequency_60": [
+          3,
+          4,
+          12,
+          7,
+          10
+        ]
+      },
+      "ensemble": [
+        7,
+        11,
+        10,
+        3,
+        4
+      ],
+      "actual": 15,
+      "hit": false,
+      "fingerprint": "d5965121c4a615ba539dc0dfab4519ca1d7ee5afdb5565a2c6f5f2570129d2c1"
+    },
+    {
+      "draw": 9585,
+      "knownThrough": 9584,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12062780092979118,
+        "markov_1": 0.24474562012291515,
+        "frequency_all": 0.05900925147573135,
+        "gap_longest": 0.1815503706315081,
+        "lag_vote": 0.10822986361272145,
+        "frequency_24": 0.0774546580291813,
+        "cycle_20": 0.044398360818013384,
+        "frequency_60": 0.16398407438013818
+      },
+      "predictions": {
+        "cycle_8": [
+          11,
+          15,
+          9,
+          7,
+          12
+        ],
+        "markov_1": [
+          12,
+          15,
+          4,
+          10,
+          11
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          14,
+          5,
+          13,
+          4
+        ],
+        "lag_vote": [
+          11,
+          7,
+          2,
+          12,
+          1
+        ],
+        "frequency_24": [
+          11,
+          3,
+          4,
+          7,
+          8
+        ],
+        "cycle_20": [
+          7,
+          6,
+          11,
+          10,
+          9
+        ],
+        "frequency_60": [
+          3,
+          4,
+          12,
+          10,
+          14
+        ]
+      },
+      "ensemble": [
+        11,
+        4,
+        12,
+        10,
+        15
+      ],
+      "actual": 8,
+      "hit": false,
+      "fingerprint": "77a3acfa3c6e8d3662e75c5a4bd170d62cf1f57892be120608cbddf990d85d47"
+    },
+    {
+      "draw": 9586,
+      "knownThrough": 9585,
+      "context": [
+        "high",
+        "low",
+        "high-heavy",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.16211657999385842,
+        "markov_1": 0.048452928806822525,
+        "frequency_all": 0.3909507626768264,
+        "gap_longest": 0.1164958459598496,
+        "lag_vote": 0.1721622902663673,
+        "frequency_24": 0.032886885930824505,
+        "cycle_20": 0.017135683864622154,
+        "frequency_60": 0.05979902250082914
+      },
+      "predictions": {
+        "cycle_8": [
+          9,
+          14,
+          5,
+          6,
+          12
+        ],
+        "markov_1": [
+          7,
+          14,
+          5,
+          10,
+          11
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          14,
+          5,
+          13,
+          4
+        ],
+        "lag_vote": [
+          11,
+          15,
+          7,
+          3,
+          1
+        ],
+        "frequency_24": [
+          11,
+          8,
+          3,
+          4,
+          7
+        ],
+        "cycle_20": [
+          8,
+          14,
+          15,
+          2,
+          11
+        ],
+        "frequency_60": [
+          3,
+          4,
+          12,
+          8,
+          10
+        ]
+      },
+      "ensemble": [
+        14,
+        11,
+        7,
+        15,
+        10
+      ],
+      "actual": 5,
+      "hit": false,
+      "fingerprint": "9cefb7623d28654a9fa775443e410432ab41b23b5004add1c423934ebfcf652b"
+    },
+    {
+      "draw": 9587,
+      "knownThrough": 9586,
+      "context": [
+        "high",
+        "low",
+        "high-heavy",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.16211657999385842,
+        "markov_1": 0.048452928806822525,
+        "frequency_all": 0.3909507626768264,
+        "gap_longest": 0.1164958459598496,
+        "lag_vote": 0.1721622902663673,
+        "frequency_24": 0.032886885930824505,
+        "cycle_20": 0.017135683864622154,
+        "frequency_60": 0.05979902250082914
+      },
+      "predictions": {
+        "cycle_8": [
+          11,
+          15,
+          10,
+          6,
+          7
+        ],
+        "markov_1": [
+          10,
+          7,
+          4,
+          12,
+          2
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          14,
+          13,
+          4,
+          10
+        ],
+        "lag_vote": [
+          8,
+          15,
+          7,
+          1,
+          9
+        ],
+        "frequency_24": [
+          11,
+          8,
+          3,
+          4,
+          5
+        ],
+        "cycle_20": [
+          10,
+          15,
+          3,
+          4,
+          7
+        ],
+        "frequency_60": [
+          3,
+          4,
+          12,
+          8,
+          10
+        ]
+      },
+      "ensemble": [
+        10,
+        7,
+        15,
+        11,
+        14
+      ],
+      "actual": 7,
+      "hit": true,
+      "fingerprint": "346efdc5c73beb4a6eafe9905d81315efb3ba113b8a4d21a36845fa37e260a28"
+    },
+    {
+      "draw": 9588,
+      "knownThrough": 9587,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12062780092979118,
+        "markov_1": 0.24474562012291515,
+        "frequency_all": 0.05900925147573135,
+        "gap_longest": 0.1815503706315081,
+        "lag_vote": 0.10822986361272145,
+        "frequency_24": 0.0774546580291813,
+        "cycle_20": 0.044398360818013384,
+        "frequency_60": 0.16398407438013818
+      },
+      "predictions": {
+        "cycle_8": [
+          10,
+          11,
+          6,
+          9,
+          14
+        ],
+        "markov_1": [
+          1,
+          7,
+          14,
+          5,
+          15
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          14,
+          13,
+          4,
+          10
+        ],
+        "lag_vote": [
+          8,
+          11,
+          5,
+          1,
+          2
+        ],
+        "frequency_24": [
+          11,
+          7,
+          3,
+          4,
+          5
+        ],
+        "cycle_20": [
+          2,
+          9,
+          3,
+          11,
+          6
+        ],
+        "frequency_60": [
+          3,
+          4,
+          12,
+          7,
+          8
+        ]
+      },
+      "ensemble": [
+        14,
+        7,
+        11,
+        4,
+        5
+      ],
+      "actual": 4,
+      "hit": true,
+      "fingerprint": "1053780b421d5674bfa8f99fd6d8304d76b349d42b5b391457322d0c316b866a"
+    },
+    {
+      "draw": 9589,
+      "knownThrough": 9588,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12062780092979118,
+        "markov_1": 0.24474562012291515,
+        "frequency_all": 0.05900925147573135,
+        "gap_longest": 0.1815503706315081,
+        "lag_vote": 0.10822986361272145,
+        "frequency_24": 0.0774546580291813,
+        "cycle_20": 0.044398360818013384,
+        "frequency_60": 0.16398407438013818
+      },
+      "predictions": {
+        "cycle_8": [
+          8,
+          1,
+          10,
+          6,
+          4
+        ],
+        "markov_1": [
+          6,
+          15,
+          5,
+          4,
+          11
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          14,
+          13,
+          10,
+          12
+        ],
+        "lag_vote": [
+          7,
+          5,
+          15,
+          11,
+          3
+        ],
+        "frequency_24": [
+          11,
+          4,
+          7,
+          3,
+          8
+        ],
+        "cycle_20": [
+          1,
+          4,
+          9,
+          8,
+          15
+        ],
+        "frequency_60": [
+          4,
+          3,
+          7,
+          8,
+          12
+        ]
+      },
+      "ensemble": [
+        4,
+        6,
+        11,
+        15,
+        7
+      ],
+      "actual": 15,
+      "hit": true,
+      "fingerprint": "9a4683c409344bdecf68cf9d96d0e28c94416b88b0b0b73ad4d96e5a01d1cad6"
+    },
+    {
+      "draw": 9590,
+      "knownThrough": 9589,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12062780092979118,
+        "markov_1": 0.24474562012291515,
+        "frequency_all": 0.05900925147573135,
+        "gap_longest": 0.1815503706315081,
+        "lag_vote": 0.10822986361272145,
+        "frequency_24": 0.0774546580291813,
+        "cycle_20": 0.044398360818013384,
+        "frequency_60": 0.16398407438013818
+      },
+      "predictions": {
+        "cycle_8": [
+          14,
+          2,
+          5,
+          8,
+          15
+        ],
+        "markov_1": [
+          12,
+          15,
+          4,
+          10,
+          11
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          14,
+          13,
+          10,
+          12
+        ],
+        "lag_vote": [
+          7,
+          4,
+          8,
+          2,
+          1
+        ],
+        "frequency_24": [
+          11,
+          4,
+          7,
+          3,
+          8
+        ],
+        "cycle_20": [
+          6,
+          2,
+          13,
+          14,
+          15
+        ],
+        "frequency_60": [
+          4,
+          3,
+          7,
+          8,
+          12
+        ]
+      },
+      "ensemble": [
+        4,
+        12,
+        10,
+        15,
+        8
+      ],
+      "actual": 2,
+      "hit": false,
+      "fingerprint": "4fa687858bff18267a45fa2ffeb41bd3e3875199a06ed0c6795419ee55b5a539"
+    },
+    {
+      "draw": 9591,
+      "knownThrough": 9590,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12062780092979118,
+        "markov_1": 0.24474562012291515,
+        "frequency_all": 0.05900925147573135,
+        "gap_longest": 0.1815503706315081,
+        "lag_vote": 0.10822986361272145,
+        "frequency_24": 0.0774546580291813,
+        "cycle_20": 0.044398360818013384,
+        "frequency_60": 0.16398407438013818
+      },
+      "predictions": {
+        "cycle_8": [
+          10,
+          15,
+          4,
+          7,
+          3
+        ],
+        "markov_1": [
+          5,
+          15,
+          8,
+          1,
+          3
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          14,
+          13,
+          10,
+          12
+        ],
+        "lag_vote": [
+          15,
+          4,
+          5,
+          11,
+          7
+        ],
+        "frequency_24": [
+          11,
+          7,
+          2,
+          3,
+          4
+        ],
+        "cycle_20": [
+          10,
+          15,
+          3,
+          11,
+          7
+        ],
+        "frequency_60": [
+          4,
+          3,
+          2,
+          7,
+          8
+        ]
+      },
+      "ensemble": [
+        15,
+        3,
+        7,
+        4,
+        10
+      ],
+      "actual": 14,
+      "hit": false,
+      "fingerprint": "03993ddefede7db5fd4f281edcb8202e0afd9675f6b83f6ebec0593ec5a8ebb7"
+    },
+    {
+      "draw": 9592,
+      "knownThrough": 9591,
+      "context": [
+        "high",
+        "low",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12062780092979118,
+        "markov_1": 0.24474562012291515,
+        "frequency_all": 0.05900925147573135,
+        "gap_longest": 0.1815503706315081,
+        "lag_vote": 0.10822986361272145,
+        "frequency_24": 0.0774546580291813,
+        "cycle_20": 0.044398360818013384,
+        "frequency_60": 0.16398407438013818
+      },
+      "predictions": {
+        "cycle_8": [
+          3,
+          11,
+          12,
+          15,
+          7
+        ],
+        "markov_1": [
+          14,
+          2,
+          10,
+          11,
+          8
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          13,
+          10,
+          12,
+          9
+        ],
+        "lag_vote": [
+          15,
+          2,
+          7,
+          1,
+          3
+        ],
+        "frequency_24": [
+          11,
+          7,
+          2,
+          3,
+          4
+        ],
+        "cycle_20": [
+          10,
+          12,
+          13,
+          14,
+          6
+        ],
+        "frequency_60": [
+          4,
+          3,
+          2,
+          7,
+          8
+        ]
+      },
+      "ensemble": [
+        2,
+        10,
+        11,
+        7,
+        3
+      ],
+      "actual": 14,
+      "hit": false,
+      "fingerprint": "73f4958ba93268be76550f868d1ac62002bfe88fa67e66e62ccef54bd9d400fd"
+    },
+    {
+      "draw": 9593,
+      "knownThrough": 9592,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.11612493372951661,
+        "markov_1": 0.08335334424387345,
+        "frequency_all": 0.1008748697618481,
+        "gap_longest": 0.10731028728480524,
+        "lag_vote": 0.3648255345286298,
+        "frequency_24": 0.07034186538510569,
+        "cycle_20": 0.09557918224519299,
+        "frequency_60": 0.06158998282102816
+      },
+      "predictions": {
+        "cycle_8": [
+          11,
+          15,
+          9,
+          7,
+          12
+        ],
+        "markov_1": [
+          14,
+          2,
+          10,
+          11,
+          8
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          13,
+          10,
+          12,
+          9
+        ],
+        "lag_vote": [
+          14,
+          2,
+          4,
+          8,
+          11
+        ],
+        "frequency_24": [
+          7,
+          11,
+          2,
+          3,
+          4
+        ],
+        "cycle_20": [
+          9,
+          2,
+          1,
+          4,
+          11
+        ],
+        "frequency_60": [
+          4,
+          3,
+          14,
+          2,
+          7
+        ]
+      },
+      "ensemble": [
+        11,
+        2,
+        14,
+        4,
+        8
+      ],
+      "actual": 7,
+      "hit": false,
+      "fingerprint": "418a3a6dae70a9b03b1ea54ac8466b896d40f38a9015c08ab56ac46892645709"
+    },
+    {
+      "draw": 9594,
+      "knownThrough": 9593,
+      "context": [
+        "high",
+        "mid",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.11612493372951661,
+        "markov_1": 0.08335334424387345,
+        "frequency_all": 0.1008748697618481,
+        "gap_longest": 0.10731028728480524,
+        "lag_vote": 0.3648255345286298,
+        "frequency_24": 0.07034186538510569,
+        "cycle_20": 0.09557918224519299,
+        "frequency_60": 0.06158998282102816
+      },
+      "predictions": {
+        "cycle_8": [
+          9,
+          14,
+          5,
+          6,
+          12
+        ],
+        "markov_1": [
+          1,
+          7,
+          14,
+          5,
+          15
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          13,
+          10,
+          12,
+          9
+        ],
+        "lag_vote": [
+          14,
+          15,
+          5,
+          11,
+          1
+        ],
+        "frequency_24": [
+          7,
+          11,
+          2,
+          3,
+          4
+        ],
+        "cycle_20": [
+          9,
+          5,
+          7,
+          10,
+          12
+        ],
+        "frequency_60": [
+          4,
+          7,
+          14,
+          2,
+          3
+        ]
+      },
+      "ensemble": [
+        14,
+        5,
+        15,
+        11,
+        7
+      ],
+      "actual": 7,
+      "hit": true,
+      "fingerprint": "b4019fd5a798bfb7003bf6c5e3dd7595e7addd665131119dd65c8261a3b2f0da"
+    },
+    {
+      "draw": 9595,
+      "knownThrough": 9594,
+      "context": [
+        "mid",
+        "high",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12353645018739842,
+        "markov_1": 0.16237735267778491,
+        "frequency_all": 0.09833208421981707,
+        "gap_longest": 0.25014793289771653,
+        "lag_vote": 0.08125983345308913,
+        "frequency_24": 0.09576566810871916,
+        "cycle_20": 0.16309823503836135,
+        "frequency_60": 0.02548244341711348
+      },
+      "predictions": {
+        "cycle_8": [
+          11,
+          15,
+          10,
+          6,
+          7
+        ],
+        "markov_1": [
+          1,
+          7,
+          14,
+          5,
+          15
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          13,
+          10,
+          12,
+          9
+        ],
+        "lag_vote": [
+          7,
+          14,
+          2,
+          1,
+          3
+        ],
+        "frequency_24": [
+          7,
+          11,
+          2,
+          3,
+          8
+        ],
+        "cycle_20": [
+          5,
+          14,
+          7,
+          4,
+          1
+        ],
+        "frequency_60": [
+          7,
+          4,
+          14,
+          2,
+          3
+        ]
+      },
+      "ensemble": [
+        7,
+        14,
+        10,
+        1,
+        6
+      ],
+      "actual": 8,
+      "hit": false,
+      "fingerprint": "8e9f45f93f1246789fbb82a4d14e292afa8a3b394e20bc3d4d4e9ba3b768ef0f"
+    },
+    {
+      "draw": 9596,
+      "knownThrough": 9595,
+      "context": [
+        "mid",
+        "high",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12353645018739842,
+        "markov_1": 0.16237735267778491,
+        "frequency_all": 0.09833208421981707,
+        "gap_longest": 0.25014793289771653,
+        "lag_vote": 0.08125983345308913,
+        "frequency_24": 0.09576566810871916,
+        "cycle_20": 0.16309823503836135,
+        "frequency_60": 0.02548244341711348
+      },
+      "predictions": {
+        "cycle_8": [
+          10,
+          11,
+          6,
+          9,
+          14
+        ],
+        "markov_1": [
+          7,
+          14,
+          5,
+          10,
+          11
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          13,
+          10,
+          12,
+          9
+        ],
+        "lag_vote": [
+          7,
+          14,
+          4,
+          11,
+          1
+        ],
+        "frequency_24": [
+          7,
+          8,
+          11,
+          2,
+          3
+        ],
+        "cycle_20": [
+          7,
+          11,
+          10,
+          5,
+          12
+        ],
+        "frequency_60": [
+          7,
+          4,
+          8,
+          14,
+          2
+        ]
+      },
+      "ensemble": [
+        10,
+        11,
+        7,
+        14,
+        6
+      ],
+      "actual": 14,
+      "hit": true,
+      "fingerprint": "1ea837536409280fa27e0c030b768cf45050b3fdde26e8f8bcac16e8205a4936"
+    },
+    {
+      "draw": 9597,
+      "knownThrough": 9596,
+      "context": [
+        "mid",
+        "high",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12353645018739842,
+        "markov_1": 0.16237735267778491,
+        "frequency_all": 0.09833208421981707,
+        "gap_longest": 0.25014793289771653,
+        "lag_vote": 0.08125983345308913,
+        "frequency_24": 0.09576566810871916,
+        "cycle_20": 0.16309823503836135,
+        "frequency_60": 0.02548244341711348
+      },
+      "predictions": {
+        "cycle_8": [
+          8,
+          1,
+          10,
+          6,
+          4
+        ],
+        "markov_1": [
+          14,
+          2,
+          10,
+          11,
+          8
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          13,
+          10,
+          12,
+          9
+        ],
+        "lag_vote": [
+          8,
+          7,
+          15,
+          14,
+          1
+        ],
+        "frequency_24": [
+          7,
+          8,
+          11,
+          14,
+          2
+        ],
+        "cycle_20": [
+          5,
+          8,
+          11,
+          14,
+          2
+        ],
+        "frequency_60": [
+          14,
+          4,
+          7,
+          8,
+          2
+        ]
+      },
+      "ensemble": [
+        8,
+        10,
+        14,
+        11,
+        2
+      ],
+      "actual": 8,
+      "hit": true,
+      "fingerprint": "8c548510de3bbe8c50093cfe56402360276bd8a55d2b26084ad7e8804befd900"
+    },
+    {
+      "draw": 9598,
+      "knownThrough": 9597,
+      "context": [
+        "mid",
+        "high",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12353645018739842,
+        "markov_1": 0.16237735267778491,
+        "frequency_all": 0.09833208421981707,
+        "gap_longest": 0.25014793289771653,
+        "lag_vote": 0.08125983345308913,
+        "frequency_24": 0.09576566810871916,
+        "cycle_20": 0.16309823503836135,
+        "frequency_60": 0.02548244341711348
+      },
+      "predictions": {
+        "cycle_8": [
+          14,
+          2,
+          5,
+          8,
+          15
+        ],
+        "markov_1": [
+          7,
+          14,
+          5,
+          10,
+          11
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          13,
+          10,
+          12,
+          9
+        ],
+        "lag_vote": [
+          8,
+          14,
+          7,
+          2,
+          1
+        ],
+        "frequency_24": [
+          7,
+          8,
+          11,
+          14,
+          2
+        ],
+        "cycle_20": [
+          14,
+          5,
+          13,
+          8,
+          4
+        ],
+        "frequency_60": [
+          8,
+          14,
+          4,
+          7,
+          2
+        ]
+      },
+      "ensemble": [
+        14,
+        10,
+        8,
+        7,
+        5
+      ],
+      "actual": 12,
+      "hit": false,
+      "fingerprint": "633029a01d83f988cb49604acdf9945afb515f03674d89d3cf7a557c92f8004f"
+    },
+    {
+      "draw": 9599,
+      "knownThrough": 9598,
+      "context": [
+        "mid",
+        "high",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12353645018739842,
+        "markov_1": 0.16237735267778491,
+        "frequency_all": 0.09833208421981707,
+        "gap_longest": 0.25014793289771653,
+        "lag_vote": 0.08125983345308913,
+        "frequency_24": 0.09576566810871916,
+        "cycle_20": 0.16309823503836135,
+        "frequency_60": 0.02548244341711348
+      },
+      "predictions": {
+        "cycle_8": [
+          10,
+          15,
+          4,
+          7,
+          14
+        ],
+        "markov_1": [
+          6,
+          13,
+          11,
+          14,
+          12
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          13,
+          10,
+          9,
+          3
+        ],
+        "lag_vote": [
+          14,
+          8,
+          7,
+          5,
+          1
+        ],
+        "frequency_24": [
+          7,
+          8,
+          11,
+          14,
+          2
+        ],
+        "cycle_20": [
+          10,
+          4,
+          9,
+          15,
+          2
+        ],
+        "frequency_60": [
+          8,
+          14,
+          4,
+          7,
+          12
+        ]
+      },
+      "ensemble": [
+        10,
+        14,
+        6,
+        13,
+        7
+      ],
+      "actual": 15,
+      "hit": false,
+      "fingerprint": "7573803ebc0f42e93f926c109cef9ba41bce041d68c987571d5b599b1b3446be"
+    },
+    {
+      "draw": 9600,
+      "knownThrough": 9599,
+      "context": [
+        "mid",
+        "high",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12353645018739842,
+        "markov_1": 0.16237735267778491,
+        "frequency_all": 0.09833208421981707,
+        "gap_longest": 0.25014793289771653,
+        "lag_vote": 0.08125983345308913,
+        "frequency_24": 0.09576566810871916,
+        "cycle_20": 0.16309823503836135,
+        "frequency_60": 0.02548244341711348
+      },
+      "predictions": {
+        "cycle_8": [
+          3,
+          11,
+          12,
+          15,
+          7
+        ],
+        "markov_1": [
+          12,
+          15,
+          4,
+          10,
+          2
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          13,
+          10,
+          9,
+          3
+        ],
+        "lag_vote": [
+          8,
+          12,
+          14,
+          7,
+          1
+        ],
+        "frequency_24": [
+          7,
+          8,
+          11,
+          14,
+          15
+        ],
+        "cycle_20": [
+          8,
+          15,
+          7,
+          14,
+          3
+        ],
+        "frequency_60": [
+          8,
+          14,
+          4,
+          7,
+          2
+        ]
+      },
+      "ensemble": [
+        15,
+        7,
+        10,
+        3,
+        14
+      ],
+      "actual": 15,
+      "hit": true,
+      "fingerprint": "76d5a0bebefbae1fd4e9c5688aa91fd497bc1aebbb1b850c91144d09cc4775d2"
+    },
+    {
+      "draw": 9601,
+      "knownThrough": 9600,
+      "context": [
+        "mid",
+        "high",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12353645018739842,
+        "markov_1": 0.16237735267778491,
+        "frequency_all": 0.09833208421981707,
+        "gap_longest": 0.25014793289771653,
+        "lag_vote": 0.08125983345308913,
+        "frequency_24": 0.09576566810871916,
+        "cycle_20": 0.16309823503836135,
+        "frequency_60": 0.02548244341711348
+      },
+      "predictions": {
+        "cycle_8": [
+          11,
+          15,
+          7,
+          9,
+          12
+        ],
+        "markov_1": [
+          12,
+          15,
+          4,
+          10,
+          2
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          13,
+          10,
+          9,
+          3
+        ],
+        "lag_vote": [
+          15,
+          12,
+          14,
+          7,
+          4
+        ],
+        "frequency_24": [
+          7,
+          15,
+          8,
+          11,
+          14
+        ],
+        "cycle_20": [
+          6,
+          8,
+          3,
+          12,
+          11
+        ],
+        "frequency_60": [
+          8,
+          14,
+          4,
+          7,
+          15
+        ]
+      },
+      "ensemble": [
+        15,
+        12,
+        10,
+        11,
+        6
+      ],
+      "actual": 11,
+      "hit": true,
+      "fingerprint": "4db19a468a2b5a2c940f9a5557953554fb6040565ee23fabd8803f3a7f0e3a7d"
+    },
+    {
+      "draw": 9602,
+      "knownThrough": 9601,
+      "context": [
+        "mid",
+        "high",
+        "balanced",
+        "balanced"
+      ],
+      "weights": {
+        "cycle_8": 0.12353645018739842,
+        "markov_1": 0.16237735267778491,
+        "frequency_all": 0.09833208421981707,
+        "gap_longest": 0.25014793289771653,
+        "lag_vote": 0.08125983345308913,
+        "frequency_24": 0.09576566810871916,
+        "cycle_20": 0.16309823503836135,
+        "frequency_60": 0.02548244341711348
+      },
+      "predictions": {
+        "cycle_8": [
+          9,
+          14,
+          5,
+          6,
+          12
+        ],
+        "markov_1": [
+          11,
+          10,
+          7,
+          8,
+          4
+        ],
+        "frequency_all": [
+          11,
+          10,
+          14,
+          7,
+          15
+        ],
+        "gap_longest": [
+          6,
+          13,
+          10,
+          9,
+          3
+        ],
+        "lag_vote": [
+          15,
+          8,
+          7,
+          1,
+          2
+        ],
+        "frequency_24": [
+          7,
+          11,
+          15,
+          8,
+          14
+        ],
+        "cycle_20": [
+          11,
+          14,
+          5,
+          3,
+          2
+        ],
+        "frequency_60": [
+          8,
+          4,
+          7,
+          14,
+          15
+        ]
+      },
+      "ensemble": [
+        11,
+        10,
+        14,
+        7,
+        6
+      ],
+      "actual": 5,
+      "hit": false,
+      "fingerprint": "a4b01db4b5023e562c8f950245ec626566f4f897f5e0c99fc7f179bd4dc6ad93"
+    }
+  ],
+  "fingerprintChainSha256": "6c03676a00df9ce15221d5a7fdf0a21c6c7b9d063fc37f6266bd8a0dfc550fce",
+  "resultSha256": "75ba3bfdfef6bca28aa9b03ef102525b0398f770775c2143ba5a8df3ac618c0e"
+}
