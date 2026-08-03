@@ -1,0 +1,59 @@
+name: Daily 3 baseline replay
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "daily3/archive.json"
+      - "daily3/baseline_replay.py"
+      - ".github/workflows/daily3-baseline-replay.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily3-baseline-replay
+  cancel-in-progress: true
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run leakage-safe baseline replay
+        run: python daily3/baseline_replay.py
+      - name: Verify results
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('daily3/baseline_results.json').read_text())
+          assert d['testedDraws'] > 10000
+          assert d['integrity']['futureDataAccess'] is False
+          assert d['integrity']['predictionsFrozenBeforeReveal'] is True
+          assert len(d['results']) == 3
+          assert len(d['resultSha256']) == 64
+          for r in d['results']:
+              assert r['tested'] == d['testedDraws']
+              assert len(r['positionAccuracy']) == 3
+          print({'tested':d['testedDraws'],'results':d['results']})
+          PY
+      - name: Commit baseline results
+        run: |
+          git config user.name "daily3-replay-bot"
+          git config user.email "daily3-replay-bot@users.noreply.github.com"
+          git add daily3/baseline_results.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Update Daily 3 baseline replay results"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push origin main && exit 0
+            sleep 4
+          done
+          exit 1
