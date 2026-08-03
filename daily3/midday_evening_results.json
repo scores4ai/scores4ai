@@ -1,0 +1,569 @@
+{
+  "version": "Daily 3 Midday-to-Evening Test Phase 1",
+  "archiveSha256": "49a97dd6d3dd780b6911175047023ef8e67d769abe4a4ceea4623703a11a0859",
+  "pairedDays": 6050,
+  "warmupDays": 100,
+  "integrity": {
+    "futureDataAccess": false,
+    "predictionFrozenAfterMiddayBeforeEveningReveal": true,
+    "updatesOnlyAfterEveningReveal": true
+  },
+  "result": {
+    "model": "midday_to_evening_position_transition",
+    "testedEveningDraws": 5950,
+    "exactHits": 5,
+    "exactAccuracy": 0.0008403361344537816,
+    "atLeastOnePositionHits": 1586,
+    "atLeastOnePositionAccuracy": 0.2665546218487395,
+    "positionHits": [
+      574,
+      595,
+      599
+    ],
+    "positionAccuracy": [
+      0.09647058823529411,
+      0.1,
+      0.10067226890756302
+    ]
+  },
+  "referenceBaselines": [
+    {
+      "model": "last_draw",
+      "tested": 11900,
+      "exactHits": 11,
+      "exactAccuracy": 0.0009243697478991597,
+      "boxHits": 64,
+      "boxAccuracy": 0.005378151260504202,
+      "atLeastOnePositionHits": 3235,
+      "atLeastOnePositionAccuracy": 0.2718487394957983,
+      "positionHits": [
+        1209,
+        1211,
+        1186
+      ],
+      "positionAccuracy": [
+        0.10159663865546219,
+        0.10176470588235294,
+        0.09966386554621849
+      ]
+    },
+    {
+      "model": "uniform_random",
+      "tested": 11900,
+      "exactHits": 8,
+      "exactAccuracy": 0.0006722689075630252,
+      "boxHits": 59,
+      "boxAccuracy": 0.004957983193277311,
+      "atLeastOnePositionHits": 3190,
+      "atLeastOnePositionAccuracy": 0.2680672268907563,
+      "positionHits": [
+        1195,
+        1182,
+        1161
+      ],
+      "positionAccuracy": [
+        0.1004201680672269,
+        0.09932773109243698,
+        0.09756302521008403
+      ]
+    },
+    {
+      "model": "frequency_position",
+      "tested": 11900,
+      "exactHits": 6,
+      "exactAccuracy": 0.0005042016806722689,
+      "boxHits": 60,
+      "boxAccuracy": 0.005042016806722689,
+      "atLeastOnePositionHits": 3272,
+      "atLeastOnePositionAccuracy": 0.2749579831932773,
+      "positionHits": [
+        1220,
+        1170,
+        1204
+      ],
+      "positionAccuracy": [
+        0.10252100840336134,
+        0.09831932773109243,
+        0.1011764705882353
+      ]
+    }
+  ],
+  "samples": [
+    {
+      "date": "2010-04-11",
+      "midday": [
+        7,
+        9,
+        9
+      ],
+      "prediction": [
+        1,
+        1,
+        3
+      ],
+      "actualEvening": [
+        4,
+        1,
+        6
+      ],
+      "fingerprint": "7dc414dd9453589ec9a72619e16ea0cb87db39e914deaaa04ba2137bc374b103"
+    },
+    {
+      "date": "2010-04-12",
+      "midday": [
+        0,
+        1,
+        5
+      ],
+      "prediction": [
+        7,
+        5,
+        6
+      ],
+      "actualEvening": [
+        4,
+        3,
+        8
+      ],
+      "fingerprint": "793670cfcfdb939a5017e68ab5bc04b84ca3b158788a440aeff3737e7c067a17"
+    },
+    {
+      "date": "2010-04-13",
+      "midday": [
+        2,
+        4,
+        5
+      ],
+      "prediction": [
+        1,
+        7,
+        6
+      ],
+      "actualEvening": [
+        2,
+        6,
+        5
+      ],
+      "fingerprint": "cd4ec6af0c7c538a8216098e273ccf6444c0b35d289b6e0467f7e02eb10305a4"
+    },
+    {
+      "date": "2010-04-14",
+      "midday": [
+        9,
+        3,
+        4
+      ],
+      "prediction": [
+        7,
+        2,
+        4
+      ],
+      "actualEvening": [
+        1,
+        6,
+        1
+      ],
+      "fingerprint": "851c4841919aa7109c7920589ac52b0f4bbb163a89fa2d734a80b5facbe3d92d"
+    },
+    {
+      "date": "2010-04-15",
+      "midday": [
+        9,
+        5,
+        9
+      ],
+      "prediction": [
+        1,
+        7,
+        6
+      ],
+      "actualEvening": [
+        3,
+        8,
+        9
+      ],
+      "fingerprint": "158b1fe2194733a377f8f6749a00a37e75bd166cf6ee2ba7f01105d5e74e45f1"
+    },
+    {
+      "date": "2010-04-16",
+      "midday": [
+        6,
+        7,
+        7
+      ],
+      "prediction": [
+        3,
+        0,
+        5
+      ],
+      "actualEvening": [
+        7,
+        3,
+        5
+      ],
+      "fingerprint": "25952de6b6456adccdc1c0121d2de54352e51adfb9d537fabf332e724eb241d4"
+    },
+    {
+      "date": "2010-04-17",
+      "midday": [
+        3,
+        1,
+        7
+      ],
+      "prediction": [
+        3,
+        5,
+        5
+      ],
+      "actualEvening": [
+        2,
+        6,
+        0
+      ],
+      "fingerprint": "cbdd4159c508797d90898a5a5ed584fd14f5636bbda25a5fb9560db275fe7fe1"
+    },
+    {
+      "date": "2010-04-18",
+      "midday": [
+        6,
+        1,
+        9
+      ],
+      "prediction": [
+        7,
+        5,
+        6
+      ],
+      "actualEvening": [
+        1,
+        0,
+        3
+      ],
+      "fingerprint": "e6451e0f414dbfc7fc77578893d1b66369e89f62520e6f9014a264faf51213e5"
+    },
+    {
+      "date": "2010-04-19",
+      "midday": [
+        3,
+        1,
+        0
+      ],
+      "prediction": [
+        3,
+        0,
+        3
+      ],
+      "actualEvening": [
+        0,
+        5,
+        2
+      ],
+      "fingerprint": "4c3fd28a3f3e4f7cfe1078d6f7998f827e9bdc59127c5cef2c3a28d1ee6790fb"
+    },
+    {
+      "date": "2010-04-20",
+      "midday": [
+        1,
+        5,
+        3
+      ],
+      "prediction": [
+        7,
+        7,
+        0
+      ],
+      "actualEvening": [
+        7,
+        7,
+        5
+      ],
+      "fingerprint": "c55073929bd362f961763f6c2ae8d0d5b324191f6783bf3ee03795cdb23116ed"
+    },
+    {
+      "date": "2010-04-21",
+      "midday": [
+        7,
+        9,
+        2
+      ],
+      "prediction": [
+        4,
+        1,
+        9
+      ],
+      "actualEvening": [
+        0,
+        7,
+        2
+      ],
+      "fingerprint": "ea54939b8a9cfc2ada79611edda12de26328265406dd92e1c796f7056d238f87"
+    },
+    {
+      "date": "2010-04-22",
+      "midday": [
+        3,
+        6,
+        6
+      ],
+      "prediction": [
+        3,
+        3,
+        4
+      ],
+      "actualEvening": [
+        8,
+        6,
+        2
+      ],
+      "fingerprint": "2523a471bb2af2699dae0da864e8b00be38139feedfad291740d478ef4cdeba2"
+    },
+    {
+      "date": "2010-04-23",
+      "midday": [
+        3,
+        1,
+        9
+      ],
+      "prediction": [
+        8,
+        5,
+        3
+      ],
+      "actualEvening": [
+        5,
+        2,
+        8
+      ],
+      "fingerprint": "e005c098d3700819eb9462c81a1c49f8330d0c5014d90f6af4ea00ead9dfec08"
+    },
+    {
+      "date": "2010-04-24",
+      "midday": [
+        8,
+        0,
+        2
+      ],
+      "prediction": [
+        8,
+        0,
+        2
+      ],
+      "actualEvening": [
+        5,
+        3,
+        3
+      ],
+      "fingerprint": "512baace9b8a392734c08cb10d5928259f548c5e3a40711b4712b9927ef3e5be"
+    },
+    {
+      "date": "2010-04-25",
+      "midday": [
+        1,
+        3,
+        6
+      ],
+      "prediction": [
+        7,
+        2,
+        4
+      ],
+      "actualEvening": [
+        5,
+        3,
+        9
+      ],
+      "fingerprint": "b50cc88727de7eb0954e4ec6b6869a4d4bbcb4528f43ce0dcf4d497ed178cbb2"
+    },
+    {
+      "date": "2010-04-26",
+      "midday": [
+        5,
+        6,
+        6
+      ],
+      "prediction": [
+        9,
+        3,
+        4
+      ],
+      "actualEvening": [
+        7,
+        2,
+        2
+      ],
+      "fingerprint": "b6d313bf2f262eba37e5df0f4852b6de704704dbd9d0073db203a1b4d0e75749"
+    },
+    {
+      "date": "2010-04-27",
+      "midday": [
+        5,
+        8,
+        5
+      ],
+      "prediction": [
+        9,
+        4,
+        6
+      ],
+      "actualEvening": [
+        2,
+        8,
+        5
+      ],
+      "fingerprint": "7d7b1da91edba0b1f6494703d6755efa5b6fe8dbdba9b57a318a6b3d8f8816d3"
+    },
+    {
+      "date": "2010-04-28",
+      "midday": [
+        1,
+        6,
+        2
+      ],
+      "prediction": [
+        7,
+        3,
+        2
+      ],
+      "actualEvening": [
+        0,
+        0,
+        8
+      ],
+      "fingerprint": "3e711e278310e79974d4f59cb83f306fde7f9f30c57c43c537b8771ec97b6b7d"
+    },
+    {
+      "date": "2010-04-29",
+      "midday": [
+        7,
+        2,
+        8
+      ],
+      "prediction": [
+        4,
+        5,
+        9
+      ],
+      "actualEvening": [
+        5,
+        3,
+        1
+      ],
+      "fingerprint": "93bf710e1a0999a434bae674a178e79e6150e8e9df3811c0be98cab533432374"
+    },
+    {
+      "date": "2010-04-30",
+      "midday": [
+        2,
+        4,
+        9
+      ],
+      "prediction": [
+        1,
+        7,
+        3
+      ],
+      "actualEvening": [
+        3,
+        8,
+        6
+      ],
+      "fingerprint": "a7983a75b491257a988c01c9be8a03d07e6973ac0482eadad396bbf12ee4e44d"
+    },
+    {
+      "date": "2010-05-01",
+      "midday": [
+        1,
+        3,
+        8
+      ],
+      "prediction": [
+        7,
+        2,
+        9
+      ],
+      "actualEvening": [
+        3,
+        2,
+        7
+      ],
+      "fingerprint": "bdc1a2cb80f99f42fdbe689eabb987dc416c12daaba66711d876ea5c4f2d2cc5"
+    },
+    {
+      "date": "2010-05-02",
+      "midday": [
+        7,
+        8,
+        1
+      ],
+      "prediction": [
+        4,
+        8,
+        3
+      ],
+      "actualEvening": [
+        8,
+        9,
+        7
+      ],
+      "fingerprint": "c15739e388251df747d38634f85e3a0c59d1b7e610afa09eaed4256d8d885865"
+    },
+    {
+      "date": "2010-05-03",
+      "midday": [
+        7,
+        5,
+        7
+      ],
+      "prediction": [
+        8,
+        7,
+        5
+      ],
+      "actualEvening": [
+        8,
+        0,
+        3
+      ],
+      "fingerprint": "a3e72ad7df61c9c40267ed3809e03d090b5b34dd96d7fed513d3d2f48b5a0c24"
+    },
+    {
+      "date": "2010-05-04",
+      "midday": [
+        1,
+        6,
+        6
+      ],
+      "prediction": [
+        7,
+        0,
+        4
+      ],
+      "actualEvening": [
+        9,
+        6,
+        7
+      ],
+      "fingerprint": "46214fa069db0369a876e585048470ade5145693b138a4e1cc4fca563ab4884d"
+    },
+    {
+      "date": "2010-05-05",
+      "midday": [
+        6,
+        4,
+        3
+      ],
+      "prediction": [
+        7,
+        7,
+        0
+      ],
+      "actualEvening": [
+        6,
+        1,
+        9
+      ],
+      "fingerprint": "b58f07816f36a763b04608f8eb668d89b59fcf57fc74b1edbc1379e4745629ad"
+    }
+  ],
+  "resultSha256": "b4d9c54281ad8caddc76cf186409f56b2284a2e28d0172adb7cdea0278cd6d55"
+}
