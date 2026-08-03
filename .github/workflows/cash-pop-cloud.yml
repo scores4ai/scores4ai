@@ -2,6 +2,9 @@ name: Michigan Cash Pop continuous live updater
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/cash-pop-cloud.yml"
   schedule:
     - cron: "2 * * * *"
 
@@ -83,8 +86,6 @@ jobs:
           PY
           )
 
-                # Publish when a new draw arrives. Also publish a heartbeat every five passes
-                # so the dashboard can distinguish a running poller from a stopped workflow.
                 if [ "$after_draw" != "$before_draw" ] || [ $((pass % 5)) -eq 0 ]; then
                   git add v0/cloud_state.json apx/state.json
                   if ! git diff --cached --quiet; then
