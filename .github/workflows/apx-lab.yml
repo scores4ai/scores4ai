@@ -2,11 +2,6 @@ name: Build APX prediction laboratory
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "apx/**"
-      - "v0/cloud_state.json"
-      - ".github/workflows/apx-lab.yml"
   schedule:
     - cron: "4-59/5 * * * *"
 
@@ -27,11 +22,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Build tournament state
-        run: python apx/engine.py
-      - name: Validate without touching working predictor
+
+      - name: Follow live feed for five minutes
         run: |
-          python - <<'PY'
+          git config user.name "apx-research-bot"
+          git config user.email "apx-research-bot@users.noreply.github.com"
+
+          for cycle in 1 2 3 4; do
+            echo "APX live cycle $cycle"
+            git fetch origin main
+            git reset --hard origin/main
+            python apx/engine.py
+
+            python - <<'PY'
           import json
           s=json.load(open('apx/state.json'))
           assert s['nextDraw']==s['latestDraw']+1
@@ -40,11 +43,18 @@ jobs:
           assert s['leaderboard']
           print('APX validated:',s['latestDraw'],s['nextDraw'],s['modelCount'],s['top5'])
           PY
-      - name: Commit APX state
-        run: |
-          git config user.name "apx-research-bot"
-          git config user.email "apx-research-bot@users.noreply.github.com"
-          git add apx/state.json
-          git diff --cached --quiet || git commit -m "Update APX tournament state"
-          git pull --rebase origin main || true
-          git push origin main || true
+
+            git add apx/state.json
+            if ! git diff --cached --quiet; then
+              git commit -m "Update APX tournament state"
+              for attempt in 1 2 3; do
+                git pull --rebase origin main && git push origin main && break
+                echo "Push retry $attempt"
+                sleep 5
+              done
+            else
+              echo "No APX state change"
+            fi
+
+            if [ "$cycle" -lt 4 ]; then sleep 70; fi
+          done
