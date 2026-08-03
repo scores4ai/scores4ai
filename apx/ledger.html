@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>APX Permanent Draw Ledger</title>
+<style>
+:root{color-scheme:dark}body{margin:0;background:#080d19;color:#eef2ff;font-family:system-ui,-apple-system,sans-serif}.wrap{max-width:960px;margin:auto;padding:24px}.card{background:#111827;border:1px solid #2d3b5c;border-radius:24px;padding:22px;margin:18px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.metric{background:#1a2439;border:1px solid #3a4a70;border-radius:20px;padding:18px;text-align:center}.label{color:#aab6d5;font-size:17px}.value{font-size:32px;font-weight:800;margin-top:8px}.good{color:#35df82}.warn{color:#ffb536}.bad{color:#ff6578}table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:12px 8px;border-bottom:1px solid #2d3b5c;text-align:left;vertical-align:top}.pill{font-weight:800}.small{color:#aab6d5;font-size:13px}h1{font-size:38px;margin:0 0 8px}button{background:#7154f7;color:white;border:0;border-radius:14px;padding:13px 18px;font-weight:800;font-size:16px}@media(max-width:650px){.grid{grid-template-columns:1fr 1fr}h1{font-size:30px}table{font-size:12px}th,td{padding:9px 5px}}
+</style>
+</head>
+<body><main class="wrap">
+<section class="card"><h1>Permanent Draw Ledger</h1><div class="small">Every official draw is recorded, including draws with no valid pre-draw prediction.</div></section>
+<section class="card"><div class="grid" id="metrics"></div></section>
+<section class="card"><button onclick="load()">Refresh ledger</button><div class="small" id="updated" style="margin-top:12px"></div></section>
+<section class="card"><h2>Latest official draws</h2><div style="overflow:auto"><table><thead><tr><th>Draw</th><th>Official</th><th>Prediction</th><th>Status</th><th>Reason / time</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+</main>
+<script>
+const pct=x=>(100*(x||0)).toFixed(1)+'%';
+function esc(x){return String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+async function load(){
+ const r=await fetch('state.json?fresh='+Date.now(),{cache:'no-store'}); const s=await r.json(); const l=s.drawLedger||{};
+ const bias=l.missingDataBias||'UNKNOWN'; const cls=bias==='LOW'?'good':bias==='MODERATE'?'warn':'bad';
+ document.getElementById('metrics').innerHTML=`
+ <div class="metric"><div class="label">Official draws recorded</div><div class="value">${l.officialDrawsRecorded||0}</div></div>
+ <div class="metric"><div class="label">Valid predictions</div><div class="value good">${l.validPredictions||0}</div></div>
+ <div class="metric"><div class="label">Unpredicted draws</div><div class="value ${l.unpredictedDraws?'warn':'good'}">${l.unpredictedDraws||0}</div></div>
+ <div class="metric"><div class="label">Prediction coverage</div><div class="value">${pct(l.predictionCoverage)}</div></div>
+ <div class="metric"><div class="label">Recent 100 coverage</div><div class="value">${pct(l.recent100Coverage)}</div></div>
+ <div class="metric"><div class="label">Missing-data bias</div><div class="value ${cls}">${bias}</div></div>`;
+ document.getElementById('updated').textContent='Updated '+new Date(l.updatedAt||s.updatedAt).toLocaleString();
+ const rows=[...(l.records||[])].reverse().slice(0,150);
+ document.getElementById('rows').innerHTML=rows.map(x=>{
+  const valid=x.countsTowardAccuracy; const status=valid?(x.result==='SUCCESS'?'<span class="pill good">SUCCESS</span>':'<span class="pill bad">MISS</span>'):'<span class="pill warn">UNPREDICTED</span>';
+  const pred=valid?esc((x.prediction||[]).join(', ')):'—';
+  const detail=valid?('Frozen '+esc(x.predictedAt?new Date(x.predictedAt).toLocaleString():'time unavailable')):esc(x.missingReason||'No reason recorded');
+  return `<tr><td>#${esc(x.draw)}</td><td>${esc(x.officialNumber)}</td><td>${pred}</td><td>${status}</td><td>${detail}</td></tr>`
+ }).join('');
+}
+load(); setInterval(load,20000);
+</script></body></html>
