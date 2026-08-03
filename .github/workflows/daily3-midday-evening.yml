@@ -1,0 +1,55 @@
+name: Daily 3 midday-to-evening test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "daily3/midday_evening_model.py"
+      - "daily3/archive.json"
+      - "daily3/baseline_results.json"
+      - ".github/workflows/daily3-midday-evening.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily3-midday-evening
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run leakage-safe paired-draw test
+        run: python daily3/midday_evening_model.py
+      - name: Verify result
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('daily3/midday_evening_results.json').read_text())
+          assert d['integrity']['futureDataAccess'] is False
+          assert d['integrity']['predictionFrozenAfterMiddayBeforeEveningReveal'] is True
+          assert d['result']['testedEveningDraws'] > 5000
+          assert len(d['resultSha256']) == 64
+          print(d['result'])
+          PY
+      - name: Commit result
+        run: |
+          git config user.name "daily3-research-bot"
+          git config user.email "daily3-research-bot@users.noreply.github.com"
+          git add daily3/midday_evening_results.json
+          git commit -m "Update Daily 3 midday-to-evening results" || exit 0
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push origin main && exit 0
+            sleep 4
+          done
+          exit 1
