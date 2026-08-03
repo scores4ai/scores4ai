@@ -8,6 +8,7 @@ on:
       - ".github/workflows/cash-pop-backup.yml"
       - "v0/robust_runner.py"
       - "apx/engine.py"
+      - "apx/evolution.py"
   schedule:
     - cron: "*/5 * * * *"
 
@@ -51,12 +52,17 @@ jobs:
             python v0/robust_runner.py
             source_status=$?
             apx_status=1
+            evolution_status=1
             if [ $source_status -eq 0 ]; then
               python apx/engine.py
               apx_status=$?
+              if [ $apx_status -eq 0 ]; then
+                python apx/evolution.py
+                evolution_status=$?
+              fi
             fi
 
-            SOURCE_STATUS=$source_status APX_STATUS=$apx_status PASS_NUMBER=$pass UPDATER_NAME=primary python - <<'PY'
+            SOURCE_STATUS=$source_status APX_STATUS=$apx_status EVOLUTION_STATUS=$evolution_status PASS_NUMBER=$pass UPDATER_NAME=primary python - <<'PY'
           import json, os
           from datetime import datetime, timezone
           from pathlib import Path
@@ -66,7 +72,8 @@ jobs:
           except Exception: old={}
           source_ok=os.environ['SOURCE_STATUS']=='0'
           apx_ok=os.environ['APX_STATUS']=='0'
-          ok=source_ok and apx_ok
+          evolution_ok=os.environ['EVOLUTION_STATUS']=='0'
+          ok=source_ok and apx_ok and evolution_ok
           latest=0
           try: latest=json.loads(Path('apx/state.json').read_text()).get('latestDraw',0)
           except Exception: pass
@@ -80,6 +87,7 @@ jobs:
             'success':ok,
             'sourceSuccess':source_ok,
             'apxSuccess':apx_ok,
+            'evolutionSuccess':evolution_ok,
             'latestDraw':latest,
             'consecutiveFailures':failures,
             'pollIntervalSeconds':65,
