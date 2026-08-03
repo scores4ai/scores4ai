@@ -1,0 +1,73 @@
+name: APX pseudo-live historical replay
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "apx/historical_replay.py"
+      - "apx/full_archive.json"
+      - ".github/workflows/apx-historical-replay.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apx-historical-replay
+  cancel-in-progress: true
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run pseudo-live replay
+        run: python apx/historical_replay.py
+
+      - name: Verify leakage protections
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('apx/replay_state.json').read_text())
+          assert d['replaySteps'] == len(d['records']) == 250
+          assert d['integrity']['futureDataAccess'] is False
+          assert d['integrity']['oneDrawRevealedPerStep'] is True
+          assert d['integrity']['predictionsFrozenBeforeReveal'] is True
+          assert len(d['integrity']['recordSha256']) == 64
+          previous=None
+          for i,row in enumerate(d['records'],1):
+              assert row['step']==i
+              assert row['frozenBeforeReveal'] is True
+              assert row['knownThroughDraw'] < row['targetDraw']
+              assert len(row['predictionFingerprint']) == 64
+              assert len(row['predictions']) >= 8
+              if previous is not None:
+                  assert row['targetDraw'] > previous
+              previous=row['targetDraw']
+          for model in d['leaderboard']:
+              assert model['tested'] == d['replaySteps']
+              assert model['hits'] + model['misses'] == model['tested']
+          print({'steps':d['replaySteps'],'first':d['firstTestedDraw'],'last':d['lastTestedDraw'],'winner':d['leaderboard'][0]})
+          PY
+
+      - name: Commit replay proof
+        run: |
+          git config user.name "apx-replay-bot"
+          git config user.email "apx-replay-bot@users.noreply.github.com"
+          git add apx/replay_state.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Update leakage-safe historical replay proof"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push origin main && exit 0
+            sleep 4
+          done
+          exit 1
