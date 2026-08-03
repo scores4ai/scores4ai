@@ -1,6 +1,6 @@
 {
-  "version": "APX Phase 1.1",
-  "updatedAt": "2026-08-03T02:09:57.882406+00:00",
+  "version": "APX Phase 1.2",
+  "updatedAt": "2026-08-03T02:14:54.205191+00:00",
   "latestDraw": 88676,
   "nextDraw": 88677,
   "top5": [
@@ -5386,6 +5386,33 @@
     "previous100": 0.38,
     "trendDelta": 0.03999999999999998,
     "note": "Exploratory walk-forward evidence; multiple-model selection is not yet corrected."
+  },
+  "feedDiagnostics": {
+    "official": {
+      "status": "online_no_cash_pop_payload",
+      "payloads": 3
+    },
+    "fallbacks": [
+      {
+        "source": "https://michiganlotterynumbers.com/cash-pop/numbers",
+        "status": "unparsed"
+      },
+      {
+        "source": "https://cash-pop.com/michigan/winning-numbers",
+        "status": "online",
+        "latestDraw": 88676
+      }
+    ],
+    "selectedSource": "https://cash-pop.com/michigan/winning-numbers direct IDs",
+    "selectedLatestDraw": 88676,
+    "oldLatestDraw": 88675,
+    "polledAt": "2026-08-03T02:09:56.493757+00:00",
+    "sourceLabel": "https://cash-pop.com/michigan/winning-numbers direct IDs",
+    "sourceUrl": "https://cash-pop.com/michigan/winning-numbers",
+    "sourceUpdatedAt": "2026-08-03T02:09:56.568283+00:00",
+    "apxLatestDraw": 88676,
+    "sourceLatestDraw": 88676,
+    "drawGap": 0
   },
   "stats": {
     "evaluated": 500,
