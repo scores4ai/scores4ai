@@ -1,4 +1,4 @@
-name: Deploy predictor to GitHub Pages
+name: Deploy APX to GitHub Pages
 
 on:
   workflow_dispatch:
@@ -6,9 +6,8 @@ on:
     branches: ["main"]
     paths:
       - "index.html"
-      - "v0/final.html"
-      - "v0/cloud_state.json"
       - "apx/**"
+      - "v0/**"
       - ".github/workflows/deploy-pages.yml"
 
 permissions:
@@ -30,35 +29,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Verify required files
-        run: |
-          test -f v0/final.html
-          test -f v0/cloud_state.json
-          test -f apx/index.html
-          test -f apx/evolution.html
-          test -f apx/retirement.html
-          test -f apx/ledger.html
-          test -f apx/state.json
-
-      - name: Build site folder
+      - name: Build site
         run: |
           rm -rf _site
           mkdir -p _site/apx
-          cp v0/final.html _site/index.html
-          cp v0/cloud_state.json _site/cloud_state.json
+          cp index.html _site/index.html
           cp apx/index.html _site/apx/index.html
-          cp apx/evolution.html _site/apx/evolution.html
-          cp apx/retirement.html _site/apx/retirement.html
-          cp apx/ledger.html _site/apx/ledger.html
+          cp apx/verified-live.html _site/apx/verified-live.html
           cp apx/state.json _site/apx/state.json
-          if [ -f apx/evolution_state.json ]; then cp apx/evolution_state.json _site/apx/evolution_state.json; fi
-          if [ -f apx/heartbeat.json ]; then cp apx/heartbeat.json _site/apx/heartbeat.json; fi
+          cp apx/heartbeat.json _site/apx/heartbeat.json
           touch _site/.nojekyll
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload artifact
+      - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
