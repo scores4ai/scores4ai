@@ -64,19 +64,27 @@ jobs:
             python v0/robust_runner.py
             source_status=$?
             apx_status=1
+            evolution_status=1
             if [ $source_status -eq 0 ]; then
               python apx/engine.py
               apx_status=$?
+              if [ $apx_status -eq 0 ]; then
+                python apx/evolution.py
+                evolution_status=$?
+              fi
             fi
 
-            SOURCE_STATUS=$source_status APX_STATUS=$apx_status PASS_NUMBER=$pass python - <<'PY'
+            SOURCE_STATUS=$source_status APX_STATUS=$apx_status EVOLUTION_STATUS=$evolution_status PASS_NUMBER=$pass python - <<'PY'
           import json, os
           from datetime import datetime, timezone
           from pathlib import Path
           path=Path('apx/heartbeat.json')
           try: old=json.loads(path.read_text())
           except Exception: old={}
-          ok=os.environ['SOURCE_STATUS']=='0' and os.environ['APX_STATUS']=='0'
+          source_ok=os.environ['SOURCE_STATUS']=='0'
+          apx_ok=os.environ['APX_STATUS']=='0'
+          evolution_ok=os.environ['EVOLUTION_STATUS']=='0'
+          ok=source_ok and apx_ok and evolution_ok
           latest=0
           try: latest=json.loads(Path('apx/state.json').read_text()).get('latestDraw',0)
           except Exception: pass
@@ -87,8 +95,9 @@ jobs:
             'lastAttemptAt':now,
             'lastSuccessAt':now if ok else old.get('lastSuccessAt'),
             'success':ok,
-            'sourceSuccess':os.environ['SOURCE_STATUS']=='0',
-            'apxSuccess':os.environ['APX_STATUS']=='0',
+            'sourceSuccess':source_ok,
+            'apxSuccess':apx_ok,
+            'evolutionSuccess':evolution_ok,
             'latestDraw':latest,
             'consecutiveFailures':0 if ok else int(old.get('consecutiveFailures',0))+1,
             'pollIntervalSeconds':65,
