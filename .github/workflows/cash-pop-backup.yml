@@ -6,6 +6,7 @@ on:
     branches: ["main"]
     paths:
       - ".github/workflows/cash-pop-backup.yml"
+      - "apx/ledger.py"
   schedule:
     - cron: "2-59/5 * * * *"
 
@@ -53,7 +54,7 @@ jobs:
           python -m pip install --disable-pip-version-check playwright
           playwright install chromium
 
-      - name: Fetch, rebuild, and publish once
+      - name: Fetch, rebuild, audit, and publish once
         if: steps.stale.outputs.run == 'true'
         shell: bash
         run: |
@@ -68,6 +69,7 @@ jobs:
           apx_status=1
           evolution_status=1
           retirement_status=1
+          ledger_status=1
           if [ $source_status -eq 0 ]; then
             python apx/engine.py
             apx_status=$?
@@ -77,9 +79,11 @@ jobs:
             evolution_status=$?
             python apx/retirement.py
             retirement_status=$?
+            python apx/ledger.py
+            ledger_status=$?
           fi
 
-          SOURCE_STATUS=$source_status APX_STATUS=$apx_status RETIREMENT_STATUS=$retirement_status EVOLUTION_STATUS=$evolution_status python - <<'PY'
+          SOURCE_STATUS=$source_status APX_STATUS=$apx_status RETIREMENT_STATUS=$retirement_status EVOLUTION_STATUS=$evolution_status LEDGER_STATUS=$ledger_status python - <<'PY'
           import json, os
           from datetime import datetime, timezone
           from pathlib import Path
@@ -98,11 +102,12 @@ jobs:
             'success':core_ok,'sourceSuccess':source_ok,'apxSuccess':apx_ok,
             'retirementSuccess':os.environ['RETIREMENT_STATUS']=='0',
             'evolutionSuccess':os.environ['EVOLUTION_STATUS']=='0',
-            'researchHealthy':os.environ['RETIREMENT_STATUS']=='0' and os.environ['EVOLUTION_STATUS']=='0',
+            'ledgerSuccess':os.environ['LEDGER_STATUS']=='0',
+            'researchHealthy':all(os.environ[x]=='0' for x in ('RETIREMENT_STATUS','EVOLUTION_STATUS','LEDGER_STATUS')),
             'latestDraw':latest,
             'consecutiveFailures':0 if core_ok else int(old.get('consecutiveFailures',0))+1,
             'scheduledIntervalMinutes':5,
-            'architecture':'single-complete-backup-no-cache-startup'
+            'architecture':'backup-live-core-plus-permanent-draw-ledger'
           },indent=2))
           PY
 
