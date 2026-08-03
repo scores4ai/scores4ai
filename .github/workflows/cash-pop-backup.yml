@@ -9,13 +9,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: cash-pop-staggered-backup
+  group: cash-pop-backup
   cancel-in-progress: false
 
 jobs:
   backup-update:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,50 +38,46 @@ jobs:
           try:
               h=json.loads(Path('apx/heartbeat.json').read_text())
               t=datetime.fromisoformat(h['lastSuccessAt'].replace('Z','+00:00'))
-              stale=(datetime.now(timezone.utc)-t).total_seconds()>210
+              stale=(datetime.now(timezone.utc)-t).total_seconds()>420
           except Exception:
               pass
           print('run=' + ('true' if stale else 'false'))
           PY
 
-      - name: Install browser fallback
+      - name: Install browser
         if: steps.stale.outputs.run == 'true'
         run: |
           python -m pip install --upgrade pip
           pip install playwright
           playwright install chromium
 
-      - name: Run backup checks
+      - name: Fetch, rebuild, and publish once
         if: steps.stale.outputs.run == 'true'
         shell: bash
         run: |
           set +e
           git config user.name "cash-pop-backup-bot"
           git config user.email "cash-pop-backup-bot@users.noreply.github.com"
+          git fetch origin main
+          git reset --hard origin/main
 
-          for pass in 1 2; do
-            git fetch origin main
-            git reset --hard origin/main
+          python v0/robust_runner.py
+          source_status=$?
+          apx_status=1
+          evolution_status=1
+          retirement_status=1
+          if [ $source_status -eq 0 ]; then
+            python apx/engine.py
+            apx_status=$?
+          fi
+          if [ $apx_status -eq 0 ]; then
+            python apx/evolution.py
+            evolution_status=$?
+            python apx/retirement.py
+            retirement_status=$?
+          fi
 
-            python v0/robust_runner.py
-            source_status=$?
-            apx_status=1
-            evolution_status=1
-            retirement_status=1
-
-            if [ $source_status -eq 0 ]; then
-              python apx/engine.py
-              apx_status=$?
-            fi
-
-            if [ $apx_status -eq 0 ]; then
-              python apx/evolution.py
-              evolution_status=$?
-              python apx/retirement.py
-              retirement_status=$?
-            fi
-
-            SOURCE_STATUS=$source_status APX_STATUS=$apx_status RETIREMENT_STATUS=$retirement_status EVOLUTION_STATUS=$evolution_status PASS_NUMBER=$pass python - <<'PY'
+          SOURCE_STATUS=$source_status APX_STATUS=$apx_status RETIREMENT_STATUS=$retirement_status EVOLUTION_STATUS=$evolution_status python - <<'PY'
           import json, os
           from datetime import datetime, timezone
           from pathlib import Path
@@ -90,39 +86,31 @@ jobs:
           except Exception: old={}
           source_ok=os.environ['SOURCE_STATUS']=='0'
           apx_ok=os.environ['APX_STATUS']=='0'
-          retirement_ok=os.environ['RETIREMENT_STATUS']=='0'
-          evolution_ok=os.environ['EVOLUTION_STATUS']=='0'
           core_ok=source_ok and apx_ok
-          latest=0
           try: latest=json.loads(Path('apx/state.json').read_text()).get('latestDraw',0)
-          except Exception: pass
+          except Exception: latest=0
           now=datetime.now(timezone.utc).isoformat()
           path.write_text(json.dumps({
-            'updater':'backup',
-            'pass':int(os.environ['PASS_NUMBER']),
-            'lastAttemptAt':now,
+            'updater':'backup','pass':1,'lastAttemptAt':now,
             'lastSuccessAt':now if core_ok else old.get('lastSuccessAt'),
-            'success':core_ok,
-            'sourceSuccess':source_ok,
-            'apxSuccess':apx_ok,
-            'retirementSuccess':retirement_ok,
-            'evolutionSuccess':evolution_ok,
-            'researchHealthy':retirement_ok and evolution_ok,
+            'success':core_ok,'sourceSuccess':source_ok,'apxSuccess':apx_ok,
+            'retirementSuccess':os.environ['RETIREMENT_STATUS']=='0',
+            'evolutionSuccess':os.environ['EVOLUTION_STATUS']=='0',
+            'researchHealthy':os.environ['RETIREMENT_STATUS']=='0' and os.environ['EVOLUTION_STATUS']=='0',
             'latestDraw':latest,
             'consecutiveFailures':0 if core_ok else int(old.get('consecutiveFailures',0))+1,
-            'pollIntervalSeconds':65,
-            'architecture':'core-live-independent-of-research-modules'
+            'scheduledIntervalMinutes':5,
+            'architecture':'single-complete-backup-poll'
           },indent=2))
           PY
 
-            git add v0/cloud_state.json
-            git add -A apx
-            if ! git diff --cached --quiet; then
-              git commit -m "Backup Cash Pop poll $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-              for attempt in 1 2 3; do
-                git pull --rebase origin main && git push origin main && break
-                sleep 4
-              done
-            fi
-            if [ "$pass" -lt 2 ]; then sleep 65; fi
-          done
+          git add v0/cloud_state.json
+          git add -A apx
+          if ! git diff --cached --quiet; then
+            git commit -m "Backup Cash Pop poll $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            for attempt in 1 2 3; do
+              git pull --rebase origin main && git push origin main && exit 0
+              sleep 4
+            done
+            exit 1
+          fi
