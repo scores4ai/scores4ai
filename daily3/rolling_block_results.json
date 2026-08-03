@@ -1,0 +1,755 @@
+{
+  "version": "Daily 3 Rolling Block Stability Phase 2",
+  "archiveSha256": "49a97dd6d3dd780b6911175047023ef8e67d769abe4a4ceea4623703a11a0859",
+  "warmupDraws": 1000,
+  "blockSize": 1000,
+  "blockCount": 12,
+  "integrity": {
+    "futureDataAccess": false,
+    "predictionsMadeSequentially": true,
+    "parametersFixed": true,
+    "incrementalEquivalent": true,
+    "timeoutSafeStatistics": true
+  },
+  "overall": [
+    {
+      "model": "last_draw",
+      "tested": 11100,
+      "exactHits": 10,
+      "exactAccuracy": 0.0009009009009009009,
+      "exactZ": -0.33033033033033027,
+      "positionAccuracy": [
+        0.1018018018018018,
+        0.10099099099099099,
+        0.10108108108108108
+      ],
+      "blocksWon": 5
+    },
+    {
+      "model": "frequency_position",
+      "tested": 11100,
+      "exactHits": 6,
+      "exactAccuracy": 0.0005405405405405405,
+      "exactZ": -1.5315315315315317,
+      "positionAccuracy": [
+        0.10288288288288289,
+        0.09774774774774775,
+        0.10216216216216216
+      ],
+      "blocksWon": 3
+    },
+    {
+      "model": "uniform_random",
+      "tested": 11100,
+      "exactHits": 11,
+      "exactAccuracy": 0.000990990990990991,
+      "exactZ": -0.030030030030029926,
+      "positionAccuracy": [
+        0.10558558558558559,
+        0.1009009009009009,
+        0.09702702702702702
+      ],
+      "blocksWon": 2
+    },
+    {
+      "model": "position_transition_1",
+      "tested": 11100,
+      "exactHits": 6,
+      "exactAccuracy": 0.0005405405405405405,
+      "exactZ": -1.5315315315315317,
+      "positionAccuracy": [
+        0.09828828828828828,
+        0.10027027027027027,
+        0.10324324324324324
+      ],
+      "blocksWon": 2
+    }
+  ],
+  "blocks": [
+    {
+      "block": 1,
+      "startSequence": 1001,
+      "endSequence": 2000,
+      "startDate": "2011-05-17",
+      "endDate": "2012-10-01",
+      "leaderboard": [
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "exactZ": 0.0,
+          "positionAccuracy": [
+            0.12,
+            0.093,
+            0.085
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.109,
+            0.099,
+            0.089
+          ]
+        },
+        {
+          "model": "frequency_position",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.107,
+            0.086,
+            0.103
+          ]
+        },
+        {
+          "model": "position_transition_1",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.099,
+            0.1,
+            0.086
+          ]
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "startSequence": 2001,
+      "endSequence": 3000,
+      "startDate": "2012-10-02",
+      "endDate": "2014-02-15",
+      "leaderboard": [
+        {
+          "model": "position_transition_1",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "exactZ": 0.0,
+          "positionAccuracy": [
+            0.084,
+            0.097,
+            0.102
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.107,
+            0.103,
+            0.112
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.094,
+            0.093,
+            0.104
+          ]
+        },
+        {
+          "model": "frequency_position",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.084,
+            0.094,
+            0.097
+          ]
+        }
+      ]
+    },
+    {
+      "block": 3,
+      "startSequence": 3001,
+      "endSequence": 4000,
+      "startDate": "2014-02-16",
+      "endDate": "2015-07-01",
+      "leaderboard": [
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "exactZ": 2.0010007506255474,
+          "positionAccuracy": [
+            0.105,
+            0.111,
+            0.101
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "exactZ": 1.0005003753127737,
+          "positionAccuracy": [
+            0.098,
+            0.102,
+            0.094
+          ]
+        },
+        {
+          "model": "position_transition_1",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "exactZ": 0.0,
+          "positionAccuracy": [
+            0.106,
+            0.097,
+            0.105
+          ]
+        },
+        {
+          "model": "frequency_position",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.109,
+            0.088,
+            0.111
+          ]
+        }
+      ]
+    },
+    {
+      "block": 4,
+      "startSequence": 4001,
+      "endSequence": 5000,
+      "startDate": "2015-07-02",
+      "endDate": "2016-11-12",
+      "leaderboard": [
+        {
+          "model": "position_transition_1",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "exactZ": 1.0005003753127737,
+          "positionAccuracy": [
+            0.095,
+            0.093,
+            0.113
+          ]
+        },
+        {
+          "model": "frequency_position",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "exactZ": 0.0,
+          "positionAccuracy": [
+            0.107,
+            0.113,
+            0.103
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.11,
+            0.102,
+            0.106
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.094,
+            0.097,
+            0.106
+          ]
+        }
+      ]
+    },
+    {
+      "block": 5,
+      "startSequence": 5001,
+      "endSequence": 6000,
+      "startDate": "2016-11-13",
+      "endDate": "2018-03-27",
+      "leaderboard": [
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "exactZ": 1.0005003753127737,
+          "positionAccuracy": [
+            0.113,
+            0.085,
+            0.101
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "exactZ": 0.0,
+          "positionAccuracy": [
+            0.123,
+            0.096,
+            0.102
+          ]
+        },
+        {
+          "model": "position_transition_1",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.101,
+            0.1,
+            0.102
+          ]
+        },
+        {
+          "model": "frequency_position",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.093,
+            0.096,
+            0.109
+          ]
+        }
+      ]
+    },
+    {
+      "block": 6,
+      "startSequence": 6001,
+      "endSequence": 7000,
+      "startDate": "2018-03-28",
+      "endDate": "2019-08-09",
+      "leaderboard": [
+        {
+          "model": "frequency_position",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "exactZ": 0.0,
+          "positionAccuracy": [
+            0.113,
+            0.101,
+            0.092
+          ]
+        },
+        {
+          "model": "position_transition_1",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "exactZ": 0.0,
+          "positionAccuracy": [
+            0.099,
+            0.107,
+            0.099
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.093,
+            0.108,
+            0.096
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.082,
+            0.091,
+            0.089
+          ]
+        }
+      ]
+    },
+    {
+      "block": 7,
+      "startSequence": 7001,
+      "endSequence": 8000,
+      "startDate": "2019-08-10",
+      "endDate": "2020-12-21",
+      "leaderboard": [
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "exactZ": 2.0010007506255474,
+          "positionAccuracy": [
+            0.111,
+            0.111,
+            0.104
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.094,
+            0.117,
+            0.104
+          ]
+        },
+        {
+          "model": "frequency_position",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.094,
+            0.104,
+            0.099
+          ]
+        },
+        {
+          "model": "position_transition_1",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.077,
+            0.1,
+            0.099
+          ]
+        }
+      ]
+    },
+    {
+      "block": 8,
+      "startSequence": 8001,
+      "endSequence": 9000,
+      "startDate": "2020-12-22",
+      "endDate": "2022-05-05",
+      "leaderboard": [
+        {
+          "model": "frequency_position",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "exactZ": 1.0005003753127737,
+          "positionAccuracy": [
+            0.12,
+            0.11,
+            0.099
+          ]
+        },
+        {
+          "model": "position_transition_1",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "exactZ": 0.0,
+          "positionAccuracy": [
+            0.116,
+            0.095,
+            0.102
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "exactZ": 0.0,
+          "positionAccuracy": [
+            0.112,
+            0.098,
+            0.089
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.11,
+            0.095,
+            0.103
+          ]
+        }
+      ]
+    },
+    {
+      "block": 9,
+      "startSequence": 9001,
+      "endSequence": 10000,
+      "startDate": "2022-05-06",
+      "endDate": "2023-09-17",
+      "leaderboard": [
+        {
+          "model": "frequency_position",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "exactZ": 1.0005003753127737,
+          "positionAccuracy": [
+            0.112,
+            0.094,
+            0.104
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "exactZ": 0.0,
+          "positionAccuracy": [
+            0.112,
+            0.098,
+            0.101
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "exactZ": 0.0,
+          "positionAccuracy": [
+            0.09,
+            0.097,
+            0.102
+          ]
+        },
+        {
+          "model": "position_transition_1",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.101,
+            0.096,
+            0.105
+          ]
+        }
+      ]
+    },
+    {
+      "block": 10,
+      "startSequence": 10001,
+      "endSequence": 11000,
+      "startDate": "2023-09-18",
+      "endDate": "2025-01-29",
+      "leaderboard": [
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "exactZ": 1.0005003753127737,
+          "positionAccuracy": [
+            0.106,
+            0.1,
+            0.094
+          ]
+        },
+        {
+          "model": "position_transition_1",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.098,
+            0.127,
+            0.116
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.104,
+            0.106,
+            0.102
+          ]
+        },
+        {
+          "model": "frequency_position",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.09,
+            0.103,
+            0.11
+          ]
+        }
+      ]
+    },
+    {
+      "block": 11,
+      "startSequence": 11001,
+      "endSequence": 12000,
+      "startDate": "2025-01-30",
+      "endDate": "2026-06-13",
+      "leaderboard": [
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "exactZ": 0.0,
+          "positionAccuracy": [
+            0.101,
+            0.109,
+            0.105
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "exactZ": 0.0,
+          "positionAccuracy": [
+            0.091,
+            0.101,
+            0.085
+          ]
+        },
+        {
+          "model": "position_transition_1",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.104,
+            0.091,
+            0.109
+          ]
+        },
+        {
+          "model": "frequency_position",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -1.0005003753127737,
+          "positionAccuracy": [
+            0.101,
+            0.084,
+            0.095
+          ]
+        }
+      ]
+    },
+    {
+      "block": 12,
+      "startSequence": 12001,
+      "endSequence": 12100,
+      "startDate": "2026-06-14",
+      "endDate": "2026-08-02",
+      "leaderboard": [
+        {
+          "model": "last_draw",
+          "tested": 100,
+          "exactHits": 2,
+          "exactAccuracy": 0.02,
+          "exactZ": 6.011333973099159,
+          "positionAccuracy": [
+            0.1,
+            0.17,
+            0.12
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 100,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -0.31638599858416633,
+          "positionAccuracy": [
+            0.13,
+            0.12,
+            0.13
+          ]
+        },
+        {
+          "model": "frequency_position",
+          "tested": 100,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -0.31638599858416633,
+          "positionAccuracy": [
+            0.12,
+            0.12,
+            0.12
+          ]
+        },
+        {
+          "model": "position_transition_1",
+          "tested": 100,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "exactZ": -0.31638599858416633,
+          "positionAccuracy": [
+            0.11,
+            0.1,
+            0.08
+          ]
+        }
+      ]
+    }
+  ],
+  "resultSha256": "544ca433488b79f585774b62ee3118a28a50f13e7d9b8360f18d3686a21c3882"
+}
