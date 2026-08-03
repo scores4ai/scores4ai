@@ -1,0 +1,41 @@
+name: Michigan Cash Pop minute watcher
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/cash-pop-minute-watcher.yml"
+      - "v0/minute_watcher.py"
+  schedule:
+    - cron: "0 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cash-pop-minute-watcher
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 58
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install watcher browser
+        run: |
+          pip install playwright
+          playwright install chromium
+
+      - name: Watch once per minute
+        run: |
+          git config user.name "cash-pop-minute-bot"
+          git config user.email "cash-pop-minute-bot@users.noreply.github.com"
+          python v0/minute_watcher.py
