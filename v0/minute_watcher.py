@@ -31,18 +31,22 @@ def run(cmd):
 
 
 def publish(draw):
-    run(['python', 'apx/engine.py'])
-    run(['python', 'apx/evolution.py'])
-    run(['python', 'apx/retirement.py'])
+    apx_ok = run(['python', 'apx/engine.py']) == 0
+    evolution_ok = run(['python', 'apx/evolution.py']) == 0 if apx_ok else False
+    retirement_ok = run(['python', 'apx/retirement.py']) == 0 if apx_ok else False
+    ledger_ok = run(['python', 'apx/ledger.py']) == 0 if apx_ok else False
     hb = {
         'updater': 'minute-watcher',
         'lastAttemptAt': now(),
-        'lastSuccessAt': now(),
-        'success': True,
+        'lastSuccessAt': now() if apx_ok else None,
+        'success': apx_ok,
         'sourceSuccess': True,
-        'apxSuccess': True,
+        'apxSuccess': apx_ok,
+        'evolutionSuccess': evolution_ok,
+        'retirementSuccess': retirement_ok,
+        'ledgerSuccess': ledger_ok,
         'latestDraw': draw,
-        'consecutiveFailures': 0,
+        'consecutiveFailures': 0 if apx_ok else 1,
         'pollIntervalSeconds': INTERVAL,
         'architecture': 'persistent-minute-watcher-plus-five-minute-backup',
     }
