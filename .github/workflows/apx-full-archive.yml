@@ -33,7 +33,7 @@ jobs:
       - name: Build timestamp-anchored archive
         run: python apx/archive_builder_v2.py
 
-      - name: Verify archive integrity
+      - name: Verify and summarize archive integrity
         run: |
           python - <<'PY'
           import json
@@ -47,14 +47,27 @@ jobs:
           assert v['chronological'] is True
           assert d['anchor']['agreeing'] >= 1
           assert len(d['sha256']) == 64
-          print({'drawCount':d['drawCount'],'firstDraw':d['firstDraw'],'latestDraw':d['latestDraw'],'anchorMatches':d['anchor']['matches'],'missingIds':v['missingDrawIdCount']})
+          summary={
+            'version':d['version'],
+            'updatedAt':d['updatedAt'],
+            'drawCount':d['drawCount'],
+            'firstDraw':d['firstDraw'],
+            'latestDraw':d['latestDraw'],
+            'sha256':d['sha256'],
+            'anchor':d['anchor'],
+            'validation':v,
+            'sourceYears':[2024,2025,2026],
+            'status':'VALIDATED'
+          }
+          Path('apx/full_archive_summary.json').write_text(json.dumps(summary,indent=2))
+          print(summary)
           PY
 
-      - name: Commit archive only
+      - name: Commit archive and summary only
         run: |
           git config user.name "apx-archive-bot"
           git config user.email "apx-archive-bot@users.noreply.github.com"
-          git add apx/full_archive.json
+          git add apx/full_archive.json apx/full_archive_summary.json
           if git diff --cached --quiet; then
             echo "Archive already current"
             exit 0
