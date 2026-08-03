@@ -1,4 +1,4 @@
-name: Michigan Cash Pop continuous updater
+name: Michigan Cash Pop resilient live updater
 
 on:
   workflow_dispatch:
@@ -8,19 +8,19 @@ on:
       - "v0/github_updater.py"
       - "v0/fresh_runner.py"
   schedule:
-    - cron: "2 * * * *"
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: write
 
 concurrency:
-  group: cash-pop-continuous
+  group: cash-pop-resilient-live
   cancel-in-progress: true
 
 jobs:
   update-data:
     runs-on: ubuntu-latest
-    timeout-minutes: 65
+    timeout-minutes: 8
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -38,16 +38,18 @@ jobs:
           pip install playwright
           playwright install --with-deps chromium
 
-      - name: Poll every minute and publish immediately
+      - name: Poll repeatedly and publish new draws
         shell: bash
         run: |
           set +e
           git config user.name "cash-pop-bot"
           git config user.email "cash-pop-bot@users.noreply.github.com"
 
-          for pass in $(seq 1 57); do
+          for pass in 1 2 3 4; do
             echo "===== live pass $pass at $(date -u) ====="
-            git pull --rebase origin main || true
+            git fetch origin main
+            git reset --hard origin/main
+
             python v0/fresh_runner.py
             status=$?
 
@@ -58,18 +60,24 @@ jobs:
           s=json.loads(Path('v0/cloud_state.json').read_text())
           assert s.get('draws')
           assert s.get('pending')
-          assert s['pending']['draw']==s['latestDraw']+1
-          print('Latest',s['latestDraw'],'Next',s['pending']['draw'],'Updated',s.get('updatedAt'))
+          assert s['pending']['draw'] == s['latestDraw'] + 1
+          print('Latest', s['latestDraw'], 'Next', s['pending']['draw'], 'Updated', s.get('updatedAt'))
           PY
+
               git add v0/cloud_state.json
               if ! git diff --cached --quiet; then
                 git commit -m "Live Cash Pop update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-                git pull --rebase origin main || true
-                git push origin main || true
+                for attempt in 1 2 3; do
+                  git pull --rebase origin main && git push origin main && break
+                  echo "Push retry $attempt"
+                  sleep 5
+                done
+              else
+                echo "No new draw found on pass $pass"
               fi
             else
-              echo "Fetch failed; retrying in one minute"
+              echo "Source fetch failed on pass $pass"
             fi
 
-            sleep 60
+            if [ "$pass" -lt 4 ]; then sleep 65; fi
           done
