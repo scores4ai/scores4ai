@@ -1,0 +1,468 @@
+{
+  "version": "Daily 3 Transition Replay Phase 1",
+  "archiveSha256": "49a97dd6d3dd780b6911175047023ef8e67d769abe4a4ceea4623703a11a0859",
+  "warmupDraws": 200,
+  "integrity": {
+    "futureDataAccess": false,
+    "predictionsFrozenBeforeReveal": true
+  },
+  "transitionResult": {
+    "model": "position_transition_1",
+    "tested": 11900,
+    "exactHits": 7,
+    "exactAccuracy": 0.000588235294117647,
+    "atLeastOnePositionHits": 3250,
+    "atLeastOnePositionAccuracy": 0.27310924369747897,
+    "positionHits": [
+      1166,
+      1201,
+      1224
+    ],
+    "positionAccuracy": [
+      0.09798319327731092,
+      0.10092436974789916,
+      0.10285714285714286
+    ]
+  },
+  "baselineResults": [
+    {
+      "model": "last_draw",
+      "tested": 11900,
+      "exactHits": 11,
+      "exactAccuracy": 0.0009243697478991597,
+      "boxHits": 64,
+      "boxAccuracy": 0.005378151260504202,
+      "atLeastOnePositionHits": 3235,
+      "atLeastOnePositionAccuracy": 0.2718487394957983,
+      "positionHits": [
+        1209,
+        1211,
+        1186
+      ],
+      "positionAccuracy": [
+        0.10159663865546219,
+        0.10176470588235294,
+        0.09966386554621849
+      ]
+    },
+    {
+      "model": "uniform_random",
+      "tested": 11900,
+      "exactHits": 8,
+      "exactAccuracy": 0.0006722689075630252,
+      "boxHits": 59,
+      "boxAccuracy": 0.004957983193277311,
+      "atLeastOnePositionHits": 3190,
+      "atLeastOnePositionAccuracy": 0.2680672268907563,
+      "positionHits": [
+        1195,
+        1182,
+        1161
+      ],
+      "positionAccuracy": [
+        0.1004201680672269,
+        0.09932773109243698,
+        0.09756302521008403
+      ]
+    },
+    {
+      "model": "frequency_position",
+      "tested": 11900,
+      "exactHits": 6,
+      "exactAccuracy": 0.0005042016806722689,
+      "boxHits": 60,
+      "boxAccuracy": 0.005042016806722689,
+      "atLeastOnePositionHits": 3272,
+      "atLeastOnePositionAccuracy": 0.2749579831932773,
+      "positionHits": [
+        1220,
+        1170,
+        1204
+      ],
+      "positionAccuracy": [
+        0.10252100840336134,
+        0.09831932773109243,
+        0.1011764705882353
+      ]
+    }
+  ],
+  "beatBestBaselineExact": false,
+  "samples": [
+    {
+      "sequence": 201,
+      "knownThrough": 200,
+      "prediction": [
+        3,
+        9,
+        7
+      ],
+      "actual": [
+        7,
+        9,
+        9
+      ],
+      "fingerprint": "46873f2bb8d8bedb8afd5039e6d8691b23814b6a2fc068a9a30b929cbf90c625"
+    },
+    {
+      "sequence": 202,
+      "knownThrough": 201,
+      "prediction": [
+        1,
+        1,
+        4
+      ],
+      "actual": [
+        4,
+        1,
+        6
+      ],
+      "fingerprint": "7c04ef021810ea0e829dd5b85b3d18b9cd531598c65c618b27961dc8cb5846d8"
+    },
+    {
+      "sequence": 203,
+      "knownThrough": 202,
+      "prediction": [
+        5,
+        9,
+        1
+      ],
+      "actual": [
+        0,
+        1,
+        5
+      ],
+      "fingerprint": "7397f6d1f25970ea9e7539be107e4c8b0af0efe8e4fd1f13d61eeebaa618f576"
+    },
+    {
+      "sequence": 204,
+      "knownThrough": 203,
+      "prediction": [
+        7,
+        9,
+        7
+      ],
+      "actual": [
+        4,
+        3,
+        8
+      ],
+      "fingerprint": "9b2ea21526324fbdcfd95e647ddd623dd27f75eab11b46a45941333b69c8ddf0"
+    },
+    {
+      "sequence": 205,
+      "knownThrough": 204,
+      "prediction": [
+        5,
+        2,
+        9
+      ],
+      "actual": [
+        2,
+        4,
+        5
+      ],
+      "fingerprint": "5ec3a2b69a8fece343820e434d77264bdb72ed0a8b53ac704c1cdaebd12d98c7"
+    },
+    {
+      "sequence": 206,
+      "knownThrough": 205,
+      "prediction": [
+        7,
+        6,
+        7
+      ],
+      "actual": [
+        2,
+        6,
+        5
+      ],
+      "fingerprint": "b163f00aa70b4028401ef374551b99ace4d7e73e4fa589e84ee1c3296fd722b5"
+    },
+    {
+      "sequence": 207,
+      "knownThrough": 206,
+      "prediction": [
+        7,
+        1,
+        7
+      ],
+      "actual": [
+        9,
+        3,
+        4
+      ],
+      "fingerprint": "abc8cf426137cdf50f0a5b5c5194ce52818298c7132d8bee0914483f96dc9cb4"
+    },
+    {
+      "sequence": 208,
+      "knownThrough": 207,
+      "prediction": [
+        5,
+        2,
+        4
+      ],
+      "actual": [
+        1,
+        6,
+        1
+      ],
+      "fingerprint": "efe66bbdd140ba7088a986ab153c679f7b67c5f54087e0026f2e78f0ea69a1fe"
+    },
+    {
+      "sequence": 209,
+      "knownThrough": 208,
+      "prediction": [
+        7,
+        1,
+        8
+      ],
+      "actual": [
+        9,
+        5,
+        9
+      ],
+      "fingerprint": "1dacd74451784618ed4888db91b86e93028c5973a37e55d326215f3685269be4"
+    },
+    {
+      "sequence": 210,
+      "knownThrough": 209,
+      "prediction": [
+        1,
+        6,
+        4
+      ],
+      "actual": [
+        3,
+        8,
+        9
+      ],
+      "fingerprint": "7305d9f1b46bad3e3091203cfc681d7544fa3c91734107c208d745b5888965db"
+    },
+    {
+      "sequence": 211,
+      "knownThrough": 210,
+      "prediction": [
+        0,
+        4,
+        4
+      ],
+      "actual": [
+        6,
+        7,
+        7
+      ],
+      "fingerprint": "bde5d888012e53436f7b9c15847749769593daa8afe44fef228b3674e16caf4d"
+    },
+    {
+      "sequence": 212,
+      "knownThrough": 211,
+      "prediction": [
+        7,
+        2,
+        4
+      ],
+      "actual": [
+        7,
+        3,
+        5
+      ],
+      "fingerprint": "38519f3425b8dc944c76602e2b9763544a446c463d231455c3929302dfcf68c3"
+    },
+    {
+      "sequence": 213,
+      "knownThrough": 212,
+      "prediction": [
+        1,
+        2,
+        7
+      ],
+      "actual": [
+        3,
+        1,
+        7
+      ],
+      "fingerprint": "962ce3ced2e0a5fba748baf1ece9d03fc2d29a8aceaa1f80aa5d360d3c218a4d"
+    },
+    {
+      "sequence": 214,
+      "knownThrough": 213,
+      "prediction": [
+        0,
+        9,
+        4
+      ],
+      "actual": [
+        2,
+        6,
+        0
+      ],
+      "fingerprint": "b27736470c95a17da7fc5e751ad2e1610421a0cf0e7524ad25a5f9cadc363fca"
+    },
+    {
+      "sequence": 215,
+      "knownThrough": 214,
+      "prediction": [
+        7,
+        5,
+        3
+      ],
+      "actual": [
+        6,
+        1,
+        9
+      ],
+      "fingerprint": "47fb6206b7edf24e1b9a31e50c5a50ad68cfef1e327c17470accc72f058518e2"
+    },
+    {
+      "sequence": 216,
+      "knownThrough": 215,
+      "prediction": [
+        7,
+        9,
+        7
+      ],
+      "actual": [
+        1,
+        0,
+        3
+      ],
+      "fingerprint": "8e230063140f67a7d28f00c1ec6c9be5ed2011b733df86f9f1770deb6a42bb58"
+    },
+    {
+      "sequence": 217,
+      "knownThrough": 216,
+      "prediction": [
+        7,
+        0,
+        0
+      ],
+      "actual": [
+        3,
+        1,
+        0
+      ],
+      "fingerprint": "146f7ef2a45cedd78f101b59f3584c6fc3b02e28bd58de3e8df2bb722f85c75f"
+    },
+    {
+      "sequence": 218,
+      "knownThrough": 217,
+      "prediction": [
+        0,
+        9,
+        9
+      ],
+      "actual": [
+        0,
+        5,
+        2
+      ],
+      "fingerprint": "982273f5518c7d725a19ba6001490fd647c0784202645dc7ba353c2fa3fd82e0"
+    },
+    {
+      "sequence": 219,
+      "knownThrough": 218,
+      "prediction": [
+        7,
+        6,
+        7
+      ],
+      "actual": [
+        1,
+        5,
+        3
+      ],
+      "fingerprint": "2da9550421cbc4957545101560f60cf9274e9206cb5802ea08d17a190f2c8611"
+    },
+    {
+      "sequence": 220,
+      "knownThrough": 219,
+      "prediction": [
+        7,
+        6,
+        0
+      ],
+      "actual": [
+        7,
+        7,
+        5
+      ],
+      "fingerprint": "05a012054159b4a992c1406f581c224d9fc49263cac5508de220048d262054b9"
+    },
+    {
+      "sequence": 221,
+      "knownThrough": 220,
+      "prediction": [
+        1,
+        2,
+        7
+      ],
+      "actual": [
+        7,
+        9,
+        2
+      ],
+      "fingerprint": "5363d2081e4b8e4b17df981553dfbe3005a8ac24162dc24683ddd937bb3e2dc4"
+    },
+    {
+      "sequence": 222,
+      "knownThrough": 221,
+      "prediction": [
+        1,
+        1,
+        7
+      ],
+      "actual": [
+        0,
+        7,
+        2
+      ],
+      "fingerprint": "8607f702ef355bb4995d6f9c4db2aafec34c16d1f3bb5e5a85fdfe140141902e"
+    },
+    {
+      "sequence": 223,
+      "knownThrough": 222,
+      "prediction": [
+        7,
+        2,
+        7
+      ],
+      "actual": [
+        3,
+        6,
+        6
+      ],
+      "fingerprint": "eb819312580d1773853a87e3c3ee9f25b6b5031bef1edad0cba09fb0670552b0"
+    },
+    {
+      "sequence": 224,
+      "knownThrough": 223,
+      "prediction": [
+        0,
+        1,
+        1
+      ],
+      "actual": [
+        8,
+        6,
+        2
+      ],
+      "fingerprint": "a772053c81efbc058fa9acc6f75d0e5a2dc817c927ef49fa43986053baa74286"
+    },
+    {
+      "sequence": 225,
+      "knownThrough": 224,
+      "prediction": [
+        8,
+        1,
+        7
+      ],
+      "actual": [
+        3,
+        1,
+        9
+      ],
+      "fingerprint": "be762f7fff755c82bc9ed5a99a26442efe345599824d920ca0ac5bbea480e817"
+    }
+  ],
+  "resultSha256": "14672cfd31e2e04576400ca0b81c3d9c854f94a73329fbd0477cdc13864afc18"
+}
