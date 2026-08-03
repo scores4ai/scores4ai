@@ -1,28 +1,21 @@
-name: Michigan Cash Pop resilient live updater
+name: Michigan Cash Pop continuous live updater
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/cash-pop-cloud.yml"
-      - "v0/github_updater.py"
-      - "v0/fresh_runner.py"
-      - "v0/robust_runner.py"
-      - "apx/engine.py"
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "2 * * * *"
 
 permissions:
   contents: write
 
 concurrency:
-  group: cash-pop-resilient-live
-  cancel-in-progress: true
+  group: cash-pop-continuous-live
+  cancel-in-progress: false
 
 jobs:
   update-data:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 59
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -40,22 +33,32 @@ jobs:
           pip install playwright
           playwright install --with-deps chromium
 
-      - name: Poll, rebuild APX, and publish atomically
+      - name: Poll every minute, rebuild APX, and publish atomically
         shell: bash
         run: |
           set +e
           git config user.name "cash-pop-bot"
           git config user.email "cash-pop-bot@users.noreply.github.com"
 
-          for pass in 1 2 3 4; do
-            echo "===== live pass $pass at $(date -u) ====="
+          for pass in $(seq 1 50); do
+            echo "===== continuous pass $pass at $(date -u) ====="
             git fetch origin main
             git reset --hard origin/main
 
-            python v0/robust_runner.py
-            status=$?
+            before_draw=$(python - <<'PY'
+          import json
+          from pathlib import Path
+          try:
+              print(json.loads(Path('v0/cloud_state.json').read_text()).get('latestDraw', 0))
+          except Exception:
+              print(0)
+          PY
+          )
 
-            if [ $status -eq 0 ]; then
+            python v0/robust_runner.py
+            source_status=$?
+
+            if [ $source_status -eq 0 ]; then
               python apx/engine.py
               apx_status=$?
 
@@ -69,19 +72,38 @@ jobs:
           assert live['pending']['draw'] == live['latestDraw'] + 1
           assert apx['latestDraw'] == live['latestDraw']
           assert apx['nextDraw'] == live['latestDraw'] + 1
+          assert apx.get('pendingPrediction', {}).get('draw') == apx['nextDraw']
           print('Atomic update verified:', live['latestDraw'], apx['latestDraw'], apx['nextDraw'])
           PY
 
-                git add v0/cloud_state.json apx/state.json
-                if ! git diff --cached --quiet; then
-                  git commit -m "Live Cash Pop and APX update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-                  for attempt in 1 2 3; do
-                    git pull --rebase origin main && git push origin main && break
-                    echo "Push retry $attempt"
-                    sleep 5
-                  done
+                after_draw=$(python - <<'PY'
+          import json
+          from pathlib import Path
+          print(json.loads(Path('v0/cloud_state.json').read_text()).get('latestDraw', 0))
+          PY
+          )
+
+                # Publish when a new draw arrives. Also publish a heartbeat every five passes
+                # so the dashboard can distinguish a running poller from a stopped workflow.
+                if [ "$after_draw" != "$before_draw" ] || [ $((pass % 5)) -eq 0 ]; then
+                  git add v0/cloud_state.json apx/state.json
+                  if ! git diff --cached --quiet; then
+                    git commit -m "Live Cash Pop and APX update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+                    pushed=false
+                    for attempt in 1 2 3; do
+                      if git pull --rebase origin main && git push origin main; then
+                        pushed=true
+                        break
+                      fi
+                      echo "Push retry $attempt"
+                      sleep 5
+                    done
+                    if [ "$pushed" != true ]; then
+                      echo "Unable to publish pass $pass"
+                    fi
+                  fi
                 else
-                  echo "No new draw found on pass $pass"
+                  echo "No new draw on pass $pass; continuing"
                 fi
               else
                 echo "APX rebuild failed on pass $pass"
@@ -90,5 +112,5 @@ jobs:
               echo "Source fetch failed on pass $pass"
             fi
 
-            if [ "$pass" -lt 4 ]; then sleep 65; fi
+            if [ "$pass" -lt 50 ]; then sleep 60; fi
           done
