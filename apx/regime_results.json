@@ -1,0 +1,1034 @@
+{
+  "version": "Regime Results Phase 1",
+  "archiveSha256": "c16df9a10a560cb987c20709f43e7719cf2c470f5ce5344bd5af1531f8b544b4",
+  "warmup": 200,
+  "steps": 5000,
+  "futureDataAccess": false,
+  "featuresComputedBeforeReveal": true,
+  "overall": [
+    {
+      "model": "cycle_8",
+      "tested": 5000,
+      "hits": 1694,
+      "accuracy": 0.3388,
+      "excessOverRandom": 0.005466666666666675
+    },
+    {
+      "model": "markov_1",
+      "tested": 5000,
+      "hits": 1692,
+      "accuracy": 0.3384,
+      "excessOverRandom": 0.005066666666666664
+    },
+    {
+      "model": "frequency_all",
+      "tested": 5000,
+      "hits": 1687,
+      "accuracy": 0.3374,
+      "excessOverRandom": 0.004066666666666663
+    },
+    {
+      "model": "gap_longest",
+      "tested": 5000,
+      "hits": 1684,
+      "accuracy": 0.3368,
+      "excessOverRandom": 0.0034666666666666734
+    },
+    {
+      "model": "lag_vote",
+      "tested": 5000,
+      "hits": 1664,
+      "accuracy": 0.3328,
+      "excessOverRandom": -0.0005333333333333301
+    },
+    {
+      "model": "frequency_24",
+      "tested": 5000,
+      "hits": 1663,
+      "accuracy": 0.3326,
+      "excessOverRandom": -0.0007333333333333081
+    },
+    {
+      "model": "cycle_20",
+      "tested": 5000,
+      "hits": 1646,
+      "accuracy": 0.3292,
+      "excessOverRandom": -0.004133333333333322
+    },
+    {
+      "model": "frequency_60",
+      "tested": 5000,
+      "hits": 1612,
+      "accuracy": 0.3224,
+      "excessOverRandom": -0.010933333333333295
+    }
+  ],
+  "regimes": [
+    {
+      "regime": "band:balanced",
+      "tested": 3515,
+      "winner": {
+        "model": "gap_longest",
+        "tested": 3515,
+        "hits": 1193,
+        "accuracy": 0.339402560455192,
+        "excessOverRandom": 0.0060692271218587
+      },
+      "leaderboard": [
+        {
+          "model": "gap_longest",
+          "tested": 3515,
+          "hits": 1193,
+          "accuracy": 0.339402560455192,
+          "excessOverRandom": 0.0060692271218587
+        },
+        {
+          "model": "markov_1",
+          "tested": 3515,
+          "hits": 1191,
+          "accuracy": 0.33883357041251777,
+          "excessOverRandom": 0.005500237079184456
+        },
+        {
+          "model": "cycle_8",
+          "tested": 3515,
+          "hits": 1187,
+          "accuracy": 0.3376955903271693,
+          "excessOverRandom": 0.004362256993835967
+        },
+        {
+          "model": "frequency_all",
+          "tested": 3515,
+          "hits": 1170,
+          "accuracy": 0.3328591749644381,
+          "excessOverRandom": -0.00047415836889519447
+        },
+        {
+          "model": "frequency_24",
+          "tested": 3515,
+          "hits": 1158,
+          "accuracy": 0.3294452347083926,
+          "excessOverRandom": -0.003888098624940717
+        },
+        {
+          "model": "lag_vote",
+          "tested": 3515,
+          "hits": 1158,
+          "accuracy": 0.3294452347083926,
+          "excessOverRandom": -0.003888098624940717
+        },
+        {
+          "model": "cycle_20",
+          "tested": 3515,
+          "hits": 1147,
+          "accuracy": 0.3263157894736842,
+          "excessOverRandom": -0.007017543859649089
+        },
+        {
+          "model": "frequency_60",
+          "tested": 3515,
+          "hits": 1107,
+          "accuracy": 0.31493598862019917,
+          "excessOverRandom": -0.018397344713134145
+        }
+      ]
+    },
+    {
+      "regime": "band:high-heavy",
+      "tested": 1168,
+      "winner": {
+        "model": "cycle_20",
+        "tested": 1168,
+        "hits": 404,
+        "accuracy": 0.3458904109589041,
+        "excessOverRandom": 0.01255707762557079
+      },
+      "leaderboard": [
+        {
+          "model": "cycle_20",
+          "tested": 1168,
+          "hits": 404,
+          "accuracy": 0.3458904109589041,
+          "excessOverRandom": 0.01255707762557079
+        },
+        {
+          "model": "frequency_all",
+          "tested": 1168,
+          "hits": 404,
+          "accuracy": 0.3458904109589041,
+          "excessOverRandom": 0.01255707762557079
+        },
+        {
+          "model": "frequency_24",
+          "tested": 1168,
+          "hits": 402,
+          "accuracy": 0.3441780821917808,
+          "excessOverRandom": 0.010844748858447495
+        },
+        {
+          "model": "cycle_8",
+          "tested": 1168,
+          "hits": 401,
+          "accuracy": 0.3433219178082192,
+          "excessOverRandom": 0.009988584474885875
+        },
+        {
+          "model": "frequency_60",
+          "tested": 1168,
+          "hits": 400,
+          "accuracy": 0.3424657534246575,
+          "excessOverRandom": 0.0091324200913242
+        },
+        {
+          "model": "markov_1",
+          "tested": 1168,
+          "hits": 397,
+          "accuracy": 0.3398972602739726,
+          "excessOverRandom": 0.006563926940639286
+        },
+        {
+          "model": "lag_vote",
+          "tested": 1168,
+          "hits": 388,
+          "accuracy": 0.3321917808219178,
+          "excessOverRandom": -0.0011415525114155112
+        },
+        {
+          "model": "gap_longest",
+          "tested": 1168,
+          "hits": 384,
+          "accuracy": 0.3287671232876712,
+          "excessOverRandom": -0.0045662100456621
+        }
+      ]
+    },
+    {
+      "regime": "band:low-heavy",
+      "tested": 317,
+      "winner": {
+        "model": "lag_vote",
+        "tested": 317,
+        "hits": 118,
+        "accuracy": 0.3722397476340694,
+        "excessOverRandom": 0.0389064143007361
+      },
+      "leaderboard": [
+        {
+          "model": "lag_vote",
+          "tested": 317,
+          "hits": 118,
+          "accuracy": 0.3722397476340694,
+          "excessOverRandom": 0.0389064143007361
+        },
+        {
+          "model": "frequency_all",
+          "tested": 317,
+          "hits": 113,
+          "accuracy": 0.35646687697160884,
+          "excessOverRandom": 0.023133543638275522
+        },
+        {
+          "model": "gap_longest",
+          "tested": 317,
+          "hits": 107,
+          "accuracy": 0.33753943217665616,
+          "excessOverRandom": 0.0042060988433228474
+        },
+        {
+          "model": "cycle_8",
+          "tested": 317,
+          "hits": 106,
+          "accuracy": 0.334384858044164,
+          "excessOverRandom": 0.001051524710830698
+        },
+        {
+          "model": "frequency_60",
+          "tested": 317,
+          "hits": 105,
+          "accuracy": 0.3312302839116719,
+          "excessOverRandom": -0.002103049421661396
+        },
+        {
+          "model": "markov_1",
+          "tested": 317,
+          "hits": 104,
+          "accuracy": 0.3280757097791798,
+          "excessOverRandom": -0.00525762355415349
+        },
+        {
+          "model": "frequency_24",
+          "tested": 317,
+          "hits": 103,
+          "accuracy": 0.3249211356466877,
+          "excessOverRandom": -0.00841219768664564
+        },
+        {
+          "model": "cycle_20",
+          "tested": 317,
+          "hits": 95,
+          "accuracy": 0.2996845425867508,
+          "excessOverRandom": -0.0336487907465825
+        }
+      ]
+    },
+    {
+      "regime": "entropy:high",
+      "tested": 3803,
+      "winner": {
+        "model": "frequency_all",
+        "tested": 3803,
+        "hits": 1301,
+        "accuracy": 0.3420983434130949,
+        "excessOverRandom": 0.008765010079761604
+      },
+      "leaderboard": [
+        {
+          "model": "frequency_all",
+          "tested": 3803,
+          "hits": 1301,
+          "accuracy": 0.3420983434130949,
+          "excessOverRandom": 0.008765010079761604
+        },
+        {
+          "model": "markov_1",
+          "tested": 3803,
+          "hits": 1299,
+          "accuracy": 0.34157244280830923,
+          "excessOverRandom": 0.008239109474975914
+        },
+        {
+          "model": "cycle_8",
+          "tested": 3803,
+          "hits": 1283,
+          "accuracy": 0.33736523797002366,
+          "excessOverRandom": 0.004031904636690342
+        },
+        {
+          "model": "gap_longest",
+          "tested": 3803,
+          "hits": 1282,
+          "accuracy": 0.33710228766763084,
+          "excessOverRandom": 0.003768954334297525
+        },
+        {
+          "model": "lag_vote",
+          "tested": 3803,
+          "hits": 1260,
+          "accuracy": 0.33131738101498814,
+          "excessOverRandom": -0.002015952318345171
+        },
+        {
+          "model": "cycle_20",
+          "tested": 3803,
+          "hits": 1241,
+          "accuracy": 0.32632132526952407,
+          "excessOverRandom": -0.00701200806380925
+        },
+        {
+          "model": "frequency_24",
+          "tested": 3803,
+          "hits": 1241,
+          "accuracy": 0.32632132526952407,
+          "excessOverRandom": -0.00701200806380925
+        },
+        {
+          "model": "frequency_60",
+          "tested": 3803,
+          "hits": 1227,
+          "accuracy": 0.3226400210360242,
+          "excessOverRandom": -0.010693312297309132
+        }
+      ]
+    },
+    {
+      "regime": "entropy:mid",
+      "tested": 1197,
+      "winner": {
+        "model": "frequency_24",
+        "tested": 1197,
+        "hits": 422,
+        "accuracy": 0.35254803675856305,
+        "excessOverRandom": 0.01921470342522974
+      },
+      "leaderboard": [
+        {
+          "model": "frequency_24",
+          "tested": 1197,
+          "hits": 422,
+          "accuracy": 0.35254803675856305,
+          "excessOverRandom": 0.01921470342522974
+        },
+        {
+          "model": "cycle_8",
+          "tested": 1197,
+          "hits": 411,
+          "accuracy": 0.3433583959899749,
+          "excessOverRandom": 0.010025062656641603
+        },
+        {
+          "model": "cycle_20",
+          "tested": 1197,
+          "hits": 405,
+          "accuracy": 0.3383458646616541,
+          "excessOverRandom": 0.005012531328320802
+        },
+        {
+          "model": "lag_vote",
+          "tested": 1197,
+          "hits": 404,
+          "accuracy": 0.33751044277360065,
+          "excessOverRandom": 0.004177109440267335
+        },
+        {
+          "model": "gap_longest",
+          "tested": 1197,
+          "hits": 402,
+          "accuracy": 0.3358395989974937,
+          "excessOverRandom": 0.002506265664160401
+        },
+        {
+          "model": "markov_1",
+          "tested": 1197,
+          "hits": 393,
+          "accuracy": 0.3283208020050125,
+          "excessOverRandom": -0.005012531328320802
+        },
+        {
+          "model": "frequency_all",
+          "tested": 1197,
+          "hits": 386,
+          "accuracy": 0.32247284878863824,
+          "excessOverRandom": -0.01086048454469507
+        },
+        {
+          "model": "frequency_60",
+          "tested": 1197,
+          "hits": 385,
+          "accuracy": 0.3216374269005848,
+          "excessOverRandom": -0.011695906432748537
+        }
+      ]
+    },
+    {
+      "regime": "gap:compressed",
+      "tested": 3,
+      "winner": {
+        "model": "cycle_20",
+        "tested": 3,
+        "hits": 3,
+        "accuracy": 1.0,
+        "excessOverRandom": 0.6666666666666667
+      },
+      "leaderboard": [
+        {
+          "model": "cycle_20",
+          "tested": 3,
+          "hits": 3,
+          "accuracy": 1.0,
+          "excessOverRandom": 0.6666666666666667
+        },
+        {
+          "model": "cycle_8",
+          "tested": 3,
+          "hits": 2,
+          "accuracy": 0.6666666666666666,
+          "excessOverRandom": 0.3333333333333333
+        },
+        {
+          "model": "frequency_all",
+          "tested": 3,
+          "hits": 2,
+          "accuracy": 0.6666666666666666,
+          "excessOverRandom": 0.3333333333333333
+        },
+        {
+          "model": "frequency_24",
+          "tested": 3,
+          "hits": 1,
+          "accuracy": 0.3333333333333333,
+          "excessOverRandom": 0.0
+        },
+        {
+          "model": "frequency_60",
+          "tested": 3,
+          "hits": 1,
+          "accuracy": 0.3333333333333333,
+          "excessOverRandom": 0.0
+        },
+        {
+          "model": "lag_vote",
+          "tested": 3,
+          "hits": 1,
+          "accuracy": 0.3333333333333333,
+          "excessOverRandom": 0.0
+        },
+        {
+          "model": "markov_1",
+          "tested": 3,
+          "hits": 1,
+          "accuracy": 0.3333333333333333,
+          "excessOverRandom": 0.0
+        },
+        {
+          "model": "gap_longest",
+          "tested": 3,
+          "hits": 0,
+          "accuracy": 0.0,
+          "excessOverRandom": -0.3333333333333333
+        }
+      ]
+    },
+    {
+      "regime": "gap:normal",
+      "tested": 2775,
+      "winner": {
+        "model": "cycle_8",
+        "tested": 2775,
+        "hits": 955,
+        "accuracy": 0.3441441441441441,
+        "excessOverRandom": 0.010810810810810811
+      },
+      "leaderboard": [
+        {
+          "model": "cycle_8",
+          "tested": 2775,
+          "hits": 955,
+          "accuracy": 0.3441441441441441,
+          "excessOverRandom": 0.010810810810810811
+        },
+        {
+          "model": "gap_longest",
+          "tested": 2775,
+          "hits": 947,
+          "accuracy": 0.3412612612612613,
+          "excessOverRandom": 0.007927927927927958
+        },
+        {
+          "model": "markov_1",
+          "tested": 2775,
+          "hits": 939,
+          "accuracy": 0.33837837837837836,
+          "excessOverRandom": 0.005045045045045049
+        },
+        {
+          "model": "frequency_all",
+          "tested": 2775,
+          "hits": 933,
+          "accuracy": 0.3362162162162162,
+          "excessOverRandom": 0.002882882882882909
+        },
+        {
+          "model": "lag_vote",
+          "tested": 2775,
+          "hits": 913,
+          "accuracy": 0.32900900900900903,
+          "excessOverRandom": -0.00432432432432428
+        },
+        {
+          "model": "frequency_24",
+          "tested": 2775,
+          "hits": 909,
+          "accuracy": 0.32756756756756755,
+          "excessOverRandom": -0.005765765765765762
+        },
+        {
+          "model": "cycle_20",
+          "tested": 2775,
+          "hits": 897,
+          "accuracy": 0.3232432432432432,
+          "excessOverRandom": -0.010090090090090098
+        },
+        {
+          "model": "frequency_60",
+          "tested": 2775,
+          "hits": 886,
+          "accuracy": 0.3192792792792793,
+          "excessOverRandom": -0.014054054054054022
+        }
+      ]
+    },
+    {
+      "regime": "gap:stretched",
+      "tested": 2222,
+      "winner": {
+        "model": "frequency_24",
+        "tested": 2222,
+        "hits": 753,
+        "accuracy": 0.33888388838883887,
+        "excessOverRandom": 0.005550555055505557
+      },
+      "leaderboard": [
+        {
+          "model": "frequency_24",
+          "tested": 2222,
+          "hits": 753,
+          "accuracy": 0.33888388838883887,
+          "excessOverRandom": 0.005550555055505557
+        },
+        {
+          "model": "frequency_all",
+          "tested": 2222,
+          "hits": 752,
+          "accuracy": 0.3384338433843384,
+          "excessOverRandom": 0.005100510051005092
+        },
+        {
+          "model": "markov_1",
+          "tested": 2222,
+          "hits": 752,
+          "accuracy": 0.3384338433843384,
+          "excessOverRandom": 0.005100510051005092
+        },
+        {
+          "model": "lag_vote",
+          "tested": 2222,
+          "hits": 750,
+          "accuracy": 0.33753375337533753,
+          "excessOverRandom": 0.004200420042004216
+        },
+        {
+          "model": "cycle_20",
+          "tested": 2222,
+          "hits": 746,
+          "accuracy": 0.3357335733573357,
+          "excessOverRandom": 0.002400240024002409
+        },
+        {
+          "model": "cycle_8",
+          "tested": 2222,
+          "hits": 737,
+          "accuracy": 0.3316831683168317,
+          "excessOverRandom": -0.0016501650165016146
+        },
+        {
+          "model": "gap_longest",
+          "tested": 2222,
+          "hits": 737,
+          "accuracy": 0.3316831683168317,
+          "excessOverRandom": -0.0016501650165016146
+        },
+        {
+          "model": "frequency_60",
+          "tested": 2222,
+          "hits": 725,
+          "accuracy": 0.3262826282628263,
+          "excessOverRandom": -0.007050705070507035
+        }
+      ]
+    },
+    {
+      "regime": "parity:balanced",
+      "tested": 3466,
+      "winner": {
+        "model": "markov_1",
+        "tested": 3466,
+        "hits": 1204,
+        "accuracy": 0.3473744950952106,
+        "excessOverRandom": 0.014041161761877308
+      },
+      "leaderboard": [
+        {
+          "model": "markov_1",
+          "tested": 3466,
+          "hits": 1204,
+          "accuracy": 0.3473744950952106,
+          "excessOverRandom": 0.014041161761877308
+        },
+        {
+          "model": "cycle_8",
+          "tested": 3466,
+          "hits": 1184,
+          "accuracy": 0.34160415464512406,
+          "excessOverRandom": 0.008270821311790744
+        },
+        {
+          "model": "gap_longest",
+          "tested": 3466,
+          "hits": 1172,
+          "accuracy": 0.3381419503750721,
+          "excessOverRandom": 0.004808617041738794
+        },
+        {
+          "model": "lag_vote",
+          "tested": 3466,
+          "hits": 1170,
+          "accuracy": 0.33756491633006347,
+          "excessOverRandom": 0.004231582996730154
+        },
+        {
+          "model": "cycle_20",
+          "tested": 3466,
+          "hits": 1153,
+          "accuracy": 0.3326601269474899,
+          "excessOverRandom": -0.0006732063858433945
+        },
+        {
+          "model": "frequency_24",
+          "tested": 3466,
+          "hits": 1152,
+          "accuracy": 0.3323716099249856,
+          "excessOverRandom": -0.0009617234083477144
+        },
+        {
+          "model": "frequency_all",
+          "tested": 3466,
+          "hits": 1149,
+          "accuracy": 0.3315060588574726,
+          "excessOverRandom": -0.0018272744758607296
+        },
+        {
+          "model": "frequency_60",
+          "tested": 3466,
+          "hits": 1078,
+          "accuracy": 0.3110213502596653,
+          "excessOverRandom": -0.022311983073667996
+        }
+      ]
+    },
+    {
+      "regime": "parity:even-heavy",
+      "tested": 482,
+      "winner": {
+        "model": "frequency_all",
+        "tested": 482,
+        "hits": 168,
+        "accuracy": 0.34854771784232363,
+        "excessOverRandom": 0.01521438450899032
+      },
+      "leaderboard": [
+        {
+          "model": "frequency_all",
+          "tested": 482,
+          "hits": 168,
+          "accuracy": 0.34854771784232363,
+          "excessOverRandom": 0.01521438450899032
+        },
+        {
+          "model": "gap_longest",
+          "tested": 482,
+          "hits": 168,
+          "accuracy": 0.34854771784232363,
+          "excessOverRandom": 0.01521438450899032
+        },
+        {
+          "model": "frequency_24",
+          "tested": 482,
+          "hits": 167,
+          "accuracy": 0.34647302904564314,
+          "excessOverRandom": 0.013139695712309829
+        },
+        {
+          "model": "frequency_60",
+          "tested": 482,
+          "hits": 167,
+          "accuracy": 0.34647302904564314,
+          "excessOverRandom": 0.013139695712309829
+        },
+        {
+          "model": "cycle_20",
+          "tested": 482,
+          "hits": 162,
+          "accuracy": 0.3360995850622407,
+          "excessOverRandom": 0.0027662517289073763
+        },
+        {
+          "model": "cycle_8",
+          "tested": 482,
+          "hits": 162,
+          "accuracy": 0.3360995850622407,
+          "excessOverRandom": 0.0027662517289073763
+        },
+        {
+          "model": "lag_vote",
+          "tested": 482,
+          "hits": 162,
+          "accuracy": 0.3360995850622407,
+          "excessOverRandom": 0.0027662517289073763
+        },
+        {
+          "model": "markov_1",
+          "tested": 482,
+          "hits": 147,
+          "accuracy": 0.3049792531120332,
+          "excessOverRandom": -0.028354080221300093
+        }
+      ]
+    },
+    {
+      "regime": "parity:odd-heavy",
+      "tested": 1052,
+      "winner": {
+        "model": "frequency_all",
+        "tested": 1052,
+        "hits": 370,
+        "accuracy": 0.3517110266159696,
+        "excessOverRandom": 0.018377693282636276
+      },
+      "leaderboard": [
+        {
+          "model": "frequency_all",
+          "tested": 1052,
+          "hits": 370,
+          "accuracy": 0.3517110266159696,
+          "excessOverRandom": 0.018377693282636276
+        },
+        {
+          "model": "frequency_60",
+          "tested": 1052,
+          "hits": 367,
+          "accuracy": 0.3488593155893536,
+          "excessOverRandom": 0.01552598225602031
+        },
+        {
+          "model": "cycle_8",
+          "tested": 1052,
+          "hits": 348,
+          "accuracy": 0.33079847908745247,
+          "excessOverRandom": -0.0025348542458808465
+        },
+        {
+          "model": "frequency_24",
+          "tested": 1052,
+          "hits": 344,
+          "accuracy": 0.3269961977186312,
+          "excessOverRandom": -0.006337135614702116
+        },
+        {
+          "model": "gap_longest",
+          "tested": 1052,
+          "hits": 344,
+          "accuracy": 0.3269961977186312,
+          "excessOverRandom": -0.006337135614702116
+        },
+        {
+          "model": "markov_1",
+          "tested": 1052,
+          "hits": 341,
+          "accuracy": 0.32414448669201523,
+          "excessOverRandom": -0.009188846641318082
+        },
+        {
+          "model": "lag_vote",
+          "tested": 1052,
+          "hits": 332,
+          "accuracy": 0.3155893536121673,
+          "excessOverRandom": -0.017743979721166037
+        },
+        {
+          "model": "cycle_20",
+          "tested": 1052,
+          "hits": 331,
+          "accuracy": 0.314638783269962,
+          "excessOverRandom": -0.01869455006337134
+        }
+      ]
+    },
+    {
+      "regime": "repeat:high",
+      "tested": 854,
+      "winner": {
+        "model": "frequency_all",
+        "tested": 854,
+        "hits": 302,
+        "accuracy": 0.35362997658079626,
+        "excessOverRandom": 0.020296643247462942
+      },
+      "leaderboard": [
+        {
+          "model": "frequency_all",
+          "tested": 854,
+          "hits": 302,
+          "accuracy": 0.35362997658079626,
+          "excessOverRandom": 0.020296643247462942
+        },
+        {
+          "model": "frequency_24",
+          "tested": 854,
+          "hits": 295,
+          "accuracy": 0.34543325526932084,
+          "excessOverRandom": 0.012099921935987523
+        },
+        {
+          "model": "lag_vote",
+          "tested": 854,
+          "hits": 289,
+          "accuracy": 0.33840749414519905,
+          "excessOverRandom": 0.0050741608118657355
+        },
+        {
+          "model": "cycle_8",
+          "tested": 854,
+          "hits": 284,
+          "accuracy": 0.3325526932084309,
+          "excessOverRandom": -0.0007806401249024209
+        },
+        {
+          "model": "cycle_20",
+          "tested": 854,
+          "hits": 282,
+          "accuracy": 0.33021077283372363,
+          "excessOverRandom": -0.0031225604996096834
+        },
+        {
+          "model": "markov_1",
+          "tested": 854,
+          "hits": 281,
+          "accuracy": 0.32903981264637,
+          "excessOverRandom": -0.004293520686963315
+        },
+        {
+          "model": "gap_longest",
+          "tested": 854,
+          "hits": 277,
+          "accuracy": 0.32435597189695553,
+          "excessOverRandom": -0.008977361436377784
+        },
+        {
+          "model": "frequency_60",
+          "tested": 854,
+          "hits": 270,
+          "accuracy": 0.3161592505854801,
+          "excessOverRandom": -0.017174082747853203
+        }
+      ]
+    },
+    {
+      "regime": "repeat:low",
+      "tested": 1387,
+      "winner": {
+        "model": "gap_longest",
+        "tested": 1387,
+        "hits": 481,
+        "accuracy": 0.3467916366258111,
+        "excessOverRandom": 0.013458303292477769
+      },
+      "leaderboard": [
+        {
+          "model": "gap_longest",
+          "tested": 1387,
+          "hits": 481,
+          "accuracy": 0.3467916366258111,
+          "excessOverRandom": 0.013458303292477769
+        },
+        {
+          "model": "cycle_8",
+          "tested": 1387,
+          "hits": 467,
+          "accuracy": 0.33669790915645276,
+          "excessOverRandom": 0.0033645758231194423
+        },
+        {
+          "model": "frequency_all",
+          "tested": 1387,
+          "hits": 462,
+          "accuracy": 0.3330930064888248,
+          "excessOverRandom": -0.0002403268445085316
+        },
+        {
+          "model": "frequency_60",
+          "tested": 1387,
+          "hits": 459,
+          "accuracy": 0.330930064888248,
+          "excessOverRandom": -0.002403268445085316
+        },
+        {
+          "model": "markov_1",
+          "tested": 1387,
+          "hits": 449,
+          "accuracy": 0.32372025955299205,
+          "excessOverRandom": -0.009613073780341264
+        },
+        {
+          "model": "frequency_24",
+          "tested": 1387,
+          "hits": 448,
+          "accuracy": 0.32299927901946646,
+          "excessOverRandom": -0.010334054313866858
+        },
+        {
+          "model": "lag_vote",
+          "tested": 1387,
+          "hits": 447,
+          "accuracy": 0.32227829848594086,
+          "excessOverRandom": -0.011055034847392453
+        },
+        {
+          "model": "cycle_20",
+          "tested": 1387,
+          "hits": 432,
+          "accuracy": 0.31146359048305694,
+          "excessOverRandom": -0.021869742850276375
+        }
+      ]
+    },
+    {
+      "regime": "repeat:mid",
+      "tested": 2759,
+      "winner": {
+        "model": "markov_1",
+        "tested": 2759,
+        "hits": 962,
+        "accuracy": 0.3486770569046756,
+        "excessOverRandom": 0.015343723571342283
+      },
+      "leaderboard": [
+        {
+          "model": "markov_1",
+          "tested": 2759,
+          "hits": 962,
+          "accuracy": 0.3486770569046756,
+          "excessOverRandom": 0.015343723571342283
+        },
+        {
+          "model": "cycle_8",
+          "tested": 2759,
+          "hits": 943,
+          "accuracy": 0.34179050380572673,
+          "excessOverRandom": 0.008457170472393416
+        },
+        {
+          "model": "cycle_20",
+          "tested": 2759,
+          "hits": 932,
+          "accuracy": 0.3378035520115984,
+          "excessOverRandom": 0.004470218678265081
+        },
+        {
+          "model": "lag_vote",
+          "tested": 2759,
+          "hits": 928,
+          "accuracy": 0.3363537513591881,
+          "excessOverRandom": 0.0030204180258547875
+        },
+        {
+          "model": "gap_longest",
+          "tested": 2759,
+          "hits": 926,
+          "accuracy": 0.33562885103298296,
+          "excessOverRandom": 0.0022955176996496407
+        },
+        {
+          "model": "frequency_all",
+          "tested": 2759,
+          "hits": 923,
+          "accuracy": 0.33454150054367526,
+          "excessOverRandom": 0.0012081672103419483
+        },
+        {
+          "model": "frequency_24",
+          "tested": 2759,
+          "hits": 920,
+          "accuracy": 0.3334541500543675,
+          "excessOverRandom": 0.00012081672103420038
+        },
+        {
+          "model": "frequency_60",
+          "tested": 2759,
+          "hits": 883,
+          "accuracy": 0.3200434940195723,
+          "excessOverRandom": -0.013289839313760987
+        }
+      ]
+    }
+  ]
+}
