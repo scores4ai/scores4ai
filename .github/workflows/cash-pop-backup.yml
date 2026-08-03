@@ -64,17 +64,22 @@ jobs:
             python v0/robust_runner.py
             source_status=$?
             apx_status=1
+            retirement_status=1
             evolution_status=1
             if [ $source_status -eq 0 ]; then
               python apx/engine.py
               apx_status=$?
               if [ $apx_status -eq 0 ]; then
+                python apx/retirement.py
+                retirement_status=$?
+              fi
+              if [ $retirement_status -eq 0 ]; then
                 python apx/evolution.py
                 evolution_status=$?
               fi
             fi
 
-            SOURCE_STATUS=$source_status APX_STATUS=$apx_status EVOLUTION_STATUS=$evolution_status PASS_NUMBER=$pass python - <<'PY'
+            SOURCE_STATUS=$source_status APX_STATUS=$apx_status RETIREMENT_STATUS=$retirement_status EVOLUTION_STATUS=$evolution_status PASS_NUMBER=$pass python - <<'PY'
           import json, os
           from datetime import datetime, timezone
           from pathlib import Path
@@ -83,8 +88,9 @@ jobs:
           except Exception: old={}
           source_ok=os.environ['SOURCE_STATUS']=='0'
           apx_ok=os.environ['APX_STATUS']=='0'
+          retirement_ok=os.environ['RETIREMENT_STATUS']=='0'
           evolution_ok=os.environ['EVOLUTION_STATUS']=='0'
-          ok=source_ok and apx_ok and evolution_ok
+          ok=source_ok and apx_ok and retirement_ok and evolution_ok
           latest=0
           try: latest=json.loads(Path('apx/state.json').read_text()).get('latestDraw',0)
           except Exception: pass
@@ -97,6 +103,7 @@ jobs:
             'success':ok,
             'sourceSuccess':source_ok,
             'apxSuccess':apx_ok,
+            'retirementSuccess':retirement_ok,
             'evolutionSuccess':evolution_ok,
             'latestDraw':latest,
             'consecutiveFailures':0 if ok else int(old.get('consecutiveFailures',0))+1,
@@ -105,7 +112,7 @@ jobs:
           },indent=2))
           PY
 
-            git add v0/cloud_state.json apx/state.json apx/heartbeat.json
+            git add v0/cloud_state.json apx/state.json apx/heartbeat.json apx/evolution_state.json
             if ! git diff --cached --quiet; then
               git commit -m "Backup Cash Pop poll $(date -u +%Y-%m-%dT%H:%M:%SZ)"
               for attempt in 1 2 3; do
