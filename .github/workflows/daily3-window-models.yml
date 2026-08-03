@@ -1,0 +1,51 @@
+name: Daily 3 rolling-window model challenge
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "daily3/window_model_challenge.py"
+      - "daily3/archive.json"
+      - ".github/workflows/daily3-window-models.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily3-window-models
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run challenge
+        run: python daily3/window_model_challenge.py
+      - name: Verify
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('daily3/window_model_results.json').read_text())
+          assert d['testedDraws']==11100
+          assert len(d['overall'])==14
+          assert d['integrity']['futureDataAccess'] is False
+          assert len(d['resultSha256'])==64
+          print(d['overall'][:5])
+          PY
+      - name: Commit result
+        run: |
+          git config user.name "daily3-research-bot"
+          git config user.email "daily3-research-bot@users.noreply.github.com"
+          git add daily3/window_model_results.json
+          git commit -m "Update Daily 3 rolling-window results" || exit 0
+          git pull --rebase origin main
+          git push origin main
