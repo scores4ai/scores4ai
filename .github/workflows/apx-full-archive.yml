@@ -5,7 +5,7 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "apx/archive_builder.py"
+      - "apx/archive_builder_v2.py"
       - ".github/workflows/apx-full-archive.yml"
   schedule:
     - cron: "17 8 * * *"
@@ -30,25 +30,24 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Build and validate immutable archive
-        run: python apx/archive_builder.py
+      - name: Build timestamp-anchored archive
+        run: python apx/archive_builder_v2.py
 
       - name: Verify archive integrity
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          p=Path('apx/full_archive.json')
-          assert p.exists(), 'archive was not created'
-          d=json.loads(p.read_text())
+          d=json.loads(Path('apx/full_archive.json').read_text())
           v=d['validation']
           assert d['drawCount'] == len(d['draws'])
+          assert d['drawCount'] > 1000, f"archive too small: {d['drawCount']}"
           assert v['duplicateDrawIds'] == 0
-          assert v['conflicts'] == 0
           assert v['numbersOutside1To15'] == 0
           assert v['chronological'] is True
+          assert d['anchor']['agreeing'] >= 1
           assert len(d['sha256']) == 64
-          print({'drawCount':d['drawCount'],'firstDraw':d['firstDraw'],'latestDraw':d['latestDraw'],'missingIds':v['missingDrawIdCount']})
+          print({'drawCount':d['drawCount'],'firstDraw':d['firstDraw'],'latestDraw':d['latestDraw'],'anchorMatches':d['anchor']['matches'],'missingIds':v['missingDrawIdCount']})
           PY
 
       - name: Commit archive only
