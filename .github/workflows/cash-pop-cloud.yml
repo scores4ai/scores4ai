@@ -23,7 +23,7 @@ concurrency:
 jobs:
   update-data:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,12 +32,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: pip
 
-      - name: Install browser
+      - name: Install browser fallback
         run: |
           python -m pip install --upgrade pip
           pip install playwright
-          playwright install --with-deps chromium
+          playwright install chromium
 
       - name: Four rapid live checks
         shell: bash
@@ -53,19 +54,21 @@ jobs:
             python v0/robust_runner.py
             source_status=$?
             apx_status=1
-            retirement_status=1
             evolution_status=1
+            retirement_status=1
+
             if [ $source_status -eq 0 ]; then
               python apx/engine.py
               apx_status=$?
-              if [ $apx_status -eq 0 ]; then
-                python apx/retirement.py
-                retirement_status=$?
-              fi
-              if [ $retirement_status -eq 0 ]; then
-                python apx/evolution.py
-                evolution_status=$?
-              fi
+            fi
+
+            # Research modules are non-blocking. Evolution runs first;
+            # retirement runs last so the published prediction remains filtered.
+            if [ $apx_status -eq 0 ]; then
+              python apx/evolution.py
+              evolution_status=$?
+              python apx/retirement.py
+              retirement_status=$?
             fi
 
             SOURCE_STATUS=$source_status APX_STATUS=$apx_status RETIREMENT_STATUS=$retirement_status EVOLUTION_STATUS=$evolution_status PASS_NUMBER=$pass UPDATER_NAME=primary python - <<'PY'
@@ -80,37 +83,44 @@ jobs:
           apx_ok=os.environ['APX_STATUS']=='0'
           retirement_ok=os.environ['RETIREMENT_STATUS']=='0'
           evolution_ok=os.environ['EVOLUTION_STATUS']=='0'
-          ok=source_ok and apx_ok and retirement_ok and evolution_ok
+          core_ok=source_ok and apx_ok
           latest=0
           try: latest=json.loads(Path('apx/state.json').read_text()).get('latestDraw',0)
           except Exception: pass
-          failures=0 if ok else int(old.get('consecutiveFailures',0))+1
           now=datetime.now(timezone.utc).isoformat()
           out={
             'updater':os.environ['UPDATER_NAME'],
             'pass':int(os.environ['PASS_NUMBER']),
             'lastAttemptAt':now,
-            'lastSuccessAt':now if ok else old.get('lastSuccessAt'),
-            'success':ok,
+            'lastSuccessAt':now if core_ok else old.get('lastSuccessAt'),
+            'success':core_ok,
             'sourceSuccess':source_ok,
             'apxSuccess':apx_ok,
             'retirementSuccess':retirement_ok,
             'evolutionSuccess':evolution_ok,
+            'researchHealthy':retirement_ok and evolution_ok,
             'latestDraw':latest,
-            'consecutiveFailures':failures,
+            'consecutiveFailures':0 if core_ok else int(old.get('consecutiveFailures',0))+1,
             'pollIntervalSeconds':65,
-            'architecture':'primary-fast-plus-staggered-backup'
+            'architecture':'core-live-independent-of-research-modules'
           }
           path.write_text(json.dumps(out,indent=2))
           PY
 
-            git add v0/cloud_state.json apx/state.json apx/heartbeat.json apx/evolution_state.json
+            # Never fail because an optional generated file is absent.
+            git add v0/cloud_state.json
+            git add -A apx
             if ! git diff --cached --quiet; then
               git commit -m "Fast Cash Pop poll $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              pushed=false
               for attempt in 1 2 3; do
-                git pull --rebase origin main && git push origin main && break
+                if git pull --rebase origin main && git push origin main; then
+                  pushed=true
+                  break
+                fi
                 sleep 4
               done
+              if [ "$pushed" != true ]; then echo "Publish failed on pass $pass"; fi
             fi
 
             if [ "$pass" -lt 4 ]; then sleep 65; fi
