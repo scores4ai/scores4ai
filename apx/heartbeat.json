@@ -1,17 +1,15 @@
 {
-  "updater": "primary",
-  "pass": 1,
-  "lastAttemptAt": "2026-08-03T18:02:35.880833+00:00",
-  "lastSuccessAt": "2026-08-03T18:02:35.880833+00:00",
+  "updater": "minute-watcher",
+  "lastAttemptAt": "2026-08-03T18:44:21.841510+00:00",
+  "lastSuccessAt": "2026-08-03T18:44:21.841530+00:00",
   "success": true,
   "sourceSuccess": true,
   "apxSuccess": true,
-  "retirementSuccess": true,
   "evolutionSuccess": true,
+  "retirementSuccess": true,
   "ledgerSuccess": true,
-  "researchHealthy": true,
-  "latestDraw": 88792,
+  "latestDraw": 88798,
   "consecutiveFailures": 0,
-  "scheduledIntervalMinutes": 5,
-  "architecture": "live-core-plus-permanent-draw-ledger"
+  "pollIntervalSeconds": 60,
+  "architecture": "persistent-minute-watcher-plus-five-minute-backup"
 }
