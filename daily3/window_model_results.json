@@ -1,0 +1,2124 @@
+{
+  "version": "Daily 3 Rolling Window Challenge Phase 1",
+  "archiveSha256": "49a97dd6d3dd780b6911175047023ef8e67d769abe4a4ceea4623703a11a0859",
+  "warmupDraws": 1000,
+  "windows": [
+    25,
+    50,
+    100,
+    250,
+    500,
+    1000
+  ],
+  "testedDraws": 11100,
+  "integrity": {
+    "futureDataAccess": false,
+    "predictionsFrozenBeforeReveal": true,
+    "parametersFixed": true
+  },
+  "overall": [
+    {
+      "model": "frequency_w25",
+      "tested": 11100,
+      "exactHits": 19,
+      "exactAccuracy": 0.0017117117117117118,
+      "positionAccuracy": [
+        0.10207207207207207,
+        0.09945945945945946,
+        0.10162162162162162
+      ],
+      "blocksWon": 2
+    },
+    {
+      "model": "last_draw",
+      "tested": 11100,
+      "exactHits": 10,
+      "exactAccuracy": 0.0009009009009009009,
+      "positionAccuracy": [
+        0.1018018018018018,
+        0.10099099099099099,
+        0.10108108108108108
+      ],
+      "blocksWon": 2
+    },
+    {
+      "model": "transition_w1000",
+      "tested": 11100,
+      "exactHits": 18,
+      "exactAccuracy": 0.0016216216216216215,
+      "positionAccuracy": [
+        0.09837837837837837,
+        0.10189189189189189,
+        0.10171171171171171
+      ],
+      "blocksWon": 1
+    },
+    {
+      "model": "frequency_w1000",
+      "tested": 11100,
+      "exactHits": 17,
+      "exactAccuracy": 0.0015315315315315315,
+      "positionAccuracy": [
+        0.1,
+        0.10099099099099099,
+        0.09774774774774775
+      ],
+      "blocksWon": 1
+    },
+    {
+      "model": "transition_w25",
+      "tested": 11100,
+      "exactHits": 16,
+      "exactAccuracy": 0.0014414414414414415,
+      "positionAccuracy": [
+        0.09864864864864865,
+        0.1018018018018018,
+        0.09945945945945946
+      ],
+      "blocksWon": 1
+    },
+    {
+      "model": "frequency_w100",
+      "tested": 11100,
+      "exactHits": 13,
+      "exactAccuracy": 0.0011711711711711711,
+      "positionAccuracy": [
+        0.10306306306306307,
+        0.09495495495495496,
+        0.10261261261261262
+      ],
+      "blocksWon": 1
+    },
+    {
+      "model": "frequency_w250",
+      "tested": 11100,
+      "exactHits": 12,
+      "exactAccuracy": 0.001081081081081081,
+      "positionAccuracy": [
+        0.10486486486486486,
+        0.1018018018018018,
+        0.10369369369369369
+      ],
+      "blocksWon": 1
+    },
+    {
+      "model": "frequency_w50",
+      "tested": 11100,
+      "exactHits": 10,
+      "exactAccuracy": 0.0009009009009009009,
+      "positionAccuracy": [
+        0.09783783783783784,
+        0.09702702702702702,
+        0.09711711711711711
+      ],
+      "blocksWon": 1
+    },
+    {
+      "model": "uniform_random",
+      "tested": 11100,
+      "exactHits": 8,
+      "exactAccuracy": 0.0007207207207207207,
+      "positionAccuracy": [
+        0.10189189189189189,
+        0.1027927927927928,
+        0.10063063063063063
+      ],
+      "blocksWon": 1
+    },
+    {
+      "model": "transition_w250",
+      "tested": 11100,
+      "exactHits": 6,
+      "exactAccuracy": 0.0005405405405405405,
+      "positionAccuracy": [
+        0.0990990990990991,
+        0.09504504504504505,
+        0.09954954954954955
+      ],
+      "blocksWon": 1
+    },
+    {
+      "model": "transition_w500",
+      "tested": 11100,
+      "exactHits": 17,
+      "exactAccuracy": 0.0015315315315315315,
+      "positionAccuracy": [
+        0.10018018018018018,
+        0.1036036036036036,
+        0.10612612612612612
+      ],
+      "blocksWon": 0
+    },
+    {
+      "model": "transition_w100",
+      "tested": 11100,
+      "exactHits": 12,
+      "exactAccuracy": 0.001081081081081081,
+      "positionAccuracy": [
+        0.0981081081081081,
+        0.09675675675675675,
+        0.1009009009009009
+      ],
+      "blocksWon": 0
+    },
+    {
+      "model": "transition_w50",
+      "tested": 11100,
+      "exactHits": 8,
+      "exactAccuracy": 0.0007207207207207207,
+      "positionAccuracy": [
+        0.09549549549549549,
+        0.1027927927927928,
+        0.10684684684684685
+      ],
+      "blocksWon": 0
+    },
+    {
+      "model": "frequency_w500",
+      "tested": 11100,
+      "exactHits": 5,
+      "exactAccuracy": 0.00045045045045045046,
+      "positionAccuracy": [
+        0.1045945945945946,
+        0.09873873873873874,
+        0.09945945945945946
+      ],
+      "blocksWon": 0
+    }
+  ],
+  "blocks": [
+    {
+      "block": 1,
+      "startSequence": 1001,
+      "endSequence": 2000,
+      "leaderboard": [
+        {
+          "model": "frequency_w25",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.102,
+            0.102,
+            0.106
+          ]
+        },
+        {
+          "model": "frequency_w100",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.104,
+            0.076,
+            0.087
+          ]
+        },
+        {
+          "model": "transition_w100",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.111,
+            0.087,
+            0.104
+          ]
+        },
+        {
+          "model": "transition_w1000",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.098,
+            0.102,
+            0.102
+          ]
+        },
+        {
+          "model": "transition_w250",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.097,
+            0.094,
+            0.097
+          ]
+        },
+        {
+          "model": "frequency_w1000",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.104,
+            0.107,
+            0.101
+          ]
+        },
+        {
+          "model": "frequency_w250",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.106,
+            0.097,
+            0.103
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.12,
+            0.093,
+            0.085
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.108,
+            0.103,
+            0.104
+          ]
+        },
+        {
+          "model": "frequency_w500",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.114,
+            0.097,
+            0.098
+          ]
+        },
+        {
+          "model": "transition_w500",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.09,
+            0.101,
+            0.105
+          ]
+        },
+        {
+          "model": "transition_w50",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.078,
+            0.094,
+            0.111
+          ]
+        },
+        {
+          "model": "transition_w25",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.099,
+            0.086,
+            0.096
+          ]
+        },
+        {
+          "model": "frequency_w50",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.1,
+            0.093,
+            0.077
+          ]
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "startSequence": 2001,
+      "endSequence": 3000,
+      "leaderboard": [
+        {
+          "model": "frequency_w50",
+          "tested": 1000,
+          "exactHits": 4,
+          "exactAccuracy": 0.004,
+          "positionAccuracy": [
+            0.098,
+            0.095,
+            0.1
+          ]
+        },
+        {
+          "model": "transition_w50",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.107,
+            0.114,
+            0.108
+          ]
+        },
+        {
+          "model": "transition_w500",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.1,
+            0.102,
+            0.115
+          ]
+        },
+        {
+          "model": "transition_w25",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.111,
+            0.109,
+            0.094
+          ]
+        },
+        {
+          "model": "transition_w1000",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.094,
+            0.102,
+            0.107
+          ]
+        },
+        {
+          "model": "frequency_w250",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.089,
+            0.087,
+            0.109
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.102,
+            0.113,
+            0.097
+          ]
+        },
+        {
+          "model": "transition_w100",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.109,
+            0.094,
+            0.107
+          ]
+        },
+        {
+          "model": "frequency_w100",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.099,
+            0.103,
+            0.105
+          ]
+        },
+        {
+          "model": "frequency_w1000",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.106,
+            0.103,
+            0.095
+          ]
+        },
+        {
+          "model": "frequency_w25",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.111,
+            0.085,
+            0.101
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.107,
+            0.103,
+            0.112
+          ]
+        },
+        {
+          "model": "transition_w250",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.115,
+            0.087,
+            0.111
+          ]
+        },
+        {
+          "model": "frequency_w500",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.1,
+            0.093,
+            0.097
+          ]
+        }
+      ]
+    },
+    {
+      "block": 3,
+      "startSequence": 3001,
+      "endSequence": 4000,
+      "leaderboard": [
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.105,
+            0.111,
+            0.101
+          ]
+        },
+        {
+          "model": "transition_w100",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.079,
+            0.109,
+            0.115
+          ]
+        },
+        {
+          "model": "transition_w500",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.093,
+            0.098,
+            0.094
+          ]
+        },
+        {
+          "model": "frequency_w100",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.088,
+            0.094,
+            0.101
+          ]
+        },
+        {
+          "model": "transition_w250",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.092,
+            0.086,
+            0.097
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.091,
+            0.094,
+            0.112
+          ]
+        },
+        {
+          "model": "frequency_w25",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.087,
+            0.085,
+            0.098
+          ]
+        },
+        {
+          "model": "frequency_w250",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.099,
+            0.099,
+            0.126
+          ]
+        },
+        {
+          "model": "frequency_w1000",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.105,
+            0.109,
+            0.088
+          ]
+        },
+        {
+          "model": "frequency_w500",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.091,
+            0.109,
+            0.095
+          ]
+        },
+        {
+          "model": "transition_w1000",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.11,
+            0.095,
+            0.088
+          ]
+        },
+        {
+          "model": "transition_w25",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.076,
+            0.09,
+            0.121
+          ]
+        },
+        {
+          "model": "transition_w50",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.078,
+            0.099,
+            0.107
+          ]
+        },
+        {
+          "model": "frequency_w50",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.08,
+            0.087,
+            0.111
+          ]
+        }
+      ]
+    },
+    {
+      "block": 4,
+      "startSequence": 4001,
+      "endSequence": 5000,
+      "leaderboard": [
+        {
+          "model": "transition_w25",
+          "tested": 1000,
+          "exactHits": 4,
+          "exactAccuracy": 0.004,
+          "positionAccuracy": [
+            0.102,
+            0.101,
+            0.096
+          ]
+        },
+        {
+          "model": "frequency_w100",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.102,
+            0.105,
+            0.12
+          ]
+        },
+        {
+          "model": "transition_w1000",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.097,
+            0.101,
+            0.118
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.125,
+            0.09,
+            0.098
+          ]
+        },
+        {
+          "model": "frequency_w250",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.119,
+            0.104,
+            0.103
+          ]
+        },
+        {
+          "model": "transition_w100",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.117,
+            0.097,
+            0.111
+          ]
+        },
+        {
+          "model": "frequency_w25",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.105,
+            0.107,
+            0.104
+          ]
+        },
+        {
+          "model": "frequency_w1000",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.09,
+            0.098,
+            0.093
+          ]
+        },
+        {
+          "model": "transition_w500",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.106,
+            0.102,
+            0.122
+          ]
+        },
+        {
+          "model": "frequency_w500",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.102,
+            0.091,
+            0.109
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.094,
+            0.097,
+            0.106
+          ]
+        },
+        {
+          "model": "transition_w50",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.092,
+            0.096,
+            0.109
+          ]
+        },
+        {
+          "model": "transition_w250",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.095,
+            0.09,
+            0.106
+          ]
+        },
+        {
+          "model": "frequency_w50",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.094,
+            0.102,
+            0.088
+          ]
+        }
+      ]
+    },
+    {
+      "block": 5,
+      "startSequence": 5001,
+      "endSequence": 6000,
+      "leaderboard": [
+        {
+          "model": "frequency_w25",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.116,
+            0.086,
+            0.099
+          ]
+        },
+        {
+          "model": "frequency_w1000",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.088,
+            0.101,
+            0.102
+          ]
+        },
+        {
+          "model": "transition_w50",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.085,
+            0.103,
+            0.121
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.113,
+            0.085,
+            0.101
+          ]
+        },
+        {
+          "model": "frequency_w50",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.099,
+            0.086,
+            0.093
+          ]
+        },
+        {
+          "model": "transition_w25",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.08,
+            0.092,
+            0.099
+          ]
+        },
+        {
+          "model": "frequency_w100",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.113,
+            0.095,
+            0.105
+          ]
+        },
+        {
+          "model": "frequency_w250",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.099,
+            0.101,
+            0.097
+          ]
+        },
+        {
+          "model": "transition_w500",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.098,
+            0.102,
+            0.097
+          ]
+        },
+        {
+          "model": "transition_w1000",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.102,
+            0.112,
+            0.095
+          ]
+        },
+        {
+          "model": "frequency_w500",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.105,
+            0.101,
+            0.098
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.12,
+            0.088,
+            0.094
+          ]
+        },
+        {
+          "model": "transition_w100",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.096,
+            0.096,
+            0.109
+          ]
+        },
+        {
+          "model": "transition_w250",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.095,
+            0.097,
+            0.097
+          ]
+        }
+      ]
+    },
+    {
+      "block": 6,
+      "startSequence": 6001,
+      "endSequence": 7000,
+      "leaderboard": [
+        {
+          "model": "transition_w1000",
+          "tested": 1000,
+          "exactHits": 4,
+          "exactAccuracy": 0.004,
+          "positionAccuracy": [
+            0.1,
+            0.103,
+            0.101
+          ]
+        },
+        {
+          "model": "frequency_w25",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.096,
+            0.103,
+            0.092
+          ]
+        },
+        {
+          "model": "frequency_w250",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.099,
+            0.111,
+            0.097
+          ]
+        },
+        {
+          "model": "transition_w25",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.105,
+            0.113,
+            0.105
+          ]
+        },
+        {
+          "model": "transition_w500",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.097,
+            0.104,
+            0.122
+          ]
+        },
+        {
+          "model": "frequency_w50",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.092,
+            0.095,
+            0.107
+          ]
+        },
+        {
+          "model": "frequency_w1000",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.1,
+            0.117,
+            0.114
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.093,
+            0.116,
+            0.108
+          ]
+        },
+        {
+          "model": "transition_w50",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.094,
+            0.121,
+            0.1
+          ]
+        },
+        {
+          "model": "frequency_w100",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.103,
+            0.084,
+            0.106
+          ]
+        },
+        {
+          "model": "frequency_w500",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.096,
+            0.103,
+            0.092
+          ]
+        },
+        {
+          "model": "transition_w100",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.085,
+            0.102,
+            0.1
+          ]
+        },
+        {
+          "model": "transition_w250",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.091,
+            0.086,
+            0.105
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.082,
+            0.091,
+            0.089
+          ]
+        }
+      ]
+    },
+    {
+      "block": 7,
+      "startSequence": 7001,
+      "endSequence": 8000,
+      "leaderboard": [
+        {
+          "model": "frequency_w1000",
+          "tested": 1000,
+          "exactHits": 5,
+          "exactAccuracy": 0.005,
+          "positionAccuracy": [
+            0.101,
+            0.091,
+            0.11
+          ]
+        },
+        {
+          "model": "transition_w500",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.094,
+            0.087,
+            0.109
+          ]
+        },
+        {
+          "model": "frequency_w25",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.104,
+            0.112,
+            0.105
+          ]
+        },
+        {
+          "model": "frequency_w50",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.095,
+            0.11,
+            0.11
+          ]
+        },
+        {
+          "model": "transition_w50",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.101,
+            0.097,
+            0.095
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.094,
+            0.117,
+            0.104
+          ]
+        },
+        {
+          "model": "frequency_w500",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.104,
+            0.095,
+            0.107
+          ]
+        },
+        {
+          "model": "frequency_w250",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.101,
+            0.096,
+            0.105
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.091,
+            0.107,
+            0.101
+          ]
+        },
+        {
+          "model": "transition_w1000",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.087,
+            0.09,
+            0.12
+          ]
+        },
+        {
+          "model": "transition_w250",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.094,
+            0.082,
+            0.111
+          ]
+        },
+        {
+          "model": "transition_w25",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.096,
+            0.1,
+            0.09
+          ]
+        },
+        {
+          "model": "frequency_w100",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.09,
+            0.094,
+            0.098
+          ]
+        },
+        {
+          "model": "transition_w100",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.089,
+            0.095,
+            0.079
+          ]
+        }
+      ]
+    },
+    {
+      "block": 8,
+      "startSequence": 8001,
+      "endSequence": 9000,
+      "leaderboard": [
+        {
+          "model": "frequency_w100",
+          "tested": 1000,
+          "exactHits": 4,
+          "exactAccuracy": 0.004,
+          "positionAccuracy": [
+            0.128,
+            0.117,
+            0.112
+          ]
+        },
+        {
+          "model": "transition_w100",
+          "tested": 1000,
+          "exactHits": 4,
+          "exactAccuracy": 0.004,
+          "positionAccuracy": [
+            0.101,
+            0.091,
+            0.101
+          ]
+        },
+        {
+          "model": "transition_w25",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.116,
+            0.103,
+            0.104
+          ]
+        },
+        {
+          "model": "frequency_w500",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.122,
+            0.11,
+            0.089
+          ]
+        },
+        {
+          "model": "transition_w1000",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.098,
+            0.096,
+            0.104
+          ]
+        },
+        {
+          "model": "frequency_w25",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.121,
+            0.111,
+            0.101
+          ]
+        },
+        {
+          "model": "transition_w500",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.118,
+            0.104,
+            0.109
+          ]
+        },
+        {
+          "model": "frequency_w50",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.13,
+            0.115,
+            0.112
+          ]
+        },
+        {
+          "model": "frequency_w250",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.125,
+            0.109,
+            0.111
+          ]
+        },
+        {
+          "model": "transition_w50",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.112,
+            0.093,
+            0.105
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.11,
+            0.095,
+            0.103
+          ]
+        },
+        {
+          "model": "transition_w250",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.102,
+            0.102,
+            0.1
+          ]
+        },
+        {
+          "model": "frequency_w1000",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.114,
+            0.084,
+            0.104
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.099,
+            0.108,
+            0.093
+          ]
+        }
+      ]
+    },
+    {
+      "block": 9,
+      "startSequence": 9001,
+      "endSequence": 10000,
+      "leaderboard": [
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.098,
+            0.12,
+            0.086
+          ]
+        },
+        {
+          "model": "transition_w500",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.108,
+            0.105,
+            0.089
+          ]
+        },
+        {
+          "model": "frequency_w1000",
+          "tested": 1000,
+          "exactHits": 3,
+          "exactAccuracy": 0.003,
+          "positionAccuracy": [
+            0.075,
+            0.097,
+            0.1
+          ]
+        },
+        {
+          "model": "frequency_w25",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.083,
+            0.119,
+            0.121
+          ]
+        },
+        {
+          "model": "transition_w25",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.089,
+            0.12,
+            0.112
+          ]
+        },
+        {
+          "model": "frequency_w500",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.103,
+            0.095,
+            0.102
+          ]
+        },
+        {
+          "model": "transition_w1000",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.08,
+            0.107,
+            0.108
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.09,
+            0.097,
+            0.102
+          ]
+        },
+        {
+          "model": "frequency_w250",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.111,
+            0.1,
+            0.102
+          ]
+        },
+        {
+          "model": "frequency_w100",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.095,
+            0.102,
+            0.101
+          ]
+        },
+        {
+          "model": "transition_w50",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.085,
+            0.104,
+            0.108
+          ]
+        },
+        {
+          "model": "transition_w250",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.079,
+            0.105,
+            0.104
+          ]
+        },
+        {
+          "model": "frequency_w50",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.089,
+            0.1,
+            0.097
+          ]
+        },
+        {
+          "model": "transition_w100",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.077,
+            0.097,
+            0.084
+          ]
+        }
+      ]
+    },
+    {
+      "block": 10,
+      "startSequence": 10001,
+      "endSequence": 11000,
+      "leaderboard": [
+        {
+          "model": "frequency_w250",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.098,
+            0.109,
+            0.099
+          ]
+        },
+        {
+          "model": "transition_w1000",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.104,
+            0.101,
+            0.101
+          ]
+        },
+        {
+          "model": "transition_w50",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.111,
+            0.096,
+            0.083
+          ]
+        },
+        {
+          "model": "frequency_w50",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.102,
+            0.097,
+            0.087
+          ]
+        },
+        {
+          "model": "frequency_w1000",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.128,
+            0.101,
+            0.078
+          ]
+        },
+        {
+          "model": "transition_w500",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.104,
+            0.111,
+            0.092
+          ]
+        },
+        {
+          "model": "transition_w25",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.105,
+            0.102,
+            0.084
+          ]
+        },
+        {
+          "model": "frequency_w25",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.098,
+            0.085,
+            0.094
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.104,
+            0.106,
+            0.102
+          ]
+        },
+        {
+          "model": "frequency_w500",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.117,
+            0.082,
+            0.111
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.099,
+            0.088,
+            0.107
+          ]
+        },
+        {
+          "model": "transition_w100",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.101,
+            0.09,
+            0.099
+          ]
+        },
+        {
+          "model": "frequency_w100",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.104,
+            0.078,
+            0.096
+          ]
+        },
+        {
+          "model": "transition_w250",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.106,
+            0.085,
+            0.076
+          ]
+        }
+      ]
+    },
+    {
+      "block": 11,
+      "startSequence": 11001,
+      "endSequence": 12000,
+      "leaderboard": [
+        {
+          "model": "transition_w250",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.125,
+            0.129,
+            0.096
+          ]
+        },
+        {
+          "model": "transition_w500",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.094,
+            0.126,
+            0.113
+          ]
+        },
+        {
+          "model": "transition_w100",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.116,
+            0.109,
+            0.104
+          ]
+        },
+        {
+          "model": "frequency_w250",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.111,
+            0.107,
+            0.09
+          ]
+        },
+        {
+          "model": "transition_w1000",
+          "tested": 1000,
+          "exactHits": 2,
+          "exactAccuracy": 0.002,
+          "positionAccuracy": [
+            0.11,
+            0.114,
+            0.08
+          ]
+        },
+        {
+          "model": "last_draw",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.101,
+            0.109,
+            0.105
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.1,
+            0.106,
+            0.109
+          ]
+        },
+        {
+          "model": "frequency_w500",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.098,
+            0.117,
+            0.096
+          ]
+        },
+        {
+          "model": "transition_w25",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.109,
+            0.104,
+            0.095
+          ]
+        },
+        {
+          "model": "frequency_w25",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.102,
+            0.097,
+            0.096
+          ]
+        },
+        {
+          "model": "frequency_w1000",
+          "tested": 1000,
+          "exactHits": 1,
+          "exactAccuracy": 0.001,
+          "positionAccuracy": [
+            0.091,
+            0.104,
+            0.088
+          ]
+        },
+        {
+          "model": "transition_w50",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.107,
+            0.116,
+            0.128
+          ]
+        },
+        {
+          "model": "frequency_w100",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.11,
+            0.094,
+            0.099
+          ]
+        },
+        {
+          "model": "frequency_w50",
+          "tested": 1000,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.1,
+            0.088,
+            0.085
+          ]
+        }
+      ]
+    },
+    {
+      "block": 12,
+      "startSequence": 12001,
+      "endSequence": 12100,
+      "leaderboard": [
+        {
+          "model": "last_draw",
+          "tested": 100,
+          "exactHits": 2,
+          "exactAccuracy": 0.02,
+          "positionAccuracy": [
+            0.1,
+            0.17,
+            0.12
+          ]
+        },
+        {
+          "model": "frequency_w1000",
+          "tested": 100,
+          "exactHits": 1,
+          "exactAccuracy": 0.01,
+          "positionAccuracy": [
+            0.08,
+            0.09,
+            0.12
+          ]
+        },
+        {
+          "model": "frequency_w250",
+          "tested": 100,
+          "exactHits": 1,
+          "exactAccuracy": 0.01,
+          "positionAccuracy": [
+            0.07,
+            0.1,
+            0.09
+          ]
+        },
+        {
+          "model": "frequency_w25",
+          "tested": 100,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.08,
+            0.12,
+            0.11
+          ]
+        },
+        {
+          "model": "transition_w50",
+          "tested": 100,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.1,
+            0.08,
+            0.11
+          ]
+        },
+        {
+          "model": "transition_w500",
+          "tested": 100,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.1,
+            0.08,
+            0.11
+          ]
+        },
+        {
+          "model": "frequency_w100",
+          "tested": 100,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.08,
+            0.12,
+            0.09
+          ]
+        },
+        {
+          "model": "frequency_w50",
+          "tested": 100,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.07,
+            0.09,
+            0.11
+          ]
+        },
+        {
+          "model": "transition_w250",
+          "tested": 100,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.09,
+            0.12,
+            0.05
+          ]
+        },
+        {
+          "model": "transition_w1000",
+          "tested": 100,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.12,
+            0.08,
+            0.05
+          ]
+        },
+        {
+          "model": "transition_w25",
+          "tested": 100,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.07,
+            0.1,
+            0.08
+          ]
+        },
+        {
+          "model": "transition_w100",
+          "tested": 100,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.08,
+            0.07,
+            0.07
+          ]
+        },
+        {
+          "model": "frequency_w500",
+          "tested": 100,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.09,
+            0.03,
+            0.1
+          ]
+        },
+        {
+          "model": "uniform_random",
+          "tested": 100,
+          "exactHits": 0,
+          "exactAccuracy": 0.0,
+          "positionAccuracy": [
+            0.05,
+            0.08,
+            0.08
+          ]
+        }
+      ]
+    }
+  ],
+  "resultSha256": "e710c2c2573c5716de87c927bc0fb7a1d3df65c568d0741ce4b37ccf03a4e880"
+}
