@@ -1,4 +1,4 @@
-name: Michigan Cash Pop staggered fast watcher
+name: Michigan Cash Pop persistent live watcher
 
 on:
   workflow_dispatch:
@@ -6,21 +6,17 @@ on:
     paths:
       - ".github/workflows/cash-pop-minute-watcher.yml"
       - "v0/minute_watcher.py"
+      - "v0/ultra_live_runner.py"
   schedule:
-    - cron: "*/5 * * * *"
-    - cron: "2-59/5 * * * *"
+    - cron: "0,30 * * * *"
 
 permissions:
   contents: write
 
-concurrency:
-  group: cash-pop-fast-watcher
-  cancel-in-progress: true
-
 jobs:
   watch:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 58
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,13 +26,13 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install browser
+      - name: Install persistent watcher browser
         run: |
           pip install playwright
           playwright install chromium
 
-      - name: Fetch newest draw once
+      - name: Poll newest draw every five seconds
         run: |
           git config user.name "cash-pop-live-bot"
           git config user.email "cash-pop-live-bot@users.noreply.github.com"
-          python v0/minute_watcher.py
+          python v0/ultra_live_runner.py
