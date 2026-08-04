@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import re
 import subprocess
 import time
 from datetime import datetime, timezone
@@ -10,12 +11,11 @@ import github_updater as updater
 
 STATE = Path('v0/cloud_state.json')
 HEARTBEAT = Path('apx/heartbeat.json')
+HOME_URL = 'https://cash-pop.com/'
 URLS = [
     'https://cash-pop.com/michigan/winning-numbers',
     'https://cash-pop.com/michigan/past-winning-numbers',
 ]
-# Persistent 55-minute session. A second workflow starts 30 minutes later,
-# so at least one browser is normally already running when a draw posts.
 CHECKS = 110
 INTERVAL = 30
 
@@ -43,7 +43,6 @@ def run(cmd):
 
 
 def push_visible_branch(message):
-    # Publish the exact main-branch state to the Pages branch in this same run.
     run(['git', 'fetch', 'origin', 'gh-pages'])
     if run(['git', 'worktree', 'add', '--force', '/tmp/gh-pages', 'origin/gh-pages']) != 0:
         return False
@@ -104,7 +103,7 @@ def write_heartbeat(*, source_ok, source_url, source_latest, stored_draw, advanc
         'pollIntervalSeconds': INTERVAL,
         'lastError': error,
         'liveDefinition': 'Source was checked recently and source/stored draws agree',
-        'architecture': 'two-overlapping-55-minute-watchers-30-second-polling',
+        'architecture': 'live-homepage-plus-two-archive-fallbacks',
     }
     HEARTBEAT.write_text(json.dumps(hb, indent=2))
     commit_and_push(f"Cash Pop heartbeat {stored_draw} {now()}")
@@ -134,7 +133,7 @@ def publish(draw, source_url, source_latest):
         'pollIntervalSeconds': INTERVAL,
         'lastError': None,
         'liveDefinition': 'Source was checked recently and source/stored draws agree',
-        'architecture': 'two-overlapping-55-minute-watchers-30-second-polling',
+        'architecture': 'live-homepage-plus-two-archive-fallbacks',
     }
     HEARTBEAT.write_text(json.dumps(hb, indent=2))
     commit_and_push(f'Persistent watcher draw {draw} {now()}')
@@ -147,14 +146,54 @@ def new_page(browser):
     )
 
 
+def parse_michigan_home(text):
+    normalized = re.sub(r'\s+', ' ', text)
+    match = re.search(
+        r'Michigan\s+Cash\s+Pop(?P<section>.*?)(?:Next\s+Draw|Georgia\s+Cash\s+Pop|$)',
+        normalized,
+        re.IGNORECASE,
+    )
+    if not match:
+        return None
+    section = match.group('section')
+    draw_match = re.search(r'#\s*(\d{4,})', section)
+    if not draw_match:
+        return None
+    draw = int(draw_match.group(1))
+    after = section[draw_match.end():]
+    number_match = re.search(r'(?<!\d)(1[0-5]|[1-9])(?!\d)', after)
+    if not number_match:
+        return None
+    number = int(number_match.group(1))
+    time_match = re.search(r'\b(\d{1,2}:\d{2}\s*(?:AM|PM))\b', section, re.IGNORECASE)
+    tm = time_match.group(1).upper() if time_match else ''
+    synthetic = f'{number}\n#{draw}\n{tm}\n'
+    return {'url': HOME_URL, 'text': synthetic, 'parsed': updater.parse(synthetic), 'newest': draw}
+
+
+def fetch_page_text(page, url):
+    page.goto(url + '?minute=' + str(time.time_ns()), wait_until='domcontentloaded', timeout=45000)
+    page.wait_for_timeout(1800)
+    return page.locator('body').inner_text(timeout=15000)
+
+
 def fetch_best(page):
     errors = []
     best = None
+
+    try:
+        home_text = fetch_page_text(page, HOME_URL)
+        home = parse_michigan_home(home_text)
+        if home:
+            best = home
+        else:
+            errors.append('Homepage: Michigan live block was not parseable')
+    except Exception as exc:
+        errors.append(f'{HOME_URL}: {exc!r}')
+
     for url in URLS:
         try:
-            page.goto(url + '?minute=' + str(time.time_ns()), wait_until='domcontentloaded', timeout=45000)
-            page.wait_for_timeout(2500)
-            text = page.locator('body').inner_text(timeout=15000)
+            text = fetch_page_text(page, url)
             parsed = updater.parse(text)
             newest = max((int(x['draw']) for x in parsed), default=0)
             if newest and (best is None or newest > best['newest']):
@@ -194,7 +233,7 @@ def main():
                     else:
                         write_heartbeat(source_ok=True, source_url=best['url'], source_latest=newest,
                                         stored_draw=before, advanced=False,
-                                        error='Source returned no draw newer than stored state')
+                                        error='All sources returned no draw newer than stored state')
                 print(json.dumps({'check': index + 1, 'before': before,
                                   'sourceLatest': best['newest'] if best else 0,
                                   'stored': latest_draw(), 'source': best['url'] if best else None}))
