@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cash Pop Live Proof 2</title>
+<style>
+body{margin:0;background:#0b0f19;color:#eef3ff;font-family:Arial,sans-serif}.wrap{max-width:680px;margin:auto;padding:18px}.card{background:#121827;border:1px solid #2d3958;border-radius:22px;padding:22px;margin:14px 0}.title{font-size:28px;font-weight:700;margin:0 0 8px}.muted{color:#9baccc}.status{text-align:center;font-size:30px;font-weight:800;padding:26px 14px;border-radius:18px}.ok{color:#35d07f}.warn{color:#ffb020}.bad{color:#ff6675}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{background:#182136;border:1px solid #344361;border-radius:16px;padding:18px}.label{color:#9baccc;font-size:14px}.value{font-size:26px;font-weight:700;margin-top:8px}.small{font-size:13px;color:#9baccc;word-break:break-word}button{width:100%;border:0;border-radius:14px;padding:14px;background:#7455f5;color:white;font-size:17px;font-weight:700}@media(max-width:560px){.grid{grid-template-columns:1fr}.value{font-size:23px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="card"><h1 class="title">Cash Pop Live Proof 2</h1><div class="muted">One same-domain feed only. No heartbeat file, models, or history.</div></section>
+<section class="card"><div id="status" class="status warn">CHECKING…</div><div id="reason" class="small" style="text-align:center;margin-top:12px">Loading cloud_state.json</div></section>
+<section class="card grid">
+<div class="metric"><div class="label">Latest completed draw</div><div id="draw" class="value">—</div></div>
+<div class="metric"><div class="label">Next prediction draw</div><div id="next" class="value">—</div></div>
+<div class="metric"><div class="label">State updated</div><div id="updated" class="value" style="font-size:19px">—</div></div>
+<div class="metric"><div class="label">Seconds old</div><div id="age" class="value">—</div></div>
+<div class="metric"><div class="label">Page fetch time</div><div id="latency" class="value">—</div></div>
+<div class="metric"><div class="label">Checks completed</div><div id="checks" class="value">0</div></div>
+</section>
+<section class="card"><div class="label">Exact feed</div><div class="small">/scores4ai/v0/cloud_state.json</div><div class="label" style="margin-top:12px">Last error</div><div id="error" class="small">none</div></section>
+<button id="refresh">Check now</button>
+</main>
+<script>
+const $=id=>document.getElementById(id);let busy=false,count=0;
+async function check(){
+ if(busy)return;busy=true;const start=performance.now();
+ try{
+  const url='/scores4ai/v0/cloud_state.json?cb='+Date.now();
+  const r=await fetch(url,{cache:'no-store'});
+  if(!r.ok)throw new Error('HTTP '+r.status+' from '+url);
+  const text=await r.text();
+  let state;try{state=JSON.parse(text)}catch(e){throw new Error('Invalid JSON: '+text.slice(0,80))}
+  const updated=state.updatedAt?new Date(state.updatedAt):null;
+  const age=updated?Math.max(0,Math.round((Date.now()-updated.getTime())/1000)):999999;
+  const latest=Number(state.latestDraw||0);
+  const next=Number((state.pending||{}).draw||latest+1);
+  $('draw').textContent=latest?'#'+latest:'—';
+  $('next').textContent=next?'#'+next:'—';
+  $('updated').textContent=updated?updated.toLocaleTimeString():'—';
+  $('age').textContent=age+'s';
+  $('latency').textContent=Math.round(performance.now()-start)+'ms';
+  $('checks').textContent=++count;
+  $('error').textContent='none';
+  if(age<=20){$('status').textContent='FEED CURRENT';$('status').className='status ok';$('reason').textContent='The published state is less than 20 seconds old.'}
+  else if(age<=120){$('status').textContent='FEED LAGGING';$('status').className='status warn';$('reason').textContent='The feed loaded, but the state is '+age+' seconds old.'}
+  else{$('status').textContent='FEED STALE';$('status').className='status bad';$('reason').textContent='The feed loaded, but the updater has not refreshed it recently.'}
+ }catch(e){$('status').textContent='FEED ERROR';$('status').className='status bad';$('reason').textContent=e.message;$('error').textContent=e.message;$('latency').textContent=Math.round(performance.now()-start)+'ms';$('checks').textContent=++count}
+ finally{busy=false}
+}
+$('refresh').addEventListener('click',check);check();setInterval(check,3000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)check()});
+</script>
+</body>
+</html>
