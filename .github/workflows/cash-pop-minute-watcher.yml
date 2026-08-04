@@ -1,4 +1,4 @@
-name: Michigan Cash Pop persistent watchers
+name: Michigan Cash Pop staggered fast watcher
 
 on:
   workflow_dispatch:
@@ -7,15 +7,20 @@ on:
       - ".github/workflows/cash-pop-minute-watcher.yml"
       - "v0/minute_watcher.py"
   schedule:
-    - cron: "0,30 * * * *"
+    - cron: "*/5 * * * *"
+    - cron: "2-59/5 * * * *"
 
 permissions:
   contents: write
 
+concurrency:
+  group: cash-pop-fast-watcher
+  cancel-in-progress: true
+
 jobs:
   watch:
     runs-on: ubuntu-latest
-    timeout-minutes: 58
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
         with:
@@ -25,13 +30,13 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install watcher browser
+      - name: Install browser
         run: |
           pip install playwright
           playwright install chromium
 
-      - name: Poll continuously every 30 seconds
+      - name: Fetch newest draw once
         run: |
-          git config user.name "cash-pop-minute-bot"
-          git config user.email "cash-pop-minute-bot@users.noreply.github.com"
+          git config user.name "cash-pop-live-bot"
+          git config user.email "cash-pop-live-bot@users.noreply.github.com"
           python v0/minute_watcher.py
