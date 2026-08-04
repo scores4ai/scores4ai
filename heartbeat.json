@@ -1,7 +1,7 @@
 {
-  "updater": "minute-watcher",
-  "lastAttemptAt": "2026-08-04T00:05:25.721391+00:00",
-  "lastSuccessAt": "2026-08-04T00:05:25.721404+00:00",
+  "updater": "persistent-overlap-watcher",
+  "lastAttemptAt": "2026-08-04T00:07:50.351746+00:00",
+  "lastSuccessAt": "2026-08-04T00:07:50.351762+00:00",
   "success": true,
   "sourceSuccess": true,
   "drawAdvanced": false,
@@ -13,5 +13,5 @@
   "pollIntervalSeconds": 30,
   "lastError": "Source returned no draw newer than stored state",
   "liveDefinition": "Source was checked recently and source/stored draws agree",
-  "architecture": "five-minute-session-30-second-poller-plus-backup"
+  "architecture": "two-overlapping-55-minute-watchers-30-second-polling"
 }
