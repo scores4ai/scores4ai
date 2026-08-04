@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import json
-import shutil
 import subprocess
-import tempfile
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -16,8 +14,10 @@ URLS = [
     'https://cash-pop.com/michigan/winning-numbers',
     'https://cash-pop.com/michigan/past-winning-numbers',
 ]
-CHECKS = 50
-INTERVAL = 60
+# Eight checks over about four minutes. The workflow starts every five minutes,
+# avoiding long-running jobs and overlap while keeping near-live coverage.
+CHECKS = 8
+INTERVAL = 30
 
 
 def now():
@@ -38,42 +38,27 @@ def load_heartbeat():
         return {}
 
 
-def run(cmd, cwd=None):
-    return subprocess.run(cmd, cwd=cwd, check=False).returncode
+def run(cmd):
+    return subprocess.run(cmd, check=False).returncode
 
 
-def sync_pages_branch():
-    """Copy the current live JSON into gh-pages during this same workflow run."""
-    temp_dir = Path(tempfile.mkdtemp(prefix='apx-gh-pages-'))
-    try:
-        run(['git', 'fetch', 'origin', 'gh-pages'])
-        if run(['git', 'worktree', 'add', '--force', str(temp_dir), 'gh-pages']) != 0:
-            return False
-
-        (temp_dir / 'apx').mkdir(parents=True, exist_ok=True)
-        for source, destinations in (
-            (Path('apx/state.json'), [temp_dir / 'state.json', temp_dir / 'apx/state.json']),
-            (Path('apx/heartbeat.json'), [temp_dir / 'heartbeat.json', temp_dir / 'apx/heartbeat.json']),
-        ):
-            if not source.exists():
-                continue
-            for destination in destinations:
-                destination.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(source, destination)
-
-        run(['git', 'add', 'state.json', 'heartbeat.json', 'apx/state.json', 'apx/heartbeat.json'], cwd=temp_dir)
-        if subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=temp_dir).returncode == 0:
-            return True
-        if run(['git', 'commit', '-m', f'Publish APX live state {latest_draw()} {now()}'], cwd=temp_dir) != 0:
-            return False
-        for _ in range(3):
-            if run(['git', 'pull', '--rebase', 'origin', 'gh-pages'], cwd=temp_dir) == 0 and run(['git', 'push', 'origin', 'gh-pages'], cwd=temp_dir) == 0:
-                return True
-            time.sleep(3)
+def publish_pages_state():
+    """Copy current APX state into gh-pages during this same workflow run."""
+    worktree = Path('/tmp/apx-gh-pages')
+    run(['rm', '-rf', str(worktree)])
+    if run(['git', 'worktree', 'add', '--force', str(worktree), 'gh-pages']) != 0:
         return False
+    try:
+        (worktree / 'state.json').write_text(Path('apx/state.json').read_text())
+        (worktree / 'heartbeat.json').write_text(HEARTBEAT.read_text())
+        run(['git', '-C', str(worktree), 'add', 'state.json', 'heartbeat.json'])
+        if subprocess.run(['git', '-C', str(worktree), 'diff', '--cached', '--quiet']).returncode == 0:
+            return True
+        if run(['git', '-C', str(worktree), 'commit', '-m', f'Publish APX state {latest_draw()}']) != 0:
+            return False
+        return run(['git', '-C', str(worktree), 'push', 'origin', 'gh-pages']) == 0
     finally:
-        run(['git', 'worktree', 'remove', '--force', str(temp_dir)])
-        shutil.rmtree(temp_dir, ignore_errors=True)
+        run(['git', 'worktree', 'remove', '--force', str(worktree)])
 
 
 def commit_and_push(message):
@@ -91,7 +76,8 @@ def commit_and_push(message):
             time.sleep(4)
         if not pushed:
             return False
-    return sync_pages_branch()
+    publish_pages_state()
+    return True
 
 
 def write_heartbeat(*, source_ok, source_url, source_latest, stored_draw, advanced, error=None):
@@ -100,8 +86,8 @@ def write_heartbeat(*, source_ok, source_url, source_latest, stored_draw, advanc
     hb = {
         'updater': 'minute-watcher',
         'lastAttemptAt': now(),
-        'lastSuccessAt': now() if advanced else old.get('lastSuccessAt'),
-        'success': bool(advanced),
+        'lastSuccessAt': now() if source_ok else old.get('lastSuccessAt'),
+        'success': bool(source_ok),
         'sourceSuccess': bool(source_ok),
         'drawAdvanced': bool(advanced),
         'sourceUrl': source_url,
@@ -111,8 +97,8 @@ def write_heartbeat(*, source_ok, source_url, source_latest, stored_draw, advanc
         'consecutiveFailures': failures,
         'pollIntervalSeconds': INTERVAL,
         'lastError': error,
-        'liveDefinition': 'A newer source draw was parsed and committed',
-        'architecture': 'same-run-main-and-gh-pages-publisher',
+        'liveDefinition': 'Source was checked recently and source/stored draws agree',
+        'architecture': 'five-minute-session-30-second-poller-plus-backup',
     }
     HEARTBEAT.write_text(json.dumps(hb, indent=2))
     commit_and_push(f"Cash Pop heartbeat {stored_draw} {now()}")
@@ -141,8 +127,8 @@ def publish(draw, source_url, source_latest):
         'consecutiveFailures': 0,
         'pollIntervalSeconds': INTERVAL,
         'lastError': None,
-        'liveDefinition': 'A newer source draw was parsed and committed',
-        'architecture': 'same-run-main-and-gh-pages-publisher',
+        'liveDefinition': 'Source was checked recently and source/stored draws agree',
+        'architecture': 'five-minute-session-30-second-poller-plus-backup',
     }
     HEARTBEAT.write_text(json.dumps(hb, indent=2))
     commit_and_push(f'Minute watcher draw {draw} {now()}')
@@ -161,7 +147,7 @@ def fetch_best(page):
     for url in URLS:
         try:
             page.goto(url + '?minute=' + str(time.time_ns()), wait_until='domcontentloaded', timeout=45000)
-            page.wait_for_timeout(5000)
+            page.wait_for_timeout(4000)
             text = page.locator('body').inner_text(timeout=15000)
             parsed = updater.parse(text)
             newest = max((int(x['draw']) for x in parsed), default=0)
