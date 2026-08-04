@@ -14,9 +14,9 @@ URLS = [
     'https://cash-pop.com/michigan/winning-numbers',
     'https://cash-pop.com/michigan/past-winning-numbers',
 ]
-# Eight checks over about four minutes. The workflow starts every five minutes,
-# avoiding long-running jobs and overlap while keeping near-live coverage.
-CHECKS = 8
+# Persistent 55-minute session. A second workflow starts 30 minutes later,
+# so at least one browser is normally already running when a draw posts.
+CHECKS = 110
 INTERVAL = 30
 
 
@@ -42,30 +42,37 @@ def run(cmd):
     return subprocess.run(cmd, check=False).returncode
 
 
-def publish_pages_state():
-    """Copy current APX state into gh-pages during this same workflow run."""
-    worktree = Path('/tmp/apx-gh-pages')
-    run(['rm', '-rf', str(worktree)])
-    if run(['git', 'worktree', 'add', '--force', str(worktree), 'gh-pages']) != 0:
+def push_visible_branch(message):
+    # Publish the exact main-branch state to the Pages branch in this same run.
+    run(['git', 'fetch', 'origin', 'gh-pages'])
+    if run(['git', 'worktree', 'add', '--force', '/tmp/gh-pages', 'origin/gh-pages']) != 0:
         return False
     try:
-        (worktree / 'state.json').write_text(Path('apx/state.json').read_text())
-        (worktree / 'heartbeat.json').write_text(HEARTBEAT.read_text())
-        run(['git', '-C', str(worktree), 'add', 'state.json', 'heartbeat.json'])
-        if subprocess.run(['git', '-C', str(worktree), 'diff', '--cached', '--quiet']).returncode == 0:
+        for source, target in [
+            ('apx/state.json', '/tmp/gh-pages/state.json'),
+            ('apx/heartbeat.json', '/tmp/gh-pages/heartbeat.json'),
+        ]:
+            Path(target).write_text(Path(source).read_text())
+        run(['git', '-C', '/tmp/gh-pages', 'config', 'user.name', 'cash-pop-minute-bot'])
+        run(['git', '-C', '/tmp/gh-pages', 'config', 'user.email', 'cash-pop-minute-bot@users.noreply.github.com'])
+        run(['git', '-C', '/tmp/gh-pages', 'add', 'state.json', 'heartbeat.json'])
+        if subprocess.run(['git', '-C', '/tmp/gh-pages', 'diff', '--cached', '--quiet']).returncode == 0:
             return True
-        if run(['git', '-C', str(worktree), 'commit', '-m', f'Publish APX state {latest_draw()}']) != 0:
+        if run(['git', '-C', '/tmp/gh-pages', 'commit', '-m', message]) != 0:
             return False
-        return run(['git', '-C', str(worktree), 'push', 'origin', 'gh-pages']) == 0
+        for _ in range(3):
+            if run(['git', '-C', '/tmp/gh-pages', 'pull', '--rebase', 'origin', 'gh-pages']) == 0 and run(['git', '-C', '/tmp/gh-pages', 'push', 'origin', 'HEAD:gh-pages']) == 0:
+                return True
+            time.sleep(3)
+        return False
     finally:
-        run(['git', 'worktree', 'remove', '--force', str(worktree)])
+        run(['git', 'worktree', 'remove', '--force', '/tmp/gh-pages'])
 
 
 def commit_and_push(message):
     run(['git', 'add', 'v0/cloud_state.json'])
     run(['git', 'add', '-A', 'apx'])
-    changed = subprocess.run(['git', 'diff', '--cached', '--quiet']).returncode != 0
-    if changed:
+    if subprocess.run(['git', 'diff', '--cached', '--quiet']).returncode != 0:
         if run(['git', 'commit', '-m', message]) != 0:
             return False
         pushed = False
@@ -76,15 +83,14 @@ def commit_and_push(message):
             time.sleep(4)
         if not pushed:
             return False
-    publish_pages_state()
-    return True
+    return push_visible_branch(message)
 
 
 def write_heartbeat(*, source_ok, source_url, source_latest, stored_draw, advanced, error=None):
     old = load_heartbeat()
     failures = 0 if source_ok else int(old.get('consecutiveFailures', 0)) + 1
     hb = {
-        'updater': 'minute-watcher',
+        'updater': 'persistent-overlap-watcher',
         'lastAttemptAt': now(),
         'lastSuccessAt': now() if source_ok else old.get('lastSuccessAt'),
         'success': bool(source_ok),
@@ -98,7 +104,7 @@ def write_heartbeat(*, source_ok, source_url, source_latest, stored_draw, advanc
         'pollIntervalSeconds': INTERVAL,
         'lastError': error,
         'liveDefinition': 'Source was checked recently and source/stored draws agree',
-        'architecture': 'five-minute-session-30-second-poller-plus-backup',
+        'architecture': 'two-overlapping-55-minute-watchers-30-second-polling',
     }
     HEARTBEAT.write_text(json.dumps(hb, indent=2))
     commit_and_push(f"Cash Pop heartbeat {stored_draw} {now()}")
@@ -110,7 +116,7 @@ def publish(draw, source_url, source_latest):
     retirement_ok = run(['python', 'apx/retirement.py']) == 0 if apx_ok else False
     ledger_ok = run(['python', 'apx/ledger.py']) == 0 if apx_ok else False
     hb = {
-        'updater': 'minute-watcher',
+        'updater': 'persistent-overlap-watcher',
         'lastAttemptAt': now(),
         'lastSuccessAt': now(),
         'success': bool(apx_ok),
@@ -128,10 +134,10 @@ def publish(draw, source_url, source_latest):
         'pollIntervalSeconds': INTERVAL,
         'lastError': None,
         'liveDefinition': 'Source was checked recently and source/stored draws agree',
-        'architecture': 'five-minute-session-30-second-poller-plus-backup',
+        'architecture': 'two-overlapping-55-minute-watchers-30-second-polling',
     }
     HEARTBEAT.write_text(json.dumps(hb, indent=2))
-    commit_and_push(f'Minute watcher draw {draw} {now()}')
+    commit_and_push(f'Persistent watcher draw {draw} {now()}')
 
 
 def new_page(browser):
@@ -147,7 +153,7 @@ def fetch_best(page):
     for url in URLS:
         try:
             page.goto(url + '?minute=' + str(time.time_ns()), wait_until='domcontentloaded', timeout=45000)
-            page.wait_for_timeout(4000)
+            page.wait_for_timeout(2500)
             text = page.locator('body').inner_text(timeout=15000)
             parsed = updater.parse(text)
             newest = max((int(x['draw']) for x in parsed), default=0)
