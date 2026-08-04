@@ -1,0 +1,71 @@
+name: Manual Cash Pop draw
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  apply:
+    if: startsWith(github.event.issue.title, 'MANUAL CASH POP DRAW') && github.event.issue.user.login == github.repository_owner
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Parse request
+        id: parse
+        env:
+          TITLE: ${{ github.event.issue.title }}
+        run: |
+          python - <<'PY'
+          import os, re
+          title=os.environ['TITLE']
+          m=re.fullmatch(r'MANUAL CASH POP DRAW #(\d+) = (\d+)', title.strip())
+          if not m:
+              raise SystemExit('Title must be: MANUAL CASH POP DRAW #88846 = 7')
+          draw,number=m.groups()
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write(f'draw={draw}\nnumber={number}\n')
+          PY
+
+      - name: Apply validated draw
+        env:
+          MANUAL_DRAW: ${{ steps.parse.outputs.draw }}
+          MANUAL_NUMBER: ${{ steps.parse.outputs.number }}
+          MANUAL_ACTOR: ${{ github.actor }}
+        run: |
+          git config user.name "manual-draw-bot"
+          git config user.email "manual-draw-bot@users.noreply.github.com"
+          python v0/manual_draw.py
+          git add v0/cloud_state.json apx
+          if ! git diff --cached --quiet; then
+            git commit -m "Manual Cash Pop draw #${MANUAL_DRAW}"
+            git pull --rebase origin main
+            git push origin main
+          fi
+
+      - name: Confirm and close
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `Accepted and processed manual draw #${{ steps.parse.outputs.draw }} = ${{ steps.parse.outputs.number }}.`
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed'
+            });
