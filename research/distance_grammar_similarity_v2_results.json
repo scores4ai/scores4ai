@@ -1,0 +1,201 @@
+{
+  "experiment": "Similarity-Gated Repeat-Distance Grammar v2 LOCKED",
+  "locked": {
+    "warmup": 260,
+    "picks": 3,
+    "baseline": 0.2,
+    "buckets": "0,1-2,3-5,6-10,11-15",
+    "similarityWeights": {
+      "distance0": 1,
+      "distance1": 0.7,
+      "distance2": 0.4
+    },
+    "minWeightedCases": 6.0,
+    "activationSmoothedRate": 0.25
+  },
+  "integrity": {
+    "futureMutationFailures": [],
+    "passed": true,
+    "hashTail": "2505318178b43ccf02c2"
+  },
+  "eligibleTargets": 340,
+  "activations": 9,
+  "coverage": 0.026470588235294117,
+  "hits": 1,
+  "accuracy": 0.1111111111111111,
+  "excessPercentagePoints": -8.888888888888891,
+  "oneSidedBinomialPValue": 0.8657822720000005,
+  "records": [
+    {
+      "draw": 89282,
+      "trainingThrough": 89281,
+      "geometry": [
+        0,
+        4,
+        3
+      ],
+      "weightedPastCases": 15.0,
+      "weightedPastHits": 4.5,
+      "smoothedPastRate": 0.275,
+      "picks": [
+        3,
+        5,
+        10
+      ],
+      "actual": 13,
+      "hit": false
+    },
+    {
+      "draw": 89300,
+      "trainingThrough": 89299,
+      "geometry": [
+        0,
+        4,
+        3
+      ],
+      "weightedPastCases": 16.0,
+      "weightedPastHits": 4.5,
+      "smoothedPastRate": 0.2619047619047619,
+      "picks": [
+        6,
+        7,
+        3
+      ],
+      "actual": 9,
+      "hit": false
+    },
+    {
+      "draw": 89471,
+      "trainingThrough": 89470,
+      "geometry": [
+        0,
+        3,
+        0
+      ],
+      "weightedPastCases": 24.999999999999982,
+      "weightedPastHits": 6.9,
+      "smoothedPastRate": 0.2633333333333335,
+      "picks": [
+        5,
+        15,
+        1
+      ],
+      "actual": 8,
+      "hit": false
+    },
+    {
+      "draw": 89474,
+      "trainingThrough": 89473,
+      "geometry": [
+        0,
+        3,
+        0
+      ],
+      "weightedPastCases": 25.999999999999982,
+      "weightedPastHits": 6.9,
+      "smoothedPastRate": 0.2548387096774195,
+      "picks": [
+        6,
+        5,
+        7
+      ],
+      "actual": 11,
+      "hit": false
+    },
+    {
+      "draw": 89506,
+      "trainingThrough": 89505,
+      "geometry": [
+        0,
+        3,
+        1
+      ],
+      "weightedPastCases": 29.99999999999997,
+      "weightedPastHits": 8.000000000000002,
+      "smoothedPastRate": 0.2571428571428574,
+      "picks": [
+        4,
+        1,
+        7
+      ],
+      "actual": 9,
+      "hit": false
+    },
+    {
+      "draw": 89513,
+      "trainingThrough": 89512,
+      "geometry": [
+        0,
+        4,
+        3
+      ],
+      "weightedPastCases": 28.59999999999998,
+      "weightedPastHits": 7.9,
+      "smoothedPastRate": 0.26488095238095255,
+      "picks": [
+        8,
+        4,
+        6
+      ],
+      "actual": 4,
+      "hit": true
+    },
+    {
+      "draw": 89529,
+      "trainingThrough": 89528,
+      "geometry": [
+        0,
+        0,
+        3
+      ],
+      "weightedPastCases": 40.5,
+      "weightedPastHits": 10.600000000000001,
+      "smoothedPastRate": 0.254945054945055,
+      "picks": [
+        5,
+        14,
+        4
+      ],
+      "actual": 7,
+      "hit": false
+    },
+    {
+      "draw": 89553,
+      "trainingThrough": 89552,
+      "geometry": [
+        0,
+        4,
+        2
+      ],
+      "weightedPastCases": 28.699999999999978,
+      "weightedPastHits": 8.600000000000001,
+      "smoothedPastRate": 0.2848664688427302,
+      "picks": [
+        14,
+        5,
+        12
+      ],
+      "actual": 15,
+      "hit": false
+    },
+    {
+      "draw": 89594,
+      "trainingThrough": 89593,
+      "geometry": [
+        1,
+        4,
+        2
+      ],
+      "weightedPastCases": 26.499999999999982,
+      "weightedPastHits": 7.300000000000002,
+      "smoothedPastRate": 0.26349206349206367,
+      "picks": [
+        6,
+        2,
+        1
+      ],
+      "actual": 10,
+      "hit": false
+    }
+  ]
+}
