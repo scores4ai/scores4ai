@@ -1,0 +1,27 @@
+name: Four distinct five recent test
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "research/four_distinct_five_recent_v1.py"
+      - ".github/workflows/four-distinct-five-recent.yml"
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python research/four_distinct_five_recent_v1.py
+      - run: |
+          git config user.name "pattern-research-bot"
+          git config user.email "pattern-research-bot@users.noreply.github.com"
+          git add research/four_distinct_five_recent_v1_results.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Four distinct five recent result"
+            git pull --rebase origin main
+            git push origin main
+          fi
