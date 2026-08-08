@@ -1,0 +1,475 @@
+{
+  "experiment": "Four distinct -> previous five contain next v1",
+  "rule": "Trigger only when the immediately previous four draws are all distinct. Candidate pool is the set of the immediately previous five draw values. Score whether the next draw is in that set.",
+  "dataRows": 9114,
+  "split": {
+    "discoveryEnd": 6379,
+    "validationEnd": 7746,
+    "sealedStart": 7746,
+    "sealedRows": 1368
+  },
+  "sealedStatus": "UNTOUCHED",
+  "discovery": {
+    "partition": "discovery",
+    "tests": 4123,
+    "hits": 1278,
+    "accuracy": 0.30996846956099927,
+    "averageRandomBaseline": 0.3157409653165171,
+    "expectedHitsUnderRandom": 1301.8,
+    "excessPercentagePoints": -0.5772495755517804,
+    "oneSidedExactPoissonBinomialPValue": 0.7925014471735371,
+    "candidateCount4": 1088,
+    "candidateCount5": 3035,
+    "sample": [
+      {
+        "targetIndex": 9,
+        "draw": 80518,
+        "last5": [
+          4,
+          8,
+          4,
+          12,
+          14
+        ],
+        "uniqueCandidates": [
+          4,
+          8,
+          12,
+          14
+        ],
+        "candidateCount": 4,
+        "actual": 15,
+        "hit": false,
+        "randomP": 0.26666666666666666
+      },
+      {
+        "targetIndex": 10,
+        "draw": 80519,
+        "last5": [
+          8,
+          4,
+          12,
+          14,
+          15
+        ],
+        "uniqueCandidates": [
+          4,
+          8,
+          12,
+          14,
+          15
+        ],
+        "candidateCount": 5,
+        "actual": 5,
+        "hit": false,
+        "randomP": 0.3333333333333333
+      },
+      {
+        "targetIndex": 11,
+        "draw": 80520,
+        "last5": [
+          4,
+          12,
+          14,
+          15,
+          5
+        ],
+        "uniqueCandidates": [
+          4,
+          5,
+          12,
+          14,
+          15
+        ],
+        "candidateCount": 5,
+        "actual": 5,
+        "hit": true,
+        "randomP": 0.3333333333333333
+      },
+      {
+        "targetIndex": 15,
+        "draw": 80524,
+        "last5": [
+          5,
+          5,
+          15,
+          10,
+          1
+        ],
+        "uniqueCandidates": [
+          1,
+          5,
+          10,
+          15
+        ],
+        "candidateCount": 4,
+        "actual": 1,
+        "hit": true,
+        "randomP": 0.26666666666666666
+      },
+      {
+        "targetIndex": 19,
+        "draw": 80528,
+        "last5": [
+          1,
+          1,
+          6,
+          3,
+          13
+        ],
+        "uniqueCandidates": [
+          1,
+          3,
+          6,
+          13
+        ],
+        "candidateCount": 4,
+        "actual": 10,
+        "hit": false,
+        "randomP": 0.26666666666666666
+      },
+      {
+        "targetIndex": 20,
+        "draw": 80529,
+        "last5": [
+          1,
+          6,
+          3,
+          13,
+          10
+        ],
+        "uniqueCandidates": [
+          1,
+          3,
+          6,
+          10,
+          13
+        ],
+        "candidateCount": 5,
+        "actual": 2,
+        "hit": false,
+        "randomP": 0.3333333333333333
+      },
+      {
+        "targetIndex": 21,
+        "draw": 80530,
+        "last5": [
+          6,
+          3,
+          13,
+          10,
+          2
+        ],
+        "uniqueCandidates": [
+          2,
+          3,
+          6,
+          10,
+          13
+        ],
+        "candidateCount": 5,
+        "actual": 8,
+        "hit": false,
+        "randomP": 0.3333333333333333
+      },
+      {
+        "targetIndex": 22,
+        "draw": 80531,
+        "last5": [
+          3,
+          13,
+          10,
+          2,
+          8
+        ],
+        "uniqueCandidates": [
+          2,
+          3,
+          8,
+          10,
+          13
+        ],
+        "candidateCount": 5,
+        "actual": 14,
+        "hit": false,
+        "randomP": 0.3333333333333333
+      },
+      {
+        "targetIndex": 23,
+        "draw": 80532,
+        "last5": [
+          13,
+          10,
+          2,
+          8,
+          14
+        ],
+        "uniqueCandidates": [
+          2,
+          8,
+          10,
+          13,
+          14
+        ],
+        "candidateCount": 5,
+        "actual": 7,
+        "hit": false,
+        "randomP": 0.3333333333333333
+      },
+      {
+        "targetIndex": 24,
+        "draw": 80533,
+        "last5": [
+          10,
+          2,
+          8,
+          14,
+          7
+        ],
+        "uniqueCandidates": [
+          2,
+          7,
+          8,
+          10,
+          14
+        ],
+        "candidateCount": 5,
+        "actual": 6,
+        "hit": false,
+        "randomP": 0.3333333333333333
+      }
+    ]
+  },
+  "validation": {
+    "partition": "validation",
+    "tests": 857,
+    "hits": 277,
+    "accuracy": 0.323220536756126,
+    "averageRandomBaseline": 0.3148191365227538,
+    "expectedHitsUnderRandom": 269.8,
+    "excessPercentagePoints": 0.8401400233372214,
+    "oneSidedExactPoissonBinomialPValue": 0.3095337239226947,
+    "candidateCount4": 238,
+    "candidateCount5": 619,
+    "sample": [
+      {
+        "targetIndex": 6379,
+        "draw": 86888,
+        "last5": [
+          10,
+          1,
+          10,
+          14,
+          3
+        ],
+        "uniqueCandidates": [
+          1,
+          3,
+          10,
+          14
+        ],
+        "candidateCount": 4,
+        "actual": 12,
+        "hit": false,
+        "randomP": 0.26666666666666666
+      },
+      {
+        "targetIndex": 6380,
+        "draw": 86889,
+        "last5": [
+          1,
+          10,
+          14,
+          3,
+          12
+        ],
+        "uniqueCandidates": [
+          1,
+          3,
+          10,
+          12,
+          14
+        ],
+        "candidateCount": 5,
+        "actual": 2,
+        "hit": false,
+        "randomP": 0.3333333333333333
+      },
+      {
+        "targetIndex": 6381,
+        "draw": 86890,
+        "last5": [
+          10,
+          14,
+          3,
+          12,
+          2
+        ],
+        "uniqueCandidates": [
+          2,
+          3,
+          10,
+          12,
+          14
+        ],
+        "candidateCount": 5,
+        "actual": 15,
+        "hit": false,
+        "randomP": 0.3333333333333333
+      },
+      {
+        "targetIndex": 6382,
+        "draw": 86891,
+        "last5": [
+          14,
+          3,
+          12,
+          2,
+          15
+        ],
+        "uniqueCandidates": [
+          2,
+          3,
+          12,
+          14,
+          15
+        ],
+        "candidateCount": 5,
+        "actual": 7,
+        "hit": false,
+        "randomP": 0.3333333333333333
+      },
+      {
+        "targetIndex": 6383,
+        "draw": 86892,
+        "last5": [
+          3,
+          12,
+          2,
+          15,
+          7
+        ],
+        "uniqueCandidates": [
+          2,
+          3,
+          7,
+          12,
+          15
+        ],
+        "candidateCount": 5,
+        "actual": 14,
+        "hit": false,
+        "randomP": 0.3333333333333333
+      },
+      {
+        "targetIndex": 6384,
+        "draw": 86893,
+        "last5": [
+          12,
+          2,
+          15,
+          7,
+          14
+        ],
+        "uniqueCandidates": [
+          2,
+          7,
+          12,
+          14,
+          15
+        ],
+        "candidateCount": 5,
+        "actual": 8,
+        "hit": false,
+        "randomP": 0.3333333333333333
+      },
+      {
+        "targetIndex": 6385,
+        "draw": 86894,
+        "last5": [
+          2,
+          15,
+          7,
+          14,
+          8
+        ],
+        "uniqueCandidates": [
+          2,
+          7,
+          8,
+          14,
+          15
+        ],
+        "candidateCount": 5,
+        "actual": 12,
+        "hit": false,
+        "randomP": 0.3333333333333333
+      },
+      {
+        "targetIndex": 6386,
+        "draw": 86895,
+        "last5": [
+          15,
+          7,
+          14,
+          8,
+          12
+        ],
+        "uniqueCandidates": [
+          7,
+          8,
+          12,
+          14,
+          15
+        ],
+        "candidateCount": 5,
+        "actual": 7,
+        "hit": true,
+        "randomP": 0.3333333333333333
+      },
+      {
+        "targetIndex": 6387,
+        "draw": 86896,
+        "last5": [
+          7,
+          14,
+          8,
+          12,
+          7
+        ],
+        "uniqueCandidates": [
+          7,
+          8,
+          12,
+          14
+        ],
+        "candidateCount": 4,
+        "actual": 1,
+        "hit": false,
+        "randomP": 0.26666666666666666
+      },
+      {
+        "targetIndex": 6388,
+        "draw": 86897,
+        "last5": [
+          14,
+          8,
+          12,
+          7,
+          1
+        ],
+        "uniqueCandidates": [
+          1,
+          7,
+          8,
+          12,
+          14
+        ],
+        "candidateCount": 5,
+        "actual": 2,
+        "hit": false,
+        "randomP": 0.3333333333333333
+      }
+    ]
+  }
+}
