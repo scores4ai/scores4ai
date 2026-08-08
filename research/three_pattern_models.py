@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import json, math, random, hashlib
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 
 STATE=Path('v0/cloud_state.json')
@@ -9,6 +9,8 @@ BASELINE=3/15
 WARMUP=220
 MAX_LAG=15
 
+# Logic is unchanged from v1. This version only caches deterministic
+# prefix-derived quantities so the sealed test can finish efficiently.
 
 def prev_distance(seq, idx):
     v=seq[idx]
@@ -18,24 +20,19 @@ def prev_distance(seq, idx):
         if seq[j]==v: return d
     return 0
 
-
 def distance_series(prefix):
     return [prev_distance(prefix,i) for i in range(len(prefix))]
-
 
 def fallback_freq(prefix, used):
     c=Counter(prefix[-120:])
     return [n for n,_ in sorted(c.items(), key=lambda kv:(kv[1],-kv[0]), reverse=True) if n not in used]
 
-
-def model_a(prefix):
-    # Repeat-Distance Grammar: learn transitions between recent distance motifs and next repeat distance.
-    ds=distance_series(prefix)
+def model_a(prefix, ds=None):
+    ds=ds if ds is not None else distance_series(prefix)
     ctx=tuple(ds[-3:])
     scores=Counter()
     for i in range(3,len(ds)):
         hist=tuple(ds[i-3:i])
-        # similarity: exact recent distance positions matter most
         sim=sum((3-j) for j in range(3) if hist[j]==ctx[j])
         if sim:
             nxt=ds[i]
@@ -47,37 +44,33 @@ def model_a(prefix):
         if len(picks)>=3: break
     return picks[:3]
 
+def feature_from_ds(ds, end):
+    return (ds[end-1],ds[end-2],ds[end-3],sum(1 for x in ds[max(0,end-8):end] if x>0))
 
-def recent_features(prefix):
-    ds=distance_series(prefix)
-    return (ds[-1],ds[-2],ds[-3], sum(1 for x in ds[-8:] if x>0))
-
-
-def model_b(prefix):
-    # Multi-Echo Intersection: each current lag gets a past-only conditional reliability score.
-    fcur=recent_features(prefix)
-    scores=Counter()
+def model_b(prefix, ds=None):
+    ds=ds if ds is not None else distance_series(prefix)
     N=len(prefix)
+    fcur=feature_from_ds(ds,N)
+    features=[None]*N
+    for t in range(3,N):
+        features[t]=feature_from_ds(ds,t)
+    scores=Counter()
     for lag in range(1,MAX_LAG+1):
         if lag>N: break
         cand=prefix[-lag]
-        succ=2.0/15.0; total=2.0  # shrinkage prior
+        succ=2.0/15.0; total=2.0
         for t in range(max(40,lag+5),N):
-            hist=prefix[:t]
-            fh=recent_features(hist)
+            fh=features[t]
             sim=(2 if fh[0]==fcur[0] else 0)+(1 if fh[1]==fcur[1] else 0)+(1 if abs(fh[3]-fcur[3])<=1 else 0)
             if sim==0: continue
             total += sim
-            if prefix[t]==hist[-lag]: succ += sim
+            if prefix[t]==prefix[t-lag]: succ += sim
         rate=succ/total
-        # modest recency confirmation if candidate occurs at multiple current lags
         scores[cand] += math.log(max(rate,1e-9)/(1/15))
-    ranked=sorted(range(1,16), key=lambda n:(scores[n], prefix[-90:].count(n), -n), reverse=True)
+    ranked=sorted(range(1,16), key=lambda n:(scores[n],prefix[-90:].count(n),-n), reverse=True)
     return ranked[:3]
 
-
 def signature(win):
-    # canonical equality pattern, e.g. 5,8,5,4 -> 0,1,0,2
     ids={}; nxt=0; out=[]
     for v in win:
         if v not in ids:
@@ -85,49 +78,43 @@ def signature(win):
         out.append(ids[v])
     return tuple(out)
 
-
 def model_c(prefix):
-    # Pattern Analog: nearest historical recurrence-geometry windows, translated to current labels.
     L=9
     cur=prefix[-L:]
     csig=signature(cur)
     votes=Counter()
-    for end in range(L, len(prefix)):
+    for end in range(L,len(prefix)):
         w=prefix[end-L:end]
         sig=signature(w)
         dist=sum(1 for a,b in zip(sig,csig) if a!=b)
         if dist>3: continue
         weight=1.0/(1+dist)
         nxt=prefix[end]
-        # If historical next equals a value inside its window, translate same relative label to current window.
         rel=None
         for j in range(L-1,-1,-1):
             if w[j]==nxt:
                 rel=j; break
         if rel is not None:
             votes[cur[rel]] += 2*weight
-        else:
-            # novel-value analog: weak vote by recent-frequency rank only, avoids inventing literal identity mapping
-            pass
     picks=[n for n,_ in votes.most_common()]
     for n in fallback_freq(prefix,set(picks)):
         picks.append(n)
         if len(picks)>=3: break
     return picks[:3]
 
-
-def ensemble(prefix):
-    preds=[model_a(prefix),model_b(prefix),model_c(prefix)]
+def all_models(prefix):
+    ds=distance_series(prefix)
+    pa=model_a(prefix,ds)
+    pb=model_b(prefix,ds)
+    pc=model_c(prefix)
     v=Counter()
-    for ps in preds:
+    for ps in (pa,pb,pc):
         for rank,n in enumerate(ps): v[n]+=3-rank
-    ranked=sorted(range(1,16), key=lambda n:(v[n],prefix[-100:].count(n),-n), reverse=True)
-    return ranked[:3], preds
-
+    pe=sorted(range(1,16), key=lambda n:(v[n],prefix[-100:].count(n),-n), reverse=True)[:3]
+    return [pa,pb,pc,pe]
 
 def binom_tail(k,n,p):
     return sum(math.comb(n,i)*p**i*(1-p)**(n-i) for i in range(k,n+1))
-
 
 def main():
     state=json.loads(STATE.read_text())
@@ -138,13 +125,12 @@ def main():
     contamination=[]; chain='GENESIS'
     for t in range(WARMUP,len(nums)):
         prefix=nums[:t]
-        pa=model_a(prefix); pb=model_b(prefix); pc=model_c(prefix); pe,_=ensemble(prefix)
-        preds=[pa,pb,pc,pe]
-        # Anti-leak: scramble ALL unseen future and require identical predictions.
+        preds=all_models(prefix)
+        # Future mutation: because models receive prefix only, corrupted suffix must be irrelevant.
         mut=nums[:]
         rng=random.Random(730001+t)
         for j in range(t,len(mut)): mut[j]=rng.randint(1,15)
-        mp=[model_a(mut[:t]),model_b(mut[:t]),model_c(mut[:t]),ensemble(mut[:t])[0]]
+        mp=all_models(mut[:t])
         if mp!=preds: contamination.append(int(draws[t]['draw']))
         actual=nums[t]
         for name,picks in zip(names,preds):
