@@ -1,0 +1,384 @@
+{
+  "model": "Echo-Regime Adaptive v1 LOCKED",
+  "integrity": {
+    "futureMutationTests": 340,
+    "futureMutationFailures": [],
+    "passed": true,
+    "rule": "gate, threshold, and picks use only draws strictly before target",
+    "predictionHashChainTail": "9f3ed30343335aaddb83"
+  },
+  "lockedParameters": {
+    "warmup": 260,
+    "maxLag": 15,
+    "regimeWindow": 30,
+    "regimePercentile": 0.8,
+    "minPriorRegimeWindows": 100,
+    "echoWindows": [
+      50,
+      150,
+      500
+    ],
+    "echoWindowWeights": [
+      0.5,
+      0.3,
+      0.2
+    ],
+    "priorStrength": 12.0,
+    "echoWeight": 0.65,
+    "motifWeight": 0.2,
+    "frequencyWeight": 0.15
+  },
+  "eligibleTests": 340,
+  "activatedTests": 127,
+  "coverage": 0.3735294117647059,
+  "hits": 40,
+  "misses": 87,
+  "activatedAccuracy": 0.31496062992125984,
+  "randomTop5Baseline": 0.3333333333333333,
+  "excessPercentagePoints": -1.8372703412073477,
+  "oneSidedExactBinomialPValue": 0.7003946304759792,
+  "firstEligibleDraw": 89282,
+  "lastEligibleDraw": 89621,
+  "recentActivated": [
+    {
+      "targetDraw": 89556,
+      "trainingThrough": 89555,
+      "active": true,
+      "density": 0.08,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        13,
+        6,
+        14,
+        15,
+        11
+      ],
+      "actual": 13,
+      "hit": true,
+      "frozenHash": "a8d9ca29a313631fb28a"
+    },
+    {
+      "targetDraw": 89557,
+      "trainingThrough": 89556,
+      "active": true,
+      "density": 0.08444444444444445,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        7,
+        5,
+        12,
+        6,
+        11
+      ],
+      "actual": 4,
+      "hit": false,
+      "frozenHash": "43fb21a8d64a78f1e84f"
+    },
+    {
+      "targetDraw": 89558,
+      "trainingThrough": 89557,
+      "active": true,
+      "density": 0.08444444444444445,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        5,
+        6,
+        13,
+        14,
+        7
+      ],
+      "actual": 11,
+      "hit": false,
+      "frozenHash": "c23ac5408b656ecb0d53"
+    },
+    {
+      "targetDraw": 89559,
+      "trainingThrough": 89558,
+      "active": true,
+      "density": 0.08,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        15,
+        14,
+        6,
+        5,
+        7
+      ],
+      "actual": 13,
+      "hit": false,
+      "frozenHash": "e2a2f92d05a2cc0147fe"
+    },
+    {
+      "targetDraw": 89560,
+      "trainingThrough": 89559,
+      "active": true,
+      "density": 0.08444444444444445,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        12,
+        5,
+        6,
+        4,
+        14
+      ],
+      "actual": 7,
+      "hit": false,
+      "frozenHash": "dfb75d0550c6d4e39775"
+    },
+    {
+      "targetDraw": 89561,
+      "trainingThrough": 89560,
+      "active": true,
+      "density": 0.08222222222222222,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        6,
+        5,
+        15,
+        8,
+        11
+      ],
+      "actual": 15,
+      "hit": true,
+      "frozenHash": "6ec2d375078f7da19881"
+    },
+    {
+      "targetDraw": 89562,
+      "trainingThrough": 89561,
+      "active": true,
+      "density": 0.08666666666666667,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        13,
+        5,
+        6,
+        15,
+        12
+      ],
+      "actual": 3,
+      "hit": false,
+      "frozenHash": "8939315baf5f1a4f705e"
+    },
+    {
+      "targetDraw": 89563,
+      "trainingThrough": 89562,
+      "active": true,
+      "density": 0.08444444444444445,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        6,
+        14,
+        8,
+        5,
+        4
+      ],
+      "actual": 13,
+      "hit": false,
+      "frozenHash": "fbbaf9419c15887eb372"
+    },
+    {
+      "targetDraw": 89564,
+      "trainingThrough": 89563,
+      "active": true,
+      "density": 0.08666666666666667,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        8,
+        12,
+        15,
+        11,
+        6
+      ],
+      "actual": 11,
+      "hit": true,
+      "frozenHash": "1bf88a378a40bf338a11"
+    },
+    {
+      "targetDraw": 89565,
+      "trainingThrough": 89564,
+      "active": true,
+      "density": 0.08444444444444445,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        13,
+        5,
+        4,
+        14,
+        8
+      ],
+      "actual": 1,
+      "hit": false,
+      "frozenHash": "42c82973907a5224ad04"
+    },
+    {
+      "targetDraw": 89566,
+      "trainingThrough": 89565,
+      "active": true,
+      "density": 0.08222222222222222,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        4,
+        7,
+        13,
+        15,
+        8
+      ],
+      "actual": 15,
+      "hit": true,
+      "frozenHash": "8a35f14ebbba082be3f7"
+    },
+    {
+      "targetDraw": 89567,
+      "trainingThrough": 89566,
+      "active": true,
+      "density": 0.08222222222222222,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        6,
+        11,
+        13,
+        5,
+        4
+      ],
+      "actual": 1,
+      "hit": false,
+      "frozenHash": "55ab1e4545149399c83e"
+    },
+    {
+      "targetDraw": 89568,
+      "trainingThrough": 89567,
+      "active": true,
+      "density": 0.08,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        8,
+        13,
+        7,
+        3,
+        11
+      ],
+      "actual": 5,
+      "hit": false,
+      "frozenHash": "9d5b16f2e51e6e3e9d46"
+    },
+    {
+      "targetDraw": 89569,
+      "trainingThrough": 89568,
+      "active": true,
+      "density": 0.08,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        13,
+        7,
+        15,
+        6,
+        14
+      ],
+      "actual": 7,
+      "hit": true,
+      "frozenHash": "e14eeba302692ce9a63e"
+    },
+    {
+      "targetDraw": 89570,
+      "trainingThrough": 89569,
+      "active": true,
+      "density": 0.08222222222222222,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        4,
+        15,
+        8,
+        11,
+        3
+      ],
+      "actual": 3,
+      "hit": true,
+      "frozenHash": "de4b7406f8a4ea9ef2bd"
+    },
+    {
+      "targetDraw": 89571,
+      "trainingThrough": 89570,
+      "active": true,
+      "density": 0.08222222222222222,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        11,
+        13,
+        1,
+        5,
+        8
+      ],
+      "actual": 6,
+      "hit": false,
+      "frozenHash": "63ebfc98a4133f0de59c"
+    },
+    {
+      "targetDraw": 89572,
+      "trainingThrough": 89571,
+      "active": true,
+      "density": 0.08,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        13,
+        11,
+        15,
+        4,
+        5
+      ],
+      "actual": 11,
+      "hit": true,
+      "frozenHash": "82e3bd066f51fae70846"
+    },
+    {
+      "targetDraw": 89573,
+      "trainingThrough": 89572,
+      "active": true,
+      "density": 0.08444444444444445,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        7,
+        1,
+        13,
+        8,
+        11
+      ],
+      "actual": 14,
+      "hit": false,
+      "frozenHash": "f8101bdb46d99e1c163f"
+    },
+    {
+      "targetDraw": 89574,
+      "trainingThrough": 89573,
+      "active": true,
+      "density": 0.08,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        15,
+        1,
+        5,
+        7,
+        6
+      ],
+      "actual": 9,
+      "hit": false,
+      "frozenHash": "da89300e5174cbf0fa58"
+    },
+    {
+      "targetDraw": 89575,
+      "trainingThrough": 89574,
+      "active": true,
+      "density": 0.07777777777777778,
+      "threshold": 0.07777777777777778,
+      "picks": [
+        15,
+        1,
+        3,
+        7,
+        8
+      ],
+      "actual": 8,
+      "hit": true,
+      "frozenHash": "178f8da7083a03b79e7a"
+    }
+  ]
+}
