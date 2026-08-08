@@ -1,0 +1,21 @@
+name: Small dataset sealed pattern test
+on:
+  workflow_dispatch:
+  push:
+    paths: ["research/small_dataset_pattern_test.py", ".github/workflows/small-dataset-pattern.yml"]
+permissions: {contents: write}
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python research/small_dataset_pattern_test.py
+      - run: |
+          git config user.name pattern-research-bot
+          git config user.email pattern-research-bot@users.noreply.github.com
+          git add research/small_dataset_pattern_results.json
+          git commit -m "Small dataset sealed pattern result" || exit 0
+          git pull --rebase origin main
+          git push origin main
