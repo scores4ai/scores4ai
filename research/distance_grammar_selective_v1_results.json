@@ -1,0 +1,63 @@
+{
+  "experiment": "Selective Repeat-Distance Grammar v1 LOCKED",
+  "locked": {
+    "warmup": 260,
+    "picksPerDraw": 3,
+    "baseline": 0.2,
+    "contextLength": 3,
+    "minPastExactContextCases": 8,
+    "activationSmoothedPastHitRate": 0.3
+  },
+  "integrity": {
+    "futureMutationFailures": [],
+    "passed": true,
+    "hashTail": "667f8b2bc9eb65d18ad8"
+  },
+  "eligibleTargets": 340,
+  "activations": 2,
+  "coverage": 0.0058823529411764705,
+  "hits": 0,
+  "accuracy": 0.0,
+  "excessPercentagePoints": -20.0,
+  "oneSidedBinomialPValue": 1.0000000000000002,
+  "records": [
+    {
+      "draw": 89380,
+      "trainingThrough": 89379,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "pastCases": 11,
+      "pastHits": 4,
+      "pastSmoothedRate": 0.3125,
+      "picks": [
+        12,
+        6,
+        4
+      ],
+      "actual": 9,
+      "hit": false
+    },
+    {
+      "draw": 89434,
+      "trainingThrough": 89433,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "pastCases": 15,
+      "pastHits": 5,
+      "pastSmoothedRate": 0.3,
+      "picks": [
+        13,
+        14,
+        3
+      ],
+      "actual": 2,
+      "hit": false
+    }
+  ]
+}
