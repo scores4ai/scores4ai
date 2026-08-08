@@ -1,0 +1,27 @@
+name: Arc-chain repeat geometry v1
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "research/arc_chain_v1.py"
+      - ".github/workflows/arc-chain-v1.yml"
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python research/arc_chain_v1.py
+      - run: |
+          git config user.name "pattern-research-bot"
+          git config user.email "pattern-research-bot@users.noreply.github.com"
+          git add research/arc_chain_v1_results.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Arc-chain repeat geometry v1 result"
+            git pull --rebase origin main
+            git push origin main
+          fi
