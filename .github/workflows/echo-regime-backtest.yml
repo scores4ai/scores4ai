@@ -1,0 +1,34 @@
+name: Echo-Regime sealed backtest
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "research/echo_regime_backtest.py"
+      - ".github/workflows/echo-regime-backtest.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run sealed regime walk-forward test
+        run: python research/echo_regime_backtest.py
+      - name: Commit result snapshot
+        run: |
+          git config user.name "echo-regime-research-bot"
+          git config user.email "echo-regime-research-bot@users.noreply.github.com"
+          git add research/echo_regime_results.json research/echo_regime_results.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Echo-Regime sealed backtest result"
+            git pull --rebase origin main
+            git push origin main
+          fi
