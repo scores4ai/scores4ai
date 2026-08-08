@@ -21,7 +21,6 @@ def rate_for_lag(prefix, lag, window):
     start = max(lag, len(prefix) - window)
     total = max(0, len(prefix) - start)
     matches = sum(1 for i in range(start, len(prefix)) if prefix[i] == prefix[i-lag])
-    # Bayesian shrinkage toward the known random repeat rate 1/15.
     return (matches + PRIOR_STRENGTH*(1/15)) / (total + PRIOR_STRENGTH) if total else 1/15
 
 
@@ -50,7 +49,6 @@ def predict_prefix(prefix):
             combined += w*math.log(max(rate,1e-9)/(1/15))
         echo[n] += combined
         motif[n] += motif_strength(prefix,lag)
-    # Recent frequency is only a tie-stabilizer / weak auxiliary feature.
     recent=prefix[-150:]
     counts={n:recent.count(n)/len(recent) for n in range(1,16)}
     scores={n:ECHO_WEIGHT*echo[n]+MOTIF_WEIGHT*motif[n]+FREQ_WEIGHT*math.log(max(counts[n],1e-9)/(1/15)) for n in range(1,16)}
@@ -59,7 +57,6 @@ def predict_prefix(prefix):
 
 
 def predict_at(full_numbers, target_index):
-    # Critical anti-leak boundary: the predictor receives only the historical prefix.
     return predict_prefix(list(full_numbers[:target_index]))
 
 
@@ -81,10 +78,8 @@ def main():
 
     for t in range(WARMUP,len(numbers)):
         picks,scores=predict_at(numbers,t)
-
-        # Future-mutation invariance test: corrupt every unseen value; this prediction MUST stay identical.
         mutated=list(numbers)
-        rng=random.Random(0xECHO + t)
+        rng=random.Random(0xEC40 + t)
         for j in range(t,len(mutated)):
             mutated[j]=rng.randint(1,15)
         picks_mut,_=predict_at(mutated,t)
