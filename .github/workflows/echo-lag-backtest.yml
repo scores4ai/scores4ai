@@ -1,0 +1,34 @@
+name: Echo-Lag sealed backtest
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "research/echo_lag_backtest.py"
+      - ".github/workflows/echo-lag-backtest.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run sealed walk-forward test
+        run: python research/echo_lag_backtest.py
+      - name: Commit immutable-style result snapshot
+        run: |
+          git config user.name "echo-lag-research-bot"
+          git config user.email "echo-lag-research-bot@users.noreply.github.com"
+          git add research/echo_lag_results.json research/echo_lag_results.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Echo-Lag sealed backtest result"
+            git pull --rebase origin main
+            git push origin main
+          fi
