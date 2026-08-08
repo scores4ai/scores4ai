@@ -1,0 +1,319 @@
+{
+  "model": "Echo-Lag Adaptive v1 LOCKED",
+  "integrity": {
+    "futureMutationTests": 400,
+    "futureMutationFailures": [],
+    "passed": true,
+    "rule": "prediction at target t receives draws strictly before t only",
+    "predictionHashChainTail": "d0ba53c6db5b37a1ffb2"
+  },
+  "lockedParameters": {
+    "warmup": 200,
+    "maxLag": 15,
+    "windows": [
+      50,
+      150,
+      500
+    ],
+    "windowWeights": [
+      0.5,
+      0.3,
+      0.2
+    ],
+    "priorStrength": 12.0,
+    "echoWeight": 0.65,
+    "motifWeight": 0.2,
+    "frequencyWeight": 0.15
+  },
+  "tests": 400,
+  "hits": 128,
+  "misses": 272,
+  "accuracy": 0.32,
+  "randomBaseline": 0.3333333333333333,
+  "excessPercentagePoints": -1.3333333333333308,
+  "oneSidedBinomialPValue": 0.7307201745021938,
+  "firstTestDraw": 89222,
+  "lastTestDraw": 89621,
+  "recent20": [
+    {
+      "targetDraw": 89602,
+      "trainingThrough": 89601,
+      "picks": [
+        10,
+        9,
+        5,
+        7,
+        8
+      ],
+      "actual": 5,
+      "hit": true,
+      "frozenHash": "615852e4b79f2079436c"
+    },
+    {
+      "targetDraw": 89603,
+      "trainingThrough": 89602,
+      "picks": [
+        14,
+        8,
+        7,
+        4,
+        13
+      ],
+      "actual": 11,
+      "hit": false,
+      "frozenHash": "6483a6252211e43bb864"
+    },
+    {
+      "targetDraw": 89604,
+      "trainingThrough": 89603,
+      "picks": [
+        9,
+        5,
+        7,
+        8,
+        4
+      ],
+      "actual": 4,
+      "hit": true,
+      "frozenHash": "0e48340abd57d12563b7"
+    },
+    {
+      "targetDraw": 89605,
+      "trainingThrough": 89604,
+      "picks": [
+        8,
+        3,
+        6,
+        7,
+        13
+      ],
+      "actual": 13,
+      "hit": true,
+      "frozenHash": "50dcf58e0757a6008594"
+    },
+    {
+      "targetDraw": 89606,
+      "trainingThrough": 89605,
+      "picks": [
+        9,
+        5,
+        4,
+        2,
+        7
+      ],
+      "actual": 4,
+      "hit": true,
+      "frozenHash": "4b51bd8abb7aaa9c4415"
+    },
+    {
+      "targetDraw": 89607,
+      "trainingThrough": 89606,
+      "picks": [
+        13,
+        10,
+        5,
+        6,
+        7
+      ],
+      "actual": 7,
+      "hit": true,
+      "frozenHash": "6269a5d9fd5de722b77c"
+    },
+    {
+      "targetDraw": 89608,
+      "trainingThrough": 89607,
+      "picks": [
+        4,
+        5,
+        14,
+        9,
+        6
+      ],
+      "actual": 13,
+      "hit": false,
+      "frozenHash": "db76c1a900dcff88bec0"
+    },
+    {
+      "targetDraw": 89609,
+      "trainingThrough": 89608,
+      "picks": [
+        11,
+        7,
+        6,
+        5,
+        14
+      ],
+      "actual": 1,
+      "hit": false,
+      "frozenHash": "72f1270a490850e0222a"
+    },
+    {
+      "targetDraw": 89610,
+      "trainingThrough": 89609,
+      "picks": [
+        5,
+        13,
+        4,
+        8,
+        6
+      ],
+      "actual": 6,
+      "hit": true,
+      "frozenHash": "0b0f58c006a256e883ef"
+    },
+    {
+      "targetDraw": 89611,
+      "trainingThrough": 89610,
+      "picks": [
+        1,
+        7,
+        14,
+        10,
+        15
+      ],
+      "actual": 2,
+      "hit": false,
+      "frozenHash": "be14b86a02003e0066fe"
+    },
+    {
+      "targetDraw": 89612,
+      "trainingThrough": 89611,
+      "picks": [
+        4,
+        6,
+        3,
+        14,
+        13
+      ],
+      "actual": 8,
+      "hit": false,
+      "frozenHash": "6b8e2ed431c94932f584"
+    },
+    {
+      "targetDraw": 89613,
+      "trainingThrough": 89612,
+      "picks": [
+        13,
+        2,
+        7,
+        1,
+        14
+      ],
+      "actual": 10,
+      "hit": false,
+      "frozenHash": "41bbbcaef86547d71328"
+    },
+    {
+      "targetDraw": 89614,
+      "trainingThrough": 89613,
+      "picks": [
+        8,
+        14,
+        1,
+        15,
+        12
+      ],
+      "actual": 9,
+      "hit": false,
+      "frozenHash": "7b41634fc08995c75e0a"
+    },
+    {
+      "targetDraw": 89615,
+      "trainingThrough": 89614,
+      "picks": [
+        10,
+        7,
+        5,
+        14,
+        6
+      ],
+      "actual": 14,
+      "hit": true,
+      "frozenHash": "3db5c89d1c846e0fe1a7"
+    },
+    {
+      "targetDraw": 89616,
+      "trainingThrough": 89615,
+      "picks": [
+        9,
+        5,
+        3,
+        15,
+        6
+      ],
+      "actual": 2,
+      "hit": false,
+      "frozenHash": "f58033fda9c71bbd7fd5"
+    },
+    {
+      "targetDraw": 89617,
+      "trainingThrough": 89616,
+      "picks": [
+        14,
+        1,
+        8,
+        11,
+        3
+      ],
+      "actual": 13,
+      "hit": false,
+      "frozenHash": "92a1555a11ff7a6af850"
+    },
+    {
+      "targetDraw": 89618,
+      "trainingThrough": 89617,
+      "picks": [
+        6,
+        10,
+        5,
+        2,
+        3
+      ],
+      "actual": 4,
+      "hit": false,
+      "frozenHash": "8ccb5f7dccbfc71d41f2"
+    },
+    {
+      "targetDraw": 89619,
+      "trainingThrough": 89618,
+      "picks": [
+        7,
+        5,
+        9,
+        11,
+        13
+      ],
+      "actual": 2,
+      "hit": false,
+      "frozenHash": "8c2addead12e9884544d"
+    },
+    {
+      "targetDraw": 89620,
+      "trainingThrough": 89619,
+      "picks": [
+        8,
+        4,
+        14,
+        5,
+        11
+      ],
+      "actual": 5,
+      "hit": true,
+      "frozenHash": "50d53ae6206004574e63"
+    },
+    {
+      "targetDraw": 89621,
+      "trainingThrough": 89620,
+      "picks": [
+        10,
+        7,
+        1,
+        11,
+        3
+      ],
+      "actual": 3,
+      "hit": true,
+      "frozenHash": "d0ba53c6db5b37a1ffb2"
+    }
+  ]
+}
