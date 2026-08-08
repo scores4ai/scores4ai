@@ -1,0 +1,28 @@
+name: Probe Michigan Cash Pop date
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "research/probe_cashpop_date.py"
+      - ".github/workflows/probe-cashpop-date.yml"
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install requests beautifulsoup4
+      - run: python research/probe_cashpop_date.py
+      - run: |
+          git config user.name "archive-research-bot"
+          git config user.email "archive-research-bot@users.noreply.github.com"
+          git add research/date_probe.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Michigan Cash Pop date probe result"
+            git pull --rebase origin main
+            git push origin main
+          fi
