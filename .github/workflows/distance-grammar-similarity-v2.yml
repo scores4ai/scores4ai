@@ -1,0 +1,27 @@
+name: Similarity-gated distance grammar v2
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "research/distance_grammar_similarity_v2.py"
+      - ".github/workflows/distance-grammar-similarity-v2.yml"
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python research/distance_grammar_similarity_v2.py
+      - run: |
+          git config user.name "pattern-research-bot"
+          git config user.email "pattern-research-bot@users.noreply.github.com"
+          git add research/distance_grammar_similarity_v2_results.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Similarity-gated distance grammar v2 result"
+            git pull --rebase origin main
+            git push origin main
+          fi
