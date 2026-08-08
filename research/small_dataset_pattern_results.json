@@ -1,0 +1,4433 @@
+{
+  "experiment": "Small dataset sealed pattern test",
+  "datasetRows": 600,
+  "testRows": 200,
+  "firstDraw": 89072,
+  "lastDraw": 89671,
+  "baseline": 0.2,
+  "models": {
+    "Repeat-Distance Grammar": {
+      "hits": 48,
+      "tests": 200,
+      "accuracy": 0.24,
+      "excessPP": 3.9999999999999982,
+      "oneSidedP": 0.09440458731035767
+    },
+    "Lag Vote": {
+      "hits": 43,
+      "tests": 200,
+      "accuracy": 0.215,
+      "excessPP": 1.4999999999999987,
+      "oneSidedP": 0.324191673843476
+    },
+    "Consensus": {
+      "hits": 46,
+      "tests": 200,
+      "accuracy": 0.23,
+      "excessPP": 3.0,
+      "oneSidedP": 0.16511752884672576
+    }
+  },
+  "records": [
+    {
+      "draw": 89472,
+      "grammar": [
+        5,
+        14,
+        7
+      ],
+      "lagVote": [
+        5,
+        7,
+        14
+      ],
+      "consensus": [
+        5,
+        7,
+        14
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89473,
+      "grammar": [
+        5,
+        2,
+        6
+      ],
+      "lagVote": [
+        5,
+        6,
+        2
+      ],
+      "consensus": [
+        2,
+        5,
+        6
+      ],
+      "actual": 13,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89474,
+      "grammar": [
+        5,
+        6,
+        8
+      ],
+      "lagVote": [
+        5,
+        6,
+        11
+      ],
+      "consensus": [
+        5,
+        6,
+        8
+      ],
+      "actual": 11,
+      "gHit": false,
+      "lHit": true,
+      "cHit": false
+    },
+    {
+      "draw": 89475,
+      "grammar": [
+        11,
+        10,
+        5
+      ],
+      "lagVote": [
+        11,
+        5,
+        6
+      ],
+      "consensus": [
+        5,
+        11,
+        6
+      ],
+      "actual": 8,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89476,
+      "grammar": [
+        8,
+        6,
+        11
+      ],
+      "lagVote": [
+        8,
+        11,
+        6
+      ],
+      "consensus": [
+        6,
+        8,
+        11
+      ],
+      "actual": 10,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89477,
+      "grammar": [
+        11,
+        8,
+        10
+      ],
+      "lagVote": [
+        6,
+        8,
+        10
+      ],
+      "consensus": [
+        8,
+        10,
+        6
+      ],
+      "actual": 14,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89478,
+      "grammar": [
+        10,
+        8,
+        2
+      ],
+      "lagVote": [
+        14,
+        10,
+        6
+      ],
+      "consensus": [
+        10,
+        2,
+        6
+      ],
+      "actual": 7,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89479,
+      "grammar": [
+        11,
+        8,
+        7
+      ],
+      "lagVote": [
+        11,
+        7,
+        14
+      ],
+      "consensus": [
+        7,
+        11,
+        8
+      ],
+      "actual": 8,
+      "gHit": true,
+      "lHit": false,
+      "cHit": true
+    },
+    {
+      "draw": 89480,
+      "grammar": [
+        8,
+        7,
+        14
+      ],
+      "lagVote": [
+        8,
+        10,
+        7
+      ],
+      "consensus": [
+        7,
+        8,
+        10
+      ],
+      "actual": 14,
+      "gHit": true,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89481,
+      "grammar": [
+        2,
+        8,
+        14
+      ],
+      "lagVote": [
+        8,
+        14,
+        10
+      ],
+      "consensus": [
+        8,
+        14,
+        2
+      ],
+      "actual": 8,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89482,
+      "grammar": [
+        14,
+        10,
+        8
+      ],
+      "lagVote": [
+        8,
+        14,
+        10
+      ],
+      "consensus": [
+        8,
+        10,
+        14
+      ],
+      "actual": 11,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89483,
+      "grammar": [
+        14,
+        8,
+        13
+      ],
+      "lagVote": [
+        8,
+        11,
+        14
+      ],
+      "consensus": [
+        8,
+        14,
+        11
+      ],
+      "actual": 14,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89484,
+      "grammar": [
+        8,
+        14,
+        11
+      ],
+      "lagVote": [
+        8,
+        14,
+        11
+      ],
+      "consensus": [
+        8,
+        11,
+        14
+      ],
+      "actual": 7,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89485,
+      "grammar": [
+        8,
+        14,
+        13
+      ],
+      "lagVote": [
+        8,
+        14,
+        11
+      ],
+      "consensus": [
+        8,
+        14,
+        11
+      ],
+      "actual": 12,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89486,
+      "grammar": [
+        14,
+        8,
+        11
+      ],
+      "lagVote": [
+        8,
+        14,
+        7
+      ],
+      "consensus": [
+        8,
+        14,
+        7
+      ],
+      "actual": 7,
+      "gHit": false,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89487,
+      "grammar": [
+        14,
+        7,
+        11
+      ],
+      "lagVote": [
+        7,
+        14,
+        8
+      ],
+      "consensus": [
+        7,
+        14,
+        8
+      ],
+      "actual": 14,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89488,
+      "grammar": [
+        14,
+        7,
+        8
+      ],
+      "lagVote": [
+        14,
+        7,
+        8
+      ],
+      "consensus": [
+        7,
+        8,
+        14
+      ],
+      "actual": 10,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89489,
+      "grammar": [
+        10,
+        14,
+        8
+      ],
+      "lagVote": [
+        14,
+        7,
+        8
+      ],
+      "consensus": [
+        8,
+        14,
+        7
+      ],
+      "actual": 2,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89490,
+      "grammar": [
+        14,
+        10,
+        7
+      ],
+      "lagVote": [
+        14,
+        8,
+        7
+      ],
+      "consensus": [
+        7,
+        14,
+        8
+      ],
+      "actual": 15,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89491,
+      "grammar": [
+        14,
+        7,
+        10
+      ],
+      "lagVote": [
+        14,
+        7,
+        8
+      ],
+      "consensus": [
+        7,
+        14,
+        8
+      ],
+      "actual": 7,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89492,
+      "grammar": [
+        14,
+        7,
+        8
+      ],
+      "lagVote": [
+        14,
+        7,
+        8
+      ],
+      "consensus": [
+        7,
+        8,
+        14
+      ],
+      "actual": 8,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89493,
+      "grammar": [
+        7,
+        8,
+        14
+      ],
+      "lagVote": [
+        7,
+        14,
+        8
+      ],
+      "consensus": [
+        7,
+        8,
+        14
+      ],
+      "actual": 10,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89494,
+      "grammar": [
+        10,
+        7,
+        8
+      ],
+      "lagVote": [
+        7,
+        8,
+        14
+      ],
+      "consensus": [
+        7,
+        8,
+        10
+      ],
+      "actual": 7,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89495,
+      "grammar": [
+        7,
+        14,
+        15
+      ],
+      "lagVote": [
+        7,
+        14,
+        10
+      ],
+      "consensus": [
+        7,
+        14,
+        10
+      ],
+      "actual": 1,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89496,
+      "grammar": [
+        7,
+        10,
+        1
+      ],
+      "lagVote": [
+        7,
+        10,
+        8
+      ],
+      "consensus": [
+        7,
+        10,
+        1
+      ],
+      "actual": 5,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89497,
+      "grammar": [
+        7,
+        10,
+        14
+      ],
+      "lagVote": [
+        7,
+        14,
+        10
+      ],
+      "consensus": [
+        7,
+        10,
+        14
+      ],
+      "actual": 4,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89498,
+      "grammar": [
+        7,
+        10,
+        14
+      ],
+      "lagVote": [
+        7,
+        10,
+        14
+      ],
+      "consensus": [
+        7,
+        10,
+        14
+      ],
+      "actual": 12,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89499,
+      "grammar": [
+        7,
+        10,
+        12
+      ],
+      "lagVote": [
+        7,
+        10,
+        12
+      ],
+      "consensus": [
+        7,
+        10,
+        12
+      ],
+      "actual": 10,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89500,
+      "grammar": [
+        7,
+        10,
+        1
+      ],
+      "lagVote": [
+        10,
+        7,
+        12
+      ],
+      "consensus": [
+        7,
+        10,
+        1
+      ],
+      "actual": 7,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89501,
+      "grammar": [
+        10,
+        7,
+        12
+      ],
+      "lagVote": [
+        7,
+        10,
+        5
+      ],
+      "consensus": [
+        7,
+        10,
+        5
+      ],
+      "actual": 12,
+      "gHit": true,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89502,
+      "grammar": [
+        12,
+        10,
+        1
+      ],
+      "lagVote": [
+        7,
+        10,
+        12
+      ],
+      "consensus": [
+        10,
+        12,
+        1
+      ],
+      "actual": 2,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89503,
+      "grammar": [
+        10,
+        2,
+        7
+      ],
+      "lagVote": [
+        10,
+        7,
+        12
+      ],
+      "consensus": [
+        7,
+        10,
+        2
+      ],
+      "actual": 9,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89504,
+      "grammar": [
+        7,
+        12,
+        2
+      ],
+      "lagVote": [
+        7,
+        10,
+        2
+      ],
+      "consensus": [
+        2,
+        7,
+        10
+      ],
+      "actual": 4,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89505,
+      "grammar": [
+        7,
+        4,
+        12
+      ],
+      "lagVote": [
+        7,
+        4,
+        10
+      ],
+      "consensus": [
+        4,
+        7,
+        10
+      ],
+      "actual": 4,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89506,
+      "grammar": [
+        7,
+        4,
+        12
+      ],
+      "lagVote": [
+        4,
+        7,
+        12
+      ],
+      "consensus": [
+        4,
+        7,
+        12
+      ],
+      "actual": 9,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89507,
+      "grammar": [
+        10,
+        4,
+        12
+      ],
+      "lagVote": [
+        4,
+        9,
+        12
+      ],
+      "consensus": [
+        4,
+        12,
+        9
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89508,
+      "grammar": [
+        12,
+        4,
+        9
+      ],
+      "lagVote": [
+        4,
+        9,
+        12
+      ],
+      "consensus": [
+        4,
+        9,
+        12
+      ],
+      "actual": 3,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89509,
+      "grammar": [
+        4,
+        9,
+        12
+      ],
+      "lagVote": [
+        4,
+        12,
+        9
+      ],
+      "consensus": [
+        4,
+        9,
+        12
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89510,
+      "grammar": [
+        4,
+        6,
+        9
+      ],
+      "lagVote": [
+        4,
+        6,
+        9
+      ],
+      "consensus": [
+        4,
+        6,
+        9
+      ],
+      "actual": 8,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89511,
+      "grammar": [
+        4,
+        9,
+        6
+      ],
+      "lagVote": [
+        4,
+        9,
+        12
+      ],
+      "consensus": [
+        4,
+        9,
+        6
+      ],
+      "actual": 5,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89512,
+      "grammar": [
+        4,
+        6,
+        12
+      ],
+      "lagVote": [
+        4,
+        6,
+        12
+      ],
+      "consensus": [
+        4,
+        6,
+        12
+      ],
+      "actual": 4,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89513,
+      "grammar": [
+        6,
+        4,
+        3
+      ],
+      "lagVote": [
+        4,
+        9,
+        6
+      ],
+      "consensus": [
+        4,
+        6,
+        3
+      ],
+      "actual": 4,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89514,
+      "grammar": [
+        4,
+        6,
+        5
+      ],
+      "lagVote": [
+        4,
+        9,
+        6
+      ],
+      "consensus": [
+        4,
+        6,
+        5
+      ],
+      "actual": 5,
+      "gHit": true,
+      "lHit": false,
+      "cHit": true
+    },
+    {
+      "draw": 89515,
+      "grammar": [
+        6,
+        4,
+        12
+      ],
+      "lagVote": [
+        4,
+        5,
+        6
+      ],
+      "consensus": [
+        4,
+        6,
+        5
+      ],
+      "actual": 15,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89516,
+      "grammar": [
+        4,
+        5,
+        9
+      ],
+      "lagVote": [
+        4,
+        5,
+        9
+      ],
+      "consensus": [
+        4,
+        5,
+        9
+      ],
+      "actual": 5,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89517,
+      "grammar": [
+        4,
+        5,
+        6
+      ],
+      "lagVote": [
+        4,
+        5,
+        6
+      ],
+      "consensus": [
+        4,
+        5,
+        6
+      ],
+      "actual": 3,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89518,
+      "grammar": [
+        4,
+        5,
+        6
+      ],
+      "lagVote": [
+        4,
+        5,
+        3
+      ],
+      "consensus": [
+        4,
+        5,
+        3
+      ],
+      "actual": 4,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89519,
+      "grammar": [
+        4,
+        5,
+        3
+      ],
+      "lagVote": [
+        4,
+        5,
+        3
+      ],
+      "consensus": [
+        3,
+        4,
+        5
+      ],
+      "actual": 8,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89520,
+      "grammar": [
+        5,
+        8,
+        15
+      ],
+      "lagVote": [
+        4,
+        5,
+        8
+      ],
+      "consensus": [
+        5,
+        8,
+        4
+      ],
+      "actual": 14,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89521,
+      "grammar": [
+        5,
+        4,
+        8
+      ],
+      "lagVote": [
+        5,
+        4,
+        8
+      ],
+      "consensus": [
+        4,
+        5,
+        8
+      ],
+      "actual": 1,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89522,
+      "grammar": [
+        5,
+        4,
+        3
+      ],
+      "lagVote": [
+        4,
+        5,
+        3
+      ],
+      "consensus": [
+        3,
+        4,
+        5
+      ],
+      "actual": 5,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89523,
+      "grammar": [
+        4,
+        5,
+        3
+      ],
+      "lagVote": [
+        5,
+        4,
+        3
+      ],
+      "consensus": [
+        3,
+        4,
+        5
+      ],
+      "actual": 5,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89524,
+      "grammar": [
+        5,
+        4,
+        8
+      ],
+      "lagVote": [
+        5,
+        4,
+        8
+      ],
+      "consensus": [
+        4,
+        5,
+        8
+      ],
+      "actual": 14,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89525,
+      "grammar": [
+        4,
+        5,
+        1
+      ],
+      "lagVote": [
+        5,
+        4,
+        14
+      ],
+      "consensus": [
+        4,
+        5,
+        1
+      ],
+      "actual": 10,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89526,
+      "grammar": [
+        5,
+        14,
+        4
+      ],
+      "lagVote": [
+        5,
+        4,
+        14
+      ],
+      "consensus": [
+        4,
+        5,
+        14
+      ],
+      "actual": 9,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89527,
+      "grammar": [
+        5,
+        4,
+        14
+      ],
+      "lagVote": [
+        5,
+        4,
+        14
+      ],
+      "consensus": [
+        4,
+        5,
+        14
+      ],
+      "actual": 13,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89528,
+      "grammar": [
+        5,
+        14,
+        4
+      ],
+      "lagVote": [
+        5,
+        4,
+        14
+      ],
+      "consensus": [
+        4,
+        5,
+        14
+      ],
+      "actual": 4,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89529,
+      "grammar": [
+        5,
+        14,
+        4
+      ],
+      "lagVote": [
+        5,
+        14,
+        4
+      ],
+      "consensus": [
+        4,
+        5,
+        14
+      ],
+      "actual": 7,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89530,
+      "grammar": [
+        14,
+        5,
+        10
+      ],
+      "lagVote": [
+        5,
+        14,
+        4
+      ],
+      "consensus": [
+        5,
+        14,
+        4
+      ],
+      "actual": 10,
+      "gHit": true,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89531,
+      "grammar": [
+        5,
+        10,
+        14
+      ],
+      "lagVote": [
+        5,
+        10,
+        4
+      ],
+      "consensus": [
+        5,
+        10,
+        4
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89532,
+      "grammar": [
+        13,
+        5,
+        10
+      ],
+      "lagVote": [
+        5,
+        10,
+        14
+      ],
+      "consensus": [
+        5,
+        10,
+        13
+      ],
+      "actual": 13,
+      "gHit": true,
+      "lHit": false,
+      "cHit": true
+    },
+    {
+      "draw": 89533,
+      "grammar": [
+        13,
+        4,
+        10
+      ],
+      "lagVote": [
+        4,
+        5,
+        13
+      ],
+      "consensus": [
+        4,
+        13,
+        5
+      ],
+      "actual": 8,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89534,
+      "grammar": [
+        5,
+        7,
+        10
+      ],
+      "lagVote": [
+        8,
+        14,
+        13
+      ],
+      "consensus": [
+        5,
+        7,
+        8
+      ],
+      "actual": 13,
+      "gHit": false,
+      "lHit": true,
+      "cHit": false
+    },
+    {
+      "draw": 89535,
+      "grammar": [
+        13,
+        8,
+        14
+      ],
+      "lagVote": [
+        13,
+        10,
+        14
+      ],
+      "consensus": [
+        13,
+        14,
+        8
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89536,
+      "grammar": [
+        13,
+        10,
+        6
+      ],
+      "lagVote": [
+        13,
+        6,
+        10
+      ],
+      "consensus": [
+        6,
+        10,
+        13
+      ],
+      "actual": 10,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89537,
+      "grammar": [
+        13,
+        14,
+        6
+      ],
+      "lagVote": [
+        13,
+        10,
+        6
+      ],
+      "consensus": [
+        6,
+        13,
+        10
+      ],
+      "actual": 6,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89538,
+      "grammar": [
+        10,
+        6,
+        13
+      ],
+      "lagVote": [
+        10,
+        6,
+        13
+      ],
+      "consensus": [
+        6,
+        10,
+        13
+      ],
+      "actual": 12,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89539,
+      "grammar": [
+        13,
+        6,
+        10
+      ],
+      "lagVote": [
+        6,
+        13,
+        10
+      ],
+      "consensus": [
+        6,
+        10,
+        13
+      ],
+      "actual": 5,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89540,
+      "grammar": [
+        6,
+        13,
+        10
+      ],
+      "lagVote": [
+        6,
+        10,
+        13
+      ],
+      "consensus": [
+        6,
+        10,
+        13
+      ],
+      "actual": 5,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89541,
+      "grammar": [
+        10,
+        6,
+        5
+      ],
+      "lagVote": [
+        6,
+        13,
+        5
+      ],
+      "consensus": [
+        5,
+        6,
+        10
+      ],
+      "actual": 8,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89542,
+      "grammar": [
+        6,
+        13,
+        5
+      ],
+      "lagVote": [
+        13,
+        6,
+        5
+      ],
+      "consensus": [
+        5,
+        6,
+        13
+      ],
+      "actual": 11,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89543,
+      "grammar": [
+        8,
+        6,
+        10
+      ],
+      "lagVote": [
+        6,
+        8,
+        13
+      ],
+      "consensus": [
+        6,
+        8,
+        10
+      ],
+      "actual": 13,
+      "gHit": false,
+      "lHit": true,
+      "cHit": false
+    },
+    {
+      "draw": 89544,
+      "grammar": [
+        5,
+        13,
+        6
+      ],
+      "lagVote": [
+        13,
+        6,
+        5
+      ],
+      "consensus": [
+        5,
+        6,
+        13
+      ],
+      "actual": 7,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89545,
+      "grammar": [
+        5,
+        13,
+        8
+      ],
+      "lagVote": [
+        6,
+        13,
+        5
+      ],
+      "consensus": [
+        5,
+        13,
+        6
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89546,
+      "grammar": [
+        6,
+        8,
+        5
+      ],
+      "lagVote": [
+        6,
+        13,
+        8
+      ],
+      "consensus": [
+        6,
+        8,
+        5
+      ],
+      "actual": 15,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89547,
+      "grammar": [
+        6,
+        13,
+        5
+      ],
+      "lagVote": [
+        6,
+        13,
+        5
+      ],
+      "consensus": [
+        5,
+        6,
+        13
+      ],
+      "actual": 13,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89548,
+      "grammar": [
+        13,
+        5,
+        6
+      ],
+      "lagVote": [
+        13,
+        6,
+        5
+      ],
+      "consensus": [
+        5,
+        6,
+        13
+      ],
+      "actual": 6,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89549,
+      "grammar": [
+        6,
+        13,
+        7
+      ],
+      "lagVote": [
+        6,
+        13,
+        5
+      ],
+      "consensus": [
+        6,
+        13,
+        5
+      ],
+      "actual": 5,
+      "gHit": false,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89550,
+      "grammar": [
+        6,
+        11,
+        12
+      ],
+      "lagVote": [
+        6,
+        5,
+        13
+      ],
+      "consensus": [
+        6,
+        5,
+        11
+      ],
+      "actual": 14,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89551,
+      "grammar": [
+        6,
+        5,
+        13
+      ],
+      "lagVote": [
+        5,
+        6,
+        13
+      ],
+      "consensus": [
+        5,
+        6,
+        13
+      ],
+      "actual": 12,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89552,
+      "grammar": [
+        13,
+        6,
+        12
+      ],
+      "lagVote": [
+        6,
+        5,
+        13
+      ],
+      "consensus": [
+        6,
+        13,
+        5
+      ],
+      "actual": 5,
+      "gHit": false,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89553,
+      "grammar": [
+        5,
+        6,
+        13
+      ],
+      "lagVote": [
+        5,
+        6,
+        13
+      ],
+      "consensus": [
+        5,
+        6,
+        13
+      ],
+      "actual": 15,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89554,
+      "grammar": [
+        5,
+        15,
+        11
+      ],
+      "lagVote": [
+        5,
+        15,
+        6
+      ],
+      "consensus": [
+        5,
+        15,
+        6
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89555,
+      "grammar": [
+        5,
+        6,
+        12
+      ],
+      "lagVote": [
+        6,
+        5,
+        15
+      ],
+      "consensus": [
+        5,
+        6,
+        12
+      ],
+      "actual": 8,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89556,
+      "grammar": [
+        6,
+        15,
+        5
+      ],
+      "lagVote": [
+        6,
+        15,
+        8
+      ],
+      "consensus": [
+        6,
+        15,
+        5
+      ],
+      "actual": 13,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89557,
+      "grammar": [
+        15,
+        13,
+        5
+      ],
+      "lagVote": [
+        13,
+        6,
+        5
+      ],
+      "consensus": [
+        5,
+        13,
+        6
+      ],
+      "actual": 4,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89558,
+      "grammar": [
+        6,
+        13,
+        5
+      ],
+      "lagVote": [
+        13,
+        6,
+        5
+      ],
+      "consensus": [
+        5,
+        6,
+        13
+      ],
+      "actual": 11,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89559,
+      "grammar": [
+        6,
+        5,
+        15
+      ],
+      "lagVote": [
+        6,
+        5,
+        15
+      ],
+      "consensus": [
+        5,
+        6,
+        15
+      ],
+      "actual": 13,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89560,
+      "grammar": [
+        13,
+        6,
+        5
+      ],
+      "lagVote": [
+        13,
+        6,
+        5
+      ],
+      "consensus": [
+        5,
+        6,
+        13
+      ],
+      "actual": 7,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89561,
+      "grammar": [
+        13,
+        15,
+        5
+      ],
+      "lagVote": [
+        13,
+        15,
+        5
+      ],
+      "consensus": [
+        5,
+        13,
+        15
+      ],
+      "actual": 15,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89562,
+      "grammar": [
+        13,
+        15,
+        5
+      ],
+      "lagVote": [
+        13,
+        15,
+        5
+      ],
+      "consensus": [
+        5,
+        13,
+        15
+      ],
+      "actual": 3,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89563,
+      "grammar": [
+        13,
+        11,
+        15
+      ],
+      "lagVote": [
+        15,
+        6,
+        5
+      ],
+      "consensus": [
+        15,
+        5,
+        6
+      ],
+      "actual": 13,
+      "gHit": true,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89564,
+      "grammar": [
+        13,
+        15,
+        3
+      ],
+      "lagVote": [
+        13,
+        15,
+        5
+      ],
+      "consensus": [
+        13,
+        15,
+        3
+      ],
+      "actual": 11,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89565,
+      "grammar": [
+        13,
+        11,
+        7
+      ],
+      "lagVote": [
+        13,
+        11,
+        15
+      ],
+      "consensus": [
+        11,
+        13,
+        7
+      ],
+      "actual": 1,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89566,
+      "grammar": [
+        13,
+        11,
+        15
+      ],
+      "lagVote": [
+        13,
+        11,
+        15
+      ],
+      "consensus": [
+        11,
+        13,
+        15
+      ],
+      "actual": 15,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89567,
+      "grammar": [
+        13,
+        15,
+        3
+      ],
+      "lagVote": [
+        15,
+        13,
+        11
+      ],
+      "consensus": [
+        13,
+        15,
+        3
+      ],
+      "actual": 1,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89568,
+      "grammar": [
+        13,
+        15,
+        11
+      ],
+      "lagVote": [
+        15,
+        13,
+        1
+      ],
+      "consensus": [
+        13,
+        15,
+        1
+      ],
+      "actual": 5,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89569,
+      "grammar": [
+        13,
+        15,
+        11
+      ],
+      "lagVote": [
+        13,
+        11,
+        15
+      ],
+      "consensus": [
+        11,
+        13,
+        15
+      ],
+      "actual": 7,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89570,
+      "grammar": [
+        13,
+        1,
+        7
+      ],
+      "lagVote": [
+        13,
+        7,
+        1
+      ],
+      "consensus": [
+        1,
+        7,
+        13
+      ],
+      "actual": 3,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89571,
+      "grammar": [
+        15,
+        1,
+        13
+      ],
+      "lagVote": [
+        13,
+        15,
+        3
+      ],
+      "consensus": [
+        13,
+        15,
+        1
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89572,
+      "grammar": [
+        1,
+        13,
+        3
+      ],
+      "lagVote": [
+        3,
+        1,
+        15
+      ],
+      "consensus": [
+        1,
+        3,
+        13
+      ],
+      "actual": 11,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89573,
+      "grammar": [
+        11,
+        1,
+        3
+      ],
+      "lagVote": [
+        11,
+        1,
+        3
+      ],
+      "consensus": [
+        1,
+        3,
+        11
+      ],
+      "actual": 14,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89574,
+      "grammar": [
+        7,
+        13,
+        3
+      ],
+      "lagVote": [
+        11,
+        7,
+        15
+      ],
+      "consensus": [
+        7,
+        3,
+        11
+      ],
+      "actual": 9,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89575,
+      "grammar": [
+        3,
+        1,
+        11
+      ],
+      "lagVote": [
+        1,
+        3,
+        11
+      ],
+      "consensus": [
+        1,
+        3,
+        11
+      ],
+      "actual": 8,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89576,
+      "grammar": [
+        1,
+        6,
+        15
+      ],
+      "lagVote": [
+        15,
+        1,
+        3
+      ],
+      "consensus": [
+        1,
+        15,
+        3
+      ],
+      "actual": 5,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89577,
+      "grammar": [
+        11,
+        5,
+        3
+      ],
+      "lagVote": [
+        11,
+        5,
+        1
+      ],
+      "consensus": [
+        5,
+        11,
+        1
+      ],
+      "actual": 14,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89578,
+      "grammar": [
+        14,
+        1,
+        9
+      ],
+      "lagVote": [
+        14,
+        5,
+        1
+      ],
+      "consensus": [
+        1,
+        14,
+        5
+      ],
+      "actual": 9,
+      "gHit": true,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89579,
+      "grammar": [
+        14,
+        3,
+        9
+      ],
+      "lagVote": [
+        9,
+        14,
+        5
+      ],
+      "consensus": [
+        9,
+        14,
+        3
+      ],
+      "actual": 1,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89580,
+      "grammar": [
+        1,
+        3,
+        9
+      ],
+      "lagVote": [
+        1,
+        9,
+        14
+      ],
+      "consensus": [
+        1,
+        9,
+        3
+      ],
+      "actual": 3,
+      "gHit": true,
+      "lHit": false,
+      "cHit": true
+    },
+    {
+      "draw": 89581,
+      "grammar": [
+        5,
+        9,
+        14
+      ],
+      "lagVote": [
+        5,
+        3,
+        14
+      ],
+      "consensus": [
+        5,
+        14,
+        3
+      ],
+      "actual": 14,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89582,
+      "grammar": [
+        14,
+        1,
+        9
+      ],
+      "lagVote": [
+        14,
+        9,
+        1
+      ],
+      "consensus": [
+        1,
+        9,
+        14
+      ],
+      "actual": 7,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89583,
+      "grammar": [
+        14,
+        3,
+        9
+      ],
+      "lagVote": [
+        14,
+        9,
+        3
+      ],
+      "consensus": [
+        3,
+        9,
+        14
+      ],
+      "actual": 1,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89584,
+      "grammar": [
+        14,
+        9,
+        1
+      ],
+      "lagVote": [
+        14,
+        1,
+        9
+      ],
+      "consensus": [
+        1,
+        9,
+        14
+      ],
+      "actual": 5,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89585,
+      "grammar": [
+        11,
+        1,
+        14
+      ],
+      "lagVote": [
+        14,
+        3,
+        1
+      ],
+      "consensus": [
+        1,
+        14,
+        3
+      ],
+      "actual": 1,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89586,
+      "grammar": [
+        9,
+        14,
+        5
+      ],
+      "lagVote": [
+        14,
+        1,
+        5
+      ],
+      "consensus": [
+        5,
+        14,
+        1
+      ],
+      "actual": 10,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89587,
+      "grammar": [
+        14,
+        1,
+        5
+      ],
+      "lagVote": [
+        1,
+        14,
+        5
+      ],
+      "consensus": [
+        1,
+        5,
+        14
+      ],
+      "actual": 15,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89588,
+      "grammar": [
+        1,
+        14,
+        9
+      ],
+      "lagVote": [
+        1,
+        14,
+        9
+      ],
+      "consensus": [
+        1,
+        9,
+        14
+      ],
+      "actual": 2,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89589,
+      "grammar": [
+        1,
+        5,
+        9
+      ],
+      "lagVote": [
+        1,
+        5,
+        9
+      ],
+      "consensus": [
+        1,
+        5,
+        9
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89590,
+      "grammar": [
+        1,
+        5,
+        10
+      ],
+      "lagVote": [
+        1,
+        14,
+        5
+      ],
+      "consensus": [
+        1,
+        5,
+        10
+      ],
+      "actual": 11,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89591,
+      "grammar": [
+        1,
+        10,
+        5
+      ],
+      "lagVote": [
+        1,
+        14,
+        5
+      ],
+      "consensus": [
+        1,
+        5,
+        10
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89592,
+      "grammar": [
+        6,
+        14,
+        1
+      ],
+      "lagVote": [
+        1,
+        6,
+        14
+      ],
+      "consensus": [
+        1,
+        6,
+        14
+      ],
+      "actual": 3,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89593,
+      "grammar": [
+        6,
+        1,
+        2
+      ],
+      "lagVote": [
+        1,
+        6,
+        3
+      ],
+      "consensus": [
+        1,
+        6,
+        2
+      ],
+      "actual": 2,
+      "gHit": true,
+      "lHit": false,
+      "cHit": true
+    },
+    {
+      "draw": 89594,
+      "grammar": [
+        1,
+        2,
+        3
+      ],
+      "lagVote": [
+        1,
+        6,
+        2
+      ],
+      "consensus": [
+        1,
+        2,
+        3
+      ],
+      "actual": 10,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89595,
+      "grammar": [
+        11,
+        1,
+        2
+      ],
+      "lagVote": [
+        10,
+        6,
+        3
+      ],
+      "consensus": [
+        1,
+        2,
+        3
+      ],
+      "actual": 14,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89596,
+      "grammar": [
+        14,
+        2,
+        3
+      ],
+      "lagVote": [
+        10,
+        2,
+        14
+      ],
+      "consensus": [
+        2,
+        14,
+        3
+      ],
+      "actual": 11,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89597,
+      "grammar": [
+        2,
+        1,
+        6
+      ],
+      "lagVote": [
+        6,
+        10,
+        2
+      ],
+      "consensus": [
+        2,
+        6,
+        1
+      ],
+      "actual": 8,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89598,
+      "grammar": [
+        2,
+        11,
+        6
+      ],
+      "lagVote": [
+        2,
+        11,
+        1
+      ],
+      "consensus": [
+        2,
+        11,
+        1
+      ],
+      "actual": 9,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89599,
+      "grammar": [
+        10,
+        6,
+        2
+      ],
+      "lagVote": [
+        6,
+        10,
+        11
+      ],
+      "consensus": [
+        6,
+        10,
+        2
+      ],
+      "actual": 3,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89600,
+      "grammar": [
+        3,
+        11,
+        6
+      ],
+      "lagVote": [
+        3,
+        11,
+        6
+      ],
+      "consensus": [
+        3,
+        6,
+        11
+      ],
+      "actual": 9,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89601,
+      "grammar": [
+        11,
+        9,
+        3
+      ],
+      "lagVote": [
+        3,
+        11,
+        2
+      ],
+      "consensus": [
+        3,
+        11,
+        2
+      ],
+      "actual": 11,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89602,
+      "grammar": [
+        2,
+        11,
+        3
+      ],
+      "lagVote": [
+        11,
+        9,
+        3
+      ],
+      "consensus": [
+        3,
+        11,
+        2
+      ],
+      "actual": 5,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89603,
+      "grammar": [
+        11,
+        9,
+        3
+      ],
+      "lagVote": [
+        11,
+        9,
+        2
+      ],
+      "consensus": [
+        9,
+        11,
+        2
+      ],
+      "actual": 11,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89604,
+      "grammar": [
+        11,
+        9,
+        3
+      ],
+      "lagVote": [
+        11,
+        9,
+        3
+      ],
+      "consensus": [
+        3,
+        9,
+        11
+      ],
+      "actual": 4,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89605,
+      "grammar": [
+        11,
+        9,
+        3
+      ],
+      "lagVote": [
+        11,
+        9,
+        3
+      ],
+      "consensus": [
+        3,
+        9,
+        11
+      ],
+      "actual": 13,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89606,
+      "grammar": [
+        11,
+        9,
+        4
+      ],
+      "lagVote": [
+        11,
+        9,
+        3
+      ],
+      "consensus": [
+        9,
+        11,
+        3
+      ],
+      "actual": 4,
+      "gHit": true,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89607,
+      "grammar": [
+        11,
+        4,
+        5
+      ],
+      "lagVote": [
+        11,
+        3,
+        4
+      ],
+      "consensus": [
+        4,
+        11,
+        3
+      ],
+      "actual": 7,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89608,
+      "grammar": [
+        11,
+        4,
+        9
+      ],
+      "lagVote": [
+        11,
+        9,
+        4
+      ],
+      "consensus": [
+        4,
+        9,
+        11
+      ],
+      "actual": 13,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89609,
+      "grammar": [
+        11,
+        13,
+        4
+      ],
+      "lagVote": [
+        11,
+        4,
+        13
+      ],
+      "consensus": [
+        4,
+        11,
+        13
+      ],
+      "actual": 1,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89610,
+      "grammar": [
+        13,
+        4,
+        11
+      ],
+      "lagVote": [
+        11,
+        13,
+        4
+      ],
+      "consensus": [
+        4,
+        11,
+        13
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89611,
+      "grammar": [
+        11,
+        4,
+        13
+      ],
+      "lagVote": [
+        11,
+        13,
+        4
+      ],
+      "consensus": [
+        4,
+        11,
+        13
+      ],
+      "actual": 2,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89612,
+      "grammar": [
+        13,
+        4,
+        11
+      ],
+      "lagVote": [
+        4,
+        11,
+        13
+      ],
+      "consensus": [
+        4,
+        11,
+        13
+      ],
+      "actual": 8,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89613,
+      "grammar": [
+        13,
+        4,
+        11
+      ],
+      "lagVote": [
+        13,
+        9,
+        11
+      ],
+      "consensus": [
+        11,
+        13,
+        4
+      ],
+      "actual": 10,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89614,
+      "grammar": [
+        1,
+        13,
+        4
+      ],
+      "lagVote": [
+        4,
+        13,
+        11
+      ],
+      "consensus": [
+        4,
+        13,
+        1
+      ],
+      "actual": 9,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89615,
+      "grammar": [
+        9,
+        13,
+        10
+      ],
+      "lagVote": [
+        9,
+        13,
+        4
+      ],
+      "consensus": [
+        9,
+        13,
+        4
+      ],
+      "actual": 14,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89616,
+      "grammar": [
+        13,
+        2,
+        4
+      ],
+      "lagVote": [
+        13,
+        11,
+        4
+      ],
+      "consensus": [
+        4,
+        13,
+        2
+      ],
+      "actual": 2,
+      "gHit": true,
+      "lHit": false,
+      "cHit": true
+    },
+    {
+      "draw": 89617,
+      "grammar": [
+        2,
+        14,
+        8
+      ],
+      "lagVote": [
+        2,
+        4,
+        13
+      ],
+      "consensus": [
+        2,
+        4,
+        8
+      ],
+      "actual": 13,
+      "gHit": false,
+      "lHit": true,
+      "cHit": false
+    },
+    {
+      "draw": 89618,
+      "grammar": [
+        10,
+        13,
+        2
+      ],
+      "lagVote": [
+        13,
+        2,
+        4
+      ],
+      "consensus": [
+        2,
+        13,
+        4
+      ],
+      "actual": 4,
+      "gHit": false,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89619,
+      "grammar": [
+        4,
+        2,
+        13
+      ],
+      "lagVote": [
+        13,
+        4,
+        2
+      ],
+      "consensus": [
+        2,
+        4,
+        13
+      ],
+      "actual": 2,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89620,
+      "grammar": [
+        2,
+        13,
+        8
+      ],
+      "lagVote": [
+        2,
+        13,
+        4
+      ],
+      "consensus": [
+        2,
+        13,
+        4
+      ],
+      "actual": 5,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89621,
+      "grammar": [
+        2,
+        13,
+        7
+      ],
+      "lagVote": [
+        2,
+        4,
+        13
+      ],
+      "consensus": [
+        2,
+        13,
+        4
+      ],
+      "actual": 3,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89622,
+      "grammar": [
+        2,
+        13,
+        5
+      ],
+      "lagVote": [
+        2,
+        13,
+        5
+      ],
+      "consensus": [
+        2,
+        5,
+        13
+      ],
+      "actual": 9,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89623,
+      "grammar": [
+        2,
+        4,
+        9
+      ],
+      "lagVote": [
+        2,
+        9,
+        13
+      ],
+      "consensus": [
+        2,
+        9,
+        4
+      ],
+      "actual": 4,
+      "gHit": true,
+      "lHit": false,
+      "cHit": true
+    },
+    {
+      "draw": 89624,
+      "grammar": [
+        2,
+        4,
+        5
+      ],
+      "lagVote": [
+        2,
+        9,
+        4
+      ],
+      "consensus": [
+        2,
+        4,
+        5
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89625,
+      "grammar": [
+        2,
+        10,
+        4
+      ],
+      "lagVote": [
+        2,
+        4,
+        9
+      ],
+      "consensus": [
+        2,
+        4,
+        9
+      ],
+      "actual": 1,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89626,
+      "grammar": [
+        2,
+        4,
+        6
+      ],
+      "lagVote": [
+        2,
+        4,
+        9
+      ],
+      "consensus": [
+        2,
+        4,
+        6
+      ],
+      "actual": 8,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89627,
+      "grammar": [
+        2,
+        8,
+        4
+      ],
+      "lagVote": [
+        9,
+        2,
+        8
+      ],
+      "consensus": [
+        2,
+        8,
+        4
+      ],
+      "actual": 15,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89628,
+      "grammar": [
+        4,
+        9,
+        2
+      ],
+      "lagVote": [
+        4,
+        9,
+        2
+      ],
+      "consensus": [
+        2,
+        4,
+        9
+      ],
+      "actual": 11,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89629,
+      "grammar": [
+        4,
+        15,
+        6
+      ],
+      "lagVote": [
+        2,
+        4,
+        9
+      ],
+      "consensus": [
+        4,
+        2,
+        6
+      ],
+      "actual": 14,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89630,
+      "grammar": [
+        14,
+        1,
+        2
+      ],
+      "lagVote": [
+        14,
+        2,
+        4
+      ],
+      "consensus": [
+        2,
+        14,
+        1
+      ],
+      "actual": 5,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89631,
+      "grammar": [
+        8,
+        5,
+        2
+      ],
+      "lagVote": [
+        4,
+        5,
+        2
+      ],
+      "consensus": [
+        2,
+        5,
+        4
+      ],
+      "actual": 3,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89632,
+      "grammar": [
+        8,
+        5,
+        3
+      ],
+      "lagVote": [
+        5,
+        3,
+        4
+      ],
+      "consensus": [
+        3,
+        5,
+        4
+      ],
+      "actual": 8,
+      "gHit": true,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89633,
+      "grammar": [
+        5,
+        3,
+        15
+      ],
+      "lagVote": [
+        4,
+        3,
+        5
+      ],
+      "consensus": [
+        3,
+        5,
+        4
+      ],
+      "actual": 11,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89634,
+      "grammar": [
+        8,
+        3,
+        5
+      ],
+      "lagVote": [
+        8,
+        11,
+        3
+      ],
+      "consensus": [
+        3,
+        8,
+        5
+      ],
+      "actual": 12,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89635,
+      "grammar": [
+        11,
+        5,
+        3
+      ],
+      "lagVote": [
+        5,
+        11,
+        8
+      ],
+      "consensus": [
+        5,
+        11,
+        3
+      ],
+      "actual": 10,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89636,
+      "grammar": [
+        11,
+        3,
+        8
+      ],
+      "lagVote": [
+        11,
+        3,
+        8
+      ],
+      "consensus": [
+        3,
+        8,
+        11
+      ],
+      "actual": 3,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89637,
+      "grammar": [
+        8,
+        11,
+        3
+      ],
+      "lagVote": [
+        8,
+        3,
+        11
+      ],
+      "consensus": [
+        3,
+        8,
+        11
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89638,
+      "grammar": [
+        11,
+        8,
+        3
+      ],
+      "lagVote": [
+        11,
+        3,
+        6
+      ],
+      "consensus": [
+        3,
+        11,
+        6
+      ],
+      "actual": 3,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89639,
+      "grammar": [
+        3,
+        11,
+        12
+      ],
+      "lagVote": [
+        3,
+        6,
+        11
+      ],
+      "consensus": [
+        3,
+        11,
+        6
+      ],
+      "actual": 10,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89640,
+      "grammar": [
+        3,
+        11,
+        12
+      ],
+      "lagVote": [
+        3,
+        10,
+        8
+      ],
+      "consensus": [
+        3,
+        8,
+        10
+      ],
+      "actual": 4,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89641,
+      "grammar": [
+        3,
+        10,
+        11
+      ],
+      "lagVote": [
+        3,
+        10,
+        11
+      ],
+      "consensus": [
+        3,
+        10,
+        11
+      ],
+      "actual": 15,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89642,
+      "grammar": [
+        3,
+        15,
+        10
+      ],
+      "lagVote": [
+        3,
+        15,
+        11
+      ],
+      "consensus": [
+        3,
+        15,
+        10
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89643,
+      "grammar": [
+        3,
+        10,
+        11
+      ],
+      "lagVote": [
+        3,
+        10,
+        11
+      ],
+      "consensus": [
+        3,
+        10,
+        11
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89644,
+      "grammar": [
+        10,
+        6,
+        3
+      ],
+      "lagVote": [
+        6,
+        3,
+        10
+      ],
+      "consensus": [
+        3,
+        6,
+        10
+      ],
+      "actual": 6,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89645,
+      "grammar": [
+        6,
+        3,
+        10
+      ],
+      "lagVote": [
+        6,
+        3,
+        10
+      ],
+      "consensus": [
+        3,
+        6,
+        10
+      ],
+      "actual": 2,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89646,
+      "grammar": [
+        6,
+        3,
+        10
+      ],
+      "lagVote": [
+        6,
+        3,
+        10
+      ],
+      "consensus": [
+        3,
+        6,
+        10
+      ],
+      "actual": 2,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89647,
+      "grammar": [
+        6,
+        2,
+        3
+      ],
+      "lagVote": [
+        6,
+        2,
+        10
+      ],
+      "consensus": [
+        2,
+        6,
+        3
+      ],
+      "actual": 14,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89648,
+      "grammar": [
+        6,
+        2,
+        3
+      ],
+      "lagVote": [
+        6,
+        2,
+        3
+      ],
+      "consensus": [
+        2,
+        3,
+        6
+      ],
+      "actual": 4,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89649,
+      "grammar": [
+        6,
+        4,
+        10
+      ],
+      "lagVote": [
+        6,
+        10,
+        4
+      ],
+      "consensus": [
+        4,
+        6,
+        10
+      ],
+      "actual": 11,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89650,
+      "grammar": [
+        6,
+        2,
+        4
+      ],
+      "lagVote": [
+        6,
+        4,
+        2
+      ],
+      "consensus": [
+        2,
+        4,
+        6
+      ],
+      "actual": 11,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89651,
+      "grammar": [
+        6,
+        2,
+        11
+      ],
+      "lagVote": [
+        6,
+        11,
+        2
+      ],
+      "consensus": [
+        2,
+        6,
+        11
+      ],
+      "actual": 8,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89652,
+      "grammar": [
+        6,
+        11,
+        14
+      ],
+      "lagVote": [
+        6,
+        11,
+        2
+      ],
+      "consensus": [
+        6,
+        11,
+        2
+      ],
+      "actual": 7,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89653,
+      "grammar": [
+        6,
+        2,
+        4
+      ],
+      "lagVote": [
+        6,
+        4,
+        2
+      ],
+      "consensus": [
+        2,
+        4,
+        6
+      ],
+      "actual": 10,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89654,
+      "grammar": [
+        11,
+        6,
+        10
+      ],
+      "lagVote": [
+        6,
+        11,
+        10
+      ],
+      "consensus": [
+        6,
+        10,
+        11
+      ],
+      "actual": 10,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89655,
+      "grammar": [
+        11,
+        10,
+        6
+      ],
+      "lagVote": [
+        6,
+        10,
+        11
+      ],
+      "consensus": [
+        6,
+        10,
+        11
+      ],
+      "actual": 9,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89656,
+      "grammar": [
+        11,
+        6,
+        10
+      ],
+      "lagVote": [
+        6,
+        10,
+        2
+      ],
+      "consensus": [
+        6,
+        10,
+        2
+      ],
+      "actual": 7,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89657,
+      "grammar": [
+        7,
+        11,
+        10
+      ],
+      "lagVote": [
+        6,
+        7,
+        11
+      ],
+      "consensus": [
+        7,
+        11,
+        6
+      ],
+      "actual": 13,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89658,
+      "grammar": [
+        10,
+        7,
+        11
+      ],
+      "lagVote": [
+        7,
+        10,
+        11
+      ],
+      "consensus": [
+        7,
+        10,
+        11
+      ],
+      "actual": 10,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89659,
+      "grammar": [
+        10,
+        7,
+        11
+      ],
+      "lagVote": [
+        10,
+        11,
+        2
+      ],
+      "consensus": [
+        10,
+        11,
+        2
+      ],
+      "actual": 10,
+      "gHit": true,
+      "lHit": true,
+      "cHit": true
+    },
+    {
+      "draw": 89660,
+      "grammar": [
+        10,
+        7,
+        11
+      ],
+      "lagVote": [
+        10,
+        7,
+        11
+      ],
+      "consensus": [
+        7,
+        10,
+        11
+      ],
+      "actual": 14,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89661,
+      "grammar": [
+        10,
+        7,
+        14
+      ],
+      "lagVote": [
+        10,
+        7,
+        14
+      ],
+      "consensus": [
+        7,
+        10,
+        14
+      ],
+      "actual": 1,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89662,
+      "grammar": [
+        10,
+        7,
+        14
+      ],
+      "lagVote": [
+        10,
+        14,
+        7
+      ],
+      "consensus": [
+        7,
+        10,
+        14
+      ],
+      "actual": 3,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89663,
+      "grammar": [
+        10,
+        1,
+        7
+      ],
+      "lagVote": [
+        10,
+        11,
+        7
+      ],
+      "consensus": [
+        7,
+        10,
+        1
+      ],
+      "actual": 12,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89664,
+      "grammar": [
+        10,
+        7,
+        11
+      ],
+      "lagVote": [
+        10,
+        11,
+        7
+      ],
+      "consensus": [
+        7,
+        10,
+        11
+      ],
+      "actual": 3,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89665,
+      "grammar": [
+        10,
+        3,
+        14
+      ],
+      "lagVote": [
+        10,
+        3,
+        7
+      ],
+      "consensus": [
+        3,
+        10,
+        7
+      ],
+      "actual": 6,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89666,
+      "grammar": [
+        10,
+        3,
+        1
+      ],
+      "lagVote": [
+        10,
+        3,
+        7
+      ],
+      "consensus": [
+        3,
+        10,
+        1
+      ],
+      "actual": 12,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89667,
+      "grammar": [
+        10,
+        3,
+        12
+      ],
+      "lagVote": [
+        10,
+        3,
+        12
+      ],
+      "consensus": [
+        3,
+        10,
+        12
+      ],
+      "actual": 13,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89668,
+      "grammar": [
+        12,
+        10,
+        3
+      ],
+      "lagVote": [
+        10,
+        12,
+        13
+      ],
+      "consensus": [
+        10,
+        12,
+        3
+      ],
+      "actual": 2,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89669,
+      "grammar": [
+        10,
+        12,
+        13
+      ],
+      "lagVote": [
+        10,
+        3,
+        12
+      ],
+      "consensus": [
+        10,
+        12,
+        3
+      ],
+      "actual": 13,
+      "gHit": true,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89670,
+      "grammar": [
+        13,
+        3,
+        12
+      ],
+      "lagVote": [
+        13,
+        3,
+        12
+      ],
+      "consensus": [
+        3,
+        12,
+        13
+      ],
+      "actual": 4,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    },
+    {
+      "draw": 89671,
+      "grammar": [
+        13,
+        12,
+        3
+      ],
+      "lagVote": [
+        13,
+        12,
+        3
+      ],
+      "consensus": [
+        3,
+        12,
+        13
+      ],
+      "actual": 7,
+      "gHit": false,
+      "lHit": false,
+      "cHit": false
+    }
+  ]
+}
