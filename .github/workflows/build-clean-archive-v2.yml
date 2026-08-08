@@ -1,0 +1,27 @@
+name: Build verified Michigan Cash Pop archive
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "research/build_clean_cashpop_archive.py"
+      - ".github/workflows/build-clean-archive-v2.yml"
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install requests beautifulsoup4
+      - run: python research/build_clean_cashpop_archive.py
+      - run: |
+          git config user.name "archive-research-bot"
+          git config user.email "archive-research-bot@users.noreply.github.com"
+          git add research/clean_cashpop_archive.json research/archive_metadata.json
+          git commit -m "Verified Michigan Cash Pop clean archive"
+          git pull --rebase origin main
+          git push origin main
