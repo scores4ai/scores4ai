@@ -1,13 +1,6 @@
 {
   "draws": [
     {
-      "draw": 90752,
-      "number": 12,
-      "date": "Friday, August 14, 2026",
-      "time": "1:34 AM",
-      "source": "cash-pop.com rendered"
-    },
-    {
       "draw": 90753,
       "number": 1,
       "date": "Friday, August 14, 2026",
@@ -4199,30 +4192,16 @@
       "date": "Monday, August 17, 2026",
       "time": "8:39 AM",
       "source": "cash-pop.com rendered"
+    },
+    {
+      "draw": 91352,
+      "number": 14,
+      "date": "Monday, August 17, 2026",
+      "time": "8:46 AM",
+      "source": "cash-pop.com rendered"
     }
   ],
   "history": [
-    {
-      "draw": 90812,
-      "top5": [
-        8,
-        2,
-        11,
-        6,
-        7
-      ],
-      "actual": 15,
-      "hit5": false,
-      "modelResults": {
-        "overall": false,
-        "recent24": false,
-        "recent60": false,
-        "markov1": false,
-        "lag7": false,
-        "cycle8": false
-      },
-      "type": "historical_walk_forward"
-    },
     {
       "draw": 90813,
       "top5": [
@@ -4249,8 +4228,8 @@
       "top5": [
         4,
         8,
-        15,
         2,
+        15,
         14
       ],
       "actual": 9,
@@ -4290,8 +4269,8 @@
       "draw": 90816,
       "top5": [
         8,
-        2,
         6,
+        2,
         9,
         11
       ],
@@ -4375,8 +4354,8 @@
       "top5": [
         15,
         9,
-        10,
         2,
+        10,
         6
       ],
       "actual": 8,
@@ -5133,7 +5112,7 @@
         14,
         10,
         3,
-        13
+        2
       ],
       "actual": 6,
       "hit5": false,
@@ -5468,8 +5447,8 @@
         6,
         3,
         2,
-        8,
-        14
+        14,
+        8
       ],
       "actual": 3,
       "hit5": true,
@@ -6747,8 +6726,8 @@
       "draw": 90933,
       "top5": [
         8,
-        12,
         10,
+        12,
         6,
         5
       ],
@@ -6791,8 +6770,8 @@
         1,
         8,
         2,
-        4,
-        14
+        14,
+        4
       ],
       "actual": 7,
       "hit5": false,
@@ -7463,8 +7442,8 @@
         5,
         8,
         2,
-        1,
-        3
+        3,
+        14
       ],
       "actual": 12,
       "hit5": false,
@@ -7484,8 +7463,8 @@
         3,
         5,
         8,
-        12,
-        2
+        2,
+        12
       ],
       "actual": 4,
       "hit5": false,
@@ -7609,8 +7588,8 @@
       "top5": [
         12,
         11,
-        5,
         1,
+        5,
         13
       ],
       "actual": 6,
@@ -7967,8 +7946,8 @@
         14,
         4,
         5,
-        12,
-        8
+        8,
+        12
       ],
       "actual": 7,
       "hit5": false,
@@ -8660,8 +8639,8 @@
         4,
         3,
         12,
-        7,
-        9
+        9,
+        7
       ],
       "actual": 15,
       "hit5": false,
@@ -9288,8 +9267,8 @@
       "draw": 91054,
       "top5": [
         5,
-        12,
         4,
+        12,
         8,
         11
       ],
@@ -9542,8 +9521,8 @@
         8,
         11,
         7,
-        12,
-        5
+        5,
+        12
       ],
       "actual": 2,
       "hit5": false,
@@ -10257,7 +10236,7 @@
         11,
         4,
         5,
-        12
+        8
       ],
       "actual": 9,
       "hit5": false,
@@ -10509,7 +10488,7 @@
         9,
         14,
         3,
-        10
+        2
       ],
       "actual": 14,
       "hit5": true,
@@ -10593,7 +10572,7 @@
         7,
         11,
         4,
-        2
+        5
       ],
       "actual": 15,
       "hit5": false,
@@ -10612,8 +10591,8 @@
       "top5": [
         9,
         14,
-        3,
         10,
+        3,
         2
       ],
       "actual": 15,
@@ -10908,7 +10887,7 @@
         4,
         3,
         9,
-        12
+        7
       ],
       "actual": 13,
       "hit5": false,
@@ -14687,8 +14666,8 @@
         10,
         3,
         11,
-        12,
-        2
+        2,
+        12
       ],
       "actual": 4,
       "hit5": false,
@@ -14939,8 +14918,8 @@
         13,
         3,
         11,
-        12,
-        2
+        2,
+        12
       ],
       "actual": 9,
       "hit5": false,
@@ -15212,8 +15191,8 @@
         15,
         3,
         11,
-        12,
-        2
+        2,
+        12
       ],
       "actual": 12,
       "hit5": true,
@@ -15539,6 +15518,27 @@
         "markov1": true,
         "lag7": true,
         "cycle8": false
+      },
+      "type": "historical_walk_forward"
+    },
+    {
+      "draw": 91352,
+      "top5": [
+        4,
+        2,
+        1,
+        9,
+        10
+      ],
+      "actual": 14,
+      "hit5": false,
+      "modelResults": {
+        "overall": false,
+        "recent24": false,
+        "recent60": false,
+        "markov1": false,
+        "lag7": false,
+        "cycle8": true
       },
       "type": "historical_walk_forward"
     },
@@ -29134,24 +29134,47 @@
       "type": "automated_future_test",
       "predictedAt": "2026-08-17T12:15:34.936355+00:00",
       "scoredAt": "2026-08-17T12:51:51.444645+00:00"
+    },
+    {
+      "draw": 91352,
+      "top5": [
+        4,
+        2,
+        1,
+        10,
+        9
+      ],
+      "actual": 14,
+      "hit5": false,
+      "modelResults": {
+        "overall": false,
+        "recent24": false,
+        "recent60": false,
+        "markov1": false,
+        "lag7": false,
+        "cycle8": true
+      },
+      "type": "automated_future_test",
+      "predictedAt": "2026-08-17T12:51:51.444933+00:00",
+      "scoredAt": "2026-08-17T12:56:39.482932+00:00"
     }
   ],
   "weights": {
-    "overall": 2.583069130795043,
-    "recent24": 0.17382300622900762,
-    "recent60": 0.24029830609650393,
-    "markov1": 2.3187550802020604,
-    "lag7": 0.6348645357471989,
-    "cycle8": 0.04918994093018666
+    "overall": 2.5806574446812016,
+    "recent24": 0.17366071613564893,
+    "recent60": 0.24007395124626646,
+    "markov1": 2.316590171271961,
+    "lag7": 0.6342717935837089,
+    "cycle8": 0.054745923081213343
   },
   "pending": {
-    "draw": 91352,
+    "draw": 91353,
     "top5": [
+      11,
       4,
-      2,
-      1,
-      10,
-      9
+      3,
+      9,
+      2
     ],
     "modelTop5": {
       "overall": [
@@ -29166,7 +29189,7 @@
         8,
         11,
         2,
-        4
+        6
       ],
       "recent60": [
         10,
@@ -29176,37 +29199,37 @@
         7
       ],
       "markov1": [
+        11,
+        3,
         4,
         1,
-        2,
-        3,
-        5
+        2
       ],
       "lag7": [
-        4,
+        11,
         1,
         2,
         3,
-        5
+        4
       ],
       "cycle8": [
         9,
-        4,
+        3,
         2,
-        14,
-        15
+        10,
+        11
       ]
     },
-    "createdAt": "2026-08-17T12:51:51.444933+00:00",
+    "createdAt": "2026-08-17T12:56:39.483233+00:00",
     "feedControlled": true,
     "diversityControl": true
   },
   "warmup": 60,
-  "latestDraw": 91351,
+  "latestDraw": 91352,
   "seedCount": 600,
-  "feed": "cash-pop.com rendered GitHub feed",
+  "feed": "https://cash-pop.com/michigan/winning-numbers direct IDs",
   "source": "https://cash-pop.com/michigan/winning-numbers",
-  "updatedAt": "2026-08-17T12:51:51.445039+00:00",
+  "updatedAt": "2026-08-17T12:56:39.483375+00:00",
   "modelNames": {
     "overall": "Overall frequency",
     "recent24": "Recent 24",
@@ -29216,14 +29239,35 @@
     "cycle8": "Cycle 8"
   },
   "stats": {
-    "evaluated": 1131,
+    "evaluated": 1132,
     "successes": 369,
-    "misses": 762,
-    "accuracy": 0.32625994694960214,
-    "liveEvaluated": 591,
+    "misses": 763,
+    "accuracy": 0.32597173144876324,
+    "liveEvaluated": 592,
     "liveSuccesses": 179,
-    "liveMisses": 412,
-    "liveAccuracy": 0.30287648054145516,
+    "liveMisses": 413,
+    "liveAccuracy": 0.30236486486486486,
     "randomTop5Baseline": 0.3333333333333333
+  },
+  "feedDiagnostics": {
+    "official": {
+      "status": "online_no_cash_pop_payload",
+      "payloads": 3
+    },
+    "fallbacks": [
+      {
+        "source": "https://michiganlotterynumbers.com/cash-pop/numbers",
+        "status": "unparsed"
+      },
+      {
+        "source": "https://cash-pop.com/michigan/winning-numbers",
+        "status": "online",
+        "latestDraw": 91352
+      }
+    ],
+    "selectedSource": "https://cash-pop.com/michigan/winning-numbers direct IDs",
+    "selectedLatestDraw": 91352,
+    "oldLatestDraw": 91351,
+    "polledAt": "2026-08-17T12:56:39.406544+00:00"
   }
 }
