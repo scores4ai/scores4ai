@@ -35131,16 +35131,16 @@
         2
       ]
     },
-    "createdAt": "2026-08-22T06:47:00.128596+00:00",
+    "createdAt": "2026-08-22T06:54:35.010232+00:00",
     "feedControlled": true,
     "diversityControl": true
   },
   "warmup": 60,
   "latestDraw": 92250,
   "seedCount": 600,
-  "feed": "cash-pop.com rendered GitHub feed",
+  "feed": "https://cash-pop.com/michigan/winning-numbers direct IDs",
   "source": "https://cash-pop.com/michigan/winning-numbers",
-  "updatedAt": "2026-08-22T06:47:00.128699+00:00",
+  "updatedAt": "2026-08-22T06:54:35.010376+00:00",
   "modelNames": {
     "overall": "Overall frequency",
     "recent24": "Recent 24",
@@ -35159,5 +35159,26 @@
     "liveMisses": 588,
     "liveAccuracy": 0.30742049469964666,
     "randomTop5Baseline": 0.3333333333333333
+  },
+  "feedDiagnostics": {
+    "official": {
+      "status": "online_no_cash_pop_payload",
+      "payloads": 3
+    },
+    "fallbacks": [
+      {
+        "source": "https://michiganlotterynumbers.com/cash-pop/numbers",
+        "status": "unparsed"
+      },
+      {
+        "source": "https://cash-pop.com/michigan/winning-numbers",
+        "status": "online",
+        "latestDraw": 92250
+      }
+    ],
+    "selectedSource": "https://cash-pop.com/michigan/winning-numbers direct IDs",
+    "selectedLatestDraw": 92250,
+    "oldLatestDraw": 92250,
+    "polledAt": "2026-08-22T06:54:34.936204+00:00"
   }
 }
