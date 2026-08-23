@@ -1,27 +1,6 @@
 {
   "draws": [
     {
-      "draw": 91883,
-      "number": 2,
-      "date": "Thursday, August 20, 2026",
-      "time": "5:37 AM",
-      "source": "cash-pop.com rendered"
-    },
-    {
-      "draw": 91884,
-      "number": 10,
-      "date": "Thursday, August 20, 2026",
-      "time": "5:44 AM",
-      "source": "cash-pop.com rendered"
-    },
-    {
-      "draw": 91885,
-      "number": 1,
-      "date": "Thursday, August 20, 2026",
-      "time": "5:51 AM",
-      "source": "cash-pop.com rendered"
-    },
-    {
       "draw": 91886,
       "number": 6,
       "date": "Thursday, August 20, 2026",
@@ -4199,124 +4178,43 @@
       "date": "Sunday, August 23, 2026",
       "time": "10:24 AM",
       "source": "cash-pop.com rendered"
+    },
+    {
+      "draw": 92483,
+      "number": 12,
+      "date": "Sunday, August 23, 2026",
+      "time": "10:31 AM",
+      "source": "cash-pop.com rendered"
+    },
+    {
+      "draw": 92484,
+      "number": 15,
+      "date": "Sunday, August 23, 2026",
+      "time": "10:38 AM",
+      "source": "cash-pop.com rendered"
+    },
+    {
+      "draw": 92485,
+      "number": 3,
+      "date": "Sunday, August 23, 2026",
+      "time": "10:45 AM",
+      "source": "cash-pop.com rendered"
     }
   ],
   "history": [
-    {
-      "draw": 91943,
-      "top5": [
-        11,
-        14,
-        9,
-        2,
-        3
-      ],
-      "actual": 11,
-      "hit5": true,
-      "modelResults": {
-        "overall": true,
-        "recent24": true,
-        "recent60": true,
-        "markov1": false,
-        "lag7": false,
-        "cycle8": true,
-        "selfLearner": true,
-        "decayFrequency": true,
-        "markov2": false,
-        "gapHazard": true,
-        "sequenceTwin": true,
-        "runState": false,
-        "cycleBank": true
-      },
-      "selfLearnerExperts": {
-        "12": false,
-        "24": true,
-        "48": true,
-        "96": true
-      },
-      "type": "historical_walk_forward"
-    },
-    {
-      "draw": 91944,
-      "top5": [
-        11,
-        14,
-        3,
-        2,
-        10
-      ],
-      "actual": 7,
-      "hit5": false,
-      "modelResults": {
-        "overall": false,
-        "recent24": false,
-        "recent60": false,
-        "markov1": false,
-        "lag7": false,
-        "cycle8": true,
-        "selfLearner": false,
-        "decayFrequency": false,
-        "markov2": false,
-        "gapHazard": false,
-        "sequenceTwin": false,
-        "runState": true,
-        "cycleBank": false
-      },
-      "selfLearnerExperts": {
-        "12": false,
-        "24": false,
-        "48": false,
-        "96": false
-      },
-      "type": "historical_walk_forward"
-    },
-    {
-      "draw": 91945,
-      "top5": [
-        2,
-        11,
-        1,
-        10,
-        14
-      ],
-      "actual": 10,
-      "hit5": true,
-      "modelResults": {
-        "overall": true,
-        "recent24": false,
-        "recent60": true,
-        "markov1": false,
-        "lag7": false,
-        "cycle8": true,
-        "selfLearner": true,
-        "decayFrequency": true,
-        "markov2": false,
-        "gapHazard": false,
-        "sequenceTwin": true,
-        "runState": true,
-        "cycleBank": false
-      },
-      "selfLearnerExperts": {
-        "12": true,
-        "24": false,
-        "48": true,
-        "96": true
-      },
-      "type": "historical_walk_forward"
-    },
     {
       "draw": 91946,
       "top5": [
         10,
         11,
-        1,
-        14,
-        12
+        3,
+        12,
+        14
       ],
       "actual": 14,
       "hit5": true,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": true,
         "markov1": false,
@@ -4327,22 +4225,22 @@
         "markov2": false,
         "gapHazard": false,
         "sequenceTwin": true,
-        "runState": true,
+        "runState": false,
         "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": false,
         "24": false,
         "48": false,
-        "96": false
+        "96": true
       },
       "type": "historical_walk_forward"
     },
     {
       "draw": 91947,
       "top5": [
-        2,
         10,
+        2,
         9,
         11,
         14
@@ -4376,8 +4274,8 @@
       "draw": 91948,
       "top5": [
         14,
-        10,
         2,
+        10,
         11,
         3
       ],
@@ -4445,8 +4343,8 @@
       "top5": [
         11,
         14,
-        7,
         15,
+        7,
         10
       ],
       "actual": 3,
@@ -4549,7 +4447,7 @@
         7,
         11,
         10,
-        15
+        1
       ],
       "actual": 3,
       "hit5": false,
@@ -4650,8 +4548,8 @@
         11,
         3,
         14,
-        7,
-        10
+        13,
+        7
       ],
       "actual": 4,
       "hit5": false,
@@ -4750,10 +4648,10 @@
       "draw": 91959,
       "top5": [
         15,
-        11,
         7,
-        14,
-        3
+        11,
+        3,
+        14
       ],
       "actual": 12,
       "hit5": false,
@@ -4787,12 +4685,12 @@
         4,
         13,
         9,
-        14
+        15
       ],
       "actual": 10,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": true,
         "recent60": false,
         "markov1": false,
@@ -4801,7 +4699,7 @@
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
-        "gapHazard": true,
+        "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
         "cycleBank": false
@@ -4810,16 +4708,16 @@
         "12": false,
         "24": true,
         "48": true,
-        "96": true
+        "96": false
       },
       "type": "historical_walk_forward"
     },
     {
       "draw": 91961,
       "top5": [
+        4,
         10,
         14,
-        4,
         11,
         3
       ],
@@ -4854,8 +4752,8 @@
         11,
         8,
         3,
-        10,
-        14
+        14,
+        10
       ],
       "actual": 9,
       "hit5": false,
@@ -4872,7 +4770,7 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": false
+        "cycleBank": true
       },
       "selfLearnerExperts": {
         "12": true,
@@ -4923,12 +4821,12 @@
         15,
         13,
         2,
-        10
+        8
       ],
       "actual": 2,
       "hit5": true,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": true,
@@ -4946,7 +4844,7 @@
         "12": false,
         "24": false,
         "48": false,
-        "96": true
+        "96": false
       },
       "type": "historical_walk_forward"
     },
@@ -4955,7 +4853,7 @@
       "top5": [
         15,
         9,
-        10,
+        8,
         3,
         11
       ],
@@ -4988,8 +4886,8 @@
       "draw": 91966,
       "top5": [
         11,
-        3,
         12,
+        3,
         4,
         14
       ],
@@ -5002,7 +4900,7 @@
         "markov1": true,
         "lag7": true,
         "cycle8": false,
-        "selfLearner": false,
+        "selfLearner": true,
         "decayFrequency": false,
         "markov2": true,
         "gapHazard": false,
@@ -5021,11 +4919,11 @@
     {
       "draw": 91967,
       "top5": [
-        11,
         10,
+        11,
         9,
         13,
-        2
+        14
       ],
       "actual": 13,
       "hit5": true,
@@ -5123,11 +5021,11 @@
     {
       "draw": 91970,
       "top5": [
+        10,
         4,
         13,
-        10,
-        14,
-        1
+        1,
+        14
       ],
       "actual": 11,
       "hit5": false,
@@ -5157,8 +5055,8 @@
     {
       "draw": 91971,
       "top5": [
-        11,
         4,
+        11,
         3,
         14,
         2
@@ -5268,7 +5166,7 @@
       "actual": 10,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": true,
         "markov1": false,
@@ -5280,13 +5178,13 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": false,
         "24": false,
         "48": true,
-        "96": true
+        "96": false
       },
       "type": "historical_walk_forward"
     },
@@ -5295,8 +5193,8 @@
       "top5": [
         3,
         11,
-        14,
         10,
+        14,
         12
       ],
       "actual": 2,
@@ -5330,8 +5228,8 @@
         11,
         10,
         3,
-        9,
-        15
+        15,
+        8
       ],
       "actual": 6,
       "hit5": false,
@@ -5466,13 +5364,13 @@
         3,
         11,
         15,
-        10,
-        14
+        14,
+        10
       ],
       "actual": 9,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -5490,7 +5388,7 @@
         "12": true,
         "24": false,
         "48": false,
-        "96": false
+        "96": true
       },
       "type": "historical_walk_forward"
     },
@@ -5506,13 +5404,13 @@
       "actual": 14,
       "hit5": true,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": true,
         "markov1": true,
         "lag7": false,
         "cycle8": false,
-        "selfLearner": true,
+        "selfLearner": false,
         "decayFrequency": true,
         "markov2": true,
         "gapHazard": false,
@@ -5569,7 +5467,7 @@
         14,
         9,
         11,
-        2
+        3
       ],
       "actual": 12,
       "hit5": false,
@@ -5670,8 +5568,8 @@
         2,
         11,
         9,
-        6,
-        13
+        13,
+        14
       ],
       "actual": 7,
       "hit5": false,
@@ -5705,17 +5603,17 @@
         9,
         10,
         1,
-        14
+        2
       ],
       "actual": 2,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": true,
         "recent24": true,
         "recent60": false,
         "markov1": true,
         "lag7": true,
-        "cycle8": true,
+        "cycle8": false,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": true,
@@ -5735,11 +5633,11 @@
     {
       "draw": 91988,
       "top5": [
-        11,
         8,
+        11,
         9,
         14,
-        10
+        2
       ],
       "actual": 6,
       "hit5": false,
@@ -5790,7 +5688,7 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": true,
-        "cycleBank": false
+        "cycleBank": true
       },
       "selfLearnerExperts": {
         "12": false,
@@ -5807,10 +5705,10 @@
         11,
         12,
         13,
-        9
+        4
       ],
       "actual": 4,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": false,
         "recent24": false,
@@ -5838,10 +5736,10 @@
       "draw": 91991,
       "top5": [
         3,
-        11,
         6,
+        11,
         13,
-        2
+        9
       ],
       "actual": 6,
       "hit5": true,
@@ -5875,7 +5773,7 @@
         14,
         12,
         9,
-        11
+        6
       ],
       "actual": 4,
       "hit5": false,
@@ -5907,9 +5805,9 @@
       "top5": [
         6,
         13,
-        9,
         11,
-        3
+        9,
+        2
       ],
       "actual": 7,
       "hit5": false,
@@ -5975,9 +5873,9 @@
       "top5": [
         6,
         2,
-        11,
         8,
-        4
+        11,
+        7
       ],
       "actual": 13,
       "hit5": false,
@@ -6079,7 +5977,7 @@
         6,
         12,
         4,
-        1
+        11
       ],
       "actual": 7,
       "hit5": false,
@@ -6109,10 +6007,10 @@
     {
       "draw": 91999,
       "top5": [
-        2,
         1,
-        10,
+        2,
         4,
+        10,
         11
       ],
       "actual": 7,
@@ -6144,15 +6042,15 @@
       "draw": 92000,
       "top5": [
         7,
+        1,
         10,
         2,
-        1,
         11
       ],
       "actual": 10,
       "hit5": true,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": true,
@@ -6249,7 +6147,7 @@
         7,
         9,
         11,
-        2
+        13
       ],
       "actual": 3,
       "hit5": false,
@@ -6281,12 +6179,12 @@
       "top5": [
         9,
         10,
-        6,
         2,
-        12
+        12,
+        4
       ],
       "actual": 4,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": false,
         "recent24": true,
@@ -6327,7 +6225,7 @@
         "recent60": false,
         "markov1": true,
         "lag7": false,
-        "cycle8": false,
+        "cycle8": true,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
@@ -6484,10 +6382,10 @@
       "draw": 92010,
       "top5": [
         2,
-        6,
-        11,
         3,
-        7
+        11,
+        7,
+        8
       ],
       "actual": 14,
       "hit5": false,
@@ -6571,7 +6469,7 @@
         "markov2": false,
         "gapHazard": false,
         "sequenceTwin": true,
-        "runState": true,
+        "runState": false,
         "cycleBank": true
       },
       "selfLearnerExperts": {
@@ -6594,7 +6492,7 @@
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -6621,9 +6519,9 @@
       "top5": [
         6,
         4,
-        10,
         8,
-        7
+        7,
+        11
       ],
       "actual": 8,
       "hit5": true,
@@ -6655,8 +6553,8 @@
       "top5": [
         12,
         3,
-        1,
         8,
+        1,
         11
       ],
       "actual": 12,
@@ -6688,8 +6586,8 @@
       "draw": 92016,
       "top5": [
         13,
-        10,
         6,
+        10,
         4,
         1
       ],
@@ -6722,8 +6620,8 @@
       "draw": 92017,
       "top5": [
         11,
-        4,
         14,
+        4,
         3,
         7
       ],
@@ -6758,8 +6656,8 @@
         6,
         10,
         11,
-        4,
-        5
+        5,
+        4
       ],
       "actual": 6,
       "hit5": true,
@@ -6792,8 +6690,8 @@
         14,
         1,
         12,
-        9,
-        6
+        6,
+        9
       ],
       "actual": 15,
       "hit5": false,
@@ -6857,11 +6755,11 @@
     {
       "draw": 92021,
       "top5": [
-        12,
         7,
-        3,
+        12,
         15,
-        11
+        3,
+        8
       ],
       "actual": 14,
       "hit5": false,
@@ -6927,8 +6825,8 @@
       "top5": [
         3,
         15,
-        11,
         9,
+        11,
         12
       ],
       "actual": 7,
@@ -6968,7 +6866,7 @@
       "actual": 3,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -7029,9 +6927,9 @@
       "top5": [
         15,
         3,
-        14,
         12,
-        1
+        14,
+        4
       ],
       "actual": 11,
       "hit5": false,
@@ -7131,8 +7029,8 @@
       "top5": [
         13,
         6,
-        8,
         11,
+        8,
         9
       ],
       "actual": 11,
@@ -7201,7 +7099,7 @@
         15,
         7,
         12,
-        11
+        14
       ],
       "actual": 15,
       "hit5": true,
@@ -7234,13 +7132,13 @@
         7,
         12,
         11,
-        15,
-        10
+        10,
+        15
       ],
       "actual": 9,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": true,
         "markov1": false,
@@ -7265,16 +7163,16 @@
     {
       "draw": 92033,
       "top5": [
-        14,
         10,
-        1,
+        14,
         11,
+        1,
         15
       ],
       "actual": 4,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": true,
         "markov1": true,
@@ -7308,7 +7206,7 @@
       "actual": 10,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -7337,7 +7235,7 @@
         11,
         3,
         12,
-        1
+        10
       ],
       "actual": 11,
       "hit5": true,
@@ -7438,8 +7336,8 @@
         11,
         4,
         5,
-        15,
-        12
+        12,
+        3
       ],
       "actual": 8,
       "hit5": false,
@@ -7504,8 +7402,8 @@
       "draw": 92040,
       "top5": [
         11,
-        6,
         4,
+        6,
         13,
         10
       ],
@@ -7549,7 +7447,7 @@
         "overall": false,
         "recent24": false,
         "recent60": false,
-        "markov1": true,
+        "markov1": false,
         "lag7": true,
         "cycle8": true,
         "selfLearner": false,
@@ -7558,7 +7456,7 @@
         "gapHazard": true,
         "sequenceTwin": false,
         "runState": true,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": false,
@@ -7571,11 +7469,11 @@
     {
       "draw": 92042,
       "top5": [
-        6,
         11,
         2,
         14,
-        15
+        15,
+        8
       ],
       "actual": 10,
       "hit5": false,
@@ -7606,10 +7504,10 @@
       "draw": 92043,
       "top5": [
         11,
-        1,
         3,
         10,
-        12
+        12,
+        4
       ],
       "actual": 3,
       "hit5": true,
@@ -7625,7 +7523,7 @@
         "markov2": true,
         "gapHazard": true,
         "sequenceTwin": false,
-        "runState": false,
+        "runState": true,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -7642,8 +7540,8 @@
         9,
         11,
         4,
-        10,
-        8
+        8,
+        10
       ],
       "actual": 2,
       "hit5": false,
@@ -7675,9 +7573,9 @@
       "top5": [
         8,
         7,
-        10,
         6,
-        11
+        11,
+        10
       ],
       "actual": 1,
       "hit5": false,
@@ -7708,15 +7606,15 @@
       "draw": 92046,
       "top5": [
         2,
-        11,
         10,
-        6,
-        8
+        11,
+        7,
+        15
       ],
       "actual": 9,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -7728,7 +7626,7 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": false
+        "cycleBank": true
       },
       "selfLearnerExperts": {
         "12": false,
@@ -7776,9 +7674,9 @@
       "draw": 92048,
       "top5": [
         9,
+        1,
         4,
         2,
-        1,
         11
       ],
       "actual": 7,
@@ -7847,7 +7745,7 @@
         13,
         14,
         2,
-        5
+        3
       ],
       "actual": 7,
       "hit5": false,
@@ -7881,7 +7779,7 @@
         10,
         1,
         14,
-        3
+        11
       ],
       "actual": 12,
       "hit5": false,
@@ -7911,8 +7809,8 @@
     {
       "draw": 92052,
       "top5": [
-        10,
         6,
+        10,
         4,
         11,
         13
@@ -7947,8 +7845,8 @@
       "top5": [
         12,
         11,
-        1,
         3,
+        1,
         13
       ],
       "actual": 4,
@@ -7979,8 +7877,8 @@
     {
       "draw": 92054,
       "top5": [
-        11,
         6,
+        11,
         3,
         13,
         8
@@ -8015,8 +7913,8 @@
       "top5": [
         14,
         10,
-        4,
         7,
+        4,
         12
       ],
       "actual": 2,
@@ -8049,9 +7947,9 @@
       "top5": [
         8,
         6,
-        10,
         9,
-        11
+        11,
+        7
       ],
       "actual": 12,
       "hit5": false,
@@ -8116,8 +8014,8 @@
       "draw": 92058,
       "top5": [
         11,
-        6,
         4,
+        6,
         12,
         3
       ],
@@ -8151,8 +8049,8 @@
       "top5": [
         8,
         11,
-        12,
         4,
+        12,
         3
       ],
       "actual": 13,
@@ -8231,7 +8129,7 @@
         "recent60": false,
         "markov1": false,
         "lag7": false,
-        "cycle8": false,
+        "cycle8": true,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
@@ -8255,12 +8153,12 @@
         9,
         3,
         11,
-        15
+        2
       ],
       "actual": 3,
       "hit5": true,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": true,
         "recent60": true,
         "markov1": true,
@@ -8289,10 +8187,10 @@
         12,
         2,
         9,
-        6
+        11
       ],
       "actual": 11,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": true,
         "recent24": false,
@@ -8320,8 +8218,8 @@
       "draw": 92064,
       "top5": [
         10,
-        11,
         5,
+        11,
         3,
         4
       ],
@@ -8389,9 +8287,9 @@
       "top5": [
         9,
         11,
-        2,
         12,
-        10
+        2,
+        13
       ],
       "actual": 11,
       "hit5": true,
@@ -8435,7 +8333,7 @@
         "recent60": false,
         "markov1": false,
         "lag7": true,
-        "cycle8": true,
+        "cycle8": false,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": true,
@@ -8457,9 +8355,9 @@
       "top5": [
         8,
         6,
-        10,
         15,
-        11
+        11,
+        10
       ],
       "actual": 1,
       "hit5": false,
@@ -8489,19 +8387,19 @@
     {
       "draw": 92069,
       "top5": [
-        11,
         9,
+        11,
         2,
-        6,
-        3
+        3,
+        10
       ],
       "actual": 10,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": true,
         "recent24": false,
         "recent60": false,
-        "markov1": false,
+        "markov1": true,
         "lag7": false,
         "cycle8": false,
         "selfLearner": false,
@@ -8523,10 +8421,10 @@
     {
       "draw": 92070,
       "top5": [
-        11,
         3,
-        1,
+        11,
         12,
+        1,
         4
       ],
       "actual": 4,
@@ -8591,8 +8489,8 @@
     {
       "draw": 92072,
       "top5": [
-        3,
         6,
+        3,
         9,
         11,
         13
@@ -8626,8 +8524,8 @@
       "draw": 92073,
       "top5": [
         3,
-        11,
         7,
+        11,
         15,
         12
       ],
@@ -8662,8 +8560,8 @@
         11,
         2,
         10,
-        6,
-        7
+        7,
+        14
       ],
       "actual": 15,
       "hit5": false,
@@ -8695,8 +8593,8 @@
       "top5": [
         1,
         3,
-        11,
         7,
+        11,
         15
       ],
       "actual": 14,
@@ -8728,8 +8626,8 @@
       "draw": 92076,
       "top5": [
         13,
-        10,
         9,
+        10,
         15,
         2
       ],
@@ -8765,7 +8663,7 @@
         4,
         1,
         10,
-        14
+        2
       ],
       "actual": 7,
       "hit5": false,
@@ -8799,7 +8697,7 @@
         4,
         7,
         1,
-        11
+        2
       ],
       "actual": 10,
       "hit5": true,
@@ -8899,9 +8797,9 @@
       "top5": [
         8,
         6,
-        10,
         1,
-        15
+        15,
+        11
       ],
       "actual": 8,
       "hit5": true,
@@ -9069,9 +8967,9 @@
       "top5": [
         13,
         11,
-        3,
+        8,
         4,
-        8
+        3
       ],
       "actual": 1,
       "hit5": false,
@@ -9102,10 +9000,10 @@
       "draw": 92087,
       "top5": [
         2,
-        11,
         10,
         15,
-        6
+        11,
+        7
       ],
       "actual": 15,
       "hit5": true,
@@ -9144,7 +9042,7 @@
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": true,
         "recent60": false,
         "markov1": false,
@@ -9173,7 +9071,7 @@
         6,
         1,
         9,
-        10
+        12
       ],
       "actual": 4,
       "hit5": false,
@@ -9238,8 +9136,8 @@
       "draw": 92091,
       "top5": [
         1,
-        3,
         5,
+        3,
         14,
         7
       ],
@@ -9258,7 +9156,7 @@
         "gapHazard": false,
         "sequenceTwin": true,
         "runState": false,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": true,
@@ -9273,9 +9171,9 @@
       "top5": [
         4,
         8,
-        6,
         11,
-        10
+        6,
+        1
       ],
       "actual": 4,
       "hit5": true,
@@ -9410,8 +9308,8 @@
         8,
         4,
         6,
-        10,
-        15
+        15,
+        1
       ],
       "actual": 12,
       "hit5": false,
@@ -9577,8 +9475,8 @@
     {
       "draw": 92101,
       "top5": [
-        15,
         13,
+        15,
         11,
         6,
         9
@@ -9681,9 +9579,9 @@
       "top5": [
         11,
         3,
-        1,
         4,
-        2
+        2,
+        12
       ],
       "actual": 8,
       "hit5": false,
@@ -9700,7 +9598,7 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": false
+        "cycleBank": true
       },
       "selfLearnerExperts": {
         "12": false,
@@ -9768,7 +9666,7 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": false,
@@ -9801,7 +9699,7 @@
         "markov2": true,
         "gapHazard": false,
         "sequenceTwin": false,
-        "runState": false,
+        "runState": true,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -9818,8 +9716,8 @@
         3,
         4,
         11,
-        1,
-        12
+        12,
+        15
       ],
       "actual": 7,
       "hit5": false,
@@ -9919,8 +9817,8 @@
       "top5": [
         11,
         6,
-        10,
         8,
+        10,
         13
       ],
       "actual": 4,
@@ -9988,8 +9886,8 @@
         1,
         10,
         3,
-        2,
-        7
+        7,
+        2
       ],
       "actual": 11,
       "hit5": false,
@@ -10056,8 +9954,8 @@
         10,
         7,
         2,
-        14,
-        3
+        3,
+        14
       ],
       "actual": 11,
       "hit5": false,
@@ -10258,8 +10156,8 @@
       "draw": 92121,
       "top5": [
         11,
-        6,
         4,
+        6,
         3,
         7
       ],
@@ -10277,7 +10175,7 @@
         "markov2": true,
         "gapHazard": true,
         "sequenceTwin": false,
-        "runState": true,
+        "runState": false,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -10346,7 +10244,7 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": false,
@@ -10498,13 +10396,13 @@
         10,
         11,
         2,
-        3,
-        12
+        6,
+        3
       ],
       "actual": 12,
-      "hit5": true,
+      "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": true,
         "recent60": false,
         "markov1": false,
@@ -10564,8 +10462,8 @@
       "draw": 92130,
       "top5": [
         3,
-        1,
         7,
+        1,
         11,
         14
       ],
@@ -10906,8 +10804,8 @@
         8,
         6,
         4,
-        10,
-        1
+        1,
+        12
       ],
       "actual": 13,
       "hit5": false,
@@ -10941,7 +10839,7 @@
         3,
         14,
         10,
-        13
+        2
       ],
       "actual": 9,
       "hit5": false,
@@ -10952,7 +10850,7 @@
         "markov1": false,
         "lag7": false,
         "cycle8": false,
-        "selfLearner": false,
+        "selfLearner": true,
         "decayFrequency": false,
         "markov2": false,
         "gapHazard": false,
@@ -11039,8 +10937,8 @@
     {
       "draw": 92144,
       "top5": [
-        7,
         14,
+        7,
         9,
         3,
         2
@@ -11082,7 +10980,7 @@
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -11108,10 +11006,10 @@
       "draw": 92146,
       "top5": [
         8,
-        10,
         1,
-        11,
-        4
+        4,
+        12,
+        6
       ],
       "actual": 13,
       "hit5": false,
@@ -11145,7 +11043,7 @@
         13,
         14,
         3,
-        2
+        15
       ],
       "actual": 9,
       "hit5": true,
@@ -11178,8 +11076,8 @@
         14,
         3,
         10,
-        4,
-        9
+        9,
+        4
       ],
       "actual": 15,
       "hit5": false,
@@ -11210,10 +11108,10 @@
       "draw": 92149,
       "top5": [
         3,
-        11,
         14,
-        13,
-        7
+        11,
+        7,
+        13
       ],
       "actual": 7,
       "hit5": true,
@@ -11279,8 +11177,8 @@
       "top5": [
         11,
         6,
-        2,
         4,
+        2,
         3
       ],
       "actual": 5,
@@ -11349,7 +11247,7 @@
         13,
         15,
         9,
-        10
+        7
       ],
       "actual": 14,
       "hit5": false,
@@ -11383,10 +11281,10 @@
         13,
         7,
         15,
-        14
+        5
       ],
       "actual": 5,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": false,
         "recent24": true,
@@ -11422,7 +11320,7 @@
       "actual": 9,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": true,
         "recent60": false,
         "markov1": false,
@@ -11584,15 +11482,15 @@
       "draw": 92160,
       "top5": [
         12,
-        7,
         3,
+        7,
         9,
         11
       ],
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": true,
         "recent60": false,
         "markov1": false,
@@ -11604,7 +11502,7 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": true,
-        "cycleBank": false
+        "cycleBank": true
       },
       "selfLearnerExperts": {
         "12": false,
@@ -11619,9 +11517,9 @@
       "top5": [
         8,
         1,
-        10,
+        13,
         12,
-        13
+        4
       ],
       "actual": 3,
       "hit5": false,
@@ -11653,8 +11551,8 @@
       "top5": [
         11,
         9,
-        10,
         12,
+        10,
         2
       ],
       "actual": 14,
@@ -11753,9 +11651,9 @@
     {
       "draw": 92165,
       "top5": [
+        15,
         14,
         1,
-        15,
         9,
         2
       ],
@@ -11789,14 +11687,14 @@
       "top5": [
         13,
         11,
-        3,
         4,
+        3,
         8
       ],
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": true,
         "recent60": false,
         "markov1": false,
@@ -11824,8 +11722,8 @@
         1,
         8,
         2,
-        10,
-        13
+        13,
+        4
       ],
       "actual": 14,
       "hit5": false,
@@ -11957,16 +11855,16 @@
     {
       "draw": 92171,
       "top5": [
-        3,
         7,
+        3,
         14,
-        2,
-        1
+        1,
+        5
       ],
       "actual": 10,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -11992,10 +11890,10 @@
       "draw": 92172,
       "top5": [
         11,
-        1,
-        4,
         3,
-        7
+        4,
+        7,
+        14
       ],
       "actual": 9,
       "hit5": false,
@@ -12129,9 +12027,9 @@
       "top5": [
         13,
         2,
+        10,
         14,
-        7,
-        10
+        11
       ],
       "actual": 10,
       "hit5": true,
@@ -12162,10 +12060,10 @@
       "draw": 92177,
       "top5": [
         2,
-        1,
         15,
         3,
-        14
+        1,
+        11
       ],
       "actual": 7,
       "hit5": false,
@@ -12198,8 +12096,8 @@
         10,
         7,
         3,
-        11,
-        1
+        1,
+        11
       ],
       "actual": 7,
       "hit5": true,
@@ -12367,9 +12265,9 @@
       "top5": [
         14,
         10,
-        2,
         15,
-        11
+        2,
+        13
       ],
       "actual": 8,
       "hit5": false,
@@ -12442,7 +12340,7 @@
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": true,
@@ -12471,7 +12369,7 @@
         1,
         4,
         14,
-        10
+        6
       ],
       "actual": 5,
       "hit5": false,
@@ -12504,8 +12402,8 @@
         11,
         4,
         6,
-        2,
-        3
+        3,
+        2
       ],
       "actual": 13,
       "hit5": false,
@@ -12539,7 +12437,7 @@
         3,
         15,
         9,
-        4
+        8
       ],
       "actual": 2,
       "hit5": false,
@@ -12550,7 +12448,7 @@
         "markov1": true,
         "lag7": true,
         "cycle8": true,
-        "selfLearner": true,
+        "selfLearner": false,
         "decayFrequency": true,
         "markov2": true,
         "gapHazard": false,
@@ -12573,7 +12471,7 @@
         12,
         1,
         11,
-        13
+        4
       ],
       "actual": 7,
       "hit5": false,
@@ -12606,8 +12504,8 @@
         2,
         3,
         10,
-        7,
-        11
+        11,
+        7
       ],
       "actual": 5,
       "hit5": false,
@@ -12776,8 +12674,8 @@
         4,
         2,
         11,
-        5,
-        13
+        13,
+        5
       ],
       "actual": 1,
       "hit5": false,
@@ -12827,7 +12725,7 @@
         "markov2": true,
         "gapHazard": false,
         "sequenceTwin": true,
-        "runState": false,
+        "runState": true,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -12845,7 +12743,7 @@
         8,
         5,
         3,
-        14
+        9
       ],
       "actual": 12,
       "hit5": true,
@@ -12911,9 +12809,9 @@
       "top5": [
         12,
         11,
-        4,
         13,
-        2
+        4,
+        9
       ],
       "actual": 13,
       "hit5": true,
@@ -12930,7 +12828,7 @@
         "gapHazard": false,
         "sequenceTwin": true,
         "runState": false,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": true,
@@ -12980,8 +12878,8 @@
         3,
         15,
         5,
-        14,
-        13
+        13,
+        7
       ],
       "actual": 8,
       "hit5": false,
@@ -13049,7 +12947,7 @@
         13,
         8,
         14,
-        10
+        1
       ],
       "actual": 15,
       "hit5": false,
@@ -13082,8 +12980,8 @@
         11,
         14,
         7,
-        3,
-        12
+        12,
+        3
       ],
       "actual": 8,
       "hit5": false,
@@ -13150,13 +13048,13 @@
         2,
         11,
         13,
-        10,
-        14
+        14,
+        10
       ],
       "actual": 10,
       "hit5": true,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -13167,7 +13065,7 @@
         "markov2": false,
         "gapHazard": true,
         "sequenceTwin": false,
-        "runState": false,
+        "runState": true,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -13355,7 +13253,7 @@
         13,
         5,
         6,
-        4
+        3
       ],
       "actual": 2,
       "hit5": false,
@@ -13387,8 +13285,8 @@
       "top5": [
         13,
         10,
-        7,
         8,
+        7,
         11
       ],
       "actual": 2,
@@ -13454,10 +13352,10 @@
       "draw": 92215,
       "top5": [
         9,
-        2,
         8,
-        12,
-        15
+        2,
+        15,
+        12
       ],
       "actual": 14,
       "hit5": false,
@@ -13490,8 +13388,8 @@
         9,
         15,
         14,
-        7,
-        13
+        13,
+        7
       ],
       "actual": 8,
       "hit5": false,
@@ -13593,7 +13491,7 @@
         10,
         13,
         11,
-        12
+        4
       ],
       "actual": 5,
       "hit5": false,
@@ -13694,8 +13592,8 @@
         4,
         14,
         13,
-        3,
-        11
+        11,
+        3
       ],
       "actual": 8,
       "hit5": false,
@@ -13795,8 +13693,8 @@
       "top5": [
         11,
         15,
-        9,
         8,
+        9,
         3
       ],
       "actual": 9,
@@ -13831,7 +13729,7 @@
         5,
         2,
         10,
-        15
+        12
       ],
       "actual": 3,
       "hit5": false,
@@ -13861,11 +13759,11 @@
     {
       "draw": 92227,
       "top5": [
-        2,
         15,
+        2,
         11,
         7,
-        14
+        10
       ],
       "actual": 5,
       "hit5": false,
@@ -13964,8 +13862,8 @@
       "draw": 92230,
       "top5": [
         6,
-        11,
         7,
+        11,
         3,
         8
       ],
@@ -14033,9 +13931,9 @@
       "top5": [
         9,
         4,
-        10,
+        7,
         2,
-        7
+        10
       ],
       "actual": 5,
       "hit5": false,
@@ -14065,8 +13963,8 @@
     {
       "draw": 92233,
       "top5": [
-        3,
         5,
+        3,
         13,
         2,
         11
@@ -14170,8 +14068,8 @@
         4,
         2,
         5,
-        13,
-        11
+        11,
+        13
       ],
       "actual": 12,
       "hit5": false,
@@ -14338,10 +14236,10 @@
       "draw": 92241,
       "top5": [
         13,
-        3,
         10,
+        3,
         11,
-        12
+        8
       ],
       "actual": 9,
       "hit5": false,
@@ -14408,8 +14306,8 @@
         12,
         5,
         13,
-        14,
-        11
+        8,
+        14
       ],
       "actual": 15,
       "hit5": false,
@@ -14440,8 +14338,8 @@
       "draw": 92244,
       "top5": [
         12,
-        8,
         11,
+        8,
         2,
         5
       ],
@@ -14476,8 +14374,8 @@
         3,
         11,
         8,
-        7,
-        15
+        15,
+        7
       ],
       "actual": 6,
       "hit5": false,
@@ -14510,8 +14408,8 @@
         1,
         9,
         4,
-        3,
-        14
+        14,
+        3
       ],
       "actual": 11,
       "hit5": false,
@@ -14545,7 +14443,7 @@
         2,
         13,
         14,
-        10
+        4
       ],
       "actual": 1,
       "hit5": false,
@@ -14576,8 +14474,8 @@
       "draw": 92248,
       "top5": [
         9,
-        10,
         15,
+        10,
         8,
         12
       ],
@@ -14613,7 +14511,7 @@
         2,
         10,
         9,
-        3
+        13
       ],
       "actual": 8,
       "hit5": false,
@@ -14652,7 +14550,7 @@
       "actual": 10,
       "hit5": true,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -14678,13 +14576,13 @@
       "draw": 92251,
       "top5": [
         4,
-        5,
         3,
         7,
-        13
+        5,
+        11
       ],
       "actual": 11,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": true,
         "recent24": false,
@@ -14712,8 +14610,8 @@
       "draw": 92252,
       "top5": [
         5,
-        13,
         11,
+        13,
         6,
         2
       ],
@@ -14746,10 +14644,10 @@
       "draw": 92253,
       "top5": [
         11,
-        12,
-        13,
         1,
-        7
+        12,
+        14,
+        13
       ],
       "actual": 15,
       "hit5": false,
@@ -14780,9 +14678,9 @@
       "draw": 92254,
       "top5": [
         1,
-        3,
         8,
         11,
+        3,
         4
       ],
       "actual": 3,
@@ -14848,15 +14746,15 @@
       "draw": 92256,
       "top5": [
         8,
-        5,
-        9,
         15,
-        7
+        9,
+        5,
+        13
       ],
       "actual": 14,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -14952,8 +14850,8 @@
         2,
         14,
         11,
-        5,
-        12
+        12,
+        5
       ],
       "actual": 11,
       "hit5": true,
@@ -14984,15 +14882,15 @@
       "draw": 92260,
       "top5": [
         2,
-        13,
         15,
+        13,
         5,
         10
       ],
       "actual": 10,
       "hit5": true,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -15020,8 +14918,8 @@
         3,
         7,
         2,
-        11,
-        12
+        12,
+        11
       ],
       "actual": 1,
       "hit5": false,
@@ -15029,7 +14927,7 @@
         "overall": false,
         "recent24": true,
         "recent60": false,
-        "markov1": true,
+        "markov1": false,
         "lag7": true,
         "cycle8": false,
         "selfLearner": false,
@@ -15053,12 +14951,12 @@
       "top5": [
         14,
         10,
-        3,
         13,
-        6
+        3,
+        8
       ],
       "actual": 6,
-      "hit5": true,
+      "hit5": false,
       "modelResults": {
         "overall": false,
         "recent24": false,
@@ -15068,7 +14966,7 @@
         "cycle8": false,
         "selfLearner": false,
         "decayFrequency": false,
-        "markov2": true,
+        "markov2": false,
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
@@ -15086,10 +14984,10 @@
       "draw": 92263,
       "top5": [
         14,
-        12,
         2,
         11,
-        7
+        12,
+        1
       ],
       "actual": 4,
       "hit5": false,
@@ -15102,9 +15000,9 @@
         "cycle8": true,
         "selfLearner": false,
         "decayFrequency": false,
-        "markov2": true,
+        "markov2": false,
         "gapHazard": false,
-        "sequenceTwin": true,
+        "sequenceTwin": false,
         "runState": false,
         "cycleBank": false
       },
@@ -15119,10 +15017,10 @@
     {
       "draw": 92264,
       "top5": [
-        7,
         2,
-        8,
+        7,
         9,
+        8,
         3
       ],
       "actual": 5,
@@ -15189,8 +15087,8 @@
       "top5": [
         11,
         5,
-        14,
         7,
+        14,
         12
       ],
       "actual": 13,
@@ -15223,9 +15121,9 @@
       "top5": [
         10,
         14,
-        2,
+        9,
         3,
-        9
+        2
       ],
       "actual": 10,
       "hit5": true,
@@ -15269,7 +15167,7 @@
         "recent60": true,
         "markov1": false,
         "lag7": true,
-        "cycle8": false,
+        "cycle8": true,
         "selfLearner": true,
         "decayFrequency": true,
         "markov2": false,
@@ -15309,7 +15207,7 @@
         "markov2": false,
         "gapHazard": false,
         "sequenceTwin": true,
-        "runState": false,
+        "runState": true,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -15360,8 +15258,8 @@
         5,
         2,
         8,
-        12,
-        11
+        11,
+        12
       ],
       "actual": 15,
       "hit5": false,
@@ -15395,7 +15293,7 @@
         5,
         7,
         12,
-        10
+        3
       ],
       "actual": 9,
       "hit5": true,
@@ -15427,8 +15325,8 @@
       "top5": [
         13,
         4,
-        12,
         14,
+        12,
         3
       ],
       "actual": 10,
@@ -15497,7 +15395,7 @@
         2,
         14,
         10,
-        11
+        9
       ],
       "actual": 15,
       "hit5": false,
@@ -15633,7 +15531,7 @@
         8,
         11,
         14,
-        2
+        4
       ],
       "actual": 5,
       "hit5": false,
@@ -15683,7 +15581,7 @@
         "markov2": false,
         "gapHazard": false,
         "sequenceTwin": false,
-        "runState": false,
+        "runState": true,
         "cycleBank": true
       },
       "selfLearnerExperts": {
@@ -15700,8 +15598,8 @@
         13,
         5,
         14,
-        3,
-        10
+        10,
+        2
       ],
       "actual": 12,
       "hit5": false,
@@ -15765,9 +15663,9 @@
     {
       "draw": 92283,
       "top5": [
+        7,
         14,
         1,
-        7,
         15,
         11
       ],
@@ -15869,8 +15767,8 @@
       "top5": [
         5,
         3,
-        4,
         15,
+        4,
         9
       ],
       "actual": 10,
@@ -15970,10 +15868,10 @@
       "draw": 92289,
       "top5": [
         14,
-        2,
-        9,
         6,
-        10
+        9,
+        2,
+        3
       ],
       "actual": 15,
       "hit5": false,
@@ -16037,8 +15935,8 @@
     {
       "draw": 92291,
       "top5": [
-        2,
         12,
+        2,
         11,
         3,
         13
@@ -16141,9 +16039,9 @@
       "top5": [
         8,
         3,
-        14,
         4,
-        12
+        12,
+        14
       ],
       "actual": 3,
       "hit5": true,
@@ -16262,7 +16160,7 @@
         "gapHazard": true,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": false,
@@ -16275,11 +16173,11 @@
     {
       "draw": 92298,
       "top5": [
-        15,
         1,
+        15,
         11,
         3,
-        10
+        8
       ],
       "actual": 4,
       "hit5": false,
@@ -16357,7 +16255,7 @@
         "recent60": true,
         "markov1": false,
         "lag7": false,
-        "cycle8": false,
+        "cycle8": true,
         "selfLearner": true,
         "decayFrequency": true,
         "markov2": false,
@@ -16377,8 +16275,8 @@
     {
       "draw": 92301,
       "top5": [
-        6,
         3,
+        6,
         13,
         11,
         10
@@ -16449,7 +16347,7 @@
         14,
         12,
         3,
-        6
+        11
       ],
       "actual": 5,
       "hit5": false,
@@ -16480,8 +16378,8 @@
       "draw": 92304,
       "top5": [
         2,
-        3,
         9,
+        3,
         12,
         10
       ],
@@ -16517,10 +16415,10 @@
         1,
         12,
         9,
-        14
+        10
       ],
       "actual": 14,
-      "hit5": true,
+      "hit5": false,
       "modelResults": {
         "overall": false,
         "recent24": false,
@@ -16619,7 +16517,7 @@
         7,
         3,
         2,
-        13
+        5
       ],
       "actual": 12,
       "hit5": false,
@@ -16720,8 +16618,8 @@
         5,
         2,
         12,
-        11,
-        10
+        7,
+        11
       ],
       "actual": 3,
       "hit5": false,
@@ -16751,8 +16649,8 @@
     {
       "draw": 92312,
       "top5": [
-        10,
         14,
+        10,
         12,
         9,
         11
@@ -16787,8 +16685,8 @@
       "top5": [
         9,
         14,
-        10,
         3,
+        10,
         12
       ],
       "actual": 7,
@@ -16862,7 +16760,7 @@
       "actual": 9,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": true,
         "markov1": true,
@@ -16891,7 +16789,7 @@
         12,
         5,
         13,
-        10
+        7
       ],
       "actual": 6,
       "hit5": false,
@@ -16956,10 +16854,10 @@
       "draw": 92318,
       "top5": [
         3,
-        7,
-        2,
         10,
-        13
+        13,
+        2,
+        7
       ],
       "actual": 4,
       "hit5": false,
@@ -17072,7 +16970,7 @@
         "markov1": false,
         "lag7": true,
         "cycle8": false,
-        "selfLearner": false,
+        "selfLearner": true,
         "decayFrequency": false,
         "markov2": false,
         "gapHazard": false,
@@ -17093,9 +16991,9 @@
       "top5": [
         9,
         11,
-        3,
-        10,
-        8
+        8,
+        15,
+        3
       ],
       "actual": 11,
       "hit5": true,
@@ -17126,10 +17024,10 @@
       "draw": 92323,
       "top5": [
         12,
+        6,
         4,
         13,
-        10,
-        6
+        10
       ],
       "actual": 3,
       "hit5": false,
@@ -17228,13 +17126,13 @@
       "draw": 92326,
       "top5": [
         13,
-        6,
         10,
         8,
-        2
+        2,
+        12
       ],
       "actual": 12,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": true,
         "recent24": false,
@@ -17242,7 +17140,7 @@
         "markov1": false,
         "lag7": false,
         "cycle8": false,
-        "selfLearner": true,
+        "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
         "gapHazard": true,
@@ -17261,11 +17159,11 @@
     {
       "draw": 92327,
       "top5": [
-        8,
         14,
+        8,
         9,
         5,
-        2
+        13
       ],
       "actual": 10,
       "hit5": false,
@@ -17398,8 +17296,8 @@
       "draw": 92331,
       "top5": [
         10,
-        2,
         5,
+        2,
         7,
         14
       ],
@@ -17411,7 +17309,7 @@
         "recent60": false,
         "markov1": false,
         "lag7": false,
-        "cycle8": false,
+        "cycle8": true,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
@@ -17480,7 +17378,7 @@
         "markov1": false,
         "lag7": true,
         "cycle8": true,
-        "selfLearner": true,
+        "selfLearner": false,
         "decayFrequency": true,
         "markov2": false,
         "gapHazard": false,
@@ -17536,13 +17434,13 @@
         7,
         11,
         2,
-        3,
-        12
+        12,
+        3
       ],
       "actual": 2,
       "hit5": true,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -17602,10 +17500,10 @@
       "draw": 92337,
       "top5": [
         15,
-        1,
         10,
         8,
-        3
+        3,
+        9
       ],
       "actual": 4,
       "hit5": false,
@@ -17704,8 +17602,8 @@
       "draw": 92340,
       "top5": [
         12,
-        9,
         2,
+        9,
         15,
         8
       ],
@@ -17737,8 +17635,8 @@
     {
       "draw": 92341,
       "top5": [
-        9,
         3,
+        9,
         8,
         15,
         11
@@ -17783,7 +17681,7 @@
         "overall": true,
         "recent24": true,
         "recent60": false,
-        "markov1": true,
+        "markov1": false,
         "lag7": false,
         "cycle8": true,
         "selfLearner": true,
@@ -17806,10 +17704,10 @@
       "draw": 92343,
       "top5": [
         10,
-        1,
         4,
+        11,
         8,
-        11
+        7
       ],
       "actual": 8,
       "hit5": true,
@@ -17839,9 +17737,9 @@
     {
       "draw": 92344,
       "top5": [
+        4,
         7,
         12,
-        4,
         9,
         13
       ],
@@ -17877,7 +17775,7 @@
         9,
         7,
         11,
-        4
+        12
       ],
       "actual": 3,
       "hit5": false,
@@ -17908,9 +17806,9 @@
       "draw": 92346,
       "top5": [
         11,
+        6,
         10,
         12,
-        6,
         7
       ],
       "actual": 15,
@@ -18011,8 +17909,8 @@
       "top5": [
         10,
         11,
-        9,
         4,
+        9,
         13
       ],
       "actual": 4,
@@ -18047,7 +17945,7 @@
         8,
         11,
         9,
-        7
+        13
       ],
       "actual": 5,
       "hit5": false,
@@ -18078,10 +17976,10 @@
       "draw": 92351,
       "top5": [
         9,
-        11,
         7,
-        6,
-        13
+        11,
+        13,
+        6
       ],
       "actual": 5,
       "hit5": false,
@@ -18145,8 +18043,8 @@
     {
       "draw": 92353,
       "top5": [
-        7,
         15,
+        7,
         3,
         11,
         9
@@ -18166,7 +18064,7 @@
         "gapHazard": true,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": false,
@@ -18182,8 +18080,8 @@
         13,
         3,
         11,
-        9,
-        10
+        10,
+        9
       ],
       "actual": 13,
       "hit5": true,
@@ -18281,11 +18179,11 @@
     {
       "draw": 92357,
       "top5": [
-        11,
         5,
+        11,
         2,
-        9,
-        12
+        12,
+        9
       ],
       "actual": 13,
       "hit5": false,
@@ -18317,8 +18215,8 @@
       "top5": [
         5,
         12,
-        9,
         3,
+        9,
         14
       ],
       "actual": 10,
@@ -18349,8 +18247,8 @@
     {
       "draw": 92359,
       "top5": [
-        8,
         7,
+        8,
         11,
         5,
         9
@@ -18358,7 +18256,7 @@
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": true,
         "recent60": false,
         "markov1": false,
@@ -18384,10 +18282,10 @@
       "draw": 92360,
       "top5": [
         9,
-        11,
         1,
-        6,
-        8
+        11,
+        8,
+        6
       ],
       "actual": 9,
       "hit5": true,
@@ -18420,8 +18318,8 @@
         11,
         14,
         12,
-        3,
-        13
+        13,
+        3
       ],
       "actual": 3,
       "hit5": true,
@@ -18487,9 +18385,9 @@
       "top5": [
         11,
         15,
-        12,
         1,
-        14
+        12,
+        13
       ],
       "actual": 8,
       "hit5": false,
@@ -18590,8 +18488,8 @@
         11,
         2,
         12,
-        9,
-        3
+        3,
+        9
       ],
       "actual": 11,
       "hit5": true,
@@ -18624,8 +18522,8 @@
         13,
         12,
         4,
-        7,
-        15
+        9,
+        7
       ],
       "actual": 11,
       "hit5": false,
@@ -18758,8 +18656,8 @@
       "draw": 92371,
       "top5": [
         14,
-        12,
         13,
+        12,
         3,
         11
       ],
@@ -18805,7 +18703,7 @@
         "recent60": true,
         "markov1": false,
         "lag7": false,
-        "cycle8": true,
+        "cycle8": false,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
@@ -18859,8 +18757,8 @@
     {
       "draw": 92374,
       "top5": [
-        1,
         11,
+        1,
         4,
         9,
         12
@@ -18931,7 +18829,7 @@
         11,
         3,
         4,
-        1
+        2
       ],
       "actual": 9,
       "hit5": false,
@@ -18963,9 +18861,9 @@
       "top5": [
         3,
         12,
-        2,
         7,
-        14
+        2,
+        11
       ],
       "actual": 1,
       "hit5": false,
@@ -18995,9 +18893,9 @@
     {
       "draw": 92378,
       "top5": [
-        2,
-        13,
         15,
+        13,
+        2,
         7,
         10
       ],
@@ -19031,9 +18929,9 @@
       "top5": [
         13,
         10,
+        14,
         2,
-        4,
-        14
+        4
       ],
       "actual": 1,
       "hit5": false,
@@ -19063,11 +18961,11 @@
     {
       "draw": 92380,
       "top5": [
-        13,
         1,
+        13,
+        6,
         4,
-        2,
-        6
+        2
       ],
       "actual": 7,
       "hit5": false,
@@ -19098,8 +18996,8 @@
       "draw": 92381,
       "top5": [
         2,
-        3,
         12,
+        3,
         5,
         4
       ],
@@ -19135,7 +19033,7 @@
         10,
         13,
         4,
-        11
+        14
       ],
       "actual": 3,
       "hit5": true,
@@ -19165,8 +19063,8 @@
     {
       "draw": 92383,
       "top5": [
-        2,
         9,
+        2,
         4,
         11,
         15
@@ -19200,10 +19098,10 @@
       "draw": 92384,
       "top5": [
         11,
+        1,
         4,
         2,
-        13,
-        1
+        13
       ],
       "actual": 13,
       "hit5": true,
@@ -19236,11 +19134,11 @@
         14,
         4,
         15,
-        2,
-        5
+        1,
+        2
       ],
       "actual": 5,
-      "hit5": true,
+      "hit5": false,
       "modelResults": {
         "overall": false,
         "recent24": false,
@@ -19269,9 +19167,9 @@
       "top5": [
         11,
         4,
-        2,
+        1,
         12,
-        1
+        2
       ],
       "actual": 4,
       "hit5": true,
@@ -19344,7 +19242,7 @@
       "actual": 2,
       "hit5": true,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -19373,7 +19271,7 @@
         3,
         15,
         14,
-        10
+        9
       ],
       "actual": 12,
       "hit5": false,
@@ -19405,9 +19303,9 @@
       "top5": [
         11,
         8,
-        14,
         10,
-        3
+        3,
+        14
       ],
       "actual": 11,
       "hit5": true,
@@ -19471,10 +19369,10 @@
     {
       "draw": 92392,
       "top5": [
-        6,
-        14,
         5,
+        6,
         9,
+        14,
         10
       ],
       "actual": 3,
@@ -19506,10 +19404,10 @@
       "draw": 92393,
       "top5": [
         14,
+        4,
         1,
         15,
-        10,
-        9
+        10
       ],
       "actual": 10,
       "hit5": true,
@@ -19541,8 +19439,8 @@
       "top5": [
         12,
         14,
-        1,
         15,
+        1,
         7
       ],
       "actual": 7,
@@ -19560,7 +19458,7 @@
         "gapHazard": true,
         "sequenceTwin": false,
         "runState": true,
-        "cycleBank": false
+        "cycleBank": true
       },
       "selfLearnerExperts": {
         "12": false,
@@ -19575,9 +19473,9 @@
       "top5": [
         14,
         7,
-        15,
         2,
-        1
+        15,
+        3
       ],
       "actual": 8,
       "hit5": false,
@@ -19607,14 +19505,14 @@
     {
       "draw": 92396,
       "top5": [
-        14,
         12,
+        14,
         9,
         13,
-        15
+        1
       ],
       "actual": 1,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": false,
         "recent24": true,
@@ -19676,8 +19574,8 @@
       "draw": 92398,
       "top5": [
         14,
-        3,
         12,
+        3,
         9,
         15
       ],
@@ -19711,14 +19609,14 @@
       "top5": [
         14,
         15,
-        9,
         3,
+        9,
         2
       ],
       "actual": 13,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -19743,8 +19641,8 @@
     {
       "draw": 92400,
       "top5": [
-        14,
         10,
+        14,
         9,
         15,
         5
@@ -19848,8 +19746,8 @@
         5,
         15,
         11,
-        2,
-        9
+        9,
+        2
       ],
       "actual": 4,
       "hit5": false,
@@ -19914,9 +19812,9 @@
       "draw": 92405,
       "top5": [
         15,
+        13,
         9,
         12,
-        13,
         5
       ],
       "actual": 15,
@@ -19950,8 +19848,8 @@
         3,
         5,
         9,
-        12,
-        13
+        13,
+        12
       ],
       "actual": 6,
       "hit5": false,
@@ -19984,8 +19882,8 @@
         9,
         12,
         5,
-        1,
-        14
+        14,
+        1
       ],
       "actual": 4,
       "hit5": false,
@@ -20084,15 +19982,15 @@
       "draw": 92410,
       "top5": [
         9,
+        4,
         5,
         12,
-        4,
         1
       ],
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": true,
         "recent60": false,
         "markov1": true,
@@ -20121,7 +20019,7 @@
         9,
         12,
         3,
-        10
+        2
       ],
       "actual": 6,
       "hit5": false,
@@ -20223,7 +20121,7 @@
         9,
         5,
         10,
-        11
+        4
       ],
       "actual": 8,
       "hit5": false,
@@ -20291,7 +20189,7 @@
         5,
         7,
         3,
-        13
+        10
       ],
       "actual": 1,
       "hit5": false,
@@ -20324,8 +20222,8 @@
         9,
         10,
         5,
-        3,
-        13
+        13,
+        3
       ],
       "actual": 8,
       "hit5": false,
@@ -20356,8 +20254,8 @@
       "draw": 92418,
       "top5": [
         9,
-        5,
         7,
+        5,
         13,
         3
       ],
@@ -20393,7 +20291,7 @@
         5,
         3,
         13,
-        10
+        14
       ],
       "actual": 1,
       "hit5": false,
@@ -20423,10 +20321,10 @@
     {
       "draw": 92420,
       "top5": [
+        12,
         10,
         13,
         9,
-        12,
         5
       ],
       "actual": 2,
@@ -20458,10 +20356,10 @@
       "draw": 92421,
       "top5": [
         9,
+        8,
         5,
         3,
-        10,
-        8
+        13
       ],
       "actual": 7,
       "hit5": false,
@@ -20471,7 +20369,7 @@
         "recent60": false,
         "markov1": false,
         "lag7": false,
-        "cycle8": false,
+        "cycle8": true,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
@@ -20491,11 +20389,11 @@
     {
       "draw": 92422,
       "top5": [
-        5,
         3,
+        5,
+        11,
         9,
-        10,
-        11
+        10
       ],
       "actual": 8,
       "hit5": false,
@@ -20525,10 +20423,10 @@
     {
       "draw": 92423,
       "top5": [
+        1,
         9,
         3,
         5,
-        1,
         13
       ],
       "actual": 3,
@@ -20596,8 +20494,8 @@
         9,
         5,
         10,
-        13,
-        15
+        4,
+        13
       ],
       "actual": 8,
       "hit5": false,
@@ -20630,8 +20528,8 @@
         5,
         9,
         10,
-        13,
-        1
+        1,
+        13
       ],
       "actual": 6,
       "hit5": false,
@@ -20661,10 +20559,10 @@
     {
       "draw": 92427,
       "top5": [
-        9,
         2,
+        9,
         5,
-        13,
+        15,
         10
       ],
       "actual": 1,
@@ -20732,8 +20630,8 @@
         9,
         5,
         12,
-        11,
-        13
+        8,
+        11
       ],
       "actual": 11,
       "hit5": true,
@@ -20763,8 +20661,8 @@
     {
       "draw": 92430,
       "top5": [
-        5,
         3,
+        5,
         9,
         10,
         13
@@ -20799,8 +20697,8 @@
       "top5": [
         5,
         9,
-        10,
         13,
+        10,
         4
       ],
       "actual": 8,
@@ -20831,8 +20729,8 @@
     {
       "draw": 92432,
       "top5": [
-        9,
         8,
+        9,
         5,
         13,
         10
@@ -20969,8 +20867,8 @@
       "top5": [
         5,
         10,
-        3,
         2,
+        3,
         11
       ],
       "actual": 1,
@@ -21002,8 +20900,8 @@
       "draw": 92437,
       "top5": [
         10,
-        5,
         12,
+        5,
         15,
         8
       ],
@@ -21013,7 +20911,7 @@
         "overall": false,
         "recent24": true,
         "recent60": true,
-        "markov1": true,
+        "markov1": false,
         "lag7": false,
         "cycle8": false,
         "selfLearner": true,
@@ -21021,7 +20919,7 @@
         "markov2": false,
         "gapHazard": false,
         "sequenceTwin": true,
-        "runState": true,
+        "runState": false,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -21036,10 +20934,10 @@
       "draw": 92438,
       "top5": [
         5,
-        1,
-        10,
         8,
-        4
+        4,
+        10,
+        1
       ],
       "actual": 3,
       "hit5": false,
@@ -21052,7 +20950,7 @@
         "cycle8": true,
         "selfLearner": false,
         "decayFrequency": false,
-        "markov2": false,
+        "markov2": true,
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": true,
@@ -21171,8 +21069,8 @@
     {
       "draw": 92442,
       "top5": [
-        10,
         5,
+        10,
         15,
         14,
         2
@@ -21180,7 +21078,7 @@
       "actual": 13,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": true,
         "markov1": false,
@@ -21240,10 +21138,10 @@
       "draw": 92444,
       "top5": [
         5,
-        10,
         6,
+        10,
         8,
-        15
+        2
       ],
       "actual": 13,
       "hit5": false,
@@ -21273,10 +21171,10 @@
     {
       "draw": 92445,
       "top5": [
-        10,
         15,
-        5,
+        10,
         3,
+        5,
         14
       ],
       "actual": 4,
@@ -21310,8 +21208,8 @@
         5,
         8,
         10,
-        13,
-        3
+        3,
+        13
       ],
       "actual": 9,
       "hit5": false,
@@ -21379,7 +21277,7 @@
         10,
         2,
         5,
-        8
+        7
       ],
       "actual": 14,
       "hit5": false,
@@ -21410,10 +21308,10 @@
       "draw": 92449,
       "top5": [
         5,
-        10,
         13,
+        10,
         8,
-        15
+        2
       ],
       "actual": 14,
       "hit5": false,
@@ -21525,7 +21423,7 @@
         "recent60": false,
         "markov1": true,
         "lag7": false,
-        "cycle8": true,
+        "cycle8": false,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
@@ -21546,10 +21444,10 @@
       "draw": 92453,
       "top5": [
         11,
-        5,
         15,
-        12,
-        3
+        5,
+        9,
+        12
       ],
       "actual": 7,
       "hit5": false,
@@ -21580,9 +21478,9 @@
       "draw": 92454,
       "top5": [
         5,
-        7,
         3,
         1,
+        7,
         11
       ],
       "actual": 14,
@@ -21613,11 +21511,11 @@
     {
       "draw": 92455,
       "top5": [
-        5,
         14,
-        2,
+        5,
         15,
-        8
+        8,
+        2
       ],
       "actual": 15,
       "hit5": true,
@@ -21649,8 +21547,8 @@
       "top5": [
         5,
         14,
-        2,
         3,
+        2,
         7
       ],
       "actual": 15,
@@ -21683,8 +21581,8 @@
       "top5": [
         5,
         14,
+        9,
         3,
-        2,
         12
       ],
       "actual": 14,
@@ -21717,9 +21615,9 @@
       "top5": [
         5,
         2,
-        9,
         13,
-        8
+        8,
+        9
       ],
       "actual": 2,
       "hit5": true,
@@ -21787,7 +21685,7 @@
         14,
         8,
         13,
-        9
+        12
       ],
       "actual": 14,
       "hit5": true,
@@ -21821,7 +21719,7 @@
         5,
         13,
         9,
-        12
+        11
       ],
       "actual": 7,
       "hit5": false,
@@ -21851,11 +21749,11 @@
     {
       "draw": 92462,
       "top5": [
-        5,
         3,
+        5,
         11,
-        7,
-        12
+        12,
+        7
       ],
       "actual": 8,
       "hit5": false,
@@ -21866,7 +21764,7 @@
         "markov1": false,
         "lag7": false,
         "cycle8": true,
-        "selfLearner": true,
+        "selfLearner": false,
         "decayFrequency": true,
         "markov2": false,
         "gapHazard": true,
@@ -21922,8 +21820,8 @@
         5,
         11,
         13,
-        3,
-        4
+        14,
+        3
       ],
       "actual": 10,
       "hit5": false,
@@ -21989,8 +21887,8 @@
       "top5": [
         5,
         11,
-        13,
         14,
+        13,
         3
       ],
       "actual": 2,
@@ -22057,9 +21955,9 @@
       "top5": [
         5,
         3,
+        7,
         11,
-        14,
-        7
+        14
       ],
       "actual": 15,
       "hit5": false,
@@ -22093,7 +21991,7 @@
         5,
         11,
         3,
-        13
+        8
       ],
       "actual": 4,
       "hit5": false,
@@ -22110,7 +22008,7 @@
         "gapHazard": false,
         "sequenceTwin": true,
         "runState": true,
-        "cycleBank": false
+        "cycleBank": true
       },
       "selfLearnerExperts": {
         "12": true,
@@ -22160,8 +22058,8 @@
         10,
         11,
         5,
-        3,
-        8
+        13,
+        3
       ],
       "actual": 1,
       "hit5": false,
@@ -22191,11 +22089,11 @@
     {
       "draw": 92472,
       "top5": [
+        4,
         13,
         14,
         5,
-        10,
-        11
+        10
       ],
       "actual": 1,
       "hit5": false,
@@ -22226,9 +22124,9 @@
       "draw": 92473,
       "top5": [
         2,
-        14,
         1,
-        13,
+        14,
+        7,
         5
       ],
       "actual": 1,
@@ -22261,8 +22159,8 @@
       "top5": [
         1,
         15,
-        13,
         11,
+        13,
         7
       ],
       "actual": 7,
@@ -22294,9 +22192,9 @@
       "draw": 92475,
       "top5": [
         5,
+        15,
         11,
         10,
-        15,
         3
       ],
       "actual": 12,
@@ -22331,7 +22229,7 @@
         5,
         8,
         11,
-        10
+        13
       ],
       "actual": 5,
       "hit5": true,
@@ -22407,7 +22305,7 @@
         "overall": false,
         "recent24": false,
         "recent60": false,
-        "markov1": true,
+        "markov1": false,
         "lag7": false,
         "cycle8": false,
         "selfLearner": false,
@@ -22415,7 +22313,7 @@
         "markov2": false,
         "gapHazard": true,
         "sequenceTwin": false,
-        "runState": true,
+        "runState": false,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -22431,8 +22329,8 @@
       "top5": [
         1,
         11,
-        14,
         3,
+        14,
         4
       ],
       "actual": 14,
@@ -22446,7 +22344,7 @@
         "cycle8": false,
         "selfLearner": true,
         "decayFrequency": true,
-        "markov2": true,
+        "markov2": false,
         "gapHazard": true,
         "sequenceTwin": true,
         "runState": false,
@@ -22464,10 +22362,10 @@
       "draw": 92480,
       "top5": [
         9,
-        13,
         11,
-        3,
-        2
+        1,
+        13,
+        3
       ],
       "actual": 10,
       "hit5": false,
@@ -22531,9 +22429,9 @@
     {
       "draw": 92482,
       "top5": [
+        11,
         3,
         7,
-        11,
         12,
         14
       ],
@@ -22558,6 +22456,108 @@
         "12": true,
         "24": true,
         "48": true,
+        "96": false
+      },
+      "type": "historical_walk_forward"
+    },
+    {
+      "draw": 92483,
+      "top5": [
+        10,
+        11,
+        5,
+        3,
+        1
+      ],
+      "actual": 12,
+      "hit5": false,
+      "modelResults": {
+        "overall": true,
+        "recent24": true,
+        "recent60": false,
+        "markov1": false,
+        "lag7": false,
+        "cycle8": false,
+        "selfLearner": true,
+        "decayFrequency": true,
+        "markov2": true,
+        "gapHazard": false,
+        "sequenceTwin": false,
+        "runState": true,
+        "cycleBank": false
+      },
+      "selfLearnerExperts": {
+        "12": false,
+        "24": true,
+        "48": false,
+        "96": false
+      },
+      "type": "historical_walk_forward"
+    },
+    {
+      "draw": 92484,
+      "top5": [
+        11,
+        1,
+        3,
+        13,
+        8
+      ],
+      "actual": 15,
+      "hit5": false,
+      "modelResults": {
+        "overall": false,
+        "recent24": false,
+        "recent60": false,
+        "markov1": false,
+        "lag7": false,
+        "cycle8": false,
+        "selfLearner": false,
+        "decayFrequency": true,
+        "markov2": false,
+        "gapHazard": false,
+        "sequenceTwin": false,
+        "runState": false,
+        "cycleBank": false
+      },
+      "selfLearnerExperts": {
+        "12": false,
+        "24": false,
+        "48": false,
+        "96": false
+      },
+      "type": "historical_walk_forward"
+    },
+    {
+      "draw": 92485,
+      "top5": [
+        3,
+        7,
+        11,
+        13,
+        6
+      ],
+      "actual": 3,
+      "hit5": true,
+      "modelResults": {
+        "overall": true,
+        "recent24": false,
+        "recent60": false,
+        "markov1": true,
+        "lag7": true,
+        "cycle8": false,
+        "selfLearner": false,
+        "decayFrequency": false,
+        "markov2": true,
+        "gapHazard": true,
+        "sequenceTwin": false,
+        "runState": true,
+        "cycleBank": false
+      },
+      "selfLearnerExperts": {
+        "12": false,
+        "24": false,
+        "48": false,
         "96": false
       },
       "type": "historical_walk_forward"
@@ -22565,120 +22565,18 @@
   ],
   "historicalHistory": [
     {
-      "draw": 91943,
-      "top5": [
-        11,
-        14,
-        9,
-        2,
-        3
-      ],
-      "actual": 11,
-      "hit5": true,
-      "modelResults": {
-        "overall": true,
-        "recent24": true,
-        "recent60": true,
-        "markov1": false,
-        "lag7": false,
-        "cycle8": true,
-        "selfLearner": true,
-        "decayFrequency": true,
-        "markov2": false,
-        "gapHazard": true,
-        "sequenceTwin": true,
-        "runState": false,
-        "cycleBank": true
-      },
-      "selfLearnerExperts": {
-        "12": false,
-        "24": true,
-        "48": true,
-        "96": true
-      },
-      "type": "historical_walk_forward"
-    },
-    {
-      "draw": 91944,
-      "top5": [
-        11,
-        14,
-        3,
-        2,
-        10
-      ],
-      "actual": 7,
-      "hit5": false,
-      "modelResults": {
-        "overall": false,
-        "recent24": false,
-        "recent60": false,
-        "markov1": false,
-        "lag7": false,
-        "cycle8": true,
-        "selfLearner": false,
-        "decayFrequency": false,
-        "markov2": false,
-        "gapHazard": false,
-        "sequenceTwin": false,
-        "runState": true,
-        "cycleBank": false
-      },
-      "selfLearnerExperts": {
-        "12": false,
-        "24": false,
-        "48": false,
-        "96": false
-      },
-      "type": "historical_walk_forward"
-    },
-    {
-      "draw": 91945,
-      "top5": [
-        2,
-        11,
-        1,
-        10,
-        14
-      ],
-      "actual": 10,
-      "hit5": true,
-      "modelResults": {
-        "overall": true,
-        "recent24": false,
-        "recent60": true,
-        "markov1": false,
-        "lag7": false,
-        "cycle8": true,
-        "selfLearner": true,
-        "decayFrequency": true,
-        "markov2": false,
-        "gapHazard": false,
-        "sequenceTwin": true,
-        "runState": true,
-        "cycleBank": false
-      },
-      "selfLearnerExperts": {
-        "12": true,
-        "24": false,
-        "48": true,
-        "96": true
-      },
-      "type": "historical_walk_forward"
-    },
-    {
       "draw": 91946,
       "top5": [
         10,
         11,
-        1,
-        14,
-        12
+        3,
+        12,
+        14
       ],
       "actual": 14,
       "hit5": true,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": true,
         "markov1": false,
@@ -22689,22 +22587,22 @@
         "markov2": false,
         "gapHazard": false,
         "sequenceTwin": true,
-        "runState": true,
+        "runState": false,
         "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": false,
         "24": false,
         "48": false,
-        "96": false
+        "96": true
       },
       "type": "historical_walk_forward"
     },
     {
       "draw": 91947,
       "top5": [
-        2,
         10,
+        2,
         9,
         11,
         14
@@ -22738,8 +22636,8 @@
       "draw": 91948,
       "top5": [
         14,
-        10,
         2,
+        10,
         11,
         3
       ],
@@ -22807,8 +22705,8 @@
       "top5": [
         11,
         14,
-        7,
         15,
+        7,
         10
       ],
       "actual": 3,
@@ -22911,7 +22809,7 @@
         7,
         11,
         10,
-        15
+        1
       ],
       "actual": 3,
       "hit5": false,
@@ -23012,8 +22910,8 @@
         11,
         3,
         14,
-        7,
-        10
+        13,
+        7
       ],
       "actual": 4,
       "hit5": false,
@@ -23112,10 +23010,10 @@
       "draw": 91959,
       "top5": [
         15,
-        11,
         7,
-        14,
-        3
+        11,
+        3,
+        14
       ],
       "actual": 12,
       "hit5": false,
@@ -23149,12 +23047,12 @@
         4,
         13,
         9,
-        14
+        15
       ],
       "actual": 10,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": true,
         "recent60": false,
         "markov1": false,
@@ -23163,7 +23061,7 @@
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
-        "gapHazard": true,
+        "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
         "cycleBank": false
@@ -23172,16 +23070,16 @@
         "12": false,
         "24": true,
         "48": true,
-        "96": true
+        "96": false
       },
       "type": "historical_walk_forward"
     },
     {
       "draw": 91961,
       "top5": [
+        4,
         10,
         14,
-        4,
         11,
         3
       ],
@@ -23216,8 +23114,8 @@
         11,
         8,
         3,
-        10,
-        14
+        14,
+        10
       ],
       "actual": 9,
       "hit5": false,
@@ -23234,7 +23132,7 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": false
+        "cycleBank": true
       },
       "selfLearnerExperts": {
         "12": true,
@@ -23285,12 +23183,12 @@
         15,
         13,
         2,
-        10
+        8
       ],
       "actual": 2,
       "hit5": true,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": true,
@@ -23308,7 +23206,7 @@
         "12": false,
         "24": false,
         "48": false,
-        "96": true
+        "96": false
       },
       "type": "historical_walk_forward"
     },
@@ -23317,7 +23215,7 @@
       "top5": [
         15,
         9,
-        10,
+        8,
         3,
         11
       ],
@@ -23350,8 +23248,8 @@
       "draw": 91966,
       "top5": [
         11,
-        3,
         12,
+        3,
         4,
         14
       ],
@@ -23364,7 +23262,7 @@
         "markov1": true,
         "lag7": true,
         "cycle8": false,
-        "selfLearner": false,
+        "selfLearner": true,
         "decayFrequency": false,
         "markov2": true,
         "gapHazard": false,
@@ -23383,11 +23281,11 @@
     {
       "draw": 91967,
       "top5": [
-        11,
         10,
+        11,
         9,
         13,
-        2
+        14
       ],
       "actual": 13,
       "hit5": true,
@@ -23485,11 +23383,11 @@
     {
       "draw": 91970,
       "top5": [
+        10,
         4,
         13,
-        10,
-        14,
-        1
+        1,
+        14
       ],
       "actual": 11,
       "hit5": false,
@@ -23519,8 +23417,8 @@
     {
       "draw": 91971,
       "top5": [
-        11,
         4,
+        11,
         3,
         14,
         2
@@ -23630,7 +23528,7 @@
       "actual": 10,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": true,
         "markov1": false,
@@ -23642,13 +23540,13 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": false,
         "24": false,
         "48": true,
-        "96": true
+        "96": false
       },
       "type": "historical_walk_forward"
     },
@@ -23657,8 +23555,8 @@
       "top5": [
         3,
         11,
-        14,
         10,
+        14,
         12
       ],
       "actual": 2,
@@ -23692,8 +23590,8 @@
         11,
         10,
         3,
-        9,
-        15
+        15,
+        8
       ],
       "actual": 6,
       "hit5": false,
@@ -23828,13 +23726,13 @@
         3,
         11,
         15,
-        10,
-        14
+        14,
+        10
       ],
       "actual": 9,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -23852,7 +23750,7 @@
         "12": true,
         "24": false,
         "48": false,
-        "96": false
+        "96": true
       },
       "type": "historical_walk_forward"
     },
@@ -23868,13 +23766,13 @@
       "actual": 14,
       "hit5": true,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": true,
         "markov1": true,
         "lag7": false,
         "cycle8": false,
-        "selfLearner": true,
+        "selfLearner": false,
         "decayFrequency": true,
         "markov2": true,
         "gapHazard": false,
@@ -23931,7 +23829,7 @@
         14,
         9,
         11,
-        2
+        3
       ],
       "actual": 12,
       "hit5": false,
@@ -24032,8 +23930,8 @@
         2,
         11,
         9,
-        6,
-        13
+        13,
+        14
       ],
       "actual": 7,
       "hit5": false,
@@ -24067,17 +23965,17 @@
         9,
         10,
         1,
-        14
+        2
       ],
       "actual": 2,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": true,
         "recent24": true,
         "recent60": false,
         "markov1": true,
         "lag7": true,
-        "cycle8": true,
+        "cycle8": false,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": true,
@@ -24097,11 +23995,11 @@
     {
       "draw": 91988,
       "top5": [
-        11,
         8,
+        11,
         9,
         14,
-        10
+        2
       ],
       "actual": 6,
       "hit5": false,
@@ -24152,7 +24050,7 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": true,
-        "cycleBank": false
+        "cycleBank": true
       },
       "selfLearnerExperts": {
         "12": false,
@@ -24169,10 +24067,10 @@
         11,
         12,
         13,
-        9
+        4
       ],
       "actual": 4,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": false,
         "recent24": false,
@@ -24200,10 +24098,10 @@
       "draw": 91991,
       "top5": [
         3,
-        11,
         6,
+        11,
         13,
-        2
+        9
       ],
       "actual": 6,
       "hit5": true,
@@ -24237,7 +24135,7 @@
         14,
         12,
         9,
-        11
+        6
       ],
       "actual": 4,
       "hit5": false,
@@ -24269,9 +24167,9 @@
       "top5": [
         6,
         13,
-        9,
         11,
-        3
+        9,
+        2
       ],
       "actual": 7,
       "hit5": false,
@@ -24337,9 +24235,9 @@
       "top5": [
         6,
         2,
-        11,
         8,
-        4
+        11,
+        7
       ],
       "actual": 13,
       "hit5": false,
@@ -24441,7 +24339,7 @@
         6,
         12,
         4,
-        1
+        11
       ],
       "actual": 7,
       "hit5": false,
@@ -24471,10 +24369,10 @@
     {
       "draw": 91999,
       "top5": [
-        2,
         1,
-        10,
+        2,
         4,
+        10,
         11
       ],
       "actual": 7,
@@ -24506,15 +24404,15 @@
       "draw": 92000,
       "top5": [
         7,
+        1,
         10,
         2,
-        1,
         11
       ],
       "actual": 10,
       "hit5": true,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": true,
@@ -24611,7 +24509,7 @@
         7,
         9,
         11,
-        2
+        13
       ],
       "actual": 3,
       "hit5": false,
@@ -24643,12 +24541,12 @@
       "top5": [
         9,
         10,
-        6,
         2,
-        12
+        12,
+        4
       ],
       "actual": 4,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": false,
         "recent24": true,
@@ -24689,7 +24587,7 @@
         "recent60": false,
         "markov1": true,
         "lag7": false,
-        "cycle8": false,
+        "cycle8": true,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
@@ -24846,10 +24744,10 @@
       "draw": 92010,
       "top5": [
         2,
-        6,
-        11,
         3,
-        7
+        11,
+        7,
+        8
       ],
       "actual": 14,
       "hit5": false,
@@ -24933,7 +24831,7 @@
         "markov2": false,
         "gapHazard": false,
         "sequenceTwin": true,
-        "runState": true,
+        "runState": false,
         "cycleBank": true
       },
       "selfLearnerExperts": {
@@ -24956,7 +24854,7 @@
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -24983,9 +24881,9 @@
       "top5": [
         6,
         4,
-        10,
         8,
-        7
+        7,
+        11
       ],
       "actual": 8,
       "hit5": true,
@@ -25017,8 +24915,8 @@
       "top5": [
         12,
         3,
-        1,
         8,
+        1,
         11
       ],
       "actual": 12,
@@ -25050,8 +24948,8 @@
       "draw": 92016,
       "top5": [
         13,
-        10,
         6,
+        10,
         4,
         1
       ],
@@ -25084,8 +24982,8 @@
       "draw": 92017,
       "top5": [
         11,
-        4,
         14,
+        4,
         3,
         7
       ],
@@ -25120,8 +25018,8 @@
         6,
         10,
         11,
-        4,
-        5
+        5,
+        4
       ],
       "actual": 6,
       "hit5": true,
@@ -25154,8 +25052,8 @@
         14,
         1,
         12,
-        9,
-        6
+        6,
+        9
       ],
       "actual": 15,
       "hit5": false,
@@ -25219,11 +25117,11 @@
     {
       "draw": 92021,
       "top5": [
-        12,
         7,
-        3,
+        12,
         15,
-        11
+        3,
+        8
       ],
       "actual": 14,
       "hit5": false,
@@ -25289,8 +25187,8 @@
       "top5": [
         3,
         15,
-        11,
         9,
+        11,
         12
       ],
       "actual": 7,
@@ -25330,7 +25228,7 @@
       "actual": 3,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -25391,9 +25289,9 @@
       "top5": [
         15,
         3,
-        14,
         12,
-        1
+        14,
+        4
       ],
       "actual": 11,
       "hit5": false,
@@ -25493,8 +25391,8 @@
       "top5": [
         13,
         6,
-        8,
         11,
+        8,
         9
       ],
       "actual": 11,
@@ -25563,7 +25461,7 @@
         15,
         7,
         12,
-        11
+        14
       ],
       "actual": 15,
       "hit5": true,
@@ -25596,13 +25494,13 @@
         7,
         12,
         11,
-        15,
-        10
+        10,
+        15
       ],
       "actual": 9,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": true,
         "markov1": false,
@@ -25627,16 +25525,16 @@
     {
       "draw": 92033,
       "top5": [
-        14,
         10,
-        1,
+        14,
         11,
+        1,
         15
       ],
       "actual": 4,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": true,
         "markov1": true,
@@ -25670,7 +25568,7 @@
       "actual": 10,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -25699,7 +25597,7 @@
         11,
         3,
         12,
-        1
+        10
       ],
       "actual": 11,
       "hit5": true,
@@ -25800,8 +25698,8 @@
         11,
         4,
         5,
-        15,
-        12
+        12,
+        3
       ],
       "actual": 8,
       "hit5": false,
@@ -25866,8 +25764,8 @@
       "draw": 92040,
       "top5": [
         11,
-        6,
         4,
+        6,
         13,
         10
       ],
@@ -25911,7 +25809,7 @@
         "overall": false,
         "recent24": false,
         "recent60": false,
-        "markov1": true,
+        "markov1": false,
         "lag7": true,
         "cycle8": true,
         "selfLearner": false,
@@ -25920,7 +25818,7 @@
         "gapHazard": true,
         "sequenceTwin": false,
         "runState": true,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": false,
@@ -25933,11 +25831,11 @@
     {
       "draw": 92042,
       "top5": [
-        6,
         11,
         2,
         14,
-        15
+        15,
+        8
       ],
       "actual": 10,
       "hit5": false,
@@ -25968,10 +25866,10 @@
       "draw": 92043,
       "top5": [
         11,
-        1,
         3,
         10,
-        12
+        12,
+        4
       ],
       "actual": 3,
       "hit5": true,
@@ -25987,7 +25885,7 @@
         "markov2": true,
         "gapHazard": true,
         "sequenceTwin": false,
-        "runState": false,
+        "runState": true,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -26004,8 +25902,8 @@
         9,
         11,
         4,
-        10,
-        8
+        8,
+        10
       ],
       "actual": 2,
       "hit5": false,
@@ -26037,9 +25935,9 @@
       "top5": [
         8,
         7,
-        10,
         6,
-        11
+        11,
+        10
       ],
       "actual": 1,
       "hit5": false,
@@ -26070,15 +25968,15 @@
       "draw": 92046,
       "top5": [
         2,
-        11,
         10,
-        6,
-        8
+        11,
+        7,
+        15
       ],
       "actual": 9,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -26090,7 +25988,7 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": false
+        "cycleBank": true
       },
       "selfLearnerExperts": {
         "12": false,
@@ -26138,9 +26036,9 @@
       "draw": 92048,
       "top5": [
         9,
+        1,
         4,
         2,
-        1,
         11
       ],
       "actual": 7,
@@ -26209,7 +26107,7 @@
         13,
         14,
         2,
-        5
+        3
       ],
       "actual": 7,
       "hit5": false,
@@ -26243,7 +26141,7 @@
         10,
         1,
         14,
-        3
+        11
       ],
       "actual": 12,
       "hit5": false,
@@ -26273,8 +26171,8 @@
     {
       "draw": 92052,
       "top5": [
-        10,
         6,
+        10,
         4,
         11,
         13
@@ -26309,8 +26207,8 @@
       "top5": [
         12,
         11,
-        1,
         3,
+        1,
         13
       ],
       "actual": 4,
@@ -26341,8 +26239,8 @@
     {
       "draw": 92054,
       "top5": [
-        11,
         6,
+        11,
         3,
         13,
         8
@@ -26377,8 +26275,8 @@
       "top5": [
         14,
         10,
-        4,
         7,
+        4,
         12
       ],
       "actual": 2,
@@ -26411,9 +26309,9 @@
       "top5": [
         8,
         6,
-        10,
         9,
-        11
+        11,
+        7
       ],
       "actual": 12,
       "hit5": false,
@@ -26478,8 +26376,8 @@
       "draw": 92058,
       "top5": [
         11,
-        6,
         4,
+        6,
         12,
         3
       ],
@@ -26513,8 +26411,8 @@
       "top5": [
         8,
         11,
-        12,
         4,
+        12,
         3
       ],
       "actual": 13,
@@ -26593,7 +26491,7 @@
         "recent60": false,
         "markov1": false,
         "lag7": false,
-        "cycle8": false,
+        "cycle8": true,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
@@ -26617,12 +26515,12 @@
         9,
         3,
         11,
-        15
+        2
       ],
       "actual": 3,
       "hit5": true,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": true,
         "recent60": true,
         "markov1": true,
@@ -26651,10 +26549,10 @@
         12,
         2,
         9,
-        6
+        11
       ],
       "actual": 11,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": true,
         "recent24": false,
@@ -26682,8 +26580,8 @@
       "draw": 92064,
       "top5": [
         10,
-        11,
         5,
+        11,
         3,
         4
       ],
@@ -26751,9 +26649,9 @@
       "top5": [
         9,
         11,
-        2,
         12,
-        10
+        2,
+        13
       ],
       "actual": 11,
       "hit5": true,
@@ -26797,7 +26695,7 @@
         "recent60": false,
         "markov1": false,
         "lag7": true,
-        "cycle8": true,
+        "cycle8": false,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": true,
@@ -26819,9 +26717,9 @@
       "top5": [
         8,
         6,
-        10,
         15,
-        11
+        11,
+        10
       ],
       "actual": 1,
       "hit5": false,
@@ -26851,19 +26749,19 @@
     {
       "draw": 92069,
       "top5": [
-        11,
         9,
+        11,
         2,
-        6,
-        3
+        3,
+        10
       ],
       "actual": 10,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": true,
         "recent24": false,
         "recent60": false,
-        "markov1": false,
+        "markov1": true,
         "lag7": false,
         "cycle8": false,
         "selfLearner": false,
@@ -26885,10 +26783,10 @@
     {
       "draw": 92070,
       "top5": [
-        11,
         3,
-        1,
+        11,
         12,
+        1,
         4
       ],
       "actual": 4,
@@ -26953,8 +26851,8 @@
     {
       "draw": 92072,
       "top5": [
-        3,
         6,
+        3,
         9,
         11,
         13
@@ -26988,8 +26886,8 @@
       "draw": 92073,
       "top5": [
         3,
-        11,
         7,
+        11,
         15,
         12
       ],
@@ -27024,8 +26922,8 @@
         11,
         2,
         10,
-        6,
-        7
+        7,
+        14
       ],
       "actual": 15,
       "hit5": false,
@@ -27057,8 +26955,8 @@
       "top5": [
         1,
         3,
-        11,
         7,
+        11,
         15
       ],
       "actual": 14,
@@ -27090,8 +26988,8 @@
       "draw": 92076,
       "top5": [
         13,
-        10,
         9,
+        10,
         15,
         2
       ],
@@ -27127,7 +27025,7 @@
         4,
         1,
         10,
-        14
+        2
       ],
       "actual": 7,
       "hit5": false,
@@ -27161,7 +27059,7 @@
         4,
         7,
         1,
-        11
+        2
       ],
       "actual": 10,
       "hit5": true,
@@ -27261,9 +27159,9 @@
       "top5": [
         8,
         6,
-        10,
         1,
-        15
+        15,
+        11
       ],
       "actual": 8,
       "hit5": true,
@@ -27431,9 +27329,9 @@
       "top5": [
         13,
         11,
-        3,
+        8,
         4,
-        8
+        3
       ],
       "actual": 1,
       "hit5": false,
@@ -27464,10 +27362,10 @@
       "draw": 92087,
       "top5": [
         2,
-        11,
         10,
         15,
-        6
+        11,
+        7
       ],
       "actual": 15,
       "hit5": true,
@@ -27506,7 +27404,7 @@
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": true,
         "recent60": false,
         "markov1": false,
@@ -27535,7 +27433,7 @@
         6,
         1,
         9,
-        10
+        12
       ],
       "actual": 4,
       "hit5": false,
@@ -27600,8 +27498,8 @@
       "draw": 92091,
       "top5": [
         1,
-        3,
         5,
+        3,
         14,
         7
       ],
@@ -27620,7 +27518,7 @@
         "gapHazard": false,
         "sequenceTwin": true,
         "runState": false,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": true,
@@ -27635,9 +27533,9 @@
       "top5": [
         4,
         8,
-        6,
         11,
-        10
+        6,
+        1
       ],
       "actual": 4,
       "hit5": true,
@@ -27772,8 +27670,8 @@
         8,
         4,
         6,
-        10,
-        15
+        15,
+        1
       ],
       "actual": 12,
       "hit5": false,
@@ -27939,8 +27837,8 @@
     {
       "draw": 92101,
       "top5": [
-        15,
         13,
+        15,
         11,
         6,
         9
@@ -28043,9 +27941,9 @@
       "top5": [
         11,
         3,
-        1,
         4,
-        2
+        2,
+        12
       ],
       "actual": 8,
       "hit5": false,
@@ -28062,7 +27960,7 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": false
+        "cycleBank": true
       },
       "selfLearnerExperts": {
         "12": false,
@@ -28130,7 +28028,7 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": false,
@@ -28163,7 +28061,7 @@
         "markov2": true,
         "gapHazard": false,
         "sequenceTwin": false,
-        "runState": false,
+        "runState": true,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -28180,8 +28078,8 @@
         3,
         4,
         11,
-        1,
-        12
+        12,
+        15
       ],
       "actual": 7,
       "hit5": false,
@@ -28281,8 +28179,8 @@
       "top5": [
         11,
         6,
-        10,
         8,
+        10,
         13
       ],
       "actual": 4,
@@ -28350,8 +28248,8 @@
         1,
         10,
         3,
-        2,
-        7
+        7,
+        2
       ],
       "actual": 11,
       "hit5": false,
@@ -28418,8 +28316,8 @@
         10,
         7,
         2,
-        14,
-        3
+        3,
+        14
       ],
       "actual": 11,
       "hit5": false,
@@ -28620,8 +28518,8 @@
       "draw": 92121,
       "top5": [
         11,
-        6,
         4,
+        6,
         3,
         7
       ],
@@ -28639,7 +28537,7 @@
         "markov2": true,
         "gapHazard": true,
         "sequenceTwin": false,
-        "runState": true,
+        "runState": false,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -28708,7 +28606,7 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": false,
@@ -28860,13 +28758,13 @@
         10,
         11,
         2,
-        3,
-        12
+        6,
+        3
       ],
       "actual": 12,
-      "hit5": true,
+      "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": true,
         "recent60": false,
         "markov1": false,
@@ -28926,8 +28824,8 @@
       "draw": 92130,
       "top5": [
         3,
-        1,
         7,
+        1,
         11,
         14
       ],
@@ -29268,8 +29166,8 @@
         8,
         6,
         4,
-        10,
-        1
+        1,
+        12
       ],
       "actual": 13,
       "hit5": false,
@@ -29303,7 +29201,7 @@
         3,
         14,
         10,
-        13
+        2
       ],
       "actual": 9,
       "hit5": false,
@@ -29314,7 +29212,7 @@
         "markov1": false,
         "lag7": false,
         "cycle8": false,
-        "selfLearner": false,
+        "selfLearner": true,
         "decayFrequency": false,
         "markov2": false,
         "gapHazard": false,
@@ -29401,8 +29299,8 @@
     {
       "draw": 92144,
       "top5": [
-        7,
         14,
+        7,
         9,
         3,
         2
@@ -29444,7 +29342,7 @@
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -29470,10 +29368,10 @@
       "draw": 92146,
       "top5": [
         8,
-        10,
         1,
-        11,
-        4
+        4,
+        12,
+        6
       ],
       "actual": 13,
       "hit5": false,
@@ -29507,7 +29405,7 @@
         13,
         14,
         3,
-        2
+        15
       ],
       "actual": 9,
       "hit5": true,
@@ -29540,8 +29438,8 @@
         14,
         3,
         10,
-        4,
-        9
+        9,
+        4
       ],
       "actual": 15,
       "hit5": false,
@@ -29572,10 +29470,10 @@
       "draw": 92149,
       "top5": [
         3,
-        11,
         14,
-        13,
-        7
+        11,
+        7,
+        13
       ],
       "actual": 7,
       "hit5": true,
@@ -29641,8 +29539,8 @@
       "top5": [
         11,
         6,
-        2,
         4,
+        2,
         3
       ],
       "actual": 5,
@@ -29711,7 +29609,7 @@
         13,
         15,
         9,
-        10
+        7
       ],
       "actual": 14,
       "hit5": false,
@@ -29745,10 +29643,10 @@
         13,
         7,
         15,
-        14
+        5
       ],
       "actual": 5,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": false,
         "recent24": true,
@@ -29784,7 +29682,7 @@
       "actual": 9,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": true,
         "recent60": false,
         "markov1": false,
@@ -29946,15 +29844,15 @@
       "draw": 92160,
       "top5": [
         12,
-        7,
         3,
+        7,
         9,
         11
       ],
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": true,
         "recent60": false,
         "markov1": false,
@@ -29966,7 +29864,7 @@
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": true,
-        "cycleBank": false
+        "cycleBank": true
       },
       "selfLearnerExperts": {
         "12": false,
@@ -29981,9 +29879,9 @@
       "top5": [
         8,
         1,
-        10,
+        13,
         12,
-        13
+        4
       ],
       "actual": 3,
       "hit5": false,
@@ -30015,8 +29913,8 @@
       "top5": [
         11,
         9,
-        10,
         12,
+        10,
         2
       ],
       "actual": 14,
@@ -30115,9 +30013,9 @@
     {
       "draw": 92165,
       "top5": [
+        15,
         14,
         1,
-        15,
         9,
         2
       ],
@@ -30151,14 +30049,14 @@
       "top5": [
         13,
         11,
-        3,
         4,
+        3,
         8
       ],
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": true,
         "recent60": false,
         "markov1": false,
@@ -30186,8 +30084,8 @@
         1,
         8,
         2,
-        10,
-        13
+        13,
+        4
       ],
       "actual": 14,
       "hit5": false,
@@ -30319,16 +30217,16 @@
     {
       "draw": 92171,
       "top5": [
-        3,
         7,
+        3,
         14,
-        2,
-        1
+        1,
+        5
       ],
       "actual": 10,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -30354,10 +30252,10 @@
       "draw": 92172,
       "top5": [
         11,
-        1,
-        4,
         3,
-        7
+        4,
+        7,
+        14
       ],
       "actual": 9,
       "hit5": false,
@@ -30491,9 +30389,9 @@
       "top5": [
         13,
         2,
+        10,
         14,
-        7,
-        10
+        11
       ],
       "actual": 10,
       "hit5": true,
@@ -30524,10 +30422,10 @@
       "draw": 92177,
       "top5": [
         2,
-        1,
         15,
         3,
-        14
+        1,
+        11
       ],
       "actual": 7,
       "hit5": false,
@@ -30560,8 +30458,8 @@
         10,
         7,
         3,
-        11,
-        1
+        1,
+        11
       ],
       "actual": 7,
       "hit5": true,
@@ -30729,9 +30627,9 @@
       "top5": [
         14,
         10,
-        2,
         15,
-        11
+        2,
+        13
       ],
       "actual": 8,
       "hit5": false,
@@ -30804,7 +30702,7 @@
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": true,
@@ -30833,7 +30731,7 @@
         1,
         4,
         14,
-        10
+        6
       ],
       "actual": 5,
       "hit5": false,
@@ -30866,8 +30764,8 @@
         11,
         4,
         6,
-        2,
-        3
+        3,
+        2
       ],
       "actual": 13,
       "hit5": false,
@@ -30901,7 +30799,7 @@
         3,
         15,
         9,
-        4
+        8
       ],
       "actual": 2,
       "hit5": false,
@@ -30912,7 +30810,7 @@
         "markov1": true,
         "lag7": true,
         "cycle8": true,
-        "selfLearner": true,
+        "selfLearner": false,
         "decayFrequency": true,
         "markov2": true,
         "gapHazard": false,
@@ -30935,7 +30833,7 @@
         12,
         1,
         11,
-        13
+        4
       ],
       "actual": 7,
       "hit5": false,
@@ -30968,8 +30866,8 @@
         2,
         3,
         10,
-        7,
-        11
+        11,
+        7
       ],
       "actual": 5,
       "hit5": false,
@@ -31138,8 +31036,8 @@
         4,
         2,
         11,
-        5,
-        13
+        13,
+        5
       ],
       "actual": 1,
       "hit5": false,
@@ -31189,7 +31087,7 @@
         "markov2": true,
         "gapHazard": false,
         "sequenceTwin": true,
-        "runState": false,
+        "runState": true,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -31207,7 +31105,7 @@
         8,
         5,
         3,
-        14
+        9
       ],
       "actual": 12,
       "hit5": true,
@@ -31273,9 +31171,9 @@
       "top5": [
         12,
         11,
-        4,
         13,
-        2
+        4,
+        9
       ],
       "actual": 13,
       "hit5": true,
@@ -31292,7 +31190,7 @@
         "gapHazard": false,
         "sequenceTwin": true,
         "runState": false,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": true,
@@ -31342,8 +31240,8 @@
         3,
         15,
         5,
-        14,
-        13
+        13,
+        7
       ],
       "actual": 8,
       "hit5": false,
@@ -31411,7 +31309,7 @@
         13,
         8,
         14,
-        10
+        1
       ],
       "actual": 15,
       "hit5": false,
@@ -31444,8 +31342,8 @@
         11,
         14,
         7,
-        3,
-        12
+        12,
+        3
       ],
       "actual": 8,
       "hit5": false,
@@ -31512,13 +31410,13 @@
         2,
         11,
         13,
-        10,
-        14
+        14,
+        10
       ],
       "actual": 10,
       "hit5": true,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -31529,7 +31427,7 @@
         "markov2": false,
         "gapHazard": true,
         "sequenceTwin": false,
-        "runState": false,
+        "runState": true,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -31717,7 +31615,7 @@
         13,
         5,
         6,
-        4
+        3
       ],
       "actual": 2,
       "hit5": false,
@@ -31749,8 +31647,8 @@
       "top5": [
         13,
         10,
-        7,
         8,
+        7,
         11
       ],
       "actual": 2,
@@ -31816,10 +31714,10 @@
       "draw": 92215,
       "top5": [
         9,
-        2,
         8,
-        12,
-        15
+        2,
+        15,
+        12
       ],
       "actual": 14,
       "hit5": false,
@@ -31852,8 +31750,8 @@
         9,
         15,
         14,
-        7,
-        13
+        13,
+        7
       ],
       "actual": 8,
       "hit5": false,
@@ -31955,7 +31853,7 @@
         10,
         13,
         11,
-        12
+        4
       ],
       "actual": 5,
       "hit5": false,
@@ -32056,8 +31954,8 @@
         4,
         14,
         13,
-        3,
-        11
+        11,
+        3
       ],
       "actual": 8,
       "hit5": false,
@@ -32157,8 +32055,8 @@
       "top5": [
         11,
         15,
-        9,
         8,
+        9,
         3
       ],
       "actual": 9,
@@ -32193,7 +32091,7 @@
         5,
         2,
         10,
-        15
+        12
       ],
       "actual": 3,
       "hit5": false,
@@ -32223,11 +32121,11 @@
     {
       "draw": 92227,
       "top5": [
-        2,
         15,
+        2,
         11,
         7,
-        14
+        10
       ],
       "actual": 5,
       "hit5": false,
@@ -32326,8 +32224,8 @@
       "draw": 92230,
       "top5": [
         6,
-        11,
         7,
+        11,
         3,
         8
       ],
@@ -32395,9 +32293,9 @@
       "top5": [
         9,
         4,
-        10,
+        7,
         2,
-        7
+        10
       ],
       "actual": 5,
       "hit5": false,
@@ -32427,8 +32325,8 @@
     {
       "draw": 92233,
       "top5": [
-        3,
         5,
+        3,
         13,
         2,
         11
@@ -32532,8 +32430,8 @@
         4,
         2,
         5,
-        13,
-        11
+        11,
+        13
       ],
       "actual": 12,
       "hit5": false,
@@ -32700,10 +32598,10 @@
       "draw": 92241,
       "top5": [
         13,
-        3,
         10,
+        3,
         11,
-        12
+        8
       ],
       "actual": 9,
       "hit5": false,
@@ -32770,8 +32668,8 @@
         12,
         5,
         13,
-        14,
-        11
+        8,
+        14
       ],
       "actual": 15,
       "hit5": false,
@@ -32802,8 +32700,8 @@
       "draw": 92244,
       "top5": [
         12,
-        8,
         11,
+        8,
         2,
         5
       ],
@@ -32838,8 +32736,8 @@
         3,
         11,
         8,
-        7,
-        15
+        15,
+        7
       ],
       "actual": 6,
       "hit5": false,
@@ -32872,8 +32770,8 @@
         1,
         9,
         4,
-        3,
-        14
+        14,
+        3
       ],
       "actual": 11,
       "hit5": false,
@@ -32907,7 +32805,7 @@
         2,
         13,
         14,
-        10
+        4
       ],
       "actual": 1,
       "hit5": false,
@@ -32938,8 +32836,8 @@
       "draw": 92248,
       "top5": [
         9,
-        10,
         15,
+        10,
         8,
         12
       ],
@@ -32975,7 +32873,7 @@
         2,
         10,
         9,
-        3
+        13
       ],
       "actual": 8,
       "hit5": false,
@@ -33014,7 +32912,7 @@
       "actual": 10,
       "hit5": true,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -33040,13 +32938,13 @@
       "draw": 92251,
       "top5": [
         4,
-        5,
         3,
         7,
-        13
+        5,
+        11
       ],
       "actual": 11,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": true,
         "recent24": false,
@@ -33074,8 +32972,8 @@
       "draw": 92252,
       "top5": [
         5,
-        13,
         11,
+        13,
         6,
         2
       ],
@@ -33108,10 +33006,10 @@
       "draw": 92253,
       "top5": [
         11,
-        12,
-        13,
         1,
-        7
+        12,
+        14,
+        13
       ],
       "actual": 15,
       "hit5": false,
@@ -33142,9 +33040,9 @@
       "draw": 92254,
       "top5": [
         1,
-        3,
         8,
         11,
+        3,
         4
       ],
       "actual": 3,
@@ -33210,15 +33108,15 @@
       "draw": 92256,
       "top5": [
         8,
-        5,
-        9,
         15,
-        7
+        9,
+        5,
+        13
       ],
       "actual": 14,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -33314,8 +33212,8 @@
         2,
         14,
         11,
-        5,
-        12
+        12,
+        5
       ],
       "actual": 11,
       "hit5": true,
@@ -33346,15 +33244,15 @@
       "draw": 92260,
       "top5": [
         2,
-        13,
         15,
+        13,
         5,
         10
       ],
       "actual": 10,
       "hit5": true,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -33382,8 +33280,8 @@
         3,
         7,
         2,
-        11,
-        12
+        12,
+        11
       ],
       "actual": 1,
       "hit5": false,
@@ -33391,7 +33289,7 @@
         "overall": false,
         "recent24": true,
         "recent60": false,
-        "markov1": true,
+        "markov1": false,
         "lag7": true,
         "cycle8": false,
         "selfLearner": false,
@@ -33415,12 +33313,12 @@
       "top5": [
         14,
         10,
-        3,
         13,
-        6
+        3,
+        8
       ],
       "actual": 6,
-      "hit5": true,
+      "hit5": false,
       "modelResults": {
         "overall": false,
         "recent24": false,
@@ -33430,7 +33328,7 @@
         "cycle8": false,
         "selfLearner": false,
         "decayFrequency": false,
-        "markov2": true,
+        "markov2": false,
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": false,
@@ -33448,10 +33346,10 @@
       "draw": 92263,
       "top5": [
         14,
-        12,
         2,
         11,
-        7
+        12,
+        1
       ],
       "actual": 4,
       "hit5": false,
@@ -33464,9 +33362,9 @@
         "cycle8": true,
         "selfLearner": false,
         "decayFrequency": false,
-        "markov2": true,
+        "markov2": false,
         "gapHazard": false,
-        "sequenceTwin": true,
+        "sequenceTwin": false,
         "runState": false,
         "cycleBank": false
       },
@@ -33481,10 +33379,10 @@
     {
       "draw": 92264,
       "top5": [
-        7,
         2,
-        8,
+        7,
         9,
+        8,
         3
       ],
       "actual": 5,
@@ -33551,8 +33449,8 @@
       "top5": [
         11,
         5,
-        14,
         7,
+        14,
         12
       ],
       "actual": 13,
@@ -33585,9 +33483,9 @@
       "top5": [
         10,
         14,
-        2,
+        9,
         3,
-        9
+        2
       ],
       "actual": 10,
       "hit5": true,
@@ -33631,7 +33529,7 @@
         "recent60": true,
         "markov1": false,
         "lag7": true,
-        "cycle8": false,
+        "cycle8": true,
         "selfLearner": true,
         "decayFrequency": true,
         "markov2": false,
@@ -33671,7 +33569,7 @@
         "markov2": false,
         "gapHazard": false,
         "sequenceTwin": true,
-        "runState": false,
+        "runState": true,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -33722,8 +33620,8 @@
         5,
         2,
         8,
-        12,
-        11
+        11,
+        12
       ],
       "actual": 15,
       "hit5": false,
@@ -33757,7 +33655,7 @@
         5,
         7,
         12,
-        10
+        3
       ],
       "actual": 9,
       "hit5": true,
@@ -33789,8 +33687,8 @@
       "top5": [
         13,
         4,
-        12,
         14,
+        12,
         3
       ],
       "actual": 10,
@@ -33859,7 +33757,7 @@
         2,
         14,
         10,
-        11
+        9
       ],
       "actual": 15,
       "hit5": false,
@@ -33995,7 +33893,7 @@
         8,
         11,
         14,
-        2
+        4
       ],
       "actual": 5,
       "hit5": false,
@@ -34045,7 +33943,7 @@
         "markov2": false,
         "gapHazard": false,
         "sequenceTwin": false,
-        "runState": false,
+        "runState": true,
         "cycleBank": true
       },
       "selfLearnerExperts": {
@@ -34062,8 +33960,8 @@
         13,
         5,
         14,
-        3,
-        10
+        10,
+        2
       ],
       "actual": 12,
       "hit5": false,
@@ -34127,9 +34025,9 @@
     {
       "draw": 92283,
       "top5": [
+        7,
         14,
         1,
-        7,
         15,
         11
       ],
@@ -34231,8 +34129,8 @@
       "top5": [
         5,
         3,
-        4,
         15,
+        4,
         9
       ],
       "actual": 10,
@@ -34332,10 +34230,10 @@
       "draw": 92289,
       "top5": [
         14,
-        2,
-        9,
         6,
-        10
+        9,
+        2,
+        3
       ],
       "actual": 15,
       "hit5": false,
@@ -34399,8 +34297,8 @@
     {
       "draw": 92291,
       "top5": [
-        2,
         12,
+        2,
         11,
         3,
         13
@@ -34503,9 +34401,9 @@
       "top5": [
         8,
         3,
-        14,
         4,
-        12
+        12,
+        14
       ],
       "actual": 3,
       "hit5": true,
@@ -34624,7 +34522,7 @@
         "gapHazard": true,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": false,
@@ -34637,11 +34535,11 @@
     {
       "draw": 92298,
       "top5": [
-        15,
         1,
+        15,
         11,
         3,
-        10
+        8
       ],
       "actual": 4,
       "hit5": false,
@@ -34719,7 +34617,7 @@
         "recent60": true,
         "markov1": false,
         "lag7": false,
-        "cycle8": false,
+        "cycle8": true,
         "selfLearner": true,
         "decayFrequency": true,
         "markov2": false,
@@ -34739,8 +34637,8 @@
     {
       "draw": 92301,
       "top5": [
-        6,
         3,
+        6,
         13,
         11,
         10
@@ -34811,7 +34709,7 @@
         14,
         12,
         3,
-        6
+        11
       ],
       "actual": 5,
       "hit5": false,
@@ -34842,8 +34740,8 @@
       "draw": 92304,
       "top5": [
         2,
-        3,
         9,
+        3,
         12,
         10
       ],
@@ -34879,10 +34777,10 @@
         1,
         12,
         9,
-        14
+        10
       ],
       "actual": 14,
-      "hit5": true,
+      "hit5": false,
       "modelResults": {
         "overall": false,
         "recent24": false,
@@ -34981,7 +34879,7 @@
         7,
         3,
         2,
-        13
+        5
       ],
       "actual": 12,
       "hit5": false,
@@ -35082,8 +34980,8 @@
         5,
         2,
         12,
-        11,
-        10
+        7,
+        11
       ],
       "actual": 3,
       "hit5": false,
@@ -35113,8 +35011,8 @@
     {
       "draw": 92312,
       "top5": [
-        10,
         14,
+        10,
         12,
         9,
         11
@@ -35149,8 +35047,8 @@
       "top5": [
         9,
         14,
-        10,
         3,
+        10,
         12
       ],
       "actual": 7,
@@ -35224,7 +35122,7 @@
       "actual": 9,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": true,
         "markov1": true,
@@ -35253,7 +35151,7 @@
         12,
         5,
         13,
-        10
+        7
       ],
       "actual": 6,
       "hit5": false,
@@ -35318,10 +35216,10 @@
       "draw": 92318,
       "top5": [
         3,
-        7,
-        2,
         10,
-        13
+        13,
+        2,
+        7
       ],
       "actual": 4,
       "hit5": false,
@@ -35434,7 +35332,7 @@
         "markov1": false,
         "lag7": true,
         "cycle8": false,
-        "selfLearner": false,
+        "selfLearner": true,
         "decayFrequency": false,
         "markov2": false,
         "gapHazard": false,
@@ -35455,9 +35353,9 @@
       "top5": [
         9,
         11,
-        3,
-        10,
-        8
+        8,
+        15,
+        3
       ],
       "actual": 11,
       "hit5": true,
@@ -35488,10 +35386,10 @@
       "draw": 92323,
       "top5": [
         12,
+        6,
         4,
         13,
-        10,
-        6
+        10
       ],
       "actual": 3,
       "hit5": false,
@@ -35590,13 +35488,13 @@
       "draw": 92326,
       "top5": [
         13,
-        6,
         10,
         8,
-        2
+        2,
+        12
       ],
       "actual": 12,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": true,
         "recent24": false,
@@ -35604,7 +35502,7 @@
         "markov1": false,
         "lag7": false,
         "cycle8": false,
-        "selfLearner": true,
+        "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
         "gapHazard": true,
@@ -35623,11 +35521,11 @@
     {
       "draw": 92327,
       "top5": [
-        8,
         14,
+        8,
         9,
         5,
-        2
+        13
       ],
       "actual": 10,
       "hit5": false,
@@ -35760,8 +35658,8 @@
       "draw": 92331,
       "top5": [
         10,
-        2,
         5,
+        2,
         7,
         14
       ],
@@ -35773,7 +35671,7 @@
         "recent60": false,
         "markov1": false,
         "lag7": false,
-        "cycle8": false,
+        "cycle8": true,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
@@ -35842,7 +35740,7 @@
         "markov1": false,
         "lag7": true,
         "cycle8": true,
-        "selfLearner": true,
+        "selfLearner": false,
         "decayFrequency": true,
         "markov2": false,
         "gapHazard": false,
@@ -35898,13 +35796,13 @@
         7,
         11,
         2,
-        3,
-        12
+        12,
+        3
       ],
       "actual": 2,
       "hit5": true,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -35964,10 +35862,10 @@
       "draw": 92337,
       "top5": [
         15,
-        1,
         10,
         8,
-        3
+        3,
+        9
       ],
       "actual": 4,
       "hit5": false,
@@ -36066,8 +35964,8 @@
       "draw": 92340,
       "top5": [
         12,
-        9,
         2,
+        9,
         15,
         8
       ],
@@ -36099,8 +35997,8 @@
     {
       "draw": 92341,
       "top5": [
-        9,
         3,
+        9,
         8,
         15,
         11
@@ -36145,7 +36043,7 @@
         "overall": true,
         "recent24": true,
         "recent60": false,
-        "markov1": true,
+        "markov1": false,
         "lag7": false,
         "cycle8": true,
         "selfLearner": true,
@@ -36168,10 +36066,10 @@
       "draw": 92343,
       "top5": [
         10,
-        1,
         4,
+        11,
         8,
-        11
+        7
       ],
       "actual": 8,
       "hit5": true,
@@ -36201,9 +36099,9 @@
     {
       "draw": 92344,
       "top5": [
+        4,
         7,
         12,
-        4,
         9,
         13
       ],
@@ -36239,7 +36137,7 @@
         9,
         7,
         11,
-        4
+        12
       ],
       "actual": 3,
       "hit5": false,
@@ -36270,9 +36168,9 @@
       "draw": 92346,
       "top5": [
         11,
+        6,
         10,
         12,
-        6,
         7
       ],
       "actual": 15,
@@ -36373,8 +36271,8 @@
       "top5": [
         10,
         11,
-        9,
         4,
+        9,
         13
       ],
       "actual": 4,
@@ -36409,7 +36307,7 @@
         8,
         11,
         9,
-        7
+        13
       ],
       "actual": 5,
       "hit5": false,
@@ -36440,10 +36338,10 @@
       "draw": 92351,
       "top5": [
         9,
-        11,
         7,
-        6,
-        13
+        11,
+        13,
+        6
       ],
       "actual": 5,
       "hit5": false,
@@ -36507,8 +36405,8 @@
     {
       "draw": 92353,
       "top5": [
-        7,
         15,
+        7,
         3,
         11,
         9
@@ -36528,7 +36426,7 @@
         "gapHazard": true,
         "sequenceTwin": false,
         "runState": false,
-        "cycleBank": true
+        "cycleBank": false
       },
       "selfLearnerExperts": {
         "12": false,
@@ -36544,8 +36442,8 @@
         13,
         3,
         11,
-        9,
-        10
+        10,
+        9
       ],
       "actual": 13,
       "hit5": true,
@@ -36643,11 +36541,11 @@
     {
       "draw": 92357,
       "top5": [
-        11,
         5,
+        11,
         2,
-        9,
-        12
+        12,
+        9
       ],
       "actual": 13,
       "hit5": false,
@@ -36679,8 +36577,8 @@
       "top5": [
         5,
         12,
-        9,
         3,
+        9,
         14
       ],
       "actual": 10,
@@ -36711,8 +36609,8 @@
     {
       "draw": 92359,
       "top5": [
-        8,
         7,
+        8,
         11,
         5,
         9
@@ -36720,7 +36618,7 @@
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": true,
         "recent60": false,
         "markov1": false,
@@ -36746,10 +36644,10 @@
       "draw": 92360,
       "top5": [
         9,
-        11,
         1,
-        6,
-        8
+        11,
+        8,
+        6
       ],
       "actual": 9,
       "hit5": true,
@@ -36782,8 +36680,8 @@
         11,
         14,
         12,
-        3,
-        13
+        13,
+        3
       ],
       "actual": 3,
       "hit5": true,
@@ -36849,9 +36747,9 @@
       "top5": [
         11,
         15,
-        12,
         1,
-        14
+        12,
+        13
       ],
       "actual": 8,
       "hit5": false,
@@ -36952,8 +36850,8 @@
         11,
         2,
         12,
-        9,
-        3
+        3,
+        9
       ],
       "actual": 11,
       "hit5": true,
@@ -36986,8 +36884,8 @@
         13,
         12,
         4,
-        7,
-        15
+        9,
+        7
       ],
       "actual": 11,
       "hit5": false,
@@ -37120,8 +37018,8 @@
       "draw": 92371,
       "top5": [
         14,
-        12,
         13,
+        12,
         3,
         11
       ],
@@ -37167,7 +37065,7 @@
         "recent60": true,
         "markov1": false,
         "lag7": false,
-        "cycle8": true,
+        "cycle8": false,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
@@ -37221,8 +37119,8 @@
     {
       "draw": 92374,
       "top5": [
-        1,
         11,
+        1,
         4,
         9,
         12
@@ -37293,7 +37191,7 @@
         11,
         3,
         4,
-        1
+        2
       ],
       "actual": 9,
       "hit5": false,
@@ -37325,9 +37223,9 @@
       "top5": [
         3,
         12,
-        2,
         7,
-        14
+        2,
+        11
       ],
       "actual": 1,
       "hit5": false,
@@ -37357,9 +37255,9 @@
     {
       "draw": 92378,
       "top5": [
-        2,
-        13,
         15,
+        13,
+        2,
         7,
         10
       ],
@@ -37393,9 +37291,9 @@
       "top5": [
         13,
         10,
+        14,
         2,
-        4,
-        14
+        4
       ],
       "actual": 1,
       "hit5": false,
@@ -37425,11 +37323,11 @@
     {
       "draw": 92380,
       "top5": [
-        13,
         1,
+        13,
+        6,
         4,
-        2,
-        6
+        2
       ],
       "actual": 7,
       "hit5": false,
@@ -37460,8 +37358,8 @@
       "draw": 92381,
       "top5": [
         2,
-        3,
         12,
+        3,
         5,
         4
       ],
@@ -37497,7 +37395,7 @@
         10,
         13,
         4,
-        11
+        14
       ],
       "actual": 3,
       "hit5": true,
@@ -37527,8 +37425,8 @@
     {
       "draw": 92383,
       "top5": [
-        2,
         9,
+        2,
         4,
         11,
         15
@@ -37562,10 +37460,10 @@
       "draw": 92384,
       "top5": [
         11,
+        1,
         4,
         2,
-        13,
-        1
+        13
       ],
       "actual": 13,
       "hit5": true,
@@ -37598,11 +37496,11 @@
         14,
         4,
         15,
-        2,
-        5
+        1,
+        2
       ],
       "actual": 5,
-      "hit5": true,
+      "hit5": false,
       "modelResults": {
         "overall": false,
         "recent24": false,
@@ -37631,9 +37529,9 @@
       "top5": [
         11,
         4,
-        2,
+        1,
         12,
-        1
+        2
       ],
       "actual": 4,
       "hit5": true,
@@ -37706,7 +37604,7 @@
       "actual": 2,
       "hit5": true,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -37735,7 +37633,7 @@
         3,
         15,
         14,
-        10
+        9
       ],
       "actual": 12,
       "hit5": false,
@@ -37767,9 +37665,9 @@
       "top5": [
         11,
         8,
-        14,
         10,
-        3
+        3,
+        14
       ],
       "actual": 11,
       "hit5": true,
@@ -37833,10 +37731,10 @@
     {
       "draw": 92392,
       "top5": [
-        6,
-        14,
         5,
+        6,
         9,
+        14,
         10
       ],
       "actual": 3,
@@ -37868,10 +37766,10 @@
       "draw": 92393,
       "top5": [
         14,
+        4,
         1,
         15,
-        10,
-        9
+        10
       ],
       "actual": 10,
       "hit5": true,
@@ -37903,8 +37801,8 @@
       "top5": [
         12,
         14,
-        1,
         15,
+        1,
         7
       ],
       "actual": 7,
@@ -37922,7 +37820,7 @@
         "gapHazard": true,
         "sequenceTwin": false,
         "runState": true,
-        "cycleBank": false
+        "cycleBank": true
       },
       "selfLearnerExperts": {
         "12": false,
@@ -37937,9 +37835,9 @@
       "top5": [
         14,
         7,
-        15,
         2,
-        1
+        15,
+        3
       ],
       "actual": 8,
       "hit5": false,
@@ -37969,14 +37867,14 @@
     {
       "draw": 92396,
       "top5": [
-        14,
         12,
+        14,
         9,
         13,
-        15
+        1
       ],
       "actual": 1,
-      "hit5": false,
+      "hit5": true,
       "modelResults": {
         "overall": false,
         "recent24": true,
@@ -38038,8 +37936,8 @@
       "draw": 92398,
       "top5": [
         14,
-        3,
         12,
+        3,
         9,
         15
       ],
@@ -38073,14 +37971,14 @@
       "top5": [
         14,
         15,
-        9,
         3,
+        9,
         2
       ],
       "actual": 13,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": false,
         "markov1": false,
@@ -38105,8 +38003,8 @@
     {
       "draw": 92400,
       "top5": [
-        14,
         10,
+        14,
         9,
         15,
         5
@@ -38210,8 +38108,8 @@
         5,
         15,
         11,
-        2,
-        9
+        9,
+        2
       ],
       "actual": 4,
       "hit5": false,
@@ -38276,9 +38174,9 @@
       "draw": 92405,
       "top5": [
         15,
+        13,
         9,
         12,
-        13,
         5
       ],
       "actual": 15,
@@ -38312,8 +38210,8 @@
         3,
         5,
         9,
-        12,
-        13
+        13,
+        12
       ],
       "actual": 6,
       "hit5": false,
@@ -38346,8 +38244,8 @@
         9,
         12,
         5,
-        1,
-        14
+        14,
+        1
       ],
       "actual": 4,
       "hit5": false,
@@ -38446,15 +38344,15 @@
       "draw": 92410,
       "top5": [
         9,
+        4,
         5,
         12,
-        4,
         1
       ],
       "actual": 2,
       "hit5": false,
       "modelResults": {
-        "overall": true,
+        "overall": false,
         "recent24": true,
         "recent60": false,
         "markov1": true,
@@ -38483,7 +38381,7 @@
         9,
         12,
         3,
-        10
+        2
       ],
       "actual": 6,
       "hit5": false,
@@ -38585,7 +38483,7 @@
         9,
         5,
         10,
-        11
+        4
       ],
       "actual": 8,
       "hit5": false,
@@ -38653,7 +38551,7 @@
         5,
         7,
         3,
-        13
+        10
       ],
       "actual": 1,
       "hit5": false,
@@ -38686,8 +38584,8 @@
         9,
         10,
         5,
-        3,
-        13
+        13,
+        3
       ],
       "actual": 8,
       "hit5": false,
@@ -38718,8 +38616,8 @@
       "draw": 92418,
       "top5": [
         9,
-        5,
         7,
+        5,
         13,
         3
       ],
@@ -38755,7 +38653,7 @@
         5,
         3,
         13,
-        10
+        14
       ],
       "actual": 1,
       "hit5": false,
@@ -38785,10 +38683,10 @@
     {
       "draw": 92420,
       "top5": [
+        12,
         10,
         13,
         9,
-        12,
         5
       ],
       "actual": 2,
@@ -38820,10 +38718,10 @@
       "draw": 92421,
       "top5": [
         9,
+        8,
         5,
         3,
-        10,
-        8
+        13
       ],
       "actual": 7,
       "hit5": false,
@@ -38833,7 +38731,7 @@
         "recent60": false,
         "markov1": false,
         "lag7": false,
-        "cycle8": false,
+        "cycle8": true,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
@@ -38853,11 +38751,11 @@
     {
       "draw": 92422,
       "top5": [
-        5,
         3,
+        5,
+        11,
         9,
-        10,
-        11
+        10
       ],
       "actual": 8,
       "hit5": false,
@@ -38887,10 +38785,10 @@
     {
       "draw": 92423,
       "top5": [
+        1,
         9,
         3,
         5,
-        1,
         13
       ],
       "actual": 3,
@@ -38958,8 +38856,8 @@
         9,
         5,
         10,
-        13,
-        15
+        4,
+        13
       ],
       "actual": 8,
       "hit5": false,
@@ -38992,8 +38890,8 @@
         5,
         9,
         10,
-        13,
-        1
+        1,
+        13
       ],
       "actual": 6,
       "hit5": false,
@@ -39023,10 +38921,10 @@
     {
       "draw": 92427,
       "top5": [
-        9,
         2,
+        9,
         5,
-        13,
+        15,
         10
       ],
       "actual": 1,
@@ -39094,8 +38992,8 @@
         9,
         5,
         12,
-        11,
-        13
+        8,
+        11
       ],
       "actual": 11,
       "hit5": true,
@@ -39125,8 +39023,8 @@
     {
       "draw": 92430,
       "top5": [
-        5,
         3,
+        5,
         9,
         10,
         13
@@ -39161,8 +39059,8 @@
       "top5": [
         5,
         9,
-        10,
         13,
+        10,
         4
       ],
       "actual": 8,
@@ -39193,8 +39091,8 @@
     {
       "draw": 92432,
       "top5": [
-        9,
         8,
+        9,
         5,
         13,
         10
@@ -39331,8 +39229,8 @@
       "top5": [
         5,
         10,
-        3,
         2,
+        3,
         11
       ],
       "actual": 1,
@@ -39364,8 +39262,8 @@
       "draw": 92437,
       "top5": [
         10,
-        5,
         12,
+        5,
         15,
         8
       ],
@@ -39375,7 +39273,7 @@
         "overall": false,
         "recent24": true,
         "recent60": true,
-        "markov1": true,
+        "markov1": false,
         "lag7": false,
         "cycle8": false,
         "selfLearner": true,
@@ -39383,7 +39281,7 @@
         "markov2": false,
         "gapHazard": false,
         "sequenceTwin": true,
-        "runState": true,
+        "runState": false,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -39398,10 +39296,10 @@
       "draw": 92438,
       "top5": [
         5,
-        1,
-        10,
         8,
-        4
+        4,
+        10,
+        1
       ],
       "actual": 3,
       "hit5": false,
@@ -39414,7 +39312,7 @@
         "cycle8": true,
         "selfLearner": false,
         "decayFrequency": false,
-        "markov2": false,
+        "markov2": true,
         "gapHazard": false,
         "sequenceTwin": false,
         "runState": true,
@@ -39533,8 +39431,8 @@
     {
       "draw": 92442,
       "top5": [
-        10,
         5,
+        10,
         15,
         14,
         2
@@ -39542,7 +39440,7 @@
       "actual": 13,
       "hit5": false,
       "modelResults": {
-        "overall": false,
+        "overall": true,
         "recent24": false,
         "recent60": true,
         "markov1": false,
@@ -39602,10 +39500,10 @@
       "draw": 92444,
       "top5": [
         5,
-        10,
         6,
+        10,
         8,
-        15
+        2
       ],
       "actual": 13,
       "hit5": false,
@@ -39635,10 +39533,10 @@
     {
       "draw": 92445,
       "top5": [
-        10,
         15,
-        5,
+        10,
         3,
+        5,
         14
       ],
       "actual": 4,
@@ -39672,8 +39570,8 @@
         5,
         8,
         10,
-        13,
-        3
+        3,
+        13
       ],
       "actual": 9,
       "hit5": false,
@@ -39741,7 +39639,7 @@
         10,
         2,
         5,
-        8
+        7
       ],
       "actual": 14,
       "hit5": false,
@@ -39772,10 +39670,10 @@
       "draw": 92449,
       "top5": [
         5,
-        10,
         13,
+        10,
         8,
-        15
+        2
       ],
       "actual": 14,
       "hit5": false,
@@ -39887,7 +39785,7 @@
         "recent60": false,
         "markov1": true,
         "lag7": false,
-        "cycle8": true,
+        "cycle8": false,
         "selfLearner": false,
         "decayFrequency": false,
         "markov2": false,
@@ -39908,10 +39806,10 @@
       "draw": 92453,
       "top5": [
         11,
-        5,
         15,
-        12,
-        3
+        5,
+        9,
+        12
       ],
       "actual": 7,
       "hit5": false,
@@ -39942,9 +39840,9 @@
       "draw": 92454,
       "top5": [
         5,
-        7,
         3,
         1,
+        7,
         11
       ],
       "actual": 14,
@@ -39975,11 +39873,11 @@
     {
       "draw": 92455,
       "top5": [
-        5,
         14,
-        2,
+        5,
         15,
-        8
+        8,
+        2
       ],
       "actual": 15,
       "hit5": true,
@@ -40011,8 +39909,8 @@
       "top5": [
         5,
         14,
-        2,
         3,
+        2,
         7
       ],
       "actual": 15,
@@ -40045,8 +39943,8 @@
       "top5": [
         5,
         14,
+        9,
         3,
-        2,
         12
       ],
       "actual": 14,
@@ -40079,9 +39977,9 @@
       "top5": [
         5,
         2,
-        9,
         13,
-        8
+        8,
+        9
       ],
       "actual": 2,
       "hit5": true,
@@ -40149,7 +40047,7 @@
         14,
         8,
         13,
-        9
+        12
       ],
       "actual": 14,
       "hit5": true,
@@ -40183,7 +40081,7 @@
         5,
         13,
         9,
-        12
+        11
       ],
       "actual": 7,
       "hit5": false,
@@ -40213,11 +40111,11 @@
     {
       "draw": 92462,
       "top5": [
-        5,
         3,
+        5,
         11,
-        7,
-        12
+        12,
+        7
       ],
       "actual": 8,
       "hit5": false,
@@ -40228,7 +40126,7 @@
         "markov1": false,
         "lag7": false,
         "cycle8": true,
-        "selfLearner": true,
+        "selfLearner": false,
         "decayFrequency": true,
         "markov2": false,
         "gapHazard": true,
@@ -40284,8 +40182,8 @@
         5,
         11,
         13,
-        3,
-        4
+        14,
+        3
       ],
       "actual": 10,
       "hit5": false,
@@ -40351,8 +40249,8 @@
       "top5": [
         5,
         11,
-        13,
         14,
+        13,
         3
       ],
       "actual": 2,
@@ -40419,9 +40317,9 @@
       "top5": [
         5,
         3,
+        7,
         11,
-        14,
-        7
+        14
       ],
       "actual": 15,
       "hit5": false,
@@ -40455,7 +40353,7 @@
         5,
         11,
         3,
-        13
+        8
       ],
       "actual": 4,
       "hit5": false,
@@ -40472,7 +40370,7 @@
         "gapHazard": false,
         "sequenceTwin": true,
         "runState": true,
-        "cycleBank": false
+        "cycleBank": true
       },
       "selfLearnerExperts": {
         "12": true,
@@ -40522,8 +40420,8 @@
         10,
         11,
         5,
-        3,
-        8
+        13,
+        3
       ],
       "actual": 1,
       "hit5": false,
@@ -40553,11 +40451,11 @@
     {
       "draw": 92472,
       "top5": [
+        4,
         13,
         14,
         5,
-        10,
-        11
+        10
       ],
       "actual": 1,
       "hit5": false,
@@ -40588,9 +40486,9 @@
       "draw": 92473,
       "top5": [
         2,
-        14,
         1,
-        13,
+        14,
+        7,
         5
       ],
       "actual": 1,
@@ -40623,8 +40521,8 @@
       "top5": [
         1,
         15,
-        13,
         11,
+        13,
         7
       ],
       "actual": 7,
@@ -40656,9 +40554,9 @@
       "draw": 92475,
       "top5": [
         5,
+        15,
         11,
         10,
-        15,
         3
       ],
       "actual": 12,
@@ -40693,7 +40591,7 @@
         5,
         8,
         11,
-        10
+        13
       ],
       "actual": 5,
       "hit5": true,
@@ -40769,7 +40667,7 @@
         "overall": false,
         "recent24": false,
         "recent60": false,
-        "markov1": true,
+        "markov1": false,
         "lag7": false,
         "cycle8": false,
         "selfLearner": false,
@@ -40777,7 +40675,7 @@
         "markov2": false,
         "gapHazard": true,
         "sequenceTwin": false,
-        "runState": true,
+        "runState": false,
         "cycleBank": false
       },
       "selfLearnerExperts": {
@@ -40793,8 +40691,8 @@
       "top5": [
         1,
         11,
-        14,
         3,
+        14,
         4
       ],
       "actual": 14,
@@ -40808,7 +40706,7 @@
         "cycle8": false,
         "selfLearner": true,
         "decayFrequency": true,
-        "markov2": true,
+        "markov2": false,
         "gapHazard": true,
         "sequenceTwin": true,
         "runState": false,
@@ -40826,10 +40724,10 @@
       "draw": 92480,
       "top5": [
         9,
-        13,
         11,
-        3,
-        2
+        1,
+        13,
+        3
       ],
       "actual": 10,
       "hit5": false,
@@ -40893,9 +40791,9 @@
     {
       "draw": 92482,
       "top5": [
+        11,
         3,
         7,
-        11,
         12,
         14
       ],
@@ -40920,6 +40818,108 @@
         "12": true,
         "24": true,
         "48": true,
+        "96": false
+      },
+      "type": "historical_walk_forward"
+    },
+    {
+      "draw": 92483,
+      "top5": [
+        10,
+        11,
+        5,
+        3,
+        1
+      ],
+      "actual": 12,
+      "hit5": false,
+      "modelResults": {
+        "overall": true,
+        "recent24": true,
+        "recent60": false,
+        "markov1": false,
+        "lag7": false,
+        "cycle8": false,
+        "selfLearner": true,
+        "decayFrequency": true,
+        "markov2": true,
+        "gapHazard": false,
+        "sequenceTwin": false,
+        "runState": true,
+        "cycleBank": false
+      },
+      "selfLearnerExperts": {
+        "12": false,
+        "24": true,
+        "48": false,
+        "96": false
+      },
+      "type": "historical_walk_forward"
+    },
+    {
+      "draw": 92484,
+      "top5": [
+        11,
+        1,
+        3,
+        13,
+        8
+      ],
+      "actual": 15,
+      "hit5": false,
+      "modelResults": {
+        "overall": false,
+        "recent24": false,
+        "recent60": false,
+        "markov1": false,
+        "lag7": false,
+        "cycle8": false,
+        "selfLearner": false,
+        "decayFrequency": true,
+        "markov2": false,
+        "gapHazard": false,
+        "sequenceTwin": false,
+        "runState": false,
+        "cycleBank": false
+      },
+      "selfLearnerExperts": {
+        "12": false,
+        "24": false,
+        "48": false,
+        "96": false
+      },
+      "type": "historical_walk_forward"
+    },
+    {
+      "draw": 92485,
+      "top5": [
+        3,
+        7,
+        11,
+        13,
+        6
+      ],
+      "actual": 3,
+      "hit5": true,
+      "modelResults": {
+        "overall": true,
+        "recent24": false,
+        "recent60": false,
+        "markov1": true,
+        "lag7": true,
+        "cycle8": false,
+        "selfLearner": false,
+        "decayFrequency": false,
+        "markov2": true,
+        "gapHazard": true,
+        "sequenceTwin": false,
+        "runState": true,
+        "cycleBank": false
+      },
+      "selfLearnerExperts": {
+        "12": false,
+        "24": false,
+        "48": false,
         "96": false
       },
       "type": "historical_walk_forward"
@@ -56675,30 +56675,60 @@
       "type": "automated_future_test",
       "predictedAt": "2026-08-23T14:13:10.038801+00:00",
       "scoredAt": "2026-08-23T14:40:02.868528+00:00"
+    },
+    {
+      "draw": 92483,
+      "top5": [
+        11,
+        3,
+        10,
+        1,
+        7
+      ],
+      "actual": 12,
+      "hit5": false,
+      "modelResults": {
+        "overall": true,
+        "recent24": true,
+        "recent60": false,
+        "markov1": false,
+        "lag7": false,
+        "cycle8": false,
+        "selfLearner": true,
+        "decayFrequency": true,
+        "markov2": true,
+        "gapHazard": false,
+        "sequenceTwin": false,
+        "runState": true,
+        "cycleBank": false
+      },
+      "type": "automated_future_test",
+      "predictedAt": "2026-08-23T14:40:02.902208+00:00",
+      "scoredAt": "2026-08-23T14:59:01.249008+00:00"
     }
   ],
   "weights": {
-    "overall": 0.35883358208495414,
-    "recent24": 0.8510249402549886,
-    "recent60": 0.6156003173471218,
-    "markov1": 2.248395181725878,
-    "lag7": 0.7639433184614535,
-    "cycle8": 1.0560988983136934,
-    "selfLearner": 0.3221157271739356,
-    "decayFrequency": 0.552608656967416,
-    "markov2": 0.685772374246794,
-    "gapHazard": 4.296942591209772,
-    "sequenceTwin": 0.18776133957472832,
-    "runState": 0.6156003173471221,
-    "cycleBank": 0.44530275529214247
+    "overall": 0.23663608141899523,
+    "recent24": 0.9627996568217605,
+    "recent60": 0.5612161656711888,
+    "markov1": 1.8400212230591602,
+    "lag7": 0.9627996568217629,
+    "cycle8": 1.0725488405009265,
+    "selfLearner": 0.2636101425133887,
+    "decayFrequency": 0.6251889928461406,
+    "markov2": 0.7758426050179297,
+    "gapHazard": 4.363872362010704,
+    "sequenceTwin": 0.15365841934526886,
+    "runState": 0.775842605017931,
+    "cycleBank": 0.4059632489548439
   },
   "modelScorecard": {
     "overall": {
       "name": "Overall frequency",
       "evaluated": 540,
-      "successes": 166,
-      "misses": 374,
-      "accuracy": 0.3074074074074074
+      "successes": 161,
+      "misses": 379,
+      "accuracy": 0.29814814814814816
     },
     "recent24": {
       "name": "Recent 24",
@@ -56710,37 +56740,37 @@
     "recent60": {
       "name": "Recent 60",
       "evaluated": 540,
-      "successes": 171,
-      "misses": 369,
-      "accuracy": 0.31666666666666665
+      "successes": 169,
+      "misses": 371,
+      "accuracy": 0.31296296296296294
     },
     "markov1": {
       "name": "Markov 1",
       "evaluated": 540,
-      "successes": 183,
-      "misses": 357,
-      "accuracy": 0.3388888888888889
+      "successes": 180,
+      "misses": 360,
+      "accuracy": 0.3333333333333333
     },
     "lag7": {
       "name": "Lag 7",
       "evaluated": 540,
-      "successes": 173,
-      "misses": 367,
-      "accuracy": 0.32037037037037036
+      "successes": 174,
+      "misses": 366,
+      "accuracy": 0.32222222222222224
     },
     "cycle8": {
       "name": "Cycle 8",
       "evaluated": 540,
-      "successes": 176,
-      "misses": 364,
-      "accuracy": 0.32592592592592595
+      "successes": 175,
+      "misses": 365,
+      "accuracy": 0.32407407407407407
     },
     "selfLearner": {
       "name": "Self-learning horizon model",
       "evaluated": 540,
-      "successes": 165,
-      "misses": 375,
-      "accuracy": 0.3055555555555556
+      "successes": 162,
+      "misses": 378,
+      "accuracy": 0.3
     },
     "decayFrequency": {
       "name": "Exponentially decayed frequency",
@@ -56759,39 +56789,39 @@
     "gapHazard": {
       "name": "Gap and return hazard",
       "evaluated": 540,
-      "successes": 189,
-      "misses": 351,
-      "accuracy": 0.35
+      "successes": 188,
+      "misses": 352,
+      "accuracy": 0.34814814814814815
     },
     "sequenceTwin": {
       "name": "Historical sequence twin",
       "evaluated": 540,
-      "successes": 160,
-      "misses": 380,
-      "accuracy": 0.2962962962962963
+      "successes": 157,
+      "misses": 383,
+      "accuracy": 0.29074074074074074
     },
     "runState": {
       "name": "Run-state transition model",
       "evaluated": 540,
-      "successes": 171,
-      "misses": 369,
-      "accuracy": 0.31666666666666665
+      "successes": 172,
+      "misses": 368,
+      "accuracy": 0.31851851851851853
     },
     "cycleBank": {
       "name": "Multi-period cycle bank",
       "evaluated": 540,
-      "successes": 168,
-      "misses": 372,
-      "accuracy": 0.3111111111111111
+      "successes": 166,
+      "misses": 374,
+      "accuracy": 0.3074074074074074
     }
   },
   "selfLearner": {
     "name": "Self-learning horizon model",
     "expertWeights": {
-      "12": 0.8504669841606661,
-      "24": 1.1098386668687519,
-      "48": 1.582691885003466,
-      "96": 0.45700246396711597
+      "12": 0.8735537995536417,
+      "24": 1.2457364758863652,
+      "48": 1.4876283391496614,
+      "96": 0.3930813854103317
     },
     "horizons": [
       12,
@@ -56801,27 +56831,27 @@
     ]
   },
   "pending": {
-    "draw": 92483,
+    "draw": 92486,
     "top5": [
       11,
-      3,
-      10,
-      1,
-      7
+      14,
+      13,
+      12,
+      9
     ],
     "modelTop5": {
       "overall": [
-        10,
         12,
-        14,
         3,
+        10,
+        14,
         11
       ],
       "recent24": [
         1,
-        7,
         12,
-        14,
+        7,
+        15,
         4
       ],
       "recent60": [
@@ -56829,35 +56859,35 @@
         1,
         7,
         6,
-        4
+        12
       ],
       "markov1": [
-        7,
+        11,
         10,
-        1,
-        3,
-        5
+        14,
+        12,
+        15
       ],
       "lag7": [
-        5,
+        14,
         1,
         2,
         3,
         4
       ],
       "cycle8": [
-        1,
+        3,
+        8,
+        10,
         11,
-        14,
-        15,
-        5
+        12
       ],
       "selfLearner": [
-        1,
         7,
-        14,
         12,
-        10
+        1,
+        14,
+        15
       ],
       "decayFrequency": [
         7,
@@ -56867,62 +56897,62 @@
         15
       ],
       "markov2": [
-        10,
-        1,
-        5,
+        4,
+        11,
         12,
-        15
+        14,
+        1
       ],
       "gapHazard": [
         11,
-        3,
         13,
         9,
-        8
+        8,
+        2
       ],
       "sequenceTwin": [
+        7,
         1,
-        10,
+        12,
         15,
-        2,
-        3
+        14
       ],
       "runState": [
+        11,
+        2,
         10,
-        1,
-        5,
         12,
-        15
+        6
       ],
       "cycleBank": [
+        13,
         3,
         10,
-        11,
-        8,
-        14
+        14,
+        11
       ]
     },
     "selfLearnerExpertTop5": {
       "12": [
-        1,
         7,
-        5,
-        6,
-        10
+        12,
+        1,
+        3,
+        5
       ],
       "24": [
         1,
-        7,
         12,
-        14,
+        7,
+        15,
         4
       ],
       "48": [
         14,
-        1,
         7,
-        4,
-        15
+        1,
+        15,
+        4
       ],
       "96": [
         14,
@@ -56932,16 +56962,16 @@
         7
       ]
     },
-    "createdAt": "2026-08-23T14:40:02.902208+00:00",
+    "createdAt": "2026-08-23T14:59:01.282731+00:00",
     "feedControlled": true,
     "experiment": "six additional independent walk-forward models"
   },
   "warmup": 60,
-  "latestDraw": 92482,
+  "latestDraw": 92485,
   "seedCount": 600,
   "feed": "isolated experiment reading verified v0 state",
   "source": "v0/cloud_state.json",
-  "updatedAt": "2026-08-23T14:40:02.903374+00:00",
+  "updatedAt": "2026-08-23T14:59:01.283831+00:00",
   "modelNames": {
     "overall": "Overall frequency",
     "recent24": "Recent 24",
@@ -56960,17 +56990,17 @@
   "integrity": {
     "duplicateScoringRemoved": true,
     "historicalAndLiveSeparated": true,
-    "uniqueLiveDraws": 525
+    "uniqueLiveDraws": 526
   },
   "stats": {
     "evaluated": 540,
-    "successes": 165,
-    "misses": 375,
-    "accuracy": 0.3055555555555556,
-    "liveEvaluated": 525,
+    "successes": 169,
+    "misses": 371,
+    "accuracy": 0.31296296296296294,
+    "liveEvaluated": 526,
     "liveSuccesses": 164,
-    "liveMisses": 361,
-    "liveAccuracy": 0.31238095238095237,
+    "liveMisses": 362,
+    "liveAccuracy": 0.311787072243346,
     "randomTop5Baseline": 0.3333333333333333
   }
 }
