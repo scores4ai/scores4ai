@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { tools } from "@/lib/data";
+import { catalogTools as tools } from "@/lib/catalog";
 import {
   defaultScoreWeights,
   normalizeWeights,
@@ -10,9 +10,10 @@ import {
 export function ScoreExplainer() {
   const [weights, setWeights] = useState<ScoreWeight[]>(defaultScoreWeights);
   const normalized = useMemo(() => normalizeWeights(weights), [weights]);
+  const exampleTool = tools[0];
   const example = useMemo(
-    () => transparentScore(tools[0], normalized),
-    [normalized],
+    () => (exampleTool ? transparentScore(exampleTool, normalized) : null),
+    [exampleTool, normalized],
   );
 
   function updateWeight(key: ScoreWeight["key"], value: number) {
@@ -38,7 +39,7 @@ export function ScoreExplainer() {
         Formula, weights, sources, confidence
       </h2>
       <p className="mt-2 text-sm leading-6 text-muted-foreground">
-        Formula: <span className="text-foreground">{example.formula}</span> No
+        Formula: <span className="text-foreground">{example?.formula ?? "No live score formula available yet."}</span> No
         hidden formulas: every category below shows its weighting and input.
       </p>
       <div className="mt-5 grid gap-3 lg:grid-cols-3">
@@ -74,12 +75,12 @@ export function ScoreExplainer() {
       </div>
       <div className="mt-5 rounded-xl border border-border bg-background/40 p-4 text-sm text-muted-foreground">
         <div className="font-semibold text-foreground">
-          Example score audit: {tools[0].name} → {example.score}/100
+          Example score audit: {exampleTool?.name ?? "No model loaded"} → {example?.score ?? "--"}/100
         </div>
         <div className="mt-2 grid gap-2 md:grid-cols-3">
-          <span>Source: {example.source}</span>
-          <span>Confidence: {example.confidence}</span>
-          <span>Updated: {example.updatedDate}</span>
+          <span>Source: {example?.source ?? "Awaiting live source"}</span>
+          <span>Confidence: {example?.confidence ?? "Unknown"}</span>
+          <span>Updated: {example?.updatedDate ?? "Pending"}</span>
         </div>
       </div>
     </section>
