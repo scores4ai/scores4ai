@@ -6,8 +6,6 @@ import {
 } from "@/lib/data-sources";
 
 export function DataNotice({ compact = false }: { compact?: boolean }) {
-  const copy = dataSourceCopy.demo;
-
   return (
     <aside
       className={`rounded-2xl border border-accent/25 bg-accent/10 ${compact ? "p-4" : "p-5"}`}
@@ -20,10 +18,11 @@ export function DataNotice({ compact = false }: { compact?: boolean }) {
         />
         <div>
           <div className="text-sm font-semibold text-foreground">
-            {copy.label}
+            Demo data is shown until live OpenRouter/Supabase sync is enabled.
           </div>
           <p className="mt-1 text-sm leading-6 text-muted-foreground">
-            {copy.helper}
+            Honest source labels remain visible on records, but demo values are
+            not presented as verified rankings.
           </p>
           <div className="mt-3 flex flex-wrap gap-2 text-[11px] uppercase tracking-wider text-muted-foreground">
             <span className="rounded-full border border-border px-2 py-1">

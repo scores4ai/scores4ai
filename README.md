@@ -10,6 +10,8 @@ Scores4AI is a transparent AI ranking and comparison platform for LLMs, AI tools
 - Added reusable scoring/pricing modules for the client and moved OpenRouter fetch/normalization plus Supabase service-role cache sync into server-only source paths.
 - Improved the UI for Prompt Lab, pricing calculator, transparent scoring sliders, personalized rankings, model profile sources, and setup transparency labels.
 - Added setup documentation for Supabase, Netlify, and OpenRouter.
+- Added an in-app setup checker backed by `/.netlify/functions/setup-status` so missing public/server config is listed explicitly instead of inferred.
+- Added `/.netlify/functions/openrouter-models` so the UI can use live OpenRouter rows, then cached Supabase rows, and only fall back to demo records when both are unavailable.
 
 ## You must do this manually
 
