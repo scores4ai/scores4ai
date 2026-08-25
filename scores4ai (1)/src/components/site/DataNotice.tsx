@@ -1,29 +1,39 @@
-import { DatabaseZap, Info } from "lucide-react";
+import { AlertTriangle, DatabaseZap, Info } from "lucide-react";
 import {
   MODEL_FRESHNESS_HOURS,
   PRICING_FRESHNESS_HOURS,
   dataSourceCopy,
 } from "@/lib/data-sources";
+import { env, getLiveDataEnvError } from "@/lib/env";
 
 export function DataNotice({ compact = false }: { compact?: boolean }) {
+  const liveError = getLiveDataEnvError();
+  const isError = !env.useDemoData && !!liveError;
   const copy = dataSourceCopy.demo;
 
   return (
     <aside
-      className={`rounded-2xl border border-accent/25 bg-accent/10 ${compact ? "p-4" : "p-5"}`}
+      className={`rounded-2xl border ${isError ? "border-red-500/40 bg-red-500/10" : "border-accent/25 bg-accent/10"} ${compact ? "p-4" : "p-5"}`}
       aria-label="Data source notice"
     >
       <div className="flex items-start gap-3">
-        <Info
-          className="mt-0.5 h-4 w-4 shrink-0 text-accent"
-          aria-hidden="true"
-        />
+        {isError ? (
+          <AlertTriangle
+            className="mt-0.5 h-4 w-4 shrink-0 text-red-300"
+            aria-hidden="true"
+          />
+        ) : (
+          <Info
+            className="mt-0.5 h-4 w-4 shrink-0 text-accent"
+            aria-hidden="true"
+          />
+        )}
         <div>
           <div className="text-sm font-semibold text-foreground">
-            {copy.label}
+            {isError ? "Live data unavailable" : copy.label}
           </div>
           <p className="mt-1 text-sm leading-6 text-muted-foreground">
-            {copy.helper}
+            {isError ? liveError : copy.helper}
           </p>
           <div className="mt-3 flex flex-wrap gap-2 text-[11px] uppercase tracking-wider text-muted-foreground">
             <span className="rounded-full border border-border px-2 py-1">
@@ -33,7 +43,7 @@ export function DataNotice({ compact = false }: { compact?: boolean }) {
               Pricing refresh: {PRICING_FRESHNESS_HOURS}h
             </span>
             <span className="rounded-full border border-border px-2 py-1">
-              Supabase cache ready
+              {isError ? "No fallback to demo" : "Supabase cache ready"}
             </span>
           </div>
         </div>
