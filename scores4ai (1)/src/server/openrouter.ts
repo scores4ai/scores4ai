@@ -20,7 +20,17 @@ export async function fetchOpenRouterModels(fetcher: typeof fetch = fetch) {
     throw new Error(`OpenRouter models request failed: ${response.status}`);
   }
 
-  return (await response.json()) as OpenRouterModelsResponse;
+  const json = (await response.json()) as Partial<OpenRouterModelsResponse>;
+  if (!json || !Array.isArray(json.data)) {
+    console.error("[OpenRouter] Invalid models payload", {
+      endpoint: OPENROUTER_MODELS_URL,
+      hasJson: Boolean(json),
+      dataType: typeof json?.data,
+    });
+    return { data: [] };
+  }
+
+  return { data: json.data };
 }
 
 export function pricePerMillionTokens(value?: string) {
@@ -38,11 +48,18 @@ export function providerFromModelId(id: string) {
 }
 
 export function normalizeOpenRouterModel(model: OpenRouterModel) {
+  if (!model?.id || !model?.name) {
+    console.error("[OpenRouter] Model missing required fields", {
+      model,
+      endpoint: OPENROUTER_MODELS_URL,
+    });
+  }
+
   return {
-    openrouter_id: model.id,
-    canonical_slug: model.canonical_slug ?? model.id,
-    name: model.name,
-    provider: providerFromModelId(model.id),
+    openrouter_id: model?.id ?? "unknown-model-id",
+    canonical_slug: model?.canonical_slug ?? model?.id ?? "unknown-model-id",
+    name: model?.name ?? "Unknown Model",
+    provider: providerFromModelId(model?.id ?? "unknown/model"),
     description: model.description ?? null,
     context_window:
       model.context_length ?? model.top_provider?.context_length ?? null,
