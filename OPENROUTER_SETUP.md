@@ -7,6 +7,8 @@
 - Added a standalone sync script at `scores4ai (1)/scripts/sync-openrouter-models.mjs`; browser components only import formatting/pricing helpers and never call OpenRouter directly.
 - Added cache freshness constants: models every 12 hours and pricing every 24 hours.
 - Added UI labels for Live, Cached, Estimated, and Demo data states.
+- Added a setup-status function that verifies OpenRouter Models API reachability server-side.
+- Added `/.netlify/functions/openrouter-models` so the app serves live OpenRouter rows only after a successful server-side fetch, then Supabase cache, then demo fallback.
 
 ## You must do this manually
 
