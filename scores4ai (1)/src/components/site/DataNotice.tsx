@@ -3,10 +3,17 @@ import {
   MODEL_FRESHNESS_HOURS,
   PRICING_FRESHNESS_HOURS,
   dataSourceCopy,
+  type DataSourceStatus,
 } from "@/lib/data-sources";
 
-export function DataNotice({ compact = false }: { compact?: boolean }) {
-  const copy = dataSourceCopy.demo;
+export function DataNotice({
+  compact = false,
+  status = "demo",
+}: {
+  compact?: boolean;
+  status?: DataSourceStatus;
+}) {
+  const copy = dataSourceCopy[status];
 
   return (
     <aside
