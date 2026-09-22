@@ -22,19 +22,35 @@ Scores4AI is a transparent AI ranking and comparison platform for LLMs, AI tools
 
 ## Local development
 
+From the repository root, install dependencies once and run the app with a Codex-friendly host binding:
+
+```bash
+npm run setup
+npm run dev:codex
+```
+
+The `dev:codex` command starts Vite on `0.0.0.0:5173`, which lets Codex expose the local web preview. Open the preview URL in the Codex in-app browser, click around the site, and use Codex browser comments/annotations to point at exact UI changes you want.
+
+You can still run commands from the nested app directory when preferred:
+
 ```bash
 cd "scores4ai (1)"
 npm install
-npm run dev
+npm run dev -- --host 0.0.0.0 --port 5173
 ```
 
 ## Build and checks
 
 ```bash
-cd "scores4ai (1)"
 npm run lint
 npm run build
 npm run verify:production-build
+```
+
+For a production-style Codex preview after building, run:
+
+```bash
+npm run preview:codex
 ```
 
 ## Data policy

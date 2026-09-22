@@ -1,0 +1,16 @@
+{
+  "name": "scores4ai-workspace",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "setup": "npm --prefix \"scores4ai (1)\" install",
+    "dev": "npm --prefix \"scores4ai (1)\" run dev -- --host 0.0.0.0",
+    "dev:codex": "npm --prefix \"scores4ai (1)\" run dev -- --host 0.0.0.0 --port 5173",
+    "preview": "npm --prefix \"scores4ai (1)\" run preview -- --host 0.0.0.0",
+    "preview:codex": "npm --prefix \"scores4ai (1)\" run preview -- --host 0.0.0.0 --port 4173",
+    "build": "npm --prefix \"scores4ai (1)\" run build",
+    "lint": "npm --prefix \"scores4ai (1)\" run lint",
+    "verify:production-build": "npm --prefix \"scores4ai (1)\" run verify:production-build",
+    "sync:openrouter": "npm --prefix \"scores4ai (1)\" run sync:openrouter"
+  }
+}

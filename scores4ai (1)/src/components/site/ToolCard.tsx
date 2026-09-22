@@ -120,6 +120,11 @@ export function ToolCard({
               {t}
             </span>
           ))}
+          <span className="rounded-md border border-border px-2 py-0.5 text-[10px] text-muted-foreground">
+            {tool.evidenceCount > 0
+              ? `${tool.evidenceCount} evidence links`
+              : "Evidence pending"}
+          </span>
         </div>
       </Link>
     </motion.div>
