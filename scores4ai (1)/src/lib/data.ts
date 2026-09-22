@@ -1,4 +1,5 @@
 import type { DataSourceStatus } from "./data-sources";
+import { env, getLiveDataEnvError } from "./env";
 
 export type Verdict =
   | "Elite"
@@ -80,7 +81,7 @@ const mk = (
   evidenceCount: extra.evidenceCount ?? 0,
 });
 
-export const tools: Tool[] = [
+const demoTools: Tool[] = [
   mk(
     "gpt-5",
     "GPT-5",
@@ -627,3 +628,7 @@ export const rails: { title: string; subtitle?: string; ids: string[] }[] = [
 export function getTool(id: string) {
   return tools.find((t) => t.id === id);
 }
+
+
+export const liveDataError = getLiveDataEnvError();
+export const tools: Tool[] = env.useDemoData ? demoTools : [];
