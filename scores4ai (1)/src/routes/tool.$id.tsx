@@ -16,7 +16,8 @@ import { PricingCalculator } from "@/components/site/PricingCalculator";
 import { PromptLab } from "@/components/site/PromptLab";
 import { ScoreGauge, ScoreMeter } from "@/components/site/Score";
 import { ToolCard } from "@/components/site/ToolCard";
-import { getTool, tools, verdictColor, type Tool } from "@/lib/data";
+import { verdictColor, type Tool } from "@/lib/data";
+import { getCatalogTool as getTool, catalogTools as tools, catalogState } from "@/lib/catalog";
 
 export const Route = createFileRoute("/tool/$id")({
   loader: ({ params }): { tool: Tool } => {
