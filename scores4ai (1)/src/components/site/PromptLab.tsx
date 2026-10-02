@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { tools } from "@/lib/data";
+import { catalogTools as tools } from "@/lib/catalog";
 import { formatUsd } from "@/lib/currency";
 import { estimateTokensFromText } from "@/lib/pricing";
 
