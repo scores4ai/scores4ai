@@ -63,6 +63,14 @@ function Rankings() {
       filteredTools = filteredTools.filter((tool) => tool.openSource);
 
     const intentWeights = weightsForIntent(intent);
+    const scoredTools = filteredTools.map((tool) => {
+      const scoreDetails = transparentScore(tool, intentWeights);
+      return {
+        tool,
+        displayScore: scoreDetails.score,
+        scoreDetails,
+      };
+    });
     const scoredTools = filteredTools.map((tool) => ({
       tool,
       displayScore: transparentScore(tool, intentWeights).score,
@@ -175,6 +183,7 @@ function Rankings() {
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {list.map(({ tool, displayScore, scoreDetails }, i) => (
           {list.map(({ tool, displayScore }, i) => (
             <ToolCard
               key={tool.id}
@@ -182,6 +191,7 @@ function Rankings() {
               index={i}
               displayScore={displayScore}
               displayScoreLabel="Transparent score"
+              scoreDetails={scoreDetails}
             />
           ))}
         </div>

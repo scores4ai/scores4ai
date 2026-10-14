@@ -8,6 +8,8 @@
 - Added immutable asset caching and baseline security headers.
 - Added an SPA fallback redirect to `/index.html` and explicit Netlify Functions bundling from `netlify/functions`.
 - Added a scheduled Netlify function for a 12-hour OpenRouter sync cadence.
+- Added `/.netlify/functions/setup-status` so the app can report missing Netlify/Supabase/OpenRouter setup without exposing secrets.
+- Added `/.netlify/functions/openrouter-models` for live model fetch + cache/demo fallback status in the UI.
 
 ## You must do this manually
 
