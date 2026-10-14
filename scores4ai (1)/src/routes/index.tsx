@@ -7,7 +7,8 @@ import { DataNotice, LiveArchitectureCard } from "@/components/site/DataNotice";
 import { Rail } from "@/components/site/Rail";
 import { ScoreExplainer } from "@/components/site/ScoreExplainer";
 import { ToolCard } from "@/components/site/ToolCard";
-import { rails, tools, getTool } from "@/lib/data";
+import { rails, tools, type Tool } from "@/lib/data";
+import { resolveConfiguredDataSourceStatus } from "@/lib/data-sources";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -29,9 +30,63 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+function sourceToolsForStatus(sourceStatus: Tool["sourceStatus"]) {
+  if (sourceStatus === "demo") return tools;
+  return tools.map((tool) => ({
+    ...tool,
+    sourceStatus,
+    lastVerified:
+      sourceStatus === "live" || sourceStatus === "cached"
+        ? tool.lastVerified === "Needs live verification"
+          ? "Configured data source"
+          : tool.lastVerified
+        : tool.lastVerified,
+  }));
+}
+
+function getHomepageLabels(sourceStatus: Tool["sourceStatus"]) {
+  if (sourceStatus === "live") {
+    return {
+      toolCount: "Live tools tracked",
+      leaderboardEyebrow: "Live leaderboard",
+      leaderboardTitle: "Verified records from configured live sources",
+    };
+  }
+
+  if (sourceStatus === "cached") {
+    return {
+      toolCount: "Cached tools tracked",
+      leaderboardEyebrow: "Cached leaderboard",
+      leaderboardTitle: "Cached records from configured data sources",
+    };
+  }
+
+  if (sourceStatus === "estimated") {
+    return {
+      toolCount: "Estimated tools tracked",
+      leaderboardEyebrow: "Estimated leaderboard",
+      leaderboardTitle: "Estimated records from configured assumptions",
+    };
+  }
+
+  return {
+    toolCount: "Demo tools labeled",
+    leaderboardEyebrow: "Demo leaderboard",
+    leaderboardTitle: "Seed records awaiting live verification",
+  };
+}
+
 function Home() {
-  const featured = tools.slice(0, 6);
-  const trending = rails[0].ids.map(getTool).filter(Boolean) as typeof tools;
+  const sourceStatus = resolveConfiguredDataSourceStatus();
+  const homepageTools = sourceToolsForStatus(sourceStatus);
+  const featured = homepageTools.slice(0, 6);
+  const homepageToolById = new Map(
+    homepageTools.map((tool) => [tool.id, tool]),
+  );
+  const trending = rails[0].ids
+    .map((id) => homepageToolById.get(id))
+    .filter(Boolean) as Tool[];
+  const labels = getHomepageLabels(sourceStatus);
 
   return (
     <div className="min-h-screen">
@@ -92,13 +147,15 @@ function Home() {
           </motion.div>
 
           {/* Stats */}
-          <div className="mt-10">
-            <DataNotice />
-          </div>
+          {sourceStatus === "demo" && (
+            <div className="mt-10">
+              <DataNotice status={sourceStatus} />
+            </div>
+          )}
 
           <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl glass md:grid-cols-4">
             {[
-              ["20", "Demo tools labeled"],
+              [String(homepageTools.length), labels.toolCount],
               ["3", "Score types"],
               ["60m", "Cache target"],
               ["0", "Hidden fake claims"],
@@ -123,10 +180,10 @@ function Home() {
         <div className="flex items-end justify-between">
           <div>
             <div className="text-xs uppercase tracking-wider text-accent">
-              Demo leaderboard
+              {labels.leaderboardEyebrow}
             </div>
             <h2 className="mt-1 font-display text-3xl font-semibold tracking-tight md:text-4xl">
-              Seed records awaiting live verification
+              {labels.leaderboardTitle}
             </h2>
           </div>
           <Link
@@ -148,7 +205,11 @@ function Home() {
         <Rail
           key={r.title}
           title={r.title}
-          tools={r.ids.map(getTool).filter(Boolean) as typeof tools}
+          tools={
+            r.ids
+              .map((id) => homepageToolById.get(id))
+              .filter(Boolean) as Tool[]
+          }
         />
       ))}
 
