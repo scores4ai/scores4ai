@@ -71,14 +71,13 @@ function Community() {
       <Nav />
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="text-xs uppercase tracking-wider text-accent">
-          Community · demo activity
+          Community · activity stream
         </div>
         <h1 className="mt-2 font-display text-5xl font-semibold tracking-tight">
           What the AI world is evaluating
         </h1>
         <p className="mt-3 max-w-2xl text-muted-foreground">
-          Discussion, reviewer, and switching modules are demo placeholders
-          until connected to verified community activity.
+          Discussion and reviewer modules are shown with current integration status.
         </p>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_360px]">
