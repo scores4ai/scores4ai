@@ -3,7 +3,7 @@ import { Bot, Cloud, Cpu, GitBranch, Globe, Lock } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { ToolCard } from "@/components/site/ToolCard";
-import { tools } from "@/lib/data";
+import { catalogTools as tools, catalogState } from "@/lib/catalog";
 
 export const Route = createFileRoute("/agents")({
   head: () => ({
