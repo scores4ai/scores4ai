@@ -55,7 +55,15 @@ export async function syncOpenRouterModelsToSupabase(
 
   const payload = await fetchOpenRouterModels();
   const syncedAt = new Date().toISOString();
-  const rows = payload.data.map((model) => ({
+  const sourceModels = Array.isArray(payload?.data) ? payload.data : [];
+  if (!Array.isArray(payload?.data)) {
+    console.error("[Supabase Sync] OpenRouter response missing data array", {
+      payload,
+      endpoint: "openrouter models",
+    });
+  }
+
+  const rows = sourceModels.map((model) => ({
     ...normalizeOpenRouterModel(model),
     raw_openrouter_payload: model,
     source_status: "live",
