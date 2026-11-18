@@ -30,8 +30,28 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const featured = tools.slice(0, 6);
-  const trending = rails[0].ids.map(getTool).filter(Boolean) as typeof tools;
+  const featured = Array.isArray(tools) ? tools.slice(0, 6) : [];
+
+  if (!Array.isArray(tools)) {
+    console.error("[Home] tools payload is not an array", { tools });
+  }
+
+  const normalizedRails = Array.isArray(rails) ? rails : [];
+  if (!Array.isArray(rails)) {
+    console.error("[Home] rails payload is undefined or not an array", {
+      rails,
+    });
+  }
+
+  const trendingIds = normalizedRails?.[0]?.ids;
+  if (!Array.isArray(trendingIds)) {
+    console.error("[Home] rails[0].ids is undefined or not an array", {
+      railsFirst: normalizedRails?.[0],
+      endpoint: "homepage rails transform",
+    });
+  }
+
+  const trending = (trendingIds ?? []).map(getTool).filter(Boolean) as typeof tools;
 
   return (
     <div className="min-h-screen">
@@ -144,13 +164,24 @@ function Home() {
       </section>
 
       {/* RAILS */}
-      {rails.map((r) => (
+      {normalizedRails.map((r, railIndex) => {
+        const railIds = Array.isArray(r?.ids) ? r.ids : [];
+        if (!Array.isArray(r?.ids)) {
+          console.error("[Home] rail.ids is undefined for rail", {
+            railIndex,
+            rail: r,
+            endpoint: "homepage rail render",
+          });
+        }
+
+        return (
         <Rail
           key={r.title}
           title={r.title}
-          tools={r.ids.map(getTool).filter(Boolean) as typeof tools}
+          tools={railIds.map(getTool).filter(Boolean) as typeof tools}
         />
-      ))}
+        );
+      })}
 
       <section className="mx-auto mt-16 max-w-7xl px-6">
         <LiveArchitectureCard />
